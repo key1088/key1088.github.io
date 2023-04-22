@@ -1,0 +1,6 @@
+title: python 小脚本
+categories: [程序设计,Python编程]
+tags: []
+date: 2011-10-10 14:14:00
+---
+<p>#!/usr/bin/env python<br />import os<br /><br />dirpath=&quot;/data&quot;<br />ext=&quot;.php&quot;<br />key=&quot;system&quot;<br />x=[]<br />y=[]<br />z=[]<br />def _isdir(path):<br />&nbsp;&nbsp; &nbsp;for i in os.listdir(path):<br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if os.path.isdir(path+'/'+i):<br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;_isdir(path+'/'+i)<br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;x.append(path+'/'+i)&nbsp;&nbsp; &nbsp;<br />def _exfile(file):<br />&nbsp;&nbsp; &nbsp;if file[-4:]==ext:<br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;y.append(file)<br />def _file(file1):<br />&nbsp;&nbsp; &nbsp;f=open(file1,'r')<br />&nbsp;&nbsp; &nbsp;for i in f:<br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if not i.find(key) == -1:<br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;z.append(file1)<br />&nbsp;&nbsp; &nbsp;f.close()<br />_isdir(dirpath)<br />for i in x:<br />&nbsp;&nbsp; &nbsp;_exfile(i)<br />for a in y:<br />&nbsp;&nbsp; &nbsp;_file(a)<br />abc=set(z)<br />for i in abc:<br />&nbsp;&nbsp; &nbsp;print i<br /></p>

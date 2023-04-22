@@ -1,0 +1,6 @@
+title: 对linux服务器的一些安全设置
+categories: [网络安全]
+tags: []
+date: 2011-07-12 17:01:00
+---
+<p>本地服务器架构为LAMP的。以下设置多多少少会增加不多安全。</p><p>&nbsp;</p><p>1.账号安全</p><p>禁用不需要的用户和系统账号，或者shell设置为/sbin/nologin,宿主目录为/dev/null，权限放低。</p><p>密码不能设置简单，密码最好不要与自己的信息有关系，日期、名称、电话、网址。最好为一句话，好记，又不容易被社工。</p><p>2.服务安全</p><p>禁用不需要的服务，修改常用的服务端口（自己用的话）。</p><p>3.mysql安全</p><p>在php中不要使用root连接。新建一个用户，只需要给 “增删改查” 功能。</p><p>多个数据库应创建不同的用户。除去所有远程连接权限。有必要时，关闭连接端口3306。只是本地连接的话，监听完全没有必要。</p><p>如果有mysql的0day，远程溢出也不好使。</p><p>4.php安全</p><p>如果php安全模式对现有的php程序没有影响，请开始安全模式。</p><p>禁止php函数。例如：system,passthru,dl,exec,shell_exec,popen,phpinfo,proc_open,chmod,chown,chroot,dir,opendir,readdir,scandir。前面红色的，我认为是很重要的。就算拿到webshell提权也不好提，列出文件函数也要禁止，dl这个还是比较有趣的。</p><p>5.apache安全</p><p>apache程序的uid用户，禁止登陆。</p><p>禁止某些目录执行php程序。</p><p>php网页程序，这个安全就不好说了。上传，注入，跨站。网站路径最好 “奇异”一点，后台要保护好。</p><p>6.权限设置。</p><p>chmod 700 gcc g++ perl php make 禁止一些开发工具。防止写代码编译提权（提前得到shell）。</p><p>chmod 700 wget chmod&nbsp; rpm yum&nbsp; 。。 禁止一些下载工具和权限控制程序 ，防止上传 提权程序，加执行权限。提权。</p><p>chmod 700 ping ifconfig netstat ps 。。 禁止一下系统配置命令，和网络命令。</p><p>&nbsp;</p><p>&nbsp;</p><p>以上就我所总结的，没有很大的0day，服务器不会被占用的。防止拿到webshell，那就是php网站程序的问题了。</p><p>如有什么地方错误，请大家指正。我也是初学者。</p>

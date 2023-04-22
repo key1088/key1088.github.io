@@ -1,0 +1,6 @@
+title: liunx下VNCserver 桌面配置。。
+categories: [Linux]
+tags: []
+date: 2010-05-30 15:12:00
+---
+先说我是RHEL5。内核为2.6的、<br /><br />$HOME/.vnc/xstartup<br />========== Start of xstartup ===========<br />#!/bin/sh<br /><br /># Uncomment the following two lines for normal desktop:<br />unset SESSION_MANAGER<br />exec /etc/X11/xinit/xinitrc<br /><br />[ -x /etc/vnc/xstartup ] &amp;&amp; exec /etc/vnc/xstartup<br />[ -r $HOME/.Xresources ] &amp;&amp; xrdb $HOME/.Xresources<br />xsetroot -solid grey<br />vncconfig -iconic &amp;<br />xterm -geometry 80x24+10+10 -ls -title &quot;$VNCDESKTOP d<a href="http://www.linuxquestions.org/questions/#" target="undefined" rel="noopener noreferrer"></a>esktop&quot; &amp;<br />tw &amp;<br />========== End of xstartup =============<br /><br />/etc/sysconfig<br />=========== bottom part of vncservers (top is all comments ==<br /># VNCSERVERS=&quot;2:myusername&quot;<br /># VNCSERVERARGS[2]=&quot;-geometry 800x600 -nolisten tcp -nohttpd -localhost&quot;<br />VNCSERRVERS=&quot;1:toreilly&quot;<br />VNCSERVERARGS[1]=&quot;-geometry 800x600&quot;<br />=========== end of vncservers ===============================<br />

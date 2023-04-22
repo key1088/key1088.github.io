@@ -1,0 +1,6 @@
+title: php 添加扩展模块
+categories: [Linux]
+tags: []
+date: 2011-12-02 10:49:00
+---
+<p>线上想用zabbix做监控。php安装的时候有很多模块没有安装，mbstring就是其中一个，所以现在要扩展安装一下。</p><p>就拿mbstring为例吧</p><p>环境php5.2.14, 不支持mbstring扩展</p><p>上传php源码，tar 之。<br />shell&gt;cd /usr/local/src/php-5.2.14/ext</p><p>shell&gt;ls&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #下面都模块源码，想安装那个就进那个目录</p><p>shell&gt;cd mbstring</p><p>shell&gt;phpize<br />shell&gt;./configure --with-php-config=/usr/local/php/bin/php-config&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #指定php-config文件<br />shell&gt;make<br />shell&gt;make install&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #看这一步的输出可以看出是模块的目录,我的是/usr/local/php/lib/php/extensions/no-debug-non-zts-20060613</p><p>shell&gt;vim /usr/local/php/lib/php.ini&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #编辑php.ini添加扩展目录。</p><p>extension_dir=/usr/local/php/lib/php/extensions/no-debug-non-zts-20060613</p><p>extension=mbstring.so</p><p>重启一个web服务，用phpinfo看看是否支持mbstring。<br /></p><p>&nbsp;</p>

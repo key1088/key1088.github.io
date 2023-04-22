@@ -1,0 +1,6 @@
+title: USB 控制器驱动的那点事
+categories: [Windows]
+tags: []
+date: 2011-01-13 10:25:00
+---
+<p>前几天，同事的USB不能用了。设备管理器里面USB控制器显示的是黄叹号。把设备卸载掉以后，安装驱动，还是不能用。</p><p>他下载一个驱动精灵也不可以。都是做技术的，当时很鄙视他，现在鄙视我自己了。因为公司事是比较多，年底了比较忙，没有给他用，他重装系统了，重装系统后好了。</p><p>昨天他的U盘不能用了，不知道是加密了还是怎么了，提示格式化。格式化也格式化不了，下载低格工具也不行，linux下也格式化不了。他出差了，把U盘丢给我，让我给他看看。</p><p>下载一个U盘量产工具，低格一个就好了。郁闷的事发生了，今天我的USB控制台也成黄叹号了。</p><p>进入系统，提示发现新硬件，机器很卡。还是那样做安装驱动呗。卸载设备驱动。用驱动精灵安装驱动，我晕，驱动精灵一点没有检测出来新硬件，不知道他判断的是什么东西，注册表？。</p><p>进设备管理器，右击属性，说注册表被破坏了。也许就量产U盘工具加载驱动的时候，加载错了。</p><p>进入注册表regedit&nbsp;</p><p>[HKEY_LOCAL_MACHINESYSTEMCurrentControlSetControlClass 设备驱动注册表的位置</p><p>{36FC9E60-C465-11CF-8056-444553540000}]&nbsp;&nbsp; USB控制器的项，有可能你的和我的不一样，有说明的。</p><p>下面这是我的</p><p><br />[HKEY_LOCAL_MACHINESYSTEMCurrentControlSetControlClass{36FC9E60-C465-11CF-8056-444553540000}]<br />&quot;Class&quot;=&quot;USB&quot;<br />@=&quot;通用串行总线控制器&quot;<br />&quot;Icon&quot;=&quot;-20&quot;<br />&quot;NoInstallClass&quot;=&quot;1&quot;<br />&quot;TroubleShooter-0&quot;=&quot;hcp://help/tshoot/tsUSB.htm&quot;</p><p>写着通用串行总线控制器的就是。</p><p>看看有没有未知的驱动的项，删除掉就OK了。</p><p>进设备管理器，重新扫描硬件设备，系统就会发现USB hub。自动会搜索驱动。USB2.0驱动一般系统自带。</p><p>ok 干活。</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>

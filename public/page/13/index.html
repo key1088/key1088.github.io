@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>key1088 blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="个人博客网站">
+<meta property="og:type" content="website">
+<meta property="og:title" content="key1088 blog">
+<meta property="og:url" content="https://key1088.github.io/page/13/index.html">
+<meta property="og:site_name" content="key1088 blog">
+<meta property="og:description" content="个人博客网站">
+<meta property="og:locale">
+<meta property="article:author" content="key1088">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="key1088 blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">key1088 blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">2020到2060会发生什么，这40年内会有哪些变化呢</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://key1088.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-USB-控制器驱动的那点事" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/01/13/USB-%E6%8E%A7%E5%88%B6%E5%99%A8%E9%A9%B1%E5%8A%A8%E7%9A%84%E9%82%A3%E7%82%B9%E4%BA%8B/" class="article-date">
+  <time class="dt-published" datetime="2011-01-13T02:25:00.000Z" itemprop="datePublished">2011-01-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Windows/">Windows</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/01/13/USB-%E6%8E%A7%E5%88%B6%E5%99%A8%E9%A9%B1%E5%8A%A8%E7%9A%84%E9%82%A3%E7%82%B9%E4%BA%8B/">USB 控制器驱动的那点事</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>前几天，同事的USB不能用了。设备管理器里面USB控制器显示的是黄叹号。把设备卸载掉以后，安装驱动，还是不能用。</p><p>他下载一个驱动精灵也不可以。都是做技术的，当时很鄙视他，现在鄙视我自己了。因为公司事是比较多，年底了比较忙，没有给他用，他重装系统了，重装系统后好了。</p><p>昨天他的U盘不能用了，不知道是加密了还是怎么了，提示格式化。格式化也格式化不了，下载低格工具也不行，linux下也格式化不了。他出差了，把U盘丢给我，让我给他看看。</p><p>下载一个U盘量产工具，低格一个就好了。郁闷的事发生了，今天我的USB控制台也成黄叹号了。</p><p>进入系统，提示发现新硬件，机器很卡。还是那样做安装驱动呗。卸载设备驱动。用驱动精灵安装驱动，我晕，驱动精灵一点没有检测出来新硬件，不知道他判断的是什么东西，注册表？。</p><p>进设备管理器，右击属性，说注册表被破坏了。也许就量产U盘工具加载驱动的时候，加载错了。</p><p>进入注册表regedit&nbsp;</p><p>[HKEY_LOCAL_MACHINESYSTEMCurrentControlSetControlClass 设备驱动注册表的位置</p><p>{36FC9E60-C465-11CF-8056-444553540000}]&nbsp;&nbsp; USB控制器的项，有可能你的和我的不一样，有说明的。</p><p>下面这是我的</p><p><br />[HKEY_LOCAL_MACHINESYSTEMCurrentControlSetControlClass{36FC9E60-C465-11CF-8056-444553540000}]<br />&quot;Class&quot;=&quot;USB&quot;<br />@=&quot;通用串行总线控制器&quot;<br />&quot;Icon&quot;=&quot;-20&quot;<br />&quot;NoInstallClass&quot;=&quot;1&quot;<br />&quot;TroubleShooter-0&quot;=&quot;hcp://help/tshoot/tsUSB.htm&quot;</p><p>写着通用串行总线控制器的就是。</p><p>看看有没有未知的驱动的项，删除掉就OK了。</p><p>进设备管理器，重新扫描硬件设备，系统就会发现USB hub。自动会搜索驱动。USB2.0驱动一般系统自带。</p><p>ok 干活。</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/01/13/USB-%E6%8E%A7%E5%88%B6%E5%99%A8%E9%A9%B1%E5%8A%A8%E7%9A%84%E9%82%A3%E7%82%B9%E4%BA%8B/" data-id="clgrjlxk9008h7opi4cqvduhf" data-title="USB 控制器驱动的那点事" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux-安装-use-text-mode选项" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/01/07/linux-%E5%AE%89%E8%A3%85-use-text-mode%E9%80%89%E9%A1%B9/" class="article-date">
+  <time class="dt-published" datetime="2011-01-07T07:51:00.000Z" itemprop="datePublished">2011-01-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/01/07/linux-%E5%AE%89%E8%A3%85-use-text-mode%E9%80%89%E9%A1%B9/">linux 安装 use text mode选项</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>use text mode 选项 被忽略了 。气人、、<img src="/images/pic/other_site/img_baidu_j_0016.gif" /></p><p>&nbsp;</p><p>安装linux 老版本的时候，由于相应的驱动比较老（），没有办法安装。</p><p>最后没有办法，都是用硬盘或者U盘安装，相应安装本博客已经写过了。</p><p>因为硬盘安装直接进入图形界面，中也有一个选项use text mode 。</p><p>跳过后，进入linux图形安装界面，主板显卡如果比较新的话，不被识别，就会花屏。</p><p>使用USE text mode 选型，很好。安装了好几次，都没有在意这个选项。</p><p>切记，切记。</p><p>&nbsp;</p><p><img src="/images/pic/other_site/img_baidu_j_0012.gif" /><img src="/images/pic/other_site/img_baidu_j_0012.gif" /><img src="/images/pic/other_site/img_baidu_j_0012.gif" /><img src="/images/pic/other_site/img_baidu_j_0012.gif" /><img src="/images/pic/other_site/img_baidu_j_0012.gif" /><img src="/images/pic/other_site/img_baidu_j_0012.gif" /><img src="/images/pic/other_site/img_baidu_j_0012.gif" /><img src="/images/pic/other_site/img_baidu_j_0012.gif" /><img src="/images/pic/other_site/img_baidu_j_0012.gif" /></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/01/07/linux-%E5%AE%89%E8%A3%85-use-text-mode%E9%80%89%E9%A1%B9/" data-id="clgrjlxgb00387opi0snr7ku8" data-title="linux 安装 use text mode选项" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Vmware-ESX-安装-一个郁闷啊" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/12/10/Vmware-ESX-%E5%AE%89%E8%A3%85-%E4%B8%80%E4%B8%AA%E9%83%81%E9%97%B7%E5%95%8A/" class="article-date">
+  <time class="dt-published" datetime="2010-12-10T14:02:00.000Z" itemprop="datePublished">2010-12-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/12/10/Vmware-ESX-%E5%AE%89%E8%A3%85-%E4%B8%80%E4%B8%AA%E9%83%81%E9%97%B7%E5%95%8A/">Vmware ESX 安装 一个郁闷啊</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在vmware 7.0下安装&nbsp;&nbsp; VMware.ESX.虚拟机3.5，真纠结啊。</p><p>安装至少使用1G的内存，我的本就两个G，可怜啊，分给他一个G吧。</p><p>安装还挺速度，比常见的linux发行版都快（那次在G41的主板上安装linux，就5分钟，安装速度一个字快。）。一会就安装。</p><p>&nbsp;</p><p>郁闷的是，启动的时候太慢了。2个小时还没有启动起来，启动到sshd，虽然快到登陆界面了，但我还是把虚拟机关了。</p><p>2个小时，我的本快烧了，内存虽然给他1G，但vmware ESX从开机到关闭，我的CPU都是100%，满满的啊。</p><p>心疼我的本啊。难道是我的cpu不知道完全虚拟机的问题，CPU使用率太高了。</p><p>突然闻到了点糊味，吓坏了。原来是后面的电热风的问题。吓吓吓啊、</p><p>&nbsp;</p><p>不敢玩了，有时间用公司真实机做，不支持完全虚拟化。</p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/12/10/Vmware-ESX-%E5%AE%89%E8%A3%85-%E4%B8%80%E4%B8%AA%E9%83%81%E9%97%B7%E5%95%8A/" data-id="clgrjlxka008l7opi824jbnsh" data-title="Vmware ESX 安装 一个郁闷啊" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux应用--硬件信息查看[转]" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/12/08/linux%E5%BA%94%E7%94%A8--%E7%A1%AC%E4%BB%B6%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B%5B%E8%BD%AC%5D/" class="article-date">
+  <time class="dt-published" datetime="2010-12-08T14:38:00.000Z" itemprop="datePublished">2010-12-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/12/08/linux%E5%BA%94%E7%94%A8--%E7%A1%AC%E4%BB%B6%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B%5B%E8%BD%AC%5D/">linux应用--硬件信息查看[转]</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p></p><p></p> <ins><ins></ins></ins> <p>linux应用--硬件信息查看</p><p>真乱---整理下、、、<br />1, 主板信息 .查看主板的序列号 -------------------------------------------------- #使用<a target="_blank" rel="noopener" href="http://www.net527.cn/a/luyoujiaohuan/"><u>命令</u></a> dmidecode | grep -i 'serial number' #查看板卡信息 cat /proc/pci --------------------------------------------------</p><p>2, cpu信息 -------------------------------------------------- #通过/proc文件系统 <br />1) cat /proc/cpuinfo #通过查看开机信息 <br />2) dmesg | grep -i 'cpu' # 3)dmidecode -t processor --------------------------------------------------</p><p>3, 硬盘信息 -------------------------------------------------- #查看分区情况 fdisk -l #查看大小情况 df -h #查看使用情况 du -h # hdparm -I /dev/sda # dmesg | grep sda --------------------------------------------------</p><p>4, 内存信息 -------------------------------------------------- 1) cat /proc/meminfo 2) dmesg | grep mem <br />3) free -m <br />4) vmstat <br />5) dmidecode | grep -i mem --------------------------------------------------</p><p>5, 网卡信息 -------------------------------------------------- <br />1) dmesg | grep -i 'eth' <br />2) cat /etc/sysconfig/hwconf | grep -i eth 3) lspci | grep -i 'eth' --------------------------------------------------</p><p>6, 鼠标键盘和USB信息查看键盘和鼠标：<br />cat /proc/bus/input/devices <br />查看USB设备：<br />cat /proc/bus/usb/devices <br />查看各设备的中断请求(IRQ):<br />cat /proc/interrupts</p><p>7, 显卡信息 -------------------------------------------------- <br />1)lspci |grep -i 'VGA' 2)dmesg | grep -i 'VGA' --------------------------------------------------</p><p>8, 声卡信息 -------------------------------------------------- <br />1)lspci |grep -i 'VGA' 2)dmesg | grep -i 'VGA' --------------------------------------------------</p><p>9, 其他命令 .用硬件检测程序kuduz探测新硬件：<br />service kudzu start ( or restart) .dmesg (查看所有启动时检测到的硬件信息) .<br />lspci (显示外设信息, 如usb，网卡等信息) .<br />cat /etc/sysconfig/hwconf .mpstat</p><p>10, 需要手动安装的工具 lshw,hwinfo,hal-device-manager</p><p>Solaris如何检测硬件参数 俺从别处发现了些有意思的东西：<br />Solaris的硬件相关命令<br />1)．查看当前处理器的类型和速度(主频) <br /># psrinfo –v </p><p>Status of processor 1 as of: 11/24/01 10:34:41 Processor has been on-line since 11/24/01 10:18:20. The sparcv9 processor operates at 432 MHz, and has a sparcv9 floating point processor. Status of processor 3 as of: 11/24/01 10:34:41 Processor has been on-line since 11/24/01 10:18:22. The sparcv9 processor operates at 432 MHz, and has a sparcv9 floating point processor.</p><p>2)．打印当前的OBP版本号<br /># prtconf –V </p><p>OBP 3.20.0 2000/10/24 10:47 <br /># /usr/platform/sun4u/sbin/prtdiag –v | grep OBP </p><p>OBP 3.20.0 2000/10/24 10:47 POST 6.1.0 2000/10/24 10:49 ok. .version Release 3.20 Version 0 created 2000/10/24 10:47 OBP 3.20.0 2000/10/24 10:47 POST 6.1.0 2000/10/24 10:49 OBDIAG 4.5.1 2000/10/24 10:48</p><p>3)．查看硬盘物理信息(vendor, RPM, Capacity) <br /># iostat –E <br />sd0 Soft Errors: 0 Hard Errors: 0 Transport Errors: 0 Vendor: SEAGATE Product: ST34371W SUN4.2G Revision: 7462 Serial No: JDX394220KW EBC Size: 4.29GB &lt;4292075520 bytes&gt;; Media Error: 0 Device Not Ready: 0 No Device: 0 Recoverable: 0 Illegal Request: 0 Predictive Failure Analysis: 0 sd2 Soft Errors: 0 Hard Errors: 0 Transport Errors: 0 Vendor: FUJITSU Product: MAJ3364M SUN36G Revision: 0804 Serial No: 01M18144 Size: 36.42GB &lt;36418595328 bytes&gt;; Media Error: 0 Device Not Ready: 0 No Device: 0 Recoverable: 0 Illegal Request: 0 Predictive Failure Analysis: 0 sd3 Soft Errors: 0 Hard Errors: 0 Transport Errors: 0 Vendor: FUJITSU Product: MAJ3364M SUN36G Revision: 0804 Serial No: 01M16199 Size: 36.42GB &lt;36418595328 bytes&gt;; Media Error: 0 Device Not Ready: 0 No Device: 0 Recoverable: 0 Illegal Request: 0 Predictive Failure Analysis: 0 sd21 Soft Errors: 0 Hard Errors: 0 Transport Errors: 0 Vendor: TOSHIBA Product: DVD-ROM SD-M1401 Revision: 1007 Serial No: 06/22/00 Size: 18446744073.71GB &lt;-1 bytes&gt;; Media Error: 0 Device Not Ready: 0 No Device: 0 Recoverable: 0 Illegal Request: 0 Predictive Failure Analysis: 0</p><p>4)．查看磁盘的几何参数和分区信息<br /># prtvtoc <br />/dev/rdsk/c0t0d0s0 * /dev/rdsk/c0t0d0s0 partition map * * Dimensions: * 512 bytes/sector * 135 sectors/track * 16 tracks/cylinder * 2160 sectors/cylinder * 3882 cylinders * 3880 accessible cylinders * * Flags: * 1: unmountable * 10: read-only * * Unallocated space: * First Sector Last * Sector Count Sector * 8277120 103680 8380799 * * First Sector Last * Partition Tag Flags Sector Count Sector Mount Directory 0 2 00 0 2049840 2049839 / 1 3 01 2049840 615600 2665439 2 5 00 0 8380800 8380799 5 0 00 2665440 2458080 5123519 /opt 6 4 00 5123520 3073680 8197199 /usr 7 8 00 8197200 79920 8277119 /export/home</p><p>5)．显示已经使用和未使用的i-node数目 <br /># df –F ufs –o i </p><p>Filesystem iused ifree %iused Mounted on /dev/dsk/c0t0d0s0 7859 479821 2% / /dev/dsk/c0t0d0s6 37763 339517 10% /usr /dev/dsk/c0t0d0s5 722 301102 0% /opt /dev/dsk/c0t0d0s7 4 24380 0% /export/home</p><p>6).显示cpu使用率最高的进程 <br /># ps –eo pid,pcpu,args | sort +1n </p><p>该命令输出当前系统进程的pid, CPU占用率及命令描述，并以pcpu来排序</p><p>7)．显示内存占用率最高的进程 <br /># ps –eo pid,vsz,args | sort +1n </p><p>该命令输出当前系统进程的pid，内存占用率及命令描述，并以vsz来排序</p><p>8)．查看及启动系统的32位或64位内核模式 64位模式 <br /># isalist –v </p><p>sparcv9+vis sparcv9 sparcv8plus+vis sparcv8plus sparcv8 sparcv8-fsmuld sparcv7 sparc <br /># isainfo –v </p><p>64-bit sparcv9 applications 32-bit sparc applications <br /># isainfo –b </p><p>64 启动64位内核模式 ok. boot kernel/sparcv9/unix 32位模式 <br /># isalist –v&nbsp;</p><p>sparcv8plus+vis sparcv8plus sparcv8 sparcv8-fsmuld sparcv7 sparc <br /># isainfo –v </p><p>32-bit sparc applications <br /># isainfo –b </p><p>32 启动32位模式 ok. boot kernel/unix</p><p>9)．查看当前的OpenWindows版本 <br /># showrev –w </p><p>OpenWindows version: X11 Version 6.4.1 5 November 2001</p><p>10)．查看当前CDE的版本 <br /># /usr/ccs/bin/what /usr/dt/bin/dtmail&nbsp;</p><p>/usr/dt/bin/dtmail: CDE Version 1.4.6_06 CDEVersion1.4.6_06</p><p>11)．测定当前的显示器刷新频率 </p><p>/usr/sbin/ffbconfig –rev </p><p>Valid values for -res option are: 1024x768x60 [1] 1024x768x70 [1] 1024x768x75 [1] [2] 1024x768x77 1024x800x84 1152x900x66 1152x900x76 1280x800x76 [1] [2] 1280x1024x60 [1] [2] 1280x1024x67 1280x1024x76 1280x1024x85 [1] [2] 960x680x112s 960x680x108s 640x480x60 [1] [2] 640x480x60i [1] 768x575x50i [1] 1440x900x76 [1] [2] 1600x1000x66 [1] [2] 1600x1000x76 [1] [2] 1600x1280x76 [1] [2] 1920x1080x72 [1] [2] 1920x1080x76 [1] [2] 1920x1200x70 [1] [2] 1920x1200x75 [1] [2] svga [1] 1152 1280 stereo vga [1] [2] ntsc [1] pal [1] none Notes: [1] monitor does not support this resolution. [2] this version of FFB (FFB1) does not support this resolution</p><p>12)．查看系统配置 <br /># /usr/platform/sun4u/sbin/prtdiag –v&nbsp;</p><p>System Configuration: Sun Microsystems sun4u Sun Enterprise 450 (2 X UltraSPAR C-II 432MHz) System clock frequency: 86 MHz Memory size: 1024 Megabytes ========================= CPUs ========================= Run Ecache CPU CPU Brd CPU Module MHz MB Impl. Mask --More-- --- --- ------- ----- ------ ------ ---- SYS 1 1 432 4.0 US-II 10.0 SYS 3 3 432 4.0 US-II 10.0 ========================= Memory ========================= Interlv. Socket Size Bank Group Name (MB) Status ---- ----- ------ ---- ------ 0 none 1901 256 OK 0 none 1902 256 OK 0 none 1903 256 OK 0 none 1904 256 OK 0 none 1701 256 OK 0 none 1702 256 OK ========================= IO Cards ========================= No failures found in Sys
+tem =========================== ========================= Environmental Status ========================= System Temperatures (Celsius): ------------------------------</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>ps：做系统移植的时候，非常有用。网卡芯片什么的，驱动也好移植。</p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/12/08/linux%E5%BA%94%E7%94%A8--%E7%A1%AC%E4%BB%B6%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B[%E8%BD%AC]/" data-id="clgrjlxhy004c7opi7ksw3toq" data-title="linux应用--硬件信息查看[转]" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux快速优化，去多余服务。" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/12/03/linux%E5%BF%AB%E9%80%9F%E4%BC%98%E5%8C%96%EF%BC%8C%E5%8E%BB%E5%A4%9A%E4%BD%99%E6%9C%8D%E5%8A%A1%E3%80%82/" class="article-date">
+  <time class="dt-published" datetime="2010-12-03T14:32:00.000Z" itemprop="datePublished">2010-12-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/12/03/linux%E5%BF%AB%E9%80%9F%E4%BC%98%E5%8C%96%EF%BC%8C%E5%8E%BB%E5%A4%9A%E4%BD%99%E6%9C%8D%E5%8A%A1%E3%80%82/">linux快速优化，去多余服务。</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>#!&#x2F;bin&#x2F;sh<p> </p><p>#by:key1088</p>services&#x3D;<code>chkconfig --list|cut -f1</code><br />for ser in $services<br />do<br /> if [ &quot;$ser&quot; &#x3D;&#x3D; &quot;network&quot; ]||[ &quot;$ser&quot; &#x3D;&#x3D; &quot;syslog&quot; ]||[ &quot;$ser&quot; &#x3D;&#x3D; &quot;sshd&quot; ]||[ &quot;$ser&quot; &#x3D;&#x3D; &quot;crond&quot; ]||[ &quot;$ser&quot; &#x3D;&#x3D; &quot;atd&quot; ];<br /> then<br />&amp;nbsp;&amp;nbsp;&amp;nbsp;  chkconfig &quot;$ser&quot; on<br /> else<br />&amp;nbsp;&amp;nbsp;&amp;nbsp;  chkconfig &quot;$ser&quot; off<br /> fi<br />done<br />echo &quot;network success!&quot;<br />echo &quot;syslog sucss!!&quot;<br />echo &quot;sshd success!!!!&quot;<br />echo &quot;crond success!!&quot;<br />echo &quot;atd success!!&quot;<br /><br /></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/12/03/linux%E5%BF%AB%E9%80%9F%E4%BC%98%E5%8C%96%EF%BC%8C%E5%8E%BB%E5%A4%9A%E4%BD%99%E6%9C%8D%E5%8A%A1%E3%80%82/" data-id="clgrjlxgj003e7opi8d8j6u82" data-title="linux快速优化，去多余服务。" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-LABEL-问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/12/02/LABEL-%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2010-12-02T09:10:00.000Z" itemprop="datePublished">2010-12-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/12/02/LABEL-%E9%97%AE%E9%A2%98/">LABEL 问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>e2label device [newlabel]&nbsp;&nbsp;  创建设备的标签命令 <br />比如我们想把文件系统为ext3 的分区/dev/hda5的标签设备为 /5 ，我们应该执行如下的命令： <br />[root@localhost]# e2label /dev/hda5 /5 <br /><br />如果是reiserfs文件系统，我们应该用 <br />[root@localhost]# reiserfstune -l 标签 设备 <br />举例：比如我为reiserfs 文件系统 /dev/hda10设置标签为 /10 ； <br />[root@localhost]# reiserfstune -l /10 /dev/hda10 <br /><br />警告： 请不要在您的Linux的安装分区（也就是Linux系统/ 所在的分区）实践，会导致您的Linux系统崩溃；如果想实践，请在其它分区测试。</p><p> </p><p>破坏的话，用光盘进入查看LABEL，或修复，进入grub修改也可以。</p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/12/02/LABEL-%E9%97%AE%E9%A2%98/" data-id="clgrjlxdw002j7opic4ic877e" data-title="LABEL 问题" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-硬盘下安装linux" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/11/25/%E7%A1%AC%E7%9B%98%E4%B8%8B%E5%AE%89%E8%A3%85linux/" class="article-date">
+  <time class="dt-published" datetime="2010-11-25T09:53:00.000Z" itemprop="datePublished">2010-11-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/11/25/%E7%A1%AC%E7%9B%98%E4%B8%8B%E5%AE%89%E8%A3%85linux/">硬盘下安装linux</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>公司新来一批设备，主板没有IDE口，IDE光驱就不能用了。</p><p>用USB光驱装，竟然不能初始化过来，郁闷死了、我要安装的linux系统，太老了，驱动应该支持的少。</p><p>没有办法，公司没有sata光驱，只能硬盘安装了。</p><p> </p><p> </p><p>在另一个linux系统上，上传linux镜像iso。再把iso里面的isolinux文件提取出来。</p><p>这个文件，大家都知道吧，安装引导文件。</p><p>从一个linux启动，进入grub，就是刚刚进去系统时的东西，进入grub命令行（按”c“）。</p><p>kernel （hd0,0)/路径/isolinux/vmlinuz</p><p>&#8205; </p><p>initrd（hd0,0)/路径/isolinux/initd.img</p><p> </p><p>boot</p><p> </p><p>进入安装界面，选择硬盘安装。选择iso的目录就行，不</p><p></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/11/25/%E7%A1%AC%E7%9B%98%E4%B8%8B%E5%AE%89%E8%A3%85linux/" data-id="clgrjlxmv00cv7opihgged1uw" data-title="硬盘下安装linux" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2010新编中国顶级黑客圈内人物资料和QQ,微博以及博客详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/10/10/2010%E6%96%B0%E7%BC%96%E4%B8%AD%E5%9B%BD%E9%A1%B6%E7%BA%A7%E9%BB%91%E5%AE%A2%E5%9C%88%E5%86%85%E4%BA%BA%E7%89%A9%E8%B5%84%E6%96%99%E5%92%8CQQ,%E5%BE%AE%E5%8D%9A%E4%BB%A5%E5%8F%8A%E5%8D%9A%E5%AE%A2%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2010-10-10T12:41:00.000Z" itemprop="datePublished">2010-10-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/10/10/2010%E6%96%B0%E7%BC%96%E4%B8%AD%E5%9B%BD%E9%A1%B6%E7%BA%A7%E9%BB%91%E5%AE%A2%E5%9C%88%E5%86%85%E4%BA%BA%E7%89%A9%E8%B5%84%E6%96%99%E5%92%8CQQ,%E5%BE%AE%E5%8D%9A%E4%BB%A5%E5%8F%8A%E5%8D%9A%E5%AE%A2%E8%AF%A6%E8%A7%A3/">2010新编中国顶级黑客圈内人物资料和QQ,微博以及博客详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>2010新编中国顶级黑客圈内人物资料和QQ,微博以及博客详解文章作者：<br />信息来源：邪恶八进制信息安全团队(<a target="_blank" href="http://www.eviloctal.com/" rel="noopener noreferrer">www.eviloctal.com</a>)<br />百晓生_民间杂志【民间交流 民间技术 民间文化 民间舆论】<br />我只是在写自己所想到的杂志 我只是菜鸟！<br /><br />主页博客相册|个人档案 |好友 <br />查看文章&amp;#160; &amp;#160; <br /><br />【转帖】2010新编中国顶级黑客圈内人物资料和QQ,微博以及博客详解<br />2010年10月06日 星期三 下午 08:06<br />强大的黑客，强大的资料，以后就跟着这榜单混了，呵呵！<br /><br />郑重声明：<br /><br />小心是网络捧杀，中国黑客威胁论，最近是多事之秋。<br /><br />小心是网络捧杀，中国黑客威胁论，最近是多事之秋。<br /><br />小心是网络捧杀，中国黑客威胁论，最近是多事之秋。<br /><br />！！！！！！！！！！！！！！！！！！！！！！<br /><br />——————————————————————————————————————————<br /><br />祝各位大牛国庆节快乐.<br /><br />本文足以轰动一下.各大网站编辑抓紧第一时间发布<br /><br />2010新编中国顶级黑客圈内人物资料和QQ,微博以及博客详解<br /><br />首先最主要注明的是：排名不分先后<br /><br />本名单第一部分罗列的黑客都是真正拥有技术和才能者。并非大多数人平时在电视中所看到的那些盗号或入侵网站的“黑客”，电视里报道的那些人只是黑客界最底 层的人。例如熊猫烧香的作者，其实技术并不高，在黑客圈中大多数人都只是把这个病毒当作一个玩具。而技术含量高超的病毒都是类似于29A发布的那种。<br /><br />本文作者自我介绍。毕业于哈尔滨工业大学，2001年出道黑客圈，曾在国内多个黑客论坛潜水多年。参加过2004年国内顶级黑客大会XCON（安全焦点峰 会）（PS:扯淡）。2003年就职过国际顶级搜索引擎公司GOOGLE，后因个人原因离职。在黑客界有一定人缘基础。所以本文有一定权威性。至于我是 谁，避免被人追杀还是不明说了。下面开始正文：<br />第一部分列举老牌黑客。中国黑客界早期技术很牛的人。都是真正的高手。现在大部分技术还是不减当年，数一数二，是普通人望尘莫及的。<br /><br />在下面这些人中很多人手握众多危害极大的未公开漏洞。就是圈内所称的0day。这类危害极大的0day一般在黑市上可以卖的数十万人民币。<br />本文原始发布地址: <a target="_blank" href="https://docs.google.com/leaf?id=1rO9CxzojOO0Qho-VOIUpGjwfZhAqcuRWnVXAbluCk4I&amp;sort=name&amp;layout=list&amp;num=50" rel="noopener noreferrer">https://docs.google.com/leaf?id= ... out=list&amp;num=50</a><br />一切内容以上面博客原文为准<br />注：以下列举的黑客当然只是一部分，其实还有很多的前辈级黑客。只不过现在基本都告别技术行业了。下面的人物中大部分还在相关领域活动，所以优先列出了。<br /><br />sunwear<br />QQ:47347<br />微博: <a target="_blank" href="http://t.qq.com/sunwe4r" rel="noopener noreferrer">http://t.qq.com/sunwe4r</a><br />博客: 好像不用了<br />日娃哥。EST核心成员。圈内皆知他手握很多未公开漏洞。渗透入侵和漏洞方面的高手，曾是编程内核牛人。曾经入侵过世界顶级黑客组织Metasploit，剑桥大学等众多高端机构。几年前的世界最顶级两大黑客大会defcon和blackhat都对他有过报道。<br /><br />刺 QQ:32750912<br />微博:<a target="_blank" href="http://t.qq.com/aullik5" rel="noopener noreferrer">http://t.qq.com/aullik5</a><br />博客:<br />刺哥，大风哥。身材瘦弱。是中国黑客圈内纯技术黑客组织幻影旅团创始人。中国顶级黑客之一。目前好像就职于淘宝公司网络安全部门。也是手握很多未公开漏洞 的人。很多影响力很大的0day都是出自幻影旅团。WebZine的发起人。并且发展过WIKI的系统。还曾远赴美国参加世界顶级黑客大会 blackhat。。<br /><br />dm<br />QQ:不详<br />微博:<a target="_blank" href="http://t.qq.com/zoeluk" rel="noopener noreferrer">http://t.qq.com/zoeluk</a><br />博客:<br />国内顶级地下黑客组织0x557核心成员。是漏洞挖掘，利用方面的高手。不用说，手里的漏洞也是多的可以批发了。目前就职于世界著名反病毒杀毒软件公司麦咖啡(刚刚被intel收购)。现在还写起了iphone,ipad下的安全软件。看来是个全能选手。<br /><br />flashsky<br />QQ:38062 &amp; 16202253<br />博客:<br />微博:<a target="_blank" href="http://t.qq.com/flash-sky" rel="noopener noreferrer">http://t.qq.com/flash-sky</a><br />方兴。闪空哥。国内著名黑客组织安全焦点核心成员。2003年WINDOWS历史上最严重安全漏洞细节全球首发者,数百个高危级安全漏洞发现者,历任启明 星辰,美国EEYE,美国微软特聘安全专家,美国微软BLUEHAT第一个中国演讲者,安全焦点成员,南京翰海源信息技术有限公司创始人和CEO。对漏洞 方面的研究是相当高深的。预祝公司发展顺利。<br /><br />tombkeeper<br />QQ:644909<br />博客:<br />微博:<a target="_blank" href="http://t.qq.com/tombkeeper" rel="noopener noreferrer">http://t.qq.com/tombkeeper</a><br />于某。传说中的tk教主。国内著名黑客组织安全焦点核心成员。就职于绿盟科技，俗称妇科圣手。对windows操作系统以及漏洞等方面的研究可以说是非常精通。而在安全焦点论坛，最近几年一直被人奉为TK教主。对于其他领域的科学也有着独到的见解。文笔思想也是很独特的。<br /><br />glacier<br />QQ:1973435<br />微博:<a target="_blank" href="http://t.qq.com/glacier" rel="noopener noreferrer">http://t.qq.com/glacier</a><br />黄鑫。冰河哥。黄总。同为国内著名的黑客组织安全焦点核心成员。深圳大成天下的创始人之一。是中国最早的远程控制木马&quot;冰河&quot;的作者，也是著名安全扫描工 具&quot;x-scan&quot;的作者。黑客编程方面的高手，对于网络协议，加密安全以及软件工程有很深的了解。女黑客wollf的老公。一个风趣幽默的人。从微博上 就可以看出来了。已经当父亲了，当然孩子不是木马，是一个帅哥。再此祝福一下。<br /><br />swan<br />QQ:不详<br />微博:<a target="_blank" href="http://t.qq.com/Swan557" rel="noopener noreferrer">http://t.qq.com/Swan557</a><br />0x557(SST)核心成员，对于linux,windows操作系统上的漏洞可谓了如指掌。<br /><br />goodwell<br />QQ:19558287<br />微博:<a target="_blank" href="http://t.qq.com/goodwell" rel="noopener noreferrer">http://t.qq.com/goodwell</a><br />龚蔚。安致信息技术有限公司。中国早起黑客组织绿色兵团创始人，是传说中的中国黑客教父。曾经接受过中央电视台的参访。是以为资深的魔兽世界玩家。<br /><br />xundi<br />QQ:518860<br />微博:<a target="_blank" href="http://t.qq.com/idnuxzhang" rel="noopener noreferrer">http://t.qq.com/idnuxzhang</a><br />张迅迪。国内早期的著名黑客组织安全焦点创始人。具体就不过多介绍了，因为不熟悉，哈哈。<br /><br />lion<br />QQ:21509<br />微博:<a target="_blank" href="http://t.qq.com/coollion" rel="noopener noreferrer">http://t.qq.com/coollion</a><br />林勇。中国红客联盟创始人。跟大多网民在网上所了解到的中国红客大联盟不同。这个才是真正的中国红客联盟。至于所谓的sharpwinner，我只能用一句文明用语敏感词来形容“SB”“草泥马”。现在对于技术不如当年，而且已经远离技术告别当初了。<br /><br />isno<br />QQ:1070681<br />微博:<a target="_blank" href="http://t.qq.com/isnoblah" rel="noopener noreferrer">http://t.qq.com/isnoblah</a><br />安全焦点核心成员之一。目前就职于北京中航嘉信公司。曾经写过很多漏洞溢出方面的分析利用文章（WEBDAV,IDQ,IDA等）。exploit也写过很多。现在较为低调。<br /><br />天行<br />QQ:911189<br />微博:<a target="_blank" href="http://t.qq.com/tian_xing
+" rel="noopener noreferrer">http://t.qq.com/tian_xing</a> 好像不怎么用<br />中国第一代黑客之一。在1999年曾经与发动对国外网站的攻击。网络刺客,网络卫兵是其代表作品。而他对溢出和漏洞利用也颇有研究，例如RPC漏洞利用程序。以及他写的后门都很好。<br /><br />quack<br />微博:<a target="_blank" href="http://t.qq.com/wulujia" rel="noopener noreferrer">http://t.qq.com/wulujia</a><br />吴鲁佳。深圳达成天下创始人。与中国木马之父黄鑫关系很好。安全焦点早期活跃之人，ID：quack。<br /><br />icbm<br />QQ:不详<br /><a target="_blank" href="http://t.qq.com/icbmx2" rel="noopener noreferrer">http://t.qq.com/icbmx2</a> 基本不用<br />赵伟。知道创宇创始人之一。曾经就职于国内著名信息安全公司启明星辰积极防御实验室。对各操作系统以及第三方软件的漏洞有很深的了解，手下的未公开漏洞很多。包括基于web方面的一些独特漏洞。<br /><br />sowhat<br />QQ:不详<br /><a target="_blank" href="http://t.qq.com/secsecsec" rel="noopener noreferrer">http://t.qq.com/secsecsec</a><br />薛峰。就职于某保密单位。曾赴美国参加过国际顶级黑客大会blackhat。手握很多未公开漏洞。好像今年中国顶级黑客盛会xcon上还抽奖中了一台PS3。<br /><br />vxk<br />QQ:86879759<br />微博:<a target="_blank" href="http://t.qq.com/cvcvxk" rel="noopener noreferrer">http://t.qq.com/cvcvxk</a><br />几年前活跃于国内著名病毒论坛CVC。是国内知名的病毒专家。对操作系统内核以及编程，逆向，破解非常精通。可谓程序全能专家。<br /><br />refdom<br />微博:<a target="_blank" href="http://t.qq.com/refdom" rel="noopener noreferrer">http://t.qq.com/refdom</a><br />安全焦点核心成员之一。曾经是中国红客联盟的一员。<br /><br />watercloud<br />微博:<a target="_blank" href="http://t.qq.com/watercloud" rel="noopener noreferrer">http://t.qq.com/watercloud</a><br />知道创宇公司创始人之一。与icbm关系甚好。安全焦点核心成员之一。对漏洞，加密解密等方面有者多年的研究经验，网络安全趋势与发展有着独到的见解。最主要的还是对漏洞，0day方面，手握0day数量也很客观。<br /><br />alert7<br />QQ:415451<br />博客:<br />安全焦点核心成员之一。曾经就职与著名杀毒软件MCAFEE。目前就职于南京翰海源(Flashsky的公司)。对linux 方面的研究经验长达10年以上。对于linux等开源系统漏洞溢出分析利用了如指掌。<br /><br />袁哥<br />博客:<br />传说中的袁哥。没错，中国所有圈内顶级黑客无不佩服的人。就只与绿盟科技。袁哥在数学，编程，漏洞等诸多方面的造诣是无人可以比拟的。很多漏洞要早其它人数年之久就已经发现并且完美利用了。堪称漏洞方面的其人。黑客界的顶级高手。<br /><br />sunx<br />QQ:239670<br />孙华。国内非常著名的黑客编程高手，对漏洞溢出与利用和有研究，写过EXPLOIT。例如IDA漏洞和printer。在9X年代用汇编写过病毒。并且还编写过操作系统后门程序。<br /><br />funnywei<br />QQ:25044885<br />魏强。F博士。安全焦点核心成员之一。漏洞挖掘，漏洞利用方面的高手，在历届国内顶级黑客盛会XCON上都能见到他的身影。据传就职于中国人民解放军XXX部。为中国人民解放军提供很多未公开漏洞。<br /><br />小榕<br />中国早期著名黑客软件“流光”“逆雪”“乱刀”“黑客字典生成器”“ARPSNIFFER”“命令行注入工具”等黑客软件作者。目前对于漏洞方面等技术不如以上几人。不过对于中国黑客界的贡献还是不可小觑的。<br /><br />xikug<br />QQ:53564797<br />国内著名内核，漏洞，程序研究站debugman的站长。逆向，破解，加密，解密，内核等方面的高人。<br /><br />baoz<br />微博:<a target="_blank" href="http://t.qq.com/perlish" rel="noopener noreferrer">http://t.qq.com/perlish</a><br />方勇。包子。fatb。多年前就活跃于中国黑客界。活跃程度和人缘还是不错的。目前就职与迅雷公司。有大牛曾说是个带眼镜的胖子。为人厚道，皮肤较黑。<br /><br />wzt<br />QQ:71579912<br />微博:<a target="_blank" href="http://t.qq.com/wztjlh" rel="noopener noreferrer">http://t.qq.com/wztjlh</a><br />曾经的中国红客联盟核心成员。对于linux内核，以及linux漏洞方面颇有研究。<br /><br />czy<br />QQ:484323<br />四川的一个著名黑客，比较低调，但地下交流圈子中交流频繁。手握很多0day的高手。<br /><br />zzzevazzz<br />QQ:49322630<br />博客:<a target="_blank" href="http://zzzevazzz.bokee.com/" rel="noopener noreferrer">http://zzzevazzz.bokee.com/</a><br />国内著名黑客组织幻影旅团核心成员。早期混迹于灰色轨迹。曾经著名的do all in cmdshell  作者。曾经在安全焦点普及ntsd知识，红极一时。对于windows内核以及漏洞方面有着深入的了解和经验。曾经写过很多有利于大众的文章，分享过很多 宝贵的经验。<br /><br />vessial<br />QQ:不详<br />微博:<a target="_blank" href="http://t.qq.com/vessial" rel="noopener noreferrer">http://t.qq.com/vessial</a><br />同dm一样就职于国际顶级杀毒软件安全厂商麦咖啡公司。也是一位对于漏洞等方面有诸多经验的高手。<br /><br />bkbll<br />qq:78384349<br />dumplogon。BK哥。中国红客联盟核心成员之一。2001年中美黑客大战时期技术还是初级的，但也算早期了。后来对溢出，漏洞以及逆向分析方面颇有研究，技术不错。是lion的好朋友。<br /><br />killer<br />微博:<a target="_blank" href="http://t.qq.com/dongzhiqiang" rel="noopener noreferrer">http://t.qq.com/dongzhiqiang</a><br />博客:<br />董志强。安全焦点核心成员之一。曾经就只与启明星辰公司。对于病毒与防病毒，逆向工程与破解等方面有多年的研究经验。目前为著名安全产品超级巡警的BOSS。<br /><br />coolq<br />qq:49462335<br />就职于绿盟科技的linux方面高手。在绿盟期刊上曾发有著作。对于开源系统有着多年的应用开发经验。linux,unix,bsd内核方面以及漏洞挖掘，利用方面也有着多年的经验。<br /><br />pjf<br />qq:85863144<br />博客:<a target="_blank" href="http://pjf.blogcn.com/" rel="noopener noreferrer">http://pjf.blogcn.com/</a><br />国内著名antirootkit工具icesword的作者。是内核方面的专家。国内著名安全软件公司奇虎360公司的核心开发人员。<br /><br />lcx<br />海洋顶端网站长，是国内渗透入侵方面的高手，有着多年的入侵经验。是中国网马教父之一。安全手册的顾问。<br /><br />村长<br />QQ:6021240<br />国内顶级黑客组织0x557(SST)创始人。是国内著名信息安全公司启明星辰积极防御实验室的BOSS。对windows,linux非常了解，拥有多年的漏洞挖掘，利用的经验。<br /><br />casper<br />QQ:843525<br />华永兴安BOSS。国内顶级黑客大会xcon的主办方，也是安全焦点创始人之一。中国黑客界的老前辈。目前已经脱离技术领域，向老板发展了。<br /><br />e4gle<br />QQ:1949479<br />国内著名黑客组织WSS核心成员。老一代的黑客。对linux,unix下的溢出漏洞分析以及利用有着多年的研究经验，并且对病毒也很了解。<br />——————–华丽的分割线———————-<br /><br />下面将列举一些新生力量，虽然是新生，但起码都是3-6年前左右就开始活跃的人，所以还算是中生代黑客。<br /><br />mj0011<br />QQ:保密，避免骂他的人太多。<br />博客:<br />就职于国内著名安全公司奇虎360。为核心工程师。圈内敌人无数，只因口无遮拦，相貌丑陋等缺点所导致。对瑞星，金山等公司曾经常出言讽刺，另外连国际顶 级安全厂商赛门铁克也不放过。可谓毒舌娘子，连我也被骂过好几次。话说回来，对于编程，内核，木马，远控方面的技术还是不可否定的。<br /><br />baiyuanfan<br />QQ:51449276<br />曾经著名的后门程序BYSHELL的作者。曾经在某界安全焦点峰会上有过演讲议题，技术还是不错的。<br /><br />zwell<br />QQ:27592430<br />网站:<a target="_blank" href="http:/
+/www.nosec.org/" rel="noopener noreferrer">http://www.nosec.org</a><br />白远方。曾经NB联盟核心成员。现在为诺塞科技的老大。诺塞科技的产品现在也广为圈内所知，例如穿山甲，JSKY等工具。对编程和注入WEB方面的东西也是很精通的。<br /><br />sudami<br />qq:527463097<br />微博:<a target="_blank" href="http://t.qq.com/sudami" rel="noopener noreferrer">http://t.qq.com/sudami</a><br />博客:<br />目前就职于国内著名杀毒软件安全软件厂商奇虎360公司。是后起的windows编程，内核之秀。对渗透攻击，入侵方面技术基本为零。曾在邪恶八进制，DEBUGMAN等论坛发表过多篇原创文章。对技术很有追求，进步很快的一个牛人。<br /><br />oldjun<br />微博:<a target="_blank" href="http://t.qq.com/seuhacker" rel="noopener noreferrer">http://t.qq.com/seuhacker</a><br />博客:<a target="_blank" href="http://www.oldjun.com/" rel="noopener noreferrer">http://www.oldjun.com/</a><br />QQ:34680304<br />t00ls核心成员。asp,php等WEB脚本方面的高手，对于渗透入侵，WEB渗透相当精通。<br /><br />9xiao<br />博客: &amp; <a target="_blank" href="http://www.9xiao.net/" rel="noopener noreferrer">www.9xiao.net</a><br />微博:<a target="_blank" href="http://t.qq.com/deioncube" rel="noopener noreferrer">http://t.qq.com/deioncube</a><br />t00ls核心成员，原火狐联盟的人。<br /><br />aono<br />QQ:13335589<br />微博:<a target="_blank" href="http://t.qq.com/air-storm" rel="noopener noreferrer">http://t.qq.com/air-storm</a><br />t00ls核心成员。无线安全方面的高手。在无线网络安方面有其独特的技术思想和经验。<br /><br />云舒<br />QQ:21287305<br />微博:<a target="_blank" href="http://t.qq.com/yunshuy" rel="noopener noreferrer">http://t.qq.com/yunshuy</a><br />是幻影旅团的核心成员之一，目前同axis一同就职于淘宝公司。其实也算的上是一位比较有资历的老人了。应该位列在上面。写过synflood方面代码。<br /><br />明小子<br />QQ:830540<br />网站:<a target="_blank" href="http://www.hackdiy.com/" rel="noopener noreferrer">http://www.hackdiy.com/</a><br />黑客动画吧的人。著名的明小子旁注工具domain的作者。相比很多菜鸟都以及享受过这个工具的实惠了。其实技术只能说是一般。不过入行也不久了。注入脚本以及简易的编程还是不错的。<br /><br />鬼仔<br />QQ:359421<br />博客:<a target="_blank" href="http://huaidan.org/" rel="noopener noreferrer">http://huaidan.org</a><br />目前就职于新浪公司。WEB应用安全方面的高手。<br /><br />lake2<br />QQ:<a target="_blank" href="http://t.qq.com/mrhupo" rel="noopener noreferrer">http://t.qq.com/mrhupo</a><br />微博:<a target="_blank" href="http://t.qq.com/mrhupo" rel="noopener noreferrer">http://t.qq.com/mrhupo</a><br />脚本，数据库，渗透方面的高手。目前就职于腾讯QQ公司。<br /><br />neeao<br />QQ:35789112<br />WEB应用安全及脚本方面的高手。<br /><br />u#0h4x0r<br />博客:<a target="_blank" href="http://www.noahacker.com/" rel="noopener noreferrer">http://www.noahacker.com/</a><br />QQ:645041992<br />对JAVA有一定了解，对渗透也有一些研究。入侵过不少无辜网站。<br /><br />hmily<br />qq:68857640<br />微博:<a target="_blank" href="http://t.qq.com/Hmily_LCG" rel="noopener noreferrer">http://t.qq.com/Hmily_LCG</a><br />博客:<br />吾爱破解的BOSS。是程序破解，软件破解，加密解密，逆向工程方面的高手。破解过很多大家常用的工具，如穿山甲。<br /><br />xi4oyu<br />博客:<a target="_blank" href="http://www.pentestday.com/" rel="noopener noreferrer">http://www.pentestday.com/</a> &amp; <br />微博:<a target="_blank" href="http://t.qq.com/evil_xi4oyu" rel="noopener noreferrer">http://t.qq.com/evil_xi4oyu</a><br />qq:909473606<br />linux方面的高手。<br /><br />猪猪<br />QQ:82648 &amp; 100298<br />岁月联盟站长。入行也有几年了。曾经参加过爱国反击黑客战。也入侵过不少圈内的同行网站。对ASP，注入方面比较了解。<br /><br />rayh4c<br />qq:30039780<br />博客:<br />微博:<a target="_blank" href="http://t.qq.com/rayh4c" rel="noopener noreferrer">http://t.qq.com/rayh4c</a><br />茄子宝。80SEC核心成员。对xss，CSRF等脚本漏洞非常精通。经验丰富。<br /><br />superhei<br />QQ:123230273<br />微博:<a target="_blank" href="http://t.qq.com/hi_heige" rel="noopener noreferrer">http://t.qq.com/hi_heige</a><br />幻影旅团核心成员。曾经写过著名的php注入漏洞利用工具。发现过很多国内流行的php程序漏洞。是WEB脚本，数据库方面的专家。<br /><br />ring04h<br />QQ:153520368<br />博客:<br />EST核心成员。与国内顶级黑客sunwear关系甚好。曾一同入侵过国内最著名的两大PHP论坛。此人对php，数据库等方面相当精通。<br /><br />冰血封情<br />QQ:310926<br />博客:<a target="_blank" href="http://weblog.eviloctal.com/" rel="noopener noreferrer">http://weblog.eviloctal.com/</a><br />EST创始人。传说中的中国第四代黑客。据传说已经自己开公司，很久不做技术了。<br /><br />冰的原点<br />QQ:519249638<br />博客:<br />微博:<a target="_blank" href="http://t.qq.com/icezone" rel="noopener noreferrer">http://t.qq.com/icezone</a><br />黑客手册常见的人。是入门级黑客书籍《黑客渗透笔记》的原作者。对于初学者来说还是有一定学习价值的。<br /><br />friddy<br />博客:<a target="_blank" href="http://www.friddy.cn/" rel="noopener noreferrer">http://www.friddy.cn</a><br />QQ:568623<br />专门搞漏洞挖掘的人，虽然技术上跟最上面的那些大牛级黑客比差一些，但相对来说还是不错的。另外也对入侵检测有所研究。<br /><br />余弦<br />qq:331861985<br />微博:<a target="_blank" href="http://t.qq.com/evilcos" rel="noopener noreferrer">http://t.qq.com/evilcos</a><br />xeye成员。目前就职于icbm的知道创宇公司，是web，脚本等方面的高手。<br /><br />教主<br />QQ:130138438<br />网站:<a target="_blank" href="http://www.jiaozhu.org/" rel="noopener noreferrer">www.jiaozhu.org</a><br />圈内名气还算比较大的，主要还是因为他刷库赚钱很多。并且赔的也比较快。呵呵。技术不怎么样，但很能买很能卖。<br /><br />剑心<br />QQ:369458956<br />微博:<a target="_blank" href="http://t.qq.com/nullnull" rel="noopener noreferrer">http://t.qq.com/nullnull</a><br />方小顿。80sec站长。目前就职于百度公司，曾经跟百度公司老板李彦宏一起参加过芒果台的娱乐节目，一曲成名。不久前因为发布nginx的漏洞而又一次成名，是WEB安全，应用安全方面的高手。<br /><br />陆羽<br />QQ:170093007<br />微博:<a target="_blank" href="http://t.qq.com/T00ls_Luyu" rel="noopener noreferrer">http://t.qq.com/T00ls_Luyu</a><br />博客:<a target="_blank" href="http://www.5luyu.cn/" rel="noopener noreferrer">http://www.5luyu.cn</a><br />t00ls核心成员，曾经编写过不少注入，旁注方面的辅助入侵工具，例如t00ls内部旁注工具，GETWEBSHELL等等。目前就职于奇虎360公司。<br /><br />爱无言<br />QQ:348450419<br />EST核心成员。对于漏洞挖掘，溢出利用，网络脚本安全方面有着多年经验。在国内著名黑客杂志黑客防线上发表过上百篇的文章。<br /><br />樱花浪子<br />QQ:305446947<br />博客:<a target="_blank" href="http://www.hacklu.net/" rel="noopener noreferrer">http://www.hacklu.net/</a><br />SQL注入，WEB应用渗透技术还行。在一些黑客杂志上有过一些技术类文章。<br /><br />h4k_b4n<br />QQ:616222<br />微博:<a target="_blank" href="http://t.qq.com/h4k_b4n" rel="noopener noreferrer">http://t.qq.com/h4k_b4n</a><br />BCT核心成员。是WEB安全，脚本，数据库安全方面的高手，曾经发现过很多著名程序的漏洞。<br /><br />pt007<br />QQ:7491805<br />彭涛。就职于国内著名信息安全公司，启明星辰。是ISTO的创始人。对oracle,mysql等数据库已经php等脚本非常精通。有多年的开发维护测试等安全经验。著名的xp&#x2F;2k&#x2F;2k3完美克隆用户的程序就是他的杰作。<br /><br />majun<br />QQ:45539511<br />马俊。据说是个很能装的人。不过还是有点技术，另外还传说他是sunwear的徒弟。可能得到的真传0day有不少。那入侵网站就如鱼得水了。<br /><br />shadow<br />QQ:26727179<br />博客:<br />影子。渗透高手。perl等脚本方面的高手。<br /><br />xiaomi<br />QQ:5980740<br />小米。T00ls的创始人之一。人缘还是不错的。<br /><br />cnbird<br />QQ:441303228<br />博客:<a target="_blank" href="http://blog.csdn.net/cnbird2008" rel="noopener noreferrer">http://blog.csdn.net/cnbi<br>rd2008</a><br />微博:<a target="_blank" href="http://t.qq.com/cnbird2008" rel="noopener noreferrer">http://t.qq.com/cnbird2008</a><br />如果大家经常看国内的黑客杂志肯定对这个不陌生。linux,windows全方面的渗透高手。有一定的入侵经验。<br /><br />hackest<br />QQ:297521327<br />博客:<a target="_blank" href="http://www.hackest.cn/" rel="noopener noreferrer">http://www.hackest.cn/</a><br />微博:<a target="_blank" href="http://t.qq.com/hackest" rel="noopener noreferrer">http://t.qq.com/hackest</a><br />也是搞入侵渗透的。不久前一直在卖LMHASH,MD5的彩虹表。<br /><br />惘然<br />博客:<a target="_blank" href="http://www.wangran.net/" rel="noopener noreferrer">http://www.wangran.net/</a><br />搞渗透的<br /><br />4ngel<br />博客:<a target="_blank" href="http://www.sablog.net/blog/" rel="noopener noreferrer">http://www.sablog.net/blog/</a><br />sablog的作者。著名的安全天使站长，现在广为流行的几个WEBSHELL都是他写的，有些是从他大代码上改的。对WEBSHELL行业有着不可磨灭的贡献，也是早期很多PHP程序漏洞的发现者。<br /><br />xhacker<br />QQ:66680800<br />小叮当。据说当年入侵过绿盟，也是混迹于黑客圈很久的人了。搞渗透不错。<br /><br />冷漠<br />QQ:386817<br />博客:fhod<a target="_blank" href="http://www.lengmo.net/" rel="noopener noreferrer">http://www.lengmo.net/</a><br />红狼联盟的创始人。目前好像跟着某前辈黑客做事。<br /><br />fhod<br />QQ:1988415<br />博客:<a target="_blank" href="http://0day.kr/" rel="noopener noreferrer">http://0day.kr/</a><br />目前好像跟着EST的老大打工。在渗透入侵方面也是有一定经验的，曾经写过一些文章。后来还因为黑站被抓。<br /><br />冰sugar<br />博客:<a target="_blank" href="http://sebug.cn/" rel="noopener noreferrer">http://sebug.cn/</a><br />朱巨源。写过入门级的文章。在X档案有过投稿。也写过书《黑客攻防实战入门》。对一般的渗透技术有一定了解。<br /><br />虫子<br />QQ:712663200<br />博客:<a target="_blank" href="http://evilh4ck.blog.sohu.com/" rel="noopener noreferrer">http://evilh4ck.blog.sohu.com/</a><br />虫总据说是入侵过不少游戏官方网站。看来应该赚了些钱。此人对入侵攻击还是有很多了解的。<br /><br />amxking<br />博客:<a target="_blank" href="http://amxking.bokee.com/" rel="noopener noreferrer">http://amxking.bokee.com</a><br />QQ:5711277<br />红狼的核心成员，也是天阳的管理。<br /><br />七剑<br />QQ:7259561<br />博客:<a target="_blank" href="http://1v1.name/" rel="noopener noreferrer">http://1v1.name</a><br />微博:<a target="_blank" href="http://t.qq.com/qijian" rel="noopener noreferrer">http://t.qq.com/qijian</a><br />搞WEB脚本，数据库，渗透攻击的。<br /><br />啊D<br />QQ:9269563<br />网站:<a target="_blank" href="http://www.d99net.net/" rel="noopener noreferrer">http://www.d99net.net/</a><br />入行时间不短了，写过一些比较出名的工具，如早期的啊D网络工具包和后来的啊D注入工具。从这些可以看出对注入，编程是有一定了解的。经验比较丰富，工具虽然有BUG但还算稳定。<br /><br />雨夜<br />QQ:9148357<br />博客:<br />混迹黑客全也有数年。技术凑合。曾经也开办过黑客网站。<br /><br />redbin<br />QQ:35475<br />网站:<a target="_blank" href="http://www.vip8.org/" rel="noopener noreferrer">http://www.vip8.org/</a><br />红滨。校园黑客联盟站长。<br /></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/10/10/2010%E6%96%B0%E7%BC%96%E4%B8%AD%E5%9B%BD%E9%A1%B6%E7%BA%A7%E9%BB%91%E5%AE%A2%E5%9C%88%E5%86%85%E4%BA%BA%E7%89%A9%E8%B5%84%E6%96%99%E5%92%8CQQ,%E5%BE%AE%E5%8D%9A%E4%BB%A5%E5%8F%8A%E5%8D%9A%E5%AE%A2%E8%AF%A6%E8%A7%A3/" data-id="clgrkb5qk000074pid4c98lr0" data-title="2010新编中国顶级黑客圈内人物资料和QQ,微博以及博客详解" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-自动安装脚本" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/10/09/%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time class="dt-published" datetime="2010-10-09T09:19:00.000Z" itemprop="datePublished">2010-10-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/10/09/%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/">自动安装脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>LAMP自动安装脚本,为工作的时候，天天敲命令，autoinstall。</p><p>很垃圾的、没有什么华丽的语言、N年后，看看自己写的，能笑什么样、</p><p>安装程序就不拿出来了、代码如下：</p><p> </p><p>&lt;code&gt;</p><p> </p><p>#!/bin/sh</p><p>#autoinstall 自动安装脚本<br />#本脚本用于hrjd server安装使用<br />#跑去文档，傻瓜式安装。<br />#没有自动判断文件功能<br />#应该遵循文件名称，不然报错<br />#注意错误提示，及时排错<br />#所有安装文件必须放在/root/hrjd下面</p><p>#2010.10.09 by:key1088</p><p>#jiance code<br />ls /usr/cis7|grep server &gt; test1<br />ps aux|grep httpd|grep -v grep &gt;&gt; test1<br />if [ -s test1 ];then<br />rm -f test1<br />echo -e &quot; 33[31m----------------jiance-------------- 33[0m&quot;<br />echo -e &quot; 33[33m------server----- 33[0m&quot;<br />ps aux|grep server|grep -v grep<br />echo -e &quot; 33[33m------lowlessip----- 33[0m&quot;<br />ps aux|grep lowlessip|grep -v grep <br />echo -e &quot; 33[33m------guard----- 33[0m&quot;<br />ps aux|grep guard|grep -v grep<br />echo -e &quot; 33[33m------httpd port----- 33[0m&quot;<br />netstat -an|grep :80<br />echo -e &quot; 33[33m------mysql port----- 33[0m&quot;<br />netstat -an|grep :3306<br />echo -e &quot; 33[33m------mode----- 33[0m&quot;<br />lsmod |grep blackwhite<br />echo -e &quot; 33[33m------mybridge----- 33[0m&quot;<br />ifconfig mybridge|grep &quot;inet addr:&quot;<br />echo -e &quot; 33[31m----------------jiance-------------- 33[0m&quot;<br />exit<br />fi<br />#setup code<br />cd /root/hrjd/<br />printf &quot;Start Auto Install hrjd Server SoftWare&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   33[32m[ok] 33[0mn&quot;<br />printf &quot; 33[32m----------------bridge setuping------------------- 33[0mn&quot;<br />tar zxvf bridge-utils-1.0.6.tar.gz<br />cd bridge-utils-1.0.6<br />printf &quot; 33[32m----------------configure --prefix=/usr------------------- 33[0mn&quot;<br />./configure --prefix=/usr<br />printf &quot; 33[32m----------------make------------------- 33[0mn&quot;<br />make<br />printf &quot; 33[32m----------------make install------------------- 33[0mn&quot;<br />make install<br />printf &quot; 33[32m----------------make done------------------- 33[0mn&quot;<br />cd /etc/sysconfig/network-scripts/<br />if [ -f ifcfg-eth0 ]; then<br />echo &quot;DEVICE=eth0&quot; &gt; ifcfg-eth0<br />echo &quot;ONBOOT=yes&quot; &gt;&gt; ifcfg-eth0<br />echo &quot;TYPE=Ethernet&quot; &gt;&gt; ifcfg-eth0<br />echo &quot;BRIDGE=mybridge&quot; &gt;&gt; ifcfg-eth0<br />echo -e &quot; 33[32mifcfg-eth0 config ok 33[0m&quot;<br />fi<br />if [ -f ifcfg-eth1 ]; then<br />echo &quot;DEVICE=eth1&quot; &gt; ifcfg-eth1<br />echo &quot;ONBOOT=yes&quot; &gt;&gt; ifcfg-eth1<br />echo &quot;TYPE=Ethernet&quot; &gt;&gt; ifcfg-eth1<br />echo &quot;BRIDGE=mybridge&quot; &gt;&gt; ifcfg-eth1<br />echo -e &quot; 33[32mifcfg-eth1 config ok 33[0m&quot;<br />fi<br />if [ -f ifcfg-eth2 ]; then<br />echo &quot;DEVICE=eth2&quot; &gt; ifcfg-eth2<br />echo &quot;ONBOOT=yes&quot; &gt;&gt; ifcfg-eth2<br />echo &quot;TYPE=Ethernet&quot; &gt;&gt; ifcfg-eth2<br />echo &quot;BRIDGE=mybridge&quot; &gt;&gt; ifcfg-eth2<br />echo -e &quot; 33[32mifcfg-eth2 config ok 33[0m&quot;<br />fi<br />if [ -f ifcfg-eth3 ]; then<br />echo &quot;DEVICE=eth3&quot; &gt; ifcfg-eth3<br />echo &quot;ONBOOT=yes&quot; &gt;&gt; ifcfg-eth3<br />echo &quot;TYPE=Ethernet&quot; &gt;&gt; ifcfg-eth3<br />echo &quot;BRIDGE=mybridge&quot; &gt;&gt; ifcfg-eth3<br />echo -e &quot; 33[32mifcfg-eth3 config ok 33[0m&quot;<br />fi<br />if [ -f ifcfg-eth4 ]; then<br />echo &quot;DEVICE=eth4&quot; &gt; ifcfg-eth4<br />echo &quot;ONBOOT=yes&quot; &gt;&gt; ifcfg-eth4<br />echo &quot;TYPE=Ethernet&quot; &gt;&gt; ifcfg-eth4<br />echo &quot;BRIDGE=mybridge&quot; &gt;&gt; ifcfg-eth5<br />echo -e &quot; 33[32mifcfg-eth4 config ok 33[0m&quot;<br />fi<br />if [ -f ifcfg-eth5 ]; then<br />echo &quot;DEVICE=eth5&quot; &gt; ifcfg-eth5<br />echo &quot;ONBOOT=yes&quot; &gt;&gt; ifcfg-eth5<br />echo &quot;TYPE=Ethernet&quot; &gt;&gt; ifcfg-eth5<br />echo &quot;BRIDGE=mybridge&quot; &gt;&gt; ifcfg-eth5<br />echo -e &quot; 33[32mifcfg-eth5 config ok 33[0m&quot;<br />fi<br />echo &quot;DEVICE=mybridge&quot; &gt; ifcfg-mybridge<br />echo &quot;BOOTPROTO=static&quot; &gt;&gt; ifcfg-mybridge<br />echo &quot;ONBOOT=yes&quot; &gt;&gt; ifcfg-mybridge<br />echo &quot;TYPE=Bridge&quot; &gt;&gt; ifcfg-mybridge<br />echo &quot;NETMASK=255.255.255.0&quot; &gt;&gt; ifcfg-mybridge<br />echo &quot;IPADDR=192.168.0.204&quot; &gt;&gt; ifcfg-mybridge<br />echo &quot;GATEWAY=192.168.0.1&quot; &gt;&gt; ifcfg-mybridge<br />echo &quot;STP=on&quot; &gt;&gt; ifcfg-mybridge<br />if [ -f ifcfg-mybridge ]; then<br />echo -e &quot; 33[32mifcfg-mybridge config ok 33[0m&quot;<br />fi<br />printf &quot; 33[32m----------------bridge Done------------------- 33[0mn&quot;<br />cd /root/hrjd<br />printf &quot; 33[32m----------------MySql Setup------------------- 33[0mn&quot;<br />cp my.cnf /etc/my.cnf<br />rpm -ivh mysql-client-5.0.22-0.i386.rpm<br />sleep 1<br />rpm -ivh mysql-devel-5.0.22-0.i386.rpm<br />sleep 1<br />rpm -ivh mysql-shared-5.0.22-0.i386.rpm<br />sleep 1<br />rpm -ivh mysql-server-5.0.22-0.i386.rpm<br />ps aux|grep mysql|grep -v grep &gt; test1<br />if [ -s test1 ];then<br />echo -e &quot; 33[32m----mysql runing ok---- 33[0mn&quot;<br />mysqladmin -u root password 123<br />mysql -uroot -p123 -e &quot;grant all on *.* to <a>'root'@'%'</a> identified by '123'&quot;<br />mysql -uroot -p123 -e &quot;flush privileges&quot;<br />iptables -F<br />rm -r test1<br />echo -e &quot; 33[32m----------------MySql Setup Done-------------- 33[0mn&quot;<br />else<br />echo -e &quot; 33[31m----mysql no runing---- 33[0mn&quot;<br />echo -e &quot; 33[31m----mysql Setup error&quot;<br />fi<br />printf &quot; 33[32m---------------Apache Setup------------------- 33[0mn&quot;<br />tar zxvf httpd-2.2.9.tar.gz<br />cd httpd-2.2.9<br />printf &quot; 33[32m------------Apache ./config------------------- 33[0mn&quot;<br />./configure --prefix=/usr/local/apache2 --enable-so -enable-rewrite<br />printf &quot; 33[32m----------------Apache make------------------- 33[0mn&quot;<br />make<br />printf &quot; 33[32m----------Apache make install----------------- 33[0mn&quot;<br />make install<br />cd /root/hrjd<br />cp -a ruqinjiance/ /usr/local/apache2/htdocs/<br />mv /usr/local/apache2/conf/httpd.conf /usr/local/apache2/conf/httpd.conf.bak<br />cp -a httpd.conf /usr/local/apache2/conf/httpd.conf<br />printf &quot; 33[32m-------------Apache Setup Done---------------- 33[0mn&quot;<br />printf &quot; 33[32m-----------------PHP Setup-------------------- 33[0mn&quot;<br />tar zxvf php-5.2.11.tar.gz<br />cd php-5.2.11<br />printf &quot; 33[32m----------------PHP ./config ----------------- 33[0mn&quot;<br />./configure --prefix=/usr/local/php5 --with-apxs2=/usr/local/apache2/bin/apxs --with-mysql=/usr/bin/mysql --with-config-file-path=/usr/local/apache2/conf --enable-sockets<br />make<br />make install<br />cd /root/hrjd<br />mv /usr/local/php5/php.ini /usr/local/php5/php.ini.bak<br />cp php.ini /usr/local/php5/php.ini<br />printf &quot; 33[32m----------------PHP Setup Done----------------- 33[0mn&quot;<br />printf &quot; 33[32m---------------HRJD SERVER Setup--------------- 33[0mn&quot;<br />cp /root/hrjd/hrjd.tar /usr/hrjd.tar<br />cd /usr<br />tar xvf hrjd.tar<br />cd /root/hrjd<br />chmod 755 rc.local<br />mv /etc/rc.d/rc.local /etc/rc.d/rc.local.bak<br />cp /root/hrjd/rc.local /etc/rc.d/rc.local<br />ls /dev/|grep hda &gt; test1<br />if [ -s test1 ];then<br />echo -e &quot; 33[32m------------IDE HD ID--------------&quot;<br />hdparm -i /dev/hda|grep SerialNo <br />echo -e &quot;------------IDE HD ID-------------- 33[0m&quot;<br />rm -rf test1<br />else<br />chmod 777 sata<br />echo -e &quot; 33[32m------------SAST HD ID--------------&quot;<br />./sata<br />echo -e &quot;------------SAST HD ID-------------- 33[0m&quot;<br />fi<br />printf &quot;HRJD Server setup ok&quot;<br />getchar() {<br />&nbsp;&nbsp;&nbsp;  stty cbreak -echo<br />&nbsp;&nbsp;&nbsp;  dd if=/dev/tty bs=1 count=1
+2&gt; /dev/null<br />&nbsp;&nbsp;&nbsp;  stty -cbreak echo<br />}<br />printf &quot; 33[32m-----------------press any key reboot----------------- 33[0m&quot;<br />ret=`getchar`<br />echo<br />reboot</p><p>&lt;/code&gt;</p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/10/09/%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/" data-id="clgrjlxmq00cq7opi44d91bbl" data-title="自动安装脚本" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-好好学习一个编程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/10/03/%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%AA%E7%BC%96%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2010-10-03T11:48:00.000Z" itemprop="datePublished">2010-10-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/10/03/%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%AA%E7%BC%96%E7%A8%8B/">好好学习一个编程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>以后要好好学习一下编程，思量也好，语言也好。<br />不想半途而废啊，学好了，做什么也有用哦。<br />有事的时候写写程序，学学习，<br />没事的时候构思个美女，写出来，给兄弟几个乐呵乐呵。<br />加油！！！<br />嘿嘿</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/10/03/%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%AA%E7%BC%96%E7%A8%8B/" data-id="clgrjlxkw009m7opi2z7ufqir" data-title="好好学习一个编程" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/12/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/14/">weiter &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/">Oracle</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Perl%E7%BC%96%E7%A8%8B/">Perl编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/%E5%AE%B9%E5%99%A8/">容器</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Python%E7%BC%96%E7%A8%8B/">Python编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-dbx/" rel="tag">C;dbx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5-CTX/" rel="tag">MD5_CTX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alarm/" rel="tag">alarm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backup/" rel="tag">backup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fseek/" rel="tag">fseek</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftell/" rel="tag">ftell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gethostbyname/" rel="tag">gethostbyname</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jmp-buf/" rel="tag">jmp_buf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%BD%95%E9%9F%B3/" rel="tag">linux录音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/longjmp/" rel="tag">longjmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mimikatz/" rel="tag">mimikatz</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minikube/" rel="tag">minikube</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-%E8%84%9A%E6%9C%AC/" rel="tag">nginx;脚本</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openshift/" rel="tag">openshift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paas/" rel="tag">paas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qsort/" rel="tag">qsort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setjmp/" rel="tag">setjmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss-easyxss/" rel="tag">xss;easyxss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" rel="tag">云计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E9%9C%89%E6%B4%BE/" rel="tag">树霉派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/" rel="tag">音频降噪</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C-dbx/" style="font-size: 10px;">C;dbx</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/MD5-CTX/" style="font-size: 10px;">MD5_CTX</a> <a href="/tags/alarm/" style="font-size: 10px;">alarm</a> <a href="/tags/backup/" style="font-size: 10px;">backup</a> <a href="/tags/fseek/" style="font-size: 10px;">fseek</a> <a href="/tags/ftell/" style="font-size: 10px;">ftell</a> <a href="/tags/gethostbyname/" style="font-size: 10px;">gethostbyname</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/jmp-buf/" style="font-size: 10px;">jmp_buf</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux%E5%BD%95%E9%9F%B3/" style="font-size: 10px;">linux录音</a> <a href="/tags/longjmp/" style="font-size: 10px;">longjmp</a> <a href="/tags/mimikatz/" style="font-size: 10px;">mimikatz</a> <a href="/tags/minikube/" style="font-size: 10px;">minikube</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx-%E8%84%9A%E6%9C%AC/" style="font-size: 10px;">nginx;脚本</a> <a href="/tags/openshift/" style="font-size: 10px;">openshift</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/paas/" style="font-size: 10px;">paas</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/qsort/" style="font-size: 10px;">qsort</a> <a href="/tags/setjmp/" style="font-size: 10px;">setjmp</a> <a href="/tags/xss-easyxss/" style="font-size: 10px;">xss;easyxss</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 10px;">云计算</a> <a href="/tags/%E6%A0%91%E9%9C%89%E6%B4%BE/" style="font-size: 10px;">树霉派</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/" style="font-size: 10px;">音频降噪</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/04/22/hello-world/">Hello Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/26/%E5%B7%B4%E8%8F%B2%E7%89%B9%E7%9A%84%E5%9F%BA%E7%A1%80%E6%8A%95%E8%B5%84%E7%90%86%E5%BF%B5%E8%AE%B0%E5%BD%95/">巴菲特的基础投资理念记录</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/26/Ubuntu-%E5%AE%89%E8%A3%85minikebe/">Ubuntu 安装minikebe</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/28/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9B%E8%A1%8C%E5%BD%95%E9%9F%B3%E5%92%8C%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/">树莓派进行录音和音频降噪</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 key1088<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

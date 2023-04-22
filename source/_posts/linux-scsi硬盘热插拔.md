@@ -1,0 +1,6 @@
+title: linux scsi硬盘热插拔
+categories: [Linux]
+tags: []
+date: 2011-11-01 10:15:00
+---
+<p>在生产环境中，有很多情况不能随便重启设备，例如scsi硬盘的更换（非raid卡环境）。</p><p>在linux下面修改/proc/scsi/scsi文件可以实现热插拔。</p><p>&nbsp;</p><p>测试环境red hat 5.5+vmware8.0</p><p>具体步骤：</p><p>1.硬盘添加到服务上，看好接口，插槽。</p><p>2.管理员登陆，看一个/proc/scsi/scsi文件</p><p><img small="0" src="/images/pic/2a0d2381df82dbd70cf4d283.jpg" /><br /></p><p>3.用户运行下面命令</p><p>例：echo&nbsp;&quot;scsi&nbsp;add-single-device&nbsp;x&nbsp;y&nbsp;z&nbsp;u&quot;&nbsp;&gt;&nbsp;/proc/scsi/scsi</p><p><img small="0" src="/images/pic/f4b4d3743f48b86eb151b968.jpg" /></p><p>其中：</p><p>　　x是硬盘所在SCSI控制器号(一般机器就一个SCSI控制器，所以就是0);</p><p>　　y是硬盘所在SCSI通道的编号(一般单通道的就是0，多通道的要看是哪个通道了);</p><p>　　z是硬盘的SCSI&nbsp;ID号(可以通过具体插入的硬盘插槽来判断，从0开始);</p><p>　　u是硬盘的lun号(默认情况都是0)</p><p>4.查看文件/proc/scsi/scsi，多出来一个硬盘。fdisk -l 也可以发现多一个硬盘。<br /></p><p><img small="0" src="/images/pic/703aeb8c8db0038f503d926a.jpg" /><br />5.拔下硬盘，别忘了挂载点，运行下面命令。</p><p>echo&nbsp;&quot;scsi remove-single-device&nbsp;x&nbsp;y&nbsp;z&nbsp;u&quot;&nbsp;&gt;&nbsp;/proc/scsi/scsi</p><p></p><p><img small="0" src="/images/pic/d636a3fa9a4b6b2c242df277.jpg" /><br />硬盘被安全移除。<br /><br /></p><p></p>

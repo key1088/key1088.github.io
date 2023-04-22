@@ -1,0 +1,6 @@
+title: scan webshell shell
+categories: [网络安全,Shell编程]
+tags: []
+date: 2011-06-21 09:48:00
+---
+<p>#!/bin/bash</p><p>#scan webshell shell</p><p>dire=/data// &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; # &nbsp; web path</p><p>exname=.php &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # &nbsp; .php; .jsp; .php3</p><p>key=eval &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# &nbsp; system; exec; base64_decode </p><p>page=$(find PATH -name &quot;*.php&quot; -type f )&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #这样效率会更高，修改用find</p><p>#page=$(du -a $dire|awk '{print $2}'|grep $exname)</p><p>for i in $page</p><p>do</p><p>test=$(cat $i |grep -i $key)</p><p>if [ ! -z &quot;$test&quot; ]</p><p>then</p><p>echo $i &gt;&gt; tmp &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;#</p><p>fi</p><p>done</p><p>&nbsp;</p><p>网站被黑后，如果网站动态页面，很难一一搜索，通过搜索webshell 里面常用的关键词，来节省一段时间。</p><p>实现方法很简单，思路就是这样。</p><p>遍历整个目录下的文件，搜索特出关键词（webshell里面的敏感关键词），然后重定向到一个文件。在检查这些文件，就快的多了。</p><p>&nbsp;</p><p></p><p>&nbsp;</p><p></p>

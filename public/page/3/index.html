@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>key1088 blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="个人博客网站">
+<meta property="og:type" content="website">
+<meta property="og:title" content="key1088 blog">
+<meta property="og:url" content="https://key1088.github.io/page/3/index.html">
+<meta property="og:site_name" content="key1088 blog">
+<meta property="og:description" content="个人博客网站">
+<meta property="og:locale">
+<meta property="article:author" content="key1088">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="key1088 blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">key1088 blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">2020到2060会发生什么，这40年内会有哪些变化呢</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://key1088.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-C专家编程—分析signal函数的原型声明" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2014/03/11/C%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B%E2%80%94%E5%88%86%E6%9E%90signal%E5%87%BD%E6%95%B0%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%A3%B0%E6%98%8E/" class="article-date">
+  <time class="dt-published" datetime="2014-03-11T13:42:40.000Z" itemprop="datePublished">2014-03-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/C%E7%BC%96%E7%A8%8B/">C编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2014/03/11/C%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B%E2%80%94%E5%88%86%E6%9E%90signal%E5%87%BD%E6%95%B0%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%A3%B0%E6%98%8E/">C专家编程—分析signal函数的原型声明</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在ANSI标准中，signal()的声明如下：<br>void (*signal(int sig,void (<em>func)(int)))(int)<br>signal是一个函数，它返回一个函数指针，后者所指向的函数(signal的返回值)接受一个int参数并返回void。signal函数有两个参数，一个是sig(为int类型)，另一个是func(为void(</em>)(int)类型)。<br>void (<em>func)(int)是一个函数指针，所指向的函数接受一个int参数，返回值是void。<br>下面用typedef进行简化：<br>typedef void（</em>ptr_to_func）(int);<br>ptr_to_func signal（int，ptr_to_func）;<br>网上的一个例子：</p>
+<pre>
+#include <stdio.h>
+enum { RED, GREEN, BLUE };
+void OutputSignal(int sig)
+{
+    printf("The signal you /'ve input is: ");
+    switch(sig)
+    {
+    case RED:
+        puts("RED!");
+        break;
+    case GREEN:
+        puts("GREEN!");
+        break;
+    case BLUE:
+        puts("BLUE!");
+        break;
+    }
+}
+void ( *signal( int sig, void (*func)(int) ) ) (int)
+{
+    puts("Hello, world!");
+    func(sig);
+    return func;
+}
+int main(void)
+{
+    (*signal(GREEN, &amp;OutputSignal))(RED);
+    return 0;
+}
+Output:
+Hello, world!
+The signal you 've input is: GREEN!
+The signal you 've input is: RED!</pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2014/03/11/C%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B%E2%80%94%E5%88%86%E6%9E%90signal%E5%87%BD%E6%95%B0%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%A3%B0%E6%98%8E/" data-id="clgrjlxc100127opi1217c7hi" data-title="C专家编程—分析signal函数的原型声明" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-POSIX-basic-and-extended" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2014/02/25/POSIX-basic-and-extended/" class="article-date">
+  <time class="dt-published" datetime="2014-02-25T14:22:36.000Z" itemprop="datePublished">2014-02-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2014/02/25/POSIX-basic-and-extended/">POSIX basic and extended</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>引用：<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Regular_expression">http://en.wikipedia.org/wiki/Regular_expression</a></strong></p>
+<h4>POSIX basic and extended[<a title="Edit section: POSIX basic and extended" target="_blank" rel="noopener" href="http://en.wikipedia.org/w/index.php?title=Regular_expression&amp;action=edit&amp;section=10">edit</a>]</h4>
+In the <a title="POSIX" target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/POSIX">POSIX</a> standard, Basic Regular Syntax, BRE, requires that the <a title="Metacharacter" target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Metacharacter">metacharacters</a> ( ) and { } be designated () and {}, whereas Extended Regular Syntax, ERE, does not.
+<table>
+<tbody>
+<tr>
+<th>Metacharacter</th>
+<th>Description</th>
+</tr>
+<tr valign="top">
+<th>.</th>
+<td>Matches any single character (many applications exclude <a title="Newline" target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Newline">newlines</a>, and exactly which characters are considered newlines is flavor-, character-encoding-, and platform-specific, but it is safe to assume that the line feed character is included). Within POSIX bracket expressions, the dot character matches a literal dot. For example, a.c matches "abc", etc., but [a.c] matches only "a", ".", or "c".</td>
+</tr>
+<tr valign="top">
+<th>[ ]</th>
+<td>A bracket expression. Matches a single character that is contained within the brackets. For example, [abc] matches "a", "b", or "c". [a-z]specifies a range which matches any lowercase letter from "a" to "z". These forms can be mixed: [abcx-z] matches "a", "b", "c", "x", "y", or "z", as does [a-cx-z].The - character is treated as a literal character if it is the last or the first (after the ^, if present) character within the brackets: [abc-], [-abc]. Note that backslash escapes are not allowed. The ] character can be included in a bracket expression if it is the first (after the ^) character: []abc].</td>
+</tr>
+<tr valign="top">
+<th>[^ ]</th>
+<td>Matches a single character that is not contained within the brackets. For example, [^abc] matches any character other than "a", "b", or "c".[^a-z] matches any single character that is not a lowercase letter from "a" to "z". Likewise, literal characters and ranges can be mixed.</td>
+</tr>
+<tr valign="top">
+<th>^</th>
+<td>Matches the starting position within the string. In line-based tools, it matches the starting position of any line.</td>
+</tr>
+<tr valign="top">
+<th>$</th>
+<td>Matches the ending position of the string or the position just before a string-ending newline. In line-based tools, it matches the ending position of any line.</td>
+</tr>
+<tr valign="top">
+<th>( )</th>
+<td>Defines a marked subexpression. The string matched within the parentheses can be recalled later (see the next entry, <i>n</i>). A marked subexpression is also called a block or capturing group. <b>BRE mode requires ( )</b>.</td>
+</tr>
+<tr valign="top">
+<th><i>n</i></th>
+<td>Matches what the <i>n</i>th marked subexpression matched, where <i>n</i> is a digit from 1 to 9. This construct is vaguely defined in the POSIX.2 standard. Some tools allow referencing more than nine capturing groups.</td>
+</tr>
+<tr valign="top">
+<th>*</th>
+<td>Matches the preceding element zero or more times. For example, ab*c matches "ac", "abc", "abbbc", etc. [xyz]* matches "", "x", "y", "z", "zx", "zyx", "xyzzy", and so on. (ab)* matches "", "ab", "abab", "ababab", and so on.</td>
+</tr>
+<tr valign="top">
+<th>{<i>m</i>,<i>n</i>}</th>
+<td>Matches the preceding element at least <i>m</i> and not more than <i>n</i> times. For example, a{3,5} matches only "aaa", "aaaa", and "aaaaa". This is not found in a few older instances of regular expressions. <b>BRE mode requires {<i>m</i>,<i>n</i>}</b>.</td>
+</tr>
+</tbody>
+</table>
+<b>Examples:</b>
+<ul>
+    <li>.at matches any three-character string ending with "at", including "hat", "cat", and "bat".</li>
+    <li>[hc]at matches "hat" and "cat".</li>
+    <li>[^b]at matches all strings matched by .at except "bat".</li>
+    <li>[^hc]at matches all strings matched by .at other than "hat" and "cat".</li>
+    <li>^[hc]at matches "hat" and "cat", but only at the beginning of the string or line.</li>
+    <li>[hc]at$ matches "hat" and "cat", but only at the end of the string or line.</li>
+    <li>[.] matches any single character surrounded by "[" and "]" since the brackets are escaped, for example: "[a]" and "[b]".</li>
+    <li>s.* matches any number of characters preceded by s , for example: "saw" and "seed".</li>
+</ul>
+<h4>POSIX extended[<a title="Edit section: POSIX extended" target="_blank" rel="noopener" href="http://en.wikipedia.org/w/index.php?title=Regular_expression&amp;action=edit&amp;section=11">edit</a>]</h4>
+The meaning of metacharacters <a title="Escape sequence" target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Escape_sequence">escaped</a> with a backslash is reversed for some characters in the POSIX Extended Regular Expression (ERE) syntax. With this syntax, a backslash causes the metacharacter to be treated as a literal character. So, for example, ( ) is now ( ) and { } is now { }. Additionally, support is removed for <i>n</i> backreferences and the following metacharacters are added:
+<table>
+<tbody>
+<tr>
+<th>Metacharacter</th>
+<th>Description</th>
+</tr>
+<tr valign="top">
+<th>?</th>
+<td>Matches the preceding element zero or one time. For example, ab?c matches only "ac" or "abc".</td>
+</tr>
+<tr>
+<th>+</th>
+<td>Matches the preceding element one or more times. For example, ab+c matches "abc", "abbc", "abbbc", and so on, but not "ac".</td>
+</tr>
+<tr>
+<th>|</th>
+<td>The choice (also known as alternation or set union) operator matches either the expression before or the expression after the operator. For example, abc|def matches "abc" or "def".</td>
+</tr>
+</tbody>
+</table>
+<b>Examples:</b>
+<ul>
+    <li>[hc]+at matches "hat", "cat", "hhat", "chat", "hcat", "cchchat", and so on, but not "at".</li>
+    <li>[hc]?at matches "hat", "cat", and "at".</li>
+    <li>[hc]*at matches "hat", "cat", "hhat", "chat", "hcat", "cchchat", "at", and so on.</li>
+    <li>cat|dog matches "cat" or "dog".</li>
+</ul>
+POSIX Extended Regular Expressions can often be used with modern Unix utilities by including the <a title="Command line" target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Command_line">command line</a> flag <var>-E</var>.
+<h4>Character classes[<a title="Edit section: Character classes" target="_blank" rel="noopener" href="http://en.wikipedia.org/w/index.php?title=Regular_expression&amp;action=edit&amp;section=12">edit</a>]</h4>
+The character class is the most basic regular expression concept after a literal match. It makes one small sequence of characters match a larger set of characters. For example, [A-Z] could stand for the alphabet, and d could mean any digit. Character classes apply to both POSIX levels.
+When specifying a range of characters, such as [a-Z] computer's locale settings determine the contents by the numeric ordering of the character encoding. They could store digits in that sequence, or the ordering could be <i>abc...zABC...Z</i>, or <i>aAbBcC...zZ</i>. So the POSIX standard defines a character class, which will be known by the regular expression processor installed. Those definitions are in the following table:
+<table>
+<tbody>
+<tr>
+<th>POSIX</th>
+<th>Non-standard</th>
+<th>Perl/Tcl</th>
+<th>Vim</th>
+<th>ASCII</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>[:alnum:]</td>
+<td></td>
+<td></td>
+<td></td>
+<td>[A-Za-z0-9]</td>
+<td>Alphanumeric characters</td>
+</tr>
+<tr>
+<td></td>
+<td>[:word:]</td>
+<td>w</td>
+<td>w</td>
+<td>[A-Za-z0-9_]</td>
+<td>Alphanumeric characters plus "_"</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>W</td>
+<td>W</td>
+<td>[^A-Za-z0-9_]</td>
+<td>Non-word characters</td>
+</tr>
+<tr>
+<td>[:alpha:]</td>
+<td></td>
+<td></td>
+<td>a</td>
+<td>[A-Za-z]</td>
+<td>Alphabetic characters</td>
+</tr>
+<tr>
+<td>[:blank:]</td>
+<td></td>
+<td></td>
+<td>s</td>
+<td>[ <a title="t" target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/%5Ct">t</a>]</td>
+<td>Space and tab</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>b</td>
+<td>&lt; &gt;</td>
+<td>(?&lt;=W)(?=w)|(?&lt;=w)(?=W)</td>
+<td>Word boundaries</td>
+</tr>
+<tr>
+<td>[:cntrl:]</td>
+<td></td>
+<td></td>
+<td></td>
+<td>[x00-x1Fx7F]</td>
+<td><a title="Control character" target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Control_character">Control characters</a></td>
+</tr>
+<tr>
+<td>[:digit:]</td>
+<td></td>
+<td>d</td>
+<td>d</td>
+<td>[0-9]</td>
+<td>Digits</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>D</td>
+<td>D</td>
+<td>[^0-9]</td>
+<td>Non-digits</td>
+</tr>
+<tr>
+<td>[:graph:]</td>
+<td></td>
+<td></td>
+<td></td>
+<td>[x21-x7E]</td>
+<td>Visible characters</td>
+</tr>
+<tr>
+<td>[:lower:]</td>
+<td></td>
+<td></td>
+<td>l</td>
+<td>[a-z]</td>
+<td>Lowercase letters</td>
+</tr>
+<tr>
+<td>[:print:]</td>
+<td></td>
+<td></td>
+<td>p</td>
+<td>[x20-x7E]</td>
+<td>Visible characters and the space character</td>
+</tr>
+<tr>
+<td>[:punct:]</td>
+<td></td>
+<td></td>
+<td></td>
+<td>[][!"#$%&amp;'()*+,./:;&lt;=&gt;?@^_`{|}~-]</td>
+<td>Punctuation characters</td>
+</tr>
+<tr>
+<td>[:space:]</td>
+<td></td>
+<td>s</td>
+<td>_s</td>
+<td>[ <a title="t" target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/%5Ct">t</a><a title="r" target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/%5Cr">r</a><a title="n" target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/%5Cn">n</a><a title="v" target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/%5Cv">v</a><a title="f" target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/%5Cf">f</a>]</td>
+<td><a title="Whitespace character" target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Whitespace_character">Whitespace characters</a></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>S</td>
+<td></td>
+<td>[^ trnvf]</td>
+<td>Non-whitespace characters</td>
+</tr>
+<tr>
+<td>[:upper:]</td>
+<td></td>
+<td></td>
+<td>u</td>
+<td>[A-Z]</td>
+<td>Uppercase letters</td>
+</tr>
+<tr>
+<td>[:xdigit:]</td>
+<td></td>
+<td></td>
+<td>x</td>
+<td>[A-Fa-f0-9]</td>
+<td>Hexadecimal digits</td>
+</tr>
+</tbody>
+</table>
+POSIX character classes can only be used within bracket expressions. For example, [[:upper:]ab] matches the uppercase letters and lowercase "a" and "b".
+An additional non-POSIX class understood by some tools is [:word:], which is usually defined as [:alnum:] plus underscore. This reflects the fact that in many programming languages these are the characters that may be used in identifiers. The editor <a title="Vim (text editor)" target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Vim_(text_editor)">Vim</a> further distinguishes <i>word</i> and <i>word-head</i> classes (using the notation w and h) since in many programming languages the characters that can begin an identifier are not the same as those that can occur in other positions.
+Note that what the POSIX regular expression standards call <i>character classes</i> are commonly referred to as <i>POSIX character classes</i> in other regular expression flavors which support them. With most other regular expression flavors, the term <i>character class</i> is used to describe what POSIX calls <i>bracket expressions</i>.
+C默认在*NIX下面，可以使用这些规则，最基本的POSIX语法，不需要其他的扩展库。
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2014/02/25/POSIX-basic-and-extended/" data-id="clgrjlxj000687opid5aphjqt" data-title="POSIX basic and extended" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux-2.6.25-select系统调用源码分析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2013/12/24/Linux-2.6.25-select%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="article-date">
+  <time class="dt-published" datetime="2013-12-24T15:06:35.000Z" itemprop="datePublished">2013-12-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2013/12/24/Linux-2.6.25-select%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Linux-2.6.25 select系统调用源码分析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Linux 2.6.25中的select系统调用<br>主要有4个函数:<br>sys_select：处理时间参数，调用core_sys_select。<br>core_sys_select：处理三个fd_set参数，调用do_select。<br>do_select：做select&#x2F;poll的工作。在合适的时机把自己挂起等待，调用sock_poll。<br>sock_poll：用函数指针分派到具体的协议层函数tcp_poll、udp_poll、datagram_poll。<br>层层分工明确，我也要多学习这种方式啊。</p>
+<pre>
+/*
+sys_select(fs/select.c)
+处理了超时值（如果有）,将struct timeval转换成了时钟周期数,调用core_sys_select,然后检查剩余时间,处理时间
+*/
+asmlinkage long sys_select(int n, fd_set __user *inp, fd_set __user *outp,
+                           fd_set __user *exp, struct timeval __user *tvp)
+{
+    s64 timeout = -1;
+    struct timeval tv;
+    int ret;
+    if (tvp) {/*如果有超时值*/
+        if (copy_from_user(&tv, tvp, sizeof(tv)))
+            return -EFAULT;
+        if (tv.tv_sec < 0 || tv.tv_usec < 0)/*时间无效*/
+            return -EINVAL;
+        /* Cast to u64 to make GCC stop complaining */
+        if ((u64)tv.tv_sec >= (u64)MAX_INT64_SECONDS)
+            timeout = -1;	/* 无限等待*/
+        else {
+            timeout = DIV_ROUND_UP(tv.tv_usec, USEC_PER_SEC/HZ);
+            timeout += tv.tv_sec * HZ;/*计算出超时的相对时间,单位为时钟周期数*/
+        }
+    }
+    /*主要工作都在core_sys_select中做了*/
+    ret = core_sys_select(n, inp, outp, exp, &timeout);
+    if (tvp) {/*如果有超时值*/
+        struct timeval rtv;
+        if (current->personality & STICKY_TIMEOUTS)/*模拟bug的一个机制,不详细描述*/
+            goto sticky;
+        /*rtv中是剩余的时间*/
+        rtv.tv_usec = jiffies_to_usecs(do_div((*(u64*)&timeout), HZ));
+        rtv.tv_sec = timeout;
+        if (timeval_compare(&rtv, &tv) >= 0)/*如果core_sys_select超时返回,更新时间*/
+            rtv = tv;
+        /*拷贝更新后的时间到用户空间*/
+        if (copy_to_user(tvp, &rtv, sizeof(rtv))) {
+sticky:
+            /*
+            * If an application puts its timeval in read-only
+            * memory, we don't want the Linux-specific update to
+            * the timeval to cause a fault after the select has
+            * completed successfully. However, because we're not
+            * updating the timeval, we can't restart the system
+            * call.
+            */
+            if (ret == -ERESTARTNOHAND)/*ERESTARTNOHAND表明,被中断的系统调用*/
+                ret = -EINTR;
+        }
+    }
+    return ret;
+}
+/*core_sys_select
+为do_select准备好了位图,然后调用do_select,将返回的结果集,返回到用户空间
+*/
+static int core_sys_select(int n, fd_set __user *inp, fd_set __user *outp,
+                           fd_set __user *exp, s64 *timeout)
+{
+    fd_set_bits fds;
+    void *bits;
+    int ret, max_fds;
+    unsigned int size;
+    struct fdtable *fdt;
+    /* Allocate small arguments on the stack to save memory and be faster */
+    /*SELECT_STACK_ALLOC 定义为256*/
+    long stack_fds[SELECT_STACK_ALLOC/sizeof(long)];
+    ret = -EINVAL;
+    if (n < 0)
+        goto out_nofds;
+    /* max_fds can increase, so grab it once to avoid race */
+    rcu_read_lock();
+    fdt = files_fdtable(current->files);/*获取当前进程的文件描述符表*/
+    max_fds = fdt->max_fds;
+    rcu_read_unlock();
+    if (n > max_fds)/*修正用户传入的第一个参数：fd_set中文件描述符的最大值*/
+        n = max_fds;
+    /*
+    * We need 6 bitmaps (in/out/ex for both incoming and outgoing),
+    * since we used fdset we need to allocate memory in units of
+    * long-words.
+    */
+    /*
+    如果stack_fds数组的大小不能容纳下所有的fd_set,就用kmalloc重新分配一个大数组。
+    然后将位图平均分成份,并初始化fds结构
+    */
+    size = FDS_BYTES(n);
+    bits = stack_fds;
+    if (size > sizeof(stack_fds) / 6) {
+        /* Not enough space in on-stack array; must use kmalloc */
+        ret = -ENOMEM;
+        bits = kmalloc(6 * size, GFP_KERNEL);
+        if (!bits)
+            goto out_nofds;
+    }
+    fds.in      = bits;
+    fds.out     = bits +   size;
+    fds.ex      = bits + 2*size;
+    fds.res_in  = bits + 3*size;
+    fds.res_out = bits + 4*size;
+    fds.res_ex  = bits + 5*size;
+    /*get_fd_set仅仅调用copy_from_user从用户空间拷贝了fd_set*/
+    if ((ret = get_fd_set(n, inp, fds.in)) ||
+        (ret = get_fd_set(n, outp, fds.out)) ||
+        (ret = get_fd_set(n, exp, fds.ex)))
+        goto out;
+    zero_fd_set(n, fds.res_in);
+    zero_fd_set(n, fds.res_out);
+    zero_fd_set(n, fds.res_ex);
+    /*
+    接力棒传给了do_select
+    */
+    ret = do_select(n, &fds, timeout);
+    if (ret < 0)
+        goto out;
+    /*do_select返回,是一种异常状态*/
+    if (!ret) {
+        /*记得上面的sys_select不？将ERESTARTNOHAND转换成了EINTR并返回。EINTR表明系统调用被中断*/
+        ret = -ERESTARTNOHAND;
+        if (signal_pending(current))/*当当前进程有信号要处理时,signal_pending返回真,这符合了EINTR的语义*/
+            goto out;
+        ret = 0;
+    }
+    /*把结果集,拷贝回用户空间*/
+    if (set_fd_set(n, inp, fds.res_in) ||
+        set_fd_set(n, outp, fds.res_out) ||
+        set_fd_set(n, exp, fds.res_ex))
+        ret = -EFAULT;
+out:
+    if (bits != stack_fds)
+        kfree(bits);/*对应上面的kmalloc*/
+out_nofds:
+    return ret;
+}
+/*do_select
+真正的select在此,遍历了所有的fd,调用对应的xxx_poll函数
+*/
+int do_select(int n, fd_set_bits *fds, s64 *timeout)
+{
+    struct poll_wqueues table;
+    poll_table *wait;
+    int retval, i;
+    rcu_read_lock();
+    /*根据已经打开fd的位图检查用户打开的fd, 要求对应fd必须打开, 并且返回最大的fd*/
+    retval = max_select_fd(n, fds);
+    rcu_read_unlock();
+    if (retval < 0)
+        return retval;
+    n = retval;
+    /*将当前进程放入自已的等待队列table, 并将该等待队列加入到该测试表wait*/
+    poll_initwait(&table);
+    wait = &table.pt;
+    if (!*timeout)
+        wait = NULL;
+    retval = 0;
+    for (;;) {/*死循环*/
+        unsigned long *rinp, *routp, *rexp, *inp, *outp, *exp;
+        long __timeout;
+        /*注意:可中断的睡眠状态*/
+        set_current_state(TASK_INTERRUPTIBLE);
+        inp = fds->in; outp = fds->out; exp = fds->ex;
+        rinp = fds->res_in; routp = fds->res_out; rexp = fds->res_ex;
+        for (i = 0; i < n; ++rinp, ++routp, ++rexp) {/*遍历所有fd*/
+            unsigned long in, out, ex, all_bits, bit = 1, mask, j;
+            unsigned long res_in = 0, res_out = 0, res_ex = 0;
+            const struct file_operations *f_op = NULL;
+            struct file *file = NULL;
+            in = *inp++; out = *outp++; ex = *exp++;
+            all_bits = in | out | ex;
+            if (all_bits == 0) {
+                /*
+                __NFDBITS定义为(8 * sizeof(unsigned long)),即long的位数。
+                因为一个long代表了__NFDBITS位，所以跳到下一个位图i要增加__NFDBITS
+                */
+                i += __NFDBITS;
+                continue;
+            }
+            for (j = 0; j < __NFDBITS; ++j, ++i, bit <<= 1) {
+                int fput_needed;
+                if (i >= n)
+                    break;
+                /*测试每一位*/
+                if (!(bit & all_bits))
+                    continue;
+                /*得到file结构指针，并增加引用计数字段f_count*/
+                file = fget_light(i, &fput_needed);
+                if (file) {
+                    f_op = file->f_op;
+                    mask = DEFAULT_POLLMASK;
+                    /*对于socket描述符,f_op->poll对应的函数是sock_poll
+                    注意第三个参数是等待队列，在poll成功后会将本进程唤醒执行*/
+                    if (f_op && f_op->poll)
+                        mask = (*f_op->poll)(file, retval ? NULL : wait);
+                    /*释放file结构指针，实际就是减小他的一个引用计数字段f_count*/
+                    fput_light(file, fput_needed);
+                    /*根据poll的结果设置状态,要返回select出来的fd数目，所以retval++。
+                    注意：retval是in out ex三个集合的总和*/
+                    if ((mask & POLLIN_SET) && (in & bit)) {
+                        res_in |= bit;
+                        retval++;
+                    }
+                    if ((mask & POLLOUT_SET) && (out & bit)) {
+                        res_out |= bit;
+                        retval++;
+                    }
+                    if ((mask & POLLEX_SET) && (ex & bit)) {
+                        res_ex |= bit;
+                        retval++;
+                    }
+                }
+                /*
+                注意前面的set_current_state(TASK_INTERRUPTIBLE);
+                因为已经进入TASK_INTERRUPTIBLE状态,所以cond_resched回调度其他进程来运行，
+                这里的目的纯粹是为了增加一个抢占点。被抢占后，由等待队列机制唤醒。
+                在支持抢占式调度的内核中（定义了CONFIG_PREEMPT），cond_resched是空操作
+                */
+                cond_resched();
+            }
+            /*根据poll的结果写回到输出位图里*/
+            if (res_in)
+                *rinp = res_in;
+            if (res_out)
+                *routp = res_out;
+            if (res_ex)
+                *rexp = res_ex;
+        }
+        wait = NULL;
+        if (retval || !*timeout || signal_pending(current))/*signal_pending前面说过了*/
+            break;
+        if(table.error) {
+            retval = table.error;
+            break;
+        }
+        if (*timeout < 0) {
+            /*无限等待*/
+            __timeout = MAX_SCHEDULE_TIMEOUT;
+        } else if (unlikely(*timeout >= (s64)MAX_SCHEDULE_TIMEOUT - 1)) {
+            /* 时间超过MAX_SCHEDULE_TIMEOUT,即schedule_timeout允许的最大值，用一个循环来不断减少超时值*/
+            __timeout = MAX_SCHEDULE_TIMEOUT - 1;
+            *timeout -= __timeout;
+        } else {
+            /*等待一段时间*/
+            __timeout = *timeout;
+            *timeout = 0;
+        }
+        /*TASK_INTERRUPTIBLE状态下，调用schedule_timeout的进程会在收到信号后重新得到调度的机会，
+        即schedule_timeout返回,并返回剩余的时钟周期数
+        */
+        __timeout = schedule_timeout(__timeout);
+        if (*timeout >= 0)
+            *timeout += __timeout;
+    }
+    /*设置为运行状态*/
+    __set_current_state(TASK_RUNNING);
+    /*清理等待队列*/
+    poll_freewait(&table);
+    return retval;
+}
+static unsigned int sock_poll(struct file *file, poll_table *wait)
+{
+    struct socket *sock;
+    /*约定socket的file->private_data字段放着对应的socket结构指针*/
+    sock = file->private_data;
+    /*对应了三个协议的函数tcp_poll,udp_poll,datagram_poll，其中udp_poll几乎直接调用了datagram_poll
+    累了，先休息一下，这三个函数以后分析*/
+    return sock->ops->poll(file, sock, wait);
+}
+</pre>
+<p>其他重要函数一览<br>static int max_select_fd(unsigned long n, fd_set_bits *fds)<br>返回在fd_set中已经打开的，并且小于用户指定最大值，的fd<br>static inline int get_fd_set(unsigned long nr, void __user *ufdset, unsigned long *fdset)<br>从用户空间拷贝fd_set到内核<br>static inline void zero_fd_set(unsigned long nr, unsigned long *fdset)<br>把fd_set清零<br>static inline unsigned long __must_check set_fd_set(unsigned long nr, void __user *ufdset, unsigned long *fdset)<br>把fd_set拷贝回用户空间<br>static inline int signal_pending(struct task_struct *p)<br>目前进程有信号需要处理<br>struct file *fget_light(unsigned int fd, int *fput_needed)<br>由fd得到其对应的file结构指针，并增加其引用计数<br>static inline void fput_light(struct file *file, int fput_needed)<br>释放由fget_light得到的file结构指针，减少其引用计数<br>set_current_state<br>设置当前进程的状态<br>static inline int cond_resched(void)<br>判断是否有进程需要抢占当前进程，如果是将立即发生调度。就是额外增加一个抢占点。<br>signed long __sched schedule_timeout(signed long timeout)<br>当前进程睡眠timeout个jiffies<br>rcu_read_lock<br>rcu_read_unlock<br>Linux 2.6新加入的rcu锁。读锁的加锁、解锁函数<br>参考<a target="_blank" rel="noopener" href="http://www.ibm.com/developerworks/cn/linux/l-rcu">http://www.ibm.com/developerworks/cn/linux/l-rcu</a><br>poll_freewait<br>poll_initwait<br>poll_wait<br>…<br>和文件IO，poll机制有关的几个函数，参考《Linux设备驱动(第三版)》6.3<br>tcp_poll<br>udp_poll<br>datagram_poll<br>协议层的poll函数<br>文件出处：<a target="_blank" rel="noopener" href="http://zhangyafeikimi.iteye.com/blog/248815">http://zhangyafeikimi.iteye.com/blog/248815</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2013/12/24/Linux-2.6.25-select%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" data-id="clgrkb5qt000274pi5mpb15lw" data-title="Linux-2.6.25 select系统调用源码分析" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-PLSQL-两种循环for和while" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2013/11/19/PLSQL-%E4%B8%A4%E7%A7%8D%E5%BE%AA%E7%8E%AFfor%E5%92%8Cwhile/" class="article-date">
+  <time class="dt-published" datetime="2013-11-19T15:01:18.000Z" itemprop="datePublished">2013-11-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Oracle/">Oracle</a>►<a class="article-category-link" href="/categories/Oracle/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2013/11/19/PLSQL-%E4%B8%A4%E7%A7%8D%E5%BE%AA%E7%8E%AFfor%E5%92%8Cwhile/">PLSQL 两种循环for和while</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>第一种 while</p>
+<pre>
+declare
+i number;
+begin
+i:=0;
+while i<=100 loop
+Dbms_Output.put_line('i=' || i);
+i:=i+1;
+end loop;
+end;
+</pre>
+<p>第二种 for</p>
+<pre>
+begin
+for i in 1..100 loop
+Dbms_Output.put_line('i=' || i);
+end loop;
+commit;
+end;
+</pre>
+<p>第三种 也可以直接使用loop( 死循环，游标中使用)</p>
+<pre>
+declare
+i number;
+begin
+i:=0;
+loop
+Dbms_Output.put_line('i=' || i);
+i:=i+1;
+end loop;
+commit;
+end;
+</pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2013/11/19/PLSQL-%E4%B8%A4%E7%A7%8D%E5%BE%AA%E7%8E%AFfor%E5%92%8Cwhile/" data-id="clgrjlxiz00677opi90a96th4" data-title="PLSQL 两种循环for和while" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-用PLSQL简单实现游标" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2013/11/19/%E7%94%A8PLSQL%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%A0%87/" class="article-date">
+  <time class="dt-published" datetime="2013-11-19T14:44:42.000Z" itemprop="datePublished">2013-11-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Oracle/">Oracle</a>►<a class="article-category-link" href="/categories/Oracle/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2013/11/19/%E7%94%A8PLSQL%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%A0%87/">用PLSQL简单实现游标</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>PLSQL编程简单实现游标</p>
+<pre>
+declare
+v_userid   t_eb_user.userid%TYPE;
+v_username t_eb_user.username%TYPE;
+cursor emp_cursor is
+ select a.userid,a.username from t_eb_user a, t_eb_tables b where a.userid=b.userid;
+begin
+  open emp_cursor;
+LOOP
+  FETCH emp_cursor INTO v_userid, v_username;
+  EXIT WHEN emp_cursor%NOTFOUND;
+  dbms_output.put_line(v_userid||' '||v_username);
+END LOOP;
+end;
+</pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2013/11/19/%E7%94%A8PLSQL%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%A0%87/" data-id="clgrjlxmh00cf7opi1wlu8eeg" data-title="用PLSQL简单实现游标" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-trim很简单的代码，但是很常用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2013/11/04/trim%E5%BE%88%E7%AE%80%E5%8D%95%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%8C%E4%BD%86%E6%98%AF%E5%BE%88%E5%B8%B8%E7%94%A8/" class="article-date">
+  <time class="dt-published" datetime="2013-11-04T15:02:29.000Z" itemprop="datePublished">2013-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C%E7%BC%96%E7%A8%8B/">C编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2013/11/04/trim%E5%BE%88%E7%AE%80%E5%8D%95%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%8C%E4%BD%86%E6%98%AF%E5%BE%88%E5%B8%B8%E7%94%A8/">trim很简单的代码，但是很常用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>void ltrim(char <em>s)<br>{<br> char *p;<br> p &#x3D; s;<br> while(</em>p &#x3D;&#x3D; ‘ ‘ || <em>p &#x3D;&#x3D; ‘t’){</em>p++;}<br> strcpy(s,p);<br>}<br>void rtrim(char *s)<br>{<br> int i;<br> if (s &#x3D;&#x3D; NULL)<br>   return;<br> i &#x3D; strlen(s)-1;<br> while((s[i] &#x3D;&#x3D; ‘ ‘ || s[i] &#x3D;&#x3D; ‘t’) &amp;&amp; i &gt;&#x3D; 0){i–;};<br> s[i+1] &#x3D; ‘ ’;<br>}<br>void trim(char *s){<br>    ltrim(s);<br>    rtrim(s);<br>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2013/11/04/trim%E5%BE%88%E7%AE%80%E5%8D%95%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%8C%E4%BD%86%E6%98%AF%E5%BE%88%E5%B8%B8%E7%94%A8/" data-id="clgrjlxjn007f7opi9h815f30" data-title="trim很简单的代码，但是很常用" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-使用inotify-监控文件创建、修改" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2013/07/17/%E4%BD%BF%E7%94%A8inotify-%E7%9B%91%E6%8E%A7%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA%E3%80%81%E4%BF%AE%E6%94%B9/" class="article-date">
+  <time class="dt-published" datetime="2013-07-17T14:36:27.000Z" itemprop="datePublished">2013-07-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/">Linux</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2013/07/17/%E4%BD%BF%E7%94%A8inotify-%E7%9B%91%E6%8E%A7%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA%E3%80%81%E4%BF%AE%E6%94%B9/">使用inotify 监控文件创建、修改</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>例子为：使用inotify 监控文件创建，可用于安全防护，在创建文件时，检测文件内容，以及后续的操作。<br>监控类型在&#x2F;usr&#x2F;include&#x2F;sys&#x2F;inotify.h头文件查看</p>
+<pre>
+#define IN_ACCESS        0x00000001     /* File was accessed.  */
+#define IN_MODIFY        0x00000002     /* File was modified.  */
+#define IN_ATTRIB        0x00000004     /* Metadata changed.  */
+#define IN_CLOSE_WRITE   0x00000008     /* Writtable file was closed.  */
+#define IN_CLOSE_NOWRITE 0x00000010     /* Unwrittable file closed.  */
+#define IN_CLOSE         (IN_CLOSE_WRITE | IN_CLOSE_NOWRITE) /* Close.  */
+#define IN_OPEN          0x00000020     /* File was opened.  */
+#define IN_MOVED_FROM    0x00000040     /* File was moved from X.  */
+#define IN_MOVED_TO      0x00000080     /* File was moved to Y.  */
+#define IN_MOVE          (IN_MOVED_FROM | IN_MOVED_TO) /* Moves.  */
+#define IN_CREATE        0x00000100     /* Subfile was created.  */
+#define IN_DELETE        0x00000200     /* Subfile was deleted.  */
+#define IN_DELETE_SELF   0x00000400     /* Self was deleted.  */
+#define IN_MOVE_SELF     0x00000800     /* Self was moved.  */
+/* Events sent by the kernel.  */
+#define IN_UNMOUNT       0x00002000     /* Backing fs was unmounted.  */
+#define IN_Q_OVERFLOW    0x00004000     /* Event queued overflowed.  */
+#define IN_IGNORED       0x00008000     /* File was ignored.  */
+/* Helper events.  */
+#define IN_CLOSE         (IN_CLOSE_WRITE | IN_CLOSE_NOWRITE)    /* Close.  */
+#define IN_MOVE          (IN_MOVED_FROM | IN_MOVED_TO)          /* Moves.  */
+/* Special flags.  */
+#define IN_ONLYDIR       0x01000000     /* Only watch the path if it is a
+                                           directory.  */
+#define IN_DONT_FOLLOW   0x02000000     /* Do not follow a sym link.  */
+#define IN_EXCL_UNLINK   0x04000000     /* Exclude events on unlinked
+                                           objects.  */
+#define IN_MASK_ADD      0x20000000     /* Add to the mask of an already
+#define IN_ONESHOT       0x80000000     /* Only send event once.  */
+/* All events which a program can wait on.  */
+#define IN_ALL_EVENTS    (IN_ACCESS | IN_MODIFY | IN_ATTRIB | IN_CLOSE_WRITE
+                          | IN_CLOSE_NOWRITE | IN_OPEN | IN_MOVED_FROM
+                          | IN_MOVED_TO | IN_CREATE | IN_DELETE
+                          | IN_DELETE_SELF | IN_MOVE_SELF)
+</pre>
+<p>监控制定目录下面创建文件和目录</p>
+<pre>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/inotify.h>
+#define	EVENT_SIZE ( sizeof(struct inotify_event) )
+#define	BUFF_LEN ( 1024 * ( EVENT_SIZE + 16 ))
+int main(void)
+{
+    int	length, i = 0;
+    int	fd;
+    int	wd;
+    char	buff[BUFF_LEN];
+    fd = inotify_init();
+    if ( fd < 0) {
+        perror("inotify_init error:");
+        exit(-1);
+    }
+    wd = inotify_add_watch(fd, "/home/key1088/code/c/test", IN_CREATE);
+    struct inotify_event *event;
+    while ( 1 ) {
+        memset(buff, 0x00, sizeof(buff));
+        length = read(fd, buff, BUFF_LEN);
+        if ( length < 0) {
+            perror("read:");
+        }
+        event = ( struct inotify_event * ) &buff[ i ];
+        if ( event->len ) {
+            if (event->mask & IN_CREATE) {
+                if(event->mask & IN_ISDIR) {
+                    printf("create dir,dirname=[%s]n", event->name);
+                }else{
+                    printf("create file,filename=[%s]n", event->name);
+                }
+            }
+        }
+    }
+    inotify_rm_watch(fd, wd);
+    close(fd);
+    return 0;
+}
+</pre>
+<p>参考：<a target="_blank" rel="noopener" href="http://www.ibm.com/developerworks/cn/linux/l-ubuntu-inotify/">http://www.ibm.com/developerworks/cn/linux/l-ubuntu-inotify/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2013/07/17/%E4%BD%BF%E7%94%A8inotify-%E7%9B%91%E6%8E%A7%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA%E3%80%81%E4%BF%AE%E6%94%B9/" data-id="clgrjlxlj00as7opi1n7g7o8q" data-title="使用inotify 监控文件创建、修改" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-LINUX-SYSCALL-NUMBER" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2013/07/16/LINUX-SYSCALL-NUMBER/" class="article-date">
+  <time class="dt-published" datetime="2013-07-16T13:57:14.000Z" itemprop="datePublished">2013-07-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/C%E7%BC%96%E7%A8%8B/">C编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2013/07/16/LINUX-SYSCALL-NUMBER/">LINUX SYSCALL NUMBER</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>&#x2F;usr&#x2F;include&#x2F;i386-linux-gnu&#x2F;asm&#x2F;unistd.h</p>
+<pre>
+# ifdef __i386__
+#  include <asm/unistd_32.h>
+# else
+#  include <asm/unistd_64.h>
+# endif
+</pre>
+<p>&#x2F;usr&#x2F;include&#x2F;i386-linux-gnu&#x2F;asm&#x2F;unistd_32.h</p>
+<pre>
+#ifndef _ASM_X86_UNISTD_32_H
+#define _ASM_X86_UNISTD_32_H
+/*
+ * This file contains the system call numbers.
+ */
+#define __NR_restart_syscall      0
+#define __NR_exit		  1
+#define __NR_fork		  2
+#define __NR_read		  3
+#define __NR_write		  4
+#define __NR_open		  5
+#define __NR_close		  6
+#define __NR_waitpid		  7
+#define __NR_creat		  8
+#define __NR_link		  9
+#define __NR_unlink		 10
+#define __NR_execve		 11
+#define __NR_chdir		 12
+#define __NR_time		 13
+#define __NR_mknod		 14
+#define __NR_chmod		 15
+#define __NR_lchown		 16
+#define __NR_break		 17
+#define __NR_oldstat		 18
+#define __NR_lseek		 19
+#define __NR_getpid		 20
+#define __NR_mount		 21
+#define __NR_umount		 22
+#define __NR_setuid		 23
+#define __NR_getuid		 24
+#define __NR_stime		 25
+#define __NR_ptrace		 26
+#define __NR_alarm		 27
+#define __NR_oldfstat		 28
+#define __NR_pause		 29
+#define __NR_utime		 30
+#define __NR_stty		 31
+#define __NR_gtty		 32
+#define __NR_access		 33
+#define __NR_nice		 34
+#define __NR_ftime		 35
+#define __NR_sync		 36
+#define __NR_kill		 37
+#define __NR_rename		 38
+#define __NR_mkdir		 39
+#define __NR_rmdir		 40
+#define __NR_dup		 41
+#define __NR_pipe		 42
+#define __NR_times		 43
+#define __NR_prof		 44
+#define __NR_brk		 45
+#define __NR_setgid		 46
+#define __NR_getgid		 47
+#define __NR_signal		 48
+#define __NR_geteuid		 49
+#define __NR_getegid		 50
+#define __NR_acct		 51
+#define __NR_umount2		 52
+#define __NR_lock		 53
+#define __NR_ioctl		 54
+#define __NR_fcntl		 55
+#define __NR_mpx		 56
+#define __NR_setpgid		 57
+#define __NR_ulimit		 58
+#define __NR_oldolduname	 59
+#define __NR_umask		 60
+#define __NR_chroot		 61
+#define __NR_ustat		 62
+#define __NR_dup2		 63
+#define __NR_getppid		 64
+#define __NR_getpgrp		 65
+#define __NR_setsid		 66
+#define __NR_sigaction		 67
+#define __NR_sgetmask		 68
+#define __NR_ssetmask		 69
+#define __NR_setreuid		 70
+#define __NR_setregid		 71
+#define __NR_sigsuspend		 72
+#define __NR_sigpending		 73
+#define __NR_sethostname	 74
+#define __NR_setrlimit		 75
+#define __NR_getrlimit		 76   /* Back compatible 2Gig limited rlimit */
+#define __NR_getrusage		 77
+#define __NR_gettimeofday	 78
+#define __NR_settimeofday	 79
+#define __NR_getgroups		 80
+#define __NR_setgroups		 81
+#define __NR_select		 82
+#define __NR_symlink		 83
+#define __NR_oldlstat		 84
+#define __NR_readlink		 85
+#define __NR_uselib		 86
+#define __NR_swapon		 87
+#define __NR_reboot		 88
+#define __NR_readdir		 89
+#define __NR_mmap		 90
+#define __NR_munmap		 91
+#define __NR_truncate		 92
+#define __NR_ftruncate		 93
+#define __NR_fchmod		 94
+#define __NR_fchown		 95
+#define __NR_getpriority	 96
+#define __NR_setpriority	 97
+#define __NR_profil		 98
+#define __NR_statfs		 99
+#define __NR_fstatfs		100
+#define __NR_ioperm		101
+#define __NR_socketcall		102
+#define __NR_syslog		103
+#define __NR_setitimer		104
+#define __NR_getitimer		105
+#define __NR_stat		106
+#define __NR_lstat		107
+#define __NR_fstat		108
+#define __NR_olduname		109
+#define __NR_iopl		110
+#define __NR_vhangup		111
+#define __NR_idle		112
+#define __NR_vm86old		113
+#define __NR_wait4		114
+#define __NR_swapoff		115
+#define __NR_sysinfo		116
+#define __NR_ipc		117
+#define __NR_fsync		118
+#define __NR_sigreturn		119
+#define __NR_clone		120
+#define __NR_setdomainname	121
+#define __NR_uname		122
+#define __NR_modify_ldt		123
+#define __NR_adjtimex		124
+#define __NR_mprotect		125
+#define __NR_sigprocmask	126
+#define __NR_create_module	127
+#define __NR_init_module	128
+#define __NR_delete_module	129
+#define __NR_get_kernel_syms	130
+#define __NR_quotactl		131
+#define __NR_getpgid		132
+#define __NR_fchdir		133
+#define __NR_bdflush		134
+#define __NR_sysfs		135
+#define __NR_personality	136
+#define __NR_afs_syscall	137 /* Syscall for Andrew File System */
+#define __NR_setfsuid		138
+#define __NR_setfsgid		139
+#define __NR__llseek		140
+#define __NR_getdents		141
+#define __NR__newselect		142
+#define __NR_flock		143
+#define __NR_msync		144
+#define __NR_readv		145
+#define __NR_writev		146
+#define __NR_getsid		147
+#define __NR_fdatasync		148
+#define __NR__sysctl		149
+#define __NR_mlock		150
+#define __NR_munlock		151
+#define __NR_mlockall		152
+#define __NR_munlockall		153
+#define __NR_sched_setparam		154
+#define __NR_sched_getparam		155
+#define __NR_sched_setscheduler		156
+#define __NR_sched_getscheduler		157
+#define __NR_sched_yield		158
+#define __NR_sched_get_priority_max	159
+#define __NR_sched_get_priority_min	160
+#define __NR_sched_rr_get_interval	161
+#define __NR_nanosleep		162
+#define __NR_mremap		163
+#define __NR_setresuid		164
+#define __NR_getresuid		165
+#define __NR_vm86		166
+#define __NR_query_module	167
+#define __NR_poll		168
+#define __NR_nfsservctl		169
+#define __NR_setresgid		170
+#define __NR_getresgid		171
+#define __NR_prctl              172
+#define __NR_rt_sigreturn	173
+#define __NR_rt_sigaction	174
+#define __NR_rt_sigprocmask	175
+#define __NR_rt_sigpending	176
+#define __NR_rt_sigtimedwait	177
+#define __NR_rt_sigqueueinfo	178
+#define __NR_rt_sigsuspend	179
+#define __NR_pread64		180
+#define __NR_pwrite64		181
+#define __NR_chown		182
+#define __NR_getcwd		183
+#define __NR_capget		184
+#define __NR_capset		185
+#define __NR_sigaltstack	186
+#define __NR_sendfile		187
+#define __NR_getpmsg		188	/* some people actually want streams */
+#define __NR_putpmsg		189	/* some people actually want streams */
+#define __NR_vfork		190
+#define __NR_ugetrlimit		191	/* SuS compliant getrlimit */
+#define __NR_mmap2		192
+#define __NR_truncate64		193
+#define __NR_ftruncate64	194
+#define __NR_stat64		195
+#define __NR_lstat64		196
+#define __NR_fstat64		197
+#define __NR_lchown32		198
+#define __NR_getuid32		199
+#define __NR_getgid32		200
+#define __NR_geteuid32		201
+#define __NR_getegid32		202
+#define __NR_setreuid32		203
+#define __NR_setregid32		204
+#define __NR_getgroups32	205
+#define __NR_setgroups32	206
+#define __NR_fchown32		207
+#define __NR_setresuid32	208
+#define __NR_getresuid32	209
+#define __NR_setresgid32	210
+#define __NR_getresgid32	211
+#define __NR_chown32		212
+#define __NR_setuid32		213
+#define __NR_setgid32		214
+#define __NR_setfsuid32		215
+#define __NR_setfsgid32		216
+#define __NR_pivot_root		217
+#define __NR_mincore		218
+#define __NR_madvise		219
+#define __NR_madvise1		219	/* delete when C lib stub is removed */
+#define __NR_getdents64		220
+#define __NR_fcntl64		221
+/* 223 is unused */
+#define __NR_gettid		224
+#define __NR_readahead		225
+#define __NR_setxattr		226
+#define __NR_lsetxattr		227
+#define __NR_fsetxattr		228
+#define __NR_getxattr		229
+#define __NR_lgetxattr		230
+#define __NR_fgetxattr		231
+#define __NR_listxattr		232
+#define __NR_llistxattr		233
+#define __NR_flistxattr		234
+#define __NR_removexattr	235
+#define __NR_lremovexattr	236
+#define __NR_fremovexattr	237
+#define __NR_tkill		238
+#define __NR_sendfile64		239
+#define __NR_futex		240
+#define __NR_sched_setaffinity	241
+#define __NR_sched_getaffinity	242
+#define __NR_set_thread_area	243
+#define __NR_get_thread_area	244
+#define __NR_io_setup		245
+#define __NR_io_destroy		246
+#define __NR_io_getevents	247
+#define __NR_io_submit		248
+#define __NR_io_cancel		249
+#define __NR_fadvise64		250
+/* 251 is available for reuse (was briefly sys_set_zone_reclaim) */
+#define __NR_exit_group		252
+#define __NR_lookup_dcookie	253
+#define __NR_epoll_create	254
+#define __NR_epoll_ctl		255
+#define __NR_epoll_wait		256
+#define __NR_remap_file_pages	257
+#define __NR_set_tid_address	258
+#define __NR_timer_create	259
+#define __NR_timer_settime	(__NR_timer_create+1)
+#define __NR_timer_gettime	(__NR_timer_create+2)
+#define __NR_timer_getoverrun	(__NR_timer_create+3)
+#define __NR_timer_delete	(__NR_timer_create+4)
+#define __NR_clock_settime	(__NR_timer_create+5)
+#define __NR_clock_gettime	(__NR_timer_create+6)
+#define __NR_clock_getres	(__NR_timer_create+7)
+#define __NR_clock_nanosleep	(__NR_timer_create+8)
+#define __NR_statfs64		268
+#define __NR_fstatfs64		269
+#define __NR_tgkill		270
+#define __NR_utimes		271
+#define __NR_fadvise64_64	272
+#define __NR_vserver		273
+#define __NR_mbind		274
+#define __NR_get_mempolicy	275
+#define __NR_set_mempolicy	276
+#define __NR_mq_open 		277
+#define __NR_mq_unlink		(__NR_mq_open+1)
+#define __NR_mq_timedsend	(__NR_mq_open+2)
+#define __NR_mq_timedreceive	(__NR_mq_open+3)
+#define __NR_mq_notify		(__NR_mq_open+4)
+#define __NR_mq_getsetattr	(__NR_mq_open+5)
+#define __NR_kexec_load		283
+#define __NR_waitid		284
+/* #define __NR_sys_setaltroot	285 */
+#define __NR_add_key		286
+#define __NR_request_key	287
+#define __NR_keyctl		288
+#define __NR_ioprio_set		289
+#define __NR_ioprio_get		290
+#define __NR_inotify_init	291
+#define __NR_inotify_add_watch	292
+#define __NR_inotify_rm_watch	293
+#define __NR_migrate_pages	294
+#define __NR_openat		295
+#define __NR_mkdirat		296
+#define __NR_mknodat		297
+#define __NR_fchownat		298
+#define __NR_futimesat		299
+#define __NR_fstatat64		300
+#define __NR_unlinkat		301
+#define __NR_renameat		302
+#define __NR_linkat		303
+#define __NR_symlinkat		304
+#define __NR_readlinkat		305
+#define __NR_fchmodat		306
+#define __NR_faccessat		307
+#define __NR_pselect6		308
+#define __NR_ppoll		309
+#define __NR_unshare		310
+#define __NR_set_robust_list	311
+#define __NR_get_robust_list	312
+#define __NR_splice		313
+#define __NR_sync_file_range	314
+#define __NR_tee		315
+#define __NR_vmsplice		316
+#define __NR_move_pages		317
+#define __NR_getcpu		318
+#define __NR_epoll_pwait	319
+#define __NR_utimensat		320
+#define __NR_signalfd		321
+#define __NR_timerfd_create	322
+#define __NR_eventfd		323
+#define __NR_fallocate		324
+#define __NR_timerfd_settime	325
+#define __NR_timerfd_gettime	326
+#define __NR_signalfd4		327
+#define __NR_eventfd2		328
+#define __NR_epoll_create1	329
+#define __NR_dup3		330
+#define __NR_pipe2		331
+#define __NR_inotify_init1	332
+#define __NR_preadv		333
+#define __NR_pwritev		334
+#define __NR_rt_tgsigqueueinfo	335
+#define __NR_perf_event_open	336
+#define __NR_recvmmsg		337
+#define __NR_fanotify_init	338
+#define __NR_fanotify_mark	339
+#define __NR_prlimit64		340
+#define __NR_name_to_handle_at	341
+#define __NR_open_by_handle_at  342
+#define __NR_clock_adjtime	343
+#define __NR_syncfs             344
+#define __NR_sendmmsg		345
+#define __NR_setns		346
+#define __NR_process_vm_readv	347
+#define __NR_process_vm_writev	348
+#endif /* _ASM_X86_UNISTD_32_H */
+</pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2013/07/16/LINUX-SYSCALL-NUMBER/" data-id="clgrjlxg1002z7opi2e8yesu2" data-title="LINUX SYSCALL NUMBER" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-结构体数组指针" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2013/07/09/%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88/" class="article-date">
+  <time class="dt-published" datetime="2013-07-09T14:00:44.000Z" itemprop="datePublished">2013-07-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C%E7%BC%96%E7%A8%8B/">C编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2013/07/09/%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88/">结构体数组指针</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>结构体数组指针有点绕，使用和数组指针一样的</p>
+<pre>
+#include <stdio.h>
+#include <string.h>
+typedef struct {
+    long int    num;
+    char        name[20];
+    char        sex;
+    float       score;
+} student;
+student stu_1[10], *p;
+int main(void) {
+    p = &stu_1;
+    stu_1[1].num = 89101;
+    strcpy(stu_1[1].name, "LiLin");
+    p->sex='M';
+    p->score=89.5;
+    printf("%ld, %s,%c,%fn", (p+1)->num, (p+1)->name,stu_1[0].sex,p->score);
+    return 0;
+}
+</pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2013/07/09/%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88/" data-id="clgrjlxk100867opic4iq2fyd" data-title="结构体数组指针" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-子进程的返回值问题status" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2013/06/19/%E5%AD%90%E8%BF%9B%E7%A8%8B%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC%E9%97%AE%E9%A2%98status/" class="article-date">
+  <time class="dt-published" datetime="2013-06-19T08:53:59.000Z" itemprop="datePublished">2013-06-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C%E7%BC%96%E7%A8%8B/">C编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2013/06/19/%E5%AD%90%E8%BF%9B%E7%A8%8B%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC%E9%97%AE%E9%A2%98status/">子进程的返回值问题status</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>最近有一个程序，转移到另一台服务器上了，在接受返回值的时候一直出问题。</p>
+<pre>
+waitpid(pid, &status, WNOHANG);
+</pre>
+<p>WEXITSTATUS(status)老实返回16，郁闷。<br>最后发现是信号的问题。在fork子进程前，添加对子进程的信号接受就可以了。</p>
+<pre>
+signal(SIGCHLD,SIG_DFL);
+</pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2013/06/19/%E5%AD%90%E8%BF%9B%E7%A8%8B%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC%E9%97%AE%E9%A2%98status/" data-id="clgrjlxmc00c57opi53zwdcek" data-title="子进程的返回值问题status" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; zurück</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/4/">weiter &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/">Oracle</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Perl%E7%BC%96%E7%A8%8B/">Perl编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/%E5%AE%B9%E5%99%A8/">容器</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Python%E7%BC%96%E7%A8%8B/">Python编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-dbx/" rel="tag">C;dbx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5-CTX/" rel="tag">MD5_CTX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alarm/" rel="tag">alarm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backup/" rel="tag">backup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fseek/" rel="tag">fseek</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftell/" rel="tag">ftell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gethostbyname/" rel="tag">gethostbyname</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jmp-buf/" rel="tag">jmp_buf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%BD%95%E9%9F%B3/" rel="tag">linux录音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/longjmp/" rel="tag">longjmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mimikatz/" rel="tag">mimikatz</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minikube/" rel="tag">minikube</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-%E8%84%9A%E6%9C%AC/" rel="tag">nginx;脚本</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openshift/" rel="tag">openshift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paas/" rel="tag">paas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qsort/" rel="tag">qsort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setjmp/" rel="tag">setjmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss-easyxss/" rel="tag">xss;easyxss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" rel="tag">云计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E9%9C%89%E6%B4%BE/" rel="tag">树霉派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/" rel="tag">音频降噪</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C-dbx/" style="font-size: 10px;">C;dbx</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/MD5-CTX/" style="font-size: 10px;">MD5_CTX</a> <a href="/tags/alarm/" style="font-size: 10px;">alarm</a> <a href="/tags/backup/" style="font-size: 10px;">backup</a> <a href="/tags/fseek/" style="font-size: 10px;">fseek</a> <a href="/tags/ftell/" style="font-size: 10px;">ftell</a> <a href="/tags/gethostbyname/" style="font-size: 10px;">gethostbyname</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/jmp-buf/" style="font-size: 10px;">jmp_buf</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux%E5%BD%95%E9%9F%B3/" style="font-size: 10px;">linux录音</a> <a href="/tags/longjmp/" style="font-size: 10px;">longjmp</a> <a href="/tags/mimikatz/" style="font-size: 10px;">mimikatz</a> <a href="/tags/minikube/" style="font-size: 10px;">minikube</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx-%E8%84%9A%E6%9C%AC/" style="font-size: 10px;">nginx;脚本</a> <a href="/tags/openshift/" style="font-size: 10px;">openshift</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/paas/" style="font-size: 10px;">paas</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/qsort/" style="font-size: 10px;">qsort</a> <a href="/tags/setjmp/" style="font-size: 10px;">setjmp</a> <a href="/tags/xss-easyxss/" style="font-size: 10px;">xss;easyxss</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 10px;">云计算</a> <a href="/tags/%E6%A0%91%E9%9C%89%E6%B4%BE/" style="font-size: 10px;">树霉派</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/" style="font-size: 10px;">音频降噪</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/04/22/hello-world/">Hello Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/26/%E5%B7%B4%E8%8F%B2%E7%89%B9%E7%9A%84%E5%9F%BA%E7%A1%80%E6%8A%95%E8%B5%84%E7%90%86%E5%BF%B5%E8%AE%B0%E5%BD%95/">巴菲特的基础投资理念记录</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/26/Ubuntu-%E5%AE%89%E8%A3%85minikebe/">Ubuntu 安装minikebe</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/28/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9B%E8%A1%8C%E5%BD%95%E9%9F%B3%E5%92%8C%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/">树莓派进行录音和音频降噪</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 key1088<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

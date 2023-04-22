@@ -1,0 +1,6 @@
+title: 写linux服务
+categories: [Linux]
+tags: []
+date: 2011-02-27 21:19:00
+---
+<p>一般系统的运行级别是在 &nbsp; /etc/inittab &nbsp; 里面指定的。有一行是类似 <br />id:5:initdefault: <br />或者 <br />id:3:initdefault: <br />的，这里的数字就是系统的默认运行级别。假设是 &nbsp; 5。 <br /><br />启动服务的是依靠 &nbsp; /etc/init.d/ &nbsp; 下的脚本启动的。这些都是普通的 &nbsp; shell &nbsp; 脚本，系统在调用的时候，如果是启动服务，则传入 &nbsp; start &nbsp; 作为参数；stop &nbsp; 表示停止；restart &nbsp; 表示重启。因此你可以写一个脚本，比如简单的如这样： <br /><br />#!/bin/sh <br /><br />ARG=$1 <br /><br />case &nbsp; $ARG &nbsp; in &nbsp; <br />start): <br />nohup &nbsp; /path/to/your/program &nbsp; &nbsp; &amp; <br />;; <br />stop): <br />pkill &nbsp; program <br />;; <br />restart): <br />pkill &nbsp; program <br />nohup &nbsp; /path/to/your/program &nbsp; &amp; <br />;; <br />esac <br /><br />把这个脚本放在 &nbsp; /etc/init.d &nbsp; 里面，譬如 &nbsp; /etc/init.d/your_prog <br />然后加入相应运行级别的链接：在 &nbsp; 5 &nbsp; 级启动则 &nbsp; <br />ln &nbsp; -s &nbsp; /etc/init.d/your_prog &nbsp; /etc/rc5.d/S100your_prog <br />ln &nbsp; -s &nbsp; /etc/init.d/your_prog &nbsp; /etc/rc0.d/K100your_prog <br />这里两个数字都可以用对应目录里最大的数字，因为没有别的服务依赖你的服务。 <br />这样表示，当系统进入 &nbsp; init &nbsp; level &nbsp; 5 &nbsp; 的时候启动你的程序，进入 &nbsp; init &nbsp; level &nbsp; 0 &nbsp; 的时候停止你的程序。 <br /><br /></p>

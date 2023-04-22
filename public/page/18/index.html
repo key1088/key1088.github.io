@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>key1088 blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="个人博客网站">
+<meta property="og:type" content="website">
+<meta property="og:title" content="key1088 blog">
+<meta property="og:url" content="https://key1088.github.io/page/18/index.html">
+<meta property="og:site_name" content="key1088 blog">
+<meta property="og:description" content="个人博客网站">
+<meta property="og:locale">
+<meta property="article:author" content="key1088">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="key1088 blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">key1088 blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">2020到2060会发生什么，这40年内会有哪些变化呢</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://key1088.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-计算EIGRP的度量值方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/03/29/%E8%AE%A1%E7%AE%97EIGRP%E7%9A%84%E5%BA%A6%E9%87%8F%E5%80%BC%E6%96%B9%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2010-03-29T08:29:00.000Z" itemprop="datePublished">2010-03-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/03/29/%E8%AE%A1%E7%AE%97EIGRP%E7%9A%84%E5%BA%A6%E9%87%8F%E5%80%BC%E6%96%B9%E6%B3%95/">计算EIGRP的度量值方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>EIGRP 度量值的计算公式&#x3D;[ K1 * Bandwidth + (K2 * Bandwidth)&#x2F;(256-Load) +<br />K3<em>Delay ]</em>[K5&#x2F;(Reliability + K4) ] *256<br />默认情况下，K1 &#x3D; K3 &#x3D; 1 ，K2 &#x3D; K4 &#x3D; K5 &#x3D; 0 。<br />Bandwidth &#x3D;10^7&#x2F;所经由链路中入口带宽（单位为Kbps）的最小值<br />Delay&#x3D;所经由链路中入口的延迟之和（单位为μs）&#x2F;10<br />也就是说默认情况下，计算公式&#x3D;[10^7&#x2F;Bandwidth+Delay]*256<br /><br />例如：<br />路由条目如下。<br />“D 1.1.1.0 [90&#x2F;20640000] via 192.168.12.1,00:04:19, Serial0&#x2F;0<br /><br />带宽就是Serial0&#x2F;0接口的带宽。<br />延迟就是Serial0&#x2F;0和宣告1.1.1.0网段接口的延迟。<br /><br />带宽和延迟可以通过<br /><br />接口的带宽和延迟可以通过“show interface ”查看<br /><br />例：<br /><br />R1#sh inter f0&#x2F;0<br />FastEthernet0&#x2F;0 is administratively down, line protocol is down<br />Hardware is AmdFE, address is c800.06fc.0000 (bia c800.06fc.0000)<br />MTU 1500 bytes, BW 100000 Kbit, DLY 100 usec,<br />reliability 255&#x2F;255, txload 1&#x2F;255, rxload 1&#x2F;255<br />Encapsulation ARPA, loopback not set<br />Keepalive set (10 sec)<br />Half-duplex, 100Mb&#x2F;s, 100BaseTX&#x2F;FX<br />ARP type: ARPA, ARP Timeout 04:00:00<br />Last input never, output never, output hang never<br />Last clearing of &quot;show interface&quot; counters never<br />Queueing strategy: fifo<br />Output queue 0&#x2F;40, 0 drops; input queue 0&#x2F;75, 0 drops<br />5 minute input rate 0 bits&#x2F;sec, 0 packets&#x2F;sec<br />5 minute output rate 0 bits&#x2F;sec, 0 packets&#x2F;sec<br />0 packets input, 0 bytes<br />Received 0 broadcasts, 0 runts, 0 giants, 0 throttles<br />0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored<br />0 watchdog<br />0 input packets with dribble condition detected<br />0 packets output, 0 bytes, 0 underruns(0&#x2F;0&#x2F;0)<br />0 output errors, 0 collisions, 0 interface resets<br />0 babbles, 0 late collision, 0 deferred<br />0 lost carrier, 0 no carrier<br />0 output buffer failures, 0 output buffers swapped out<br /></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/03/29/%E8%AE%A1%E7%AE%97EIGRP%E7%9A%84%E5%BA%A6%E9%87%8F%E5%80%BC%E6%96%B9%E6%B3%95/" data-id="clgrjlxl1009y7opibtqna2rr" data-title="计算EIGRP的度量值方法" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-郁闷，手机停机了。" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/03/29/%E9%83%81%E9%97%B7%EF%BC%8C%E6%89%8B%E6%9C%BA%E5%81%9C%E6%9C%BA%E4%BA%86%E3%80%82/" class="article-date">
+  <time class="dt-published" datetime="2010-03-29T00:37:00.000Z" itemprop="datePublished">2010-03-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/03/29/%E9%83%81%E9%97%B7%EF%BC%8C%E6%89%8B%E6%9C%BA%E5%81%9C%E6%9C%BA%E4%BA%86%E3%80%82/">郁闷，手机停机了。</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>昨天晚上，查询包月短信，现在没有太多“业务”了，还有30多条短信呢，可怜啊。<br />这不快到月底了嘛，来几个群发，想亲友们，问问好，送送祝福，不是每次短信发不完，才给他们发的，一般都是直接打电话的。<br />晚上都没有睡好，陆陆续续的来短信，也不看，太困了。<br />早上看信息报告，我晕40多条，发超了，还要一个个回。回了没有几个人时，发现发送消息失败。<br />⊙﹏⊙b汗，竟然停机了。。<br /></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/03/29/%E9%83%81%E9%97%B7%EF%BC%8C%E6%89%8B%E6%9C%BA%E5%81%9C%E6%9C%BA%E4%BA%86%E3%80%82/" data-id="clgrjlxms00cr7opi4nq8f8jy" data-title="郁闷，手机停机了。" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-网络负载平衡（NLB)试验总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/03/28/%E7%BD%91%E7%BB%9C%E8%B4%9F%E8%BD%BD%E5%B9%B3%E8%A1%A1%EF%BC%88NLB)%E8%AF%95%E9%AA%8C%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2010-03-28T03:33:00.000Z" itemprop="datePublished">2010-03-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/03/28/%E7%BD%91%E7%BB%9C%E8%B4%9F%E8%BD%BD%E5%B9%B3%E8%A1%A1%EF%BC%88NLB)%E8%AF%95%E9%AA%8C%E6%80%BB%E7%BB%93/">网络负载平衡（NLB)试验总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>这两天被这个试验忙死了，居然钻错了方向。</p><p>NLB大致分为四个类型：1.单网卡多播</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  2.单网卡单播</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  3.多网卡多播</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  4.多网卡单播</p><p>这是微软官方说的四种NLB类型。我做单播时候，虚拟机环境下没有做出来。每次重启网卡的时候就提示</p><p>Adapter Ethernet0 may not have network connectivity.MAC address 02:BF:C0:A8:05:01 of adapter Ethernet0 is within the reserved address range or is in use by another virtual adapter on your system.</p><p>一次和第二次分别down机时，可以完成冗余，在第三次切换的时候，无法连接，其他的没有问题了。不知道问题出在哪了，感觉应该是虚拟环境的问题。也没有多少技术含量。</p><p>注意一下几点：</p><p>1.使用NLB管理器的时候，应在本机把本机添加到群集中，不用在其他PC上操作本机。</p><p>2.单播群集里，不能进行通信。</p><p>3.NLB聚合后，不一定就意味着成功，自己测试一下。</p><p> </p><p>在做双网卡多播时，发现一下亮点。欢迎就这样的。</p><p>都属于baidu.com域中。节点一为域控，并在上面配置DNS。节点二为域成员。</p><p>AD：192.168.5.106 255.255.255.0  DNS:192.168.5.106</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  10.0.0.1  255.0.0.0 DNS:10.0.0.1</p><p>key；192.168.5.109 255.255.255.0 DNS：192.168.5.106</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  10.0.0.2  255.0.0.0  DNS：10.0.0.1</p><p> </p><p>测试PC：192.168.5.105  255.255.255.0 DNS：192.168.5.106</p><p>并在主机上做了WEB服务。</p><p>用域名访问没有问题。测试时，把AD的节点网卡DOWN掉，竟然能用域名访问，key的web页。我用NSLOOKUP解析，竟然解析不出来。以为是缓存的问题，把缓存清楚后，还可以。难道是key上面两卡的转换，也许就通过10.0.0.0/8网段解析的，那为什么NSLOOKUP不能解析呢，这问题就不多探讨了，当初应该把key的10.0.0.2网卡down掉，验证一下，现在也没有心思做了。</p><p>原理方面就去microsoft吧，地址奉上。</p><p><a target="_blank" rel="noopener" href="http://technet.microsoft.com/zh-cn/library/cc784785%28WS.10%29.aspx">http://technet.microsoft.com/zh-cn/library/cc784785%28WS.10%29.aspx</a></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/03/28/%E7%BD%91%E7%BB%9C%E8%B4%9F%E8%BD%BD%E5%B9%B3%E8%A1%A1%EF%BC%88NLB)%E8%AF%95%E9%AA%8C%E6%80%BB%E7%BB%93/" data-id="clgrjlxm400bz7opi7pnube7z" data-title="网络负载平衡（NLB)试验总结" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-P4P技术" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/03/26/P4P%E6%8A%80%E6%9C%AF/" class="article-date">
+  <time class="dt-published" datetime="2010-03-26T10:32:00.000Z" itemprop="datePublished">2010-03-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/03/26/P4P%E6%8A%80%E6%9C%AF/">P4P技术</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" href="http://baike.baidu.com/image/7787b9ef14740309fdfa3cb4" rel="noopener noreferrer"><br /></a>P4P 全称“Proactive network Provider Participation for P2P”，  是P2P技术的升级版，而不是广告商所谓的p4p，p4p技术意在加强服务供应商(ISP)与客户端程序的通信，降低骨干网络传输压力和运营成本，并提高改良的P2P文件传输的性能。与P2P 随机挑选 Peer(对等机)不同，P4P协议可以协调网络拓扑数据，能够有效选择Peer，从而提高网络路由效率。<br />7月30日消息：德国一个名为iPoque的研究机构在2007年研究了一百多万网民将近3TB的匿名数据流量，调查地区包括澳大利亚、东欧、德国、中东 和南欧地区。调查发现，目前网络带宽“消费大户”是P2P文件共享，在中东占据了49%，东欧地区占据了84%。从全球来看，晚上时段的网络带宽有95% 被P2P占据。据国内权威部门统计，当前P2P流量已经占整个互联网流量的约70%，并且正在以每年350%的速度增长。P2P流量消耗了巨大的网络带 宽，尤其是国际带宽，使网络基础设施不堪重负，运营商苦不堪言。<br />问题的症结不在于P2P，而在于交换的机制。P2P过于强调“对等”，每个节点之间的交换完全是无序的。一个北京的用户，既可能和广州的用户进行文件片段 的交换，也可能和远在美国的某用户进行交换。显然，无序的交换导致了无谓的跨地区甚至是跨国的“流量旅行”，这耗费了宝贵的国内和国际带宽资源，代价巨 大。<br />值得一提的是，P4P的开山鼻祖是一位工作在耶鲁大学的中国人，谢海勇博士。谢博士系美国分布式计算工业联盟 (DCIA)和P4P工作组的首席研究员，提出并完成了P4P理论和系统设计。自今年2月底以来，谢海永等研究人员对P4P系统设计进行了大规模现场测 试。 <br />这项中国人主导的发明，在商业测试中有出色表现。根据Verizon工程师的反馈，使用P4P技 术，P2P用户平均下载速度提高60%，光纤到户用户提高205%~665  %。此外，运营商内部数据传送距离减少了84%。用户有58%的数据是来自同城，较传统P2P的6.3%比例有了近10倍提升。<br />P4P协议可以协调网络拓扑数据，能够有效选择节点，从而提高网络路由效率。仍以上述例子来说，北京的用户就可以优先和北京同城的用户来实现文件片段的交 换，再扩展至较远的地区，有十分的必要时，才会出国进行文件片段交换。当然，P4P的运行机制，要远远超过“同城交换”的概念，它还会根据用户的上行、下 载带宽进行综合判断，以进行最有效选择，最大化整体交换的效率。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/03/26/P4P%E6%8A%80%E6%9C%AF/" data-id="clgrjlxip005p7opihum1bgwc" data-title="P4P技术" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-很NB的一个自我介绍" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/03/26/%E5%BE%88NB%E7%9A%84%E4%B8%80%E4%B8%AA%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" class="article-date">
+  <time class="dt-published" datetime="2010-03-26T08:01:00.000Z" itemprop="datePublished">2010-03-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Windows/">Windows</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/03/26/%E5%BE%88NB%E7%9A%84%E4%B8%80%E4%B8%AA%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/">很NB的一个自我介绍</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="/images/pic/0cedc91f66999abd86d6b668.jpg" small="0" /><br /></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/03/26/%E5%BE%88NB%E7%9A%84%E4%B8%80%E4%B8%AA%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" data-id="clgrjlxkz009u7opi9ds262dh" data-title="很NB的一个自我介绍" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-思科Cisco-路由器型号剖析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/03/26/%E6%80%9D%E7%A7%91Cisco-%E8%B7%AF%E7%94%B1%E5%99%A8%E5%9E%8B%E5%8F%B7%E5%89%96%E6%9E%90/" class="article-date">
+  <time class="dt-published" datetime="2010-03-26T07:47:00.000Z" itemprop="datePublished">2010-03-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/03/26/%E6%80%9D%E7%A7%91Cisco-%E8%B7%AF%E7%94%B1%E5%99%A8%E5%9E%8B%E5%8F%B7%E5%89%96%E6%9E%90/">思科Cisco 路由器型号剖析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <![CDATA[如：Cisco1721，Cisco2621，Cisco3662，Cisco3745。这些都是路由器。 比如：Cisco2621  其中Cisco：是品牌，后面的前两位数字是系列号，这款产品属于2600系列，后两位是具体的型号。<p>其中Cisco路由器有以下多个 系列：<br />Cisco2500系列：Cisco2501、Cisco2502、一直到Cisco2514，这些都是国内能见到的设备，再往上就是国外 的了，国内很少见到。<br />Cisco1700：1720、1721、1751、1760<br />Cisco1800：1821、1841<br />Cisco2600 系列：2610、2611、2620、2621、2651<br />Cisco2600XM系列：2610XM、2611XM、2620XM、2621XM<br />Cisco3600：3620、 3640、3660<br />Cisco3700：3725、3745<br />Cisco3800：3825、3845<br />Cisco7200：7204、 7206、7204VXR、7206VXR这些都是机箱，运用 当中须要 引擎的支持（NPE-225、NPE-300、NPE-400、NPE-G1、最新的是NPE-G2）和业务模块的支持。<br />Cisco7500：7507、 7513 同样也须要 引擎的支持（RSP2、RSP4、RSP8、RSP16）和业务模块的支持，7200上的业务模块都能在75上运用 ，须要 一块VIP卡的支持。</p><p>往上就是12000系列：12008，12016这些是目前最高端的。同样也须要 引擎和业务模块的支持。</p><p>思科路由器主要型号介绍：<br /><br />700系列&#160;&#160;&#160;&#160;&#160;&#160; ISDN路由器<br />-76x型:  1E(10baseT)+1*BRI(NT1)<br />-77x型: 4E(10baseT)+2个模拟电话端口(NT1)<br />-支持30个用户<br />---------------------------------------------------------------------<br />800 系列&#160;&#160;&#160;&#160;&#160;&#160;&#160; 采用CiscoIOS技能 的ISDN,IDSL和串行路由器<br />-1*BRI(可选的NT1)、IDSL或1端口串行<br />-可选的4端口以太网集线器和2个模拟电话端口(NT1型号)<br />-增强的安全特征 <br />----------------------------------------------------------------------<br />1000 系列&#160;&#160;&#160; 固定配置桌面访问路由器<br />-1E<br />-1*BRI(可选的NT1）或1端口同步或异步串行<br />----------------------------------------------------------------------<br /><u>1400</u>系 列&#160;&#160;&#160; ADSL路由器<br />-1E(10baseT)和1ATM-25(1401),或1E和1ADSL(DMT-2)(1417)<br />-旨在提供高达8Mbps的DSL访问<br />-Cisco端到端DSL处理 方案的一部份<br />----------------------------------------------------------------------<br />1600 系列&#160;&#160;&#160; 模块化桌面访问路由器<br />-1E or 2E(10baseT)<br />-1*BRI(可选的NT1)或1端口同步或异步串行<br />-1WIC槽<br />----------------------------------------------------------------------<br />1700 系列&#160;&#160;&#160; 灵活、安全的模块化访问路由器<br />-1FE<br />-模块化插槽支持广泛的广域网和模拟语音接口卡<br />-支持安全的Internet、Lan、Wan访问以及新广域网运用  ，包括<br />VPN、集成化语音/Voip和宽带<br />----------------------------------------------------------------------<br />2500 系列&#160;&#160;&#160; 固定配置及模块化配置访问路由器和服务器<br />-单或双Lan，EtherNet or TokengRing<br />-路由器/集线器或访问服务器<br />-单、双串行或高密度串行模型<br />----------------------------------------------------------------------<br />2600 系列&#160;&#160;&#160; 模块化访问路由器、语音数据网关和拨号访问服务器<br />-单或双Lan，EtherNet or  TokenRing<br />-与1600,1700和3600系列共享Wan Interface和网络模块。<br />-广泛的介质支持，包括异步和同步串行、ISDN、部分和多路T1/E1&#160;以太网、模拟调制解调器和ATM<br />----------------------------------------------------------------------<br />3300 系列&#160;&#160;&#160; 承载级SONET访问设备<br />-完全冗余的平台<br />-结合SONET可靠性和第三层意识<br />-以太网接口支持可以为桥接或路由配置的不同服务接口，并通过面<br />向集线器、交换机或路由器的10BaseT连接本地局域网<br />----------------------------------------------------------------------<br />3600 系列&#160;&#160;&#160; 模块化的高密度访问路由器<br />-2、4和6插槽型路由器<br />-广泛的介质支持，包括异步和同步串行、ISDN、多路T1/E1、以太<br />网、高速 以太网、令牌环网、数字调制解调器和ATM<br />-通过IP或帧中继提供语音/传真<br />----------------------------------------------------------------------<br />MC3810&#160;&#160;&#160;&#160;&#160;&#160;  小型低成本的多服务访问集中器<br />-1E和2端口串行<br />-6端口模拟或24/30端口数字语音<br />-数据、语音和视频集成<br />----------------------------------------------------------------------<br />4000 系列&#160;&#160;&#160;&#160;&#160;&#160;&#160; 模块化的高密度路由器<br />-适用于所有型号的3个插槽<br />-可以选择100-MHz或133-MHz处理器<br />-广泛的介质支持，包括异步和同步串行、ISDN、多路T1/E1、以太网、高速 以太网、令牌环网、FDDI、HSSI和ATM&#160;<br />----------------------------------------------------------------------<br />6400 系列&#160;&#160;&#160; 用于在POP或总部端接大量用户和多域服务的承载级集合设备<br />-每个平台多达14,000个用户端接<br />-L2TP、LAC/LNS、多域服务<br />-全ATM功能<br />----------------------------------------------------------------------<br />6700 系列&#160;&#160;&#160; 提供电路交换和基于包的语音/数据流量的集成化访问平台<br />-提供端到端集成化语音和数据服务的模块化,可伸缩的高密度平台<br />-5个用于RT和CPE运用  的线路卡插槽（6705）<br />-32个用于CO和RT运用  的线路卡插槽（6732）<br />----------------------------------------------------------------------<br />7100 系列&#160;&#160;&#160; 大型分支机构和中央站点VPN路由器<br />-彻底 的VPN服务套件，包括加密、隧道、防火墙及带宽管理<br />-方便部署的嵌入式I/O<br />-用于IPSec和PPTP加密协同处理的服务模块插槽<br />----------------------------------------------------------------------<br />7200 系列&#160;&#160;&#160; 提供智能服务、模块性、高性能和可伸缩性的广域网边缘路由器<br />-完全模块化、机箱式<br />-4或6插槽模型，可以选择三种系统处理器<br />-广泛的局域网和广域网选项，包括以太网，高速 以太网，100VG-<br />AnyLan、令牌环网、FDDI、串行、ISDN、HSSI、ATM、Packet&#160;over  DS3/E3<br />----------------------------------------------------------------------<br />7500 系列&#160;&#160;&#160; 主要的高端服务启动的核心及广域网集合路由器，适合企业及服务<br />供应商运用  中的语音、视频和数据<br />-5、7和13插槽模型<br />-1、2或4个总线模型，提供1、2或4Gbps背板<br />-广泛的局域网和广域网选项，包括以太网，高速 以太网，千兆<br />以太网、令牌环网、FDDI、串行、ISDN、HSSI、ATM、Packet&#160;over DS3/E3<br />----------------------------------------------------------------------<br />12000 系列&#160;&#160;&#160;&#160; 可伸缩的千兆们交换路由器(GSR)<br />-8、12或16插槽模型<br />-根据型号不同，提供40、60或80Gbps交换光纤<br />-为IP执行  了优化<br />-承载级</p>下面是多个 具体的系列的一些参数。<p>一.CISCO1700系列路由器</p><p>型号&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 描述</p><p>CISCO1721&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 1个10/100M以太网络接口&#160;&#160; 、2个WIC插槽, 32M闪存/64M 内存</p><p>CISCO1760&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 1个10/100M以太网络接口&#160;&#160; 、4个WIC插槽&#160;&#160; 、19寸机箱、32M闪存/64M  内存</p><p>CISCO1760-V&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 1个10/100M以太网络
+接口&#160;&#160; 、4个WIC/VIC插槽、19寸机箱、32M闪存/96M  内存</p><p>CISCO1721-VPN/K9&#160;&#160;&#160;&#160;&#160;&#160; 1721 VPN Boundl 、VPN加快 卡、96MB内存、32MB闪存,VPN防火墙IOS软件</p><p>Cisco 1700系列模块化访问路由器为中小型企业和小型分支机构提供灵活、安全的访问处理 方案。Cisco 1700系列的模块化体系结构能运用 户定制一个满足其目前访问要求的安全访问处理 方案，能使他们经济有效地实施新运用  ，包括虚拟专网（VPN）访问、多服务语音/数据集成和宽带服务。集成的网络功能包括1个可选的防火墙、CSU/DSU和VPN特征 ，减少了部署及管理时间和努力。</p><p>Cisco 1721支持传统的数据访问运用  以及目前和未来的新广域网服务，包括VPN和宽带技能 。</p><p>除数据运用  之外，Cisco 1751还支持集成的多服务语音/传真/数据运用  。企业可以从一个稳健的数据访问处理 方案开始，然后在准备就绪时经济有效地集成语音和传真。<br />Cisco  1760模块化接入路由器为中小企业和小型企业个体分支机构提供多服务电子商务功能。思科系统公司隆重推出了Cisco  1760模块化接入路由器，这种路由器是中小企业和小型企业个体分支机构的理想接入处理 方案。Cisco  1760属于四插槽模块化接入路由器，安装在19寸机架中不但能提供安全的互联网和内部网接入，还能在同一个平台上实施多种电子商务和语音运用  。这些服务包括IP语音（VoIP）安全的虚拟专用网（VPN）接入和集成式防火墙，以及企业级数字用户线路（DSL）接入，该产品适用于许多行业和企 业。 借助Cisco1760，客户能够执行  安全的数据联网开始，并在须要 时移植到VoIP和IP电话服务。有了这种灵活性，除基本的互联网和内部网接入外，您还能销售增值服务，从而成为客户的战备联网合作伙伴.由于能引入新运 用  ，并在平台上修改或添加WAN和语音接口，因而能根据客户的需求添加服务并获得更多收入。Cisco1760运用 的Cisco IOS软件、WAN和语音接口卡与Cisco  1700、Cisco2600和Cisco3600路由器相同，不但降低了存储和支持要求，还能充分运用  您在销售和支持思科系统公司接入处理 方案方面积累的丰富体会 。二 .CISCO1800系列路由器</p><p>CISCO1841&#160;&#160;&#160; Modular Router w/2xFE, 2 WAN slots, 32 FL/128 DR</p><p>Cisco 1800系列集成多业务路由器以思科20年的领先地位和创新理念为基础，能够智能地将数据、安全性和无线技能 嵌入到同一个永续系统中，以便高速 、安全地将关键业务运用  提供给中小企业和小型分支机构。</p><p>Cisco 1800系列集成多业务路由器是屡获大奖的Cisco 1700系列路由器的下一代产品。Cisco  1801、1802、1803、1811和1812路由器运用 固定配置，Cisco 1841则运用 模块化配置。</p><p>因为有Cisco IOS软件，Cisco 1800系列路由器能够借助多种先进的安全服务和管理功能支持思科自防御网络，这其中包括硬件加密加快 、IPSec VPN（AES、3DES、DES）、防火墙保卫 、内部入侵防御（IPS）、网络准入控制（NAC）和URL过滤支持等。为简化管理和配置，Cisco  1800预装有基于Web的直观思科路由器和安全设备管理器（SDM）。</p><p>Cisco 1841集成多业务路由器：以线速提供安全的并发服务</p><p>Cisco 1841集成多业务路由器能够以线速提供安全的数据访问运用  ，从而为中小企业和小型分支机构提供全套功能和灵活性，以便实现安全的互联网和内部网接入。</p><p>与Cisco 7120和1721相比，Cisco 1841路由器不仅性能提高了五倍以上，还可通过新型结构 提供安全的并发服务，因而价值更高。运用  AIM、新型高速WAN接口卡（HWIC）和VWIC模块化特征 ，用户可以运用 多种连接形式 。另外，由于支持30多种现有的1700系列WAN接口卡（仅限WIC/VIC/VWIC数据模式），因而能够实现投资保卫 。</p><p>Cisco 1800系列固定配置型号：运用  冗余WAN链路为宽带接入提供安全的并发服务，Cisco  1800系列固定配置型号能够提供安全的宽带、城域以太网和无线连接。企业能够降低成本，因为只需部署一台设备就能提供多种功能，例如运用  集成冗余链路提供的DSL宽带接入、路由、LAN交换机、防火墙、VPN、IPS、无线局域网技能 以及一般由独立设备执行的服务质量（QoS）等。Cisco  1801、1802、1803集成多业务路由器不但能提供ADSL或G.SHDSL高速宽带接入，还能通过集成ISDN S/T  BRI备份保证网络的可靠性。Cisco 1811和1812通过两个10/100BaseT  WAN端口提供高速宽带和以太网接入，并通过V.92模拟调制解调器（Cisco 1811）或ISDN S/T BRI接口（Cisco  1812）提供集成WAN备份。</p><p>三 .CISCO2600系列路由器</p><p>CISCO2610XM&#160;&#160;&#160;&#160;&#160;&#160;&#160;  1个10/100M以太网络接口、1个NM模块插槽、2个WIC插槽、1个AIM插槽、32M闪存、128M内存</p><p>CISCO2611XM&#160;&#160;&#160;&#160;&#160;&#160;&#160;  2个10/100M以太网络接口、1个NM模块插槽、2个WIC插槽、1个AIM插槽、32M闪存、128M内存</p><p>CISCO2620XM&#160;&#160;&#160;&#160;&#160;&#160;&#160;  1个10/100M以太网络接口、1个NM模块插槽、2个WIC插槽、1个AIM插槽、32M闪存、128M内存</p><p>CISCO2621XM&#160;&#160;&#160;&#160;&#160;&#160;&#160;  2个10/100M以太网络接口、1个NM模块插槽、2个WIC插槽、1个AIM插槽、32M闪存、128M内存</p>CISCO2650XM&#160;&#160;&#160;&#160;1个10/100M以太网络接口、1个NM模块插槽、2个WIC插槽、1个AIM插槽、32M闪存、256M内存<p>CISCO2651XM&#160;&#160;&#160; 2个10/100M以太网络接口、1个NM模块插槽、2个WIC插槽、1个AIM插槽、32M闪存、256M内存</p><p>CISCO2691&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;  2个10/100M以太网络接口、1个NM模块插槽、3个WIC插槽、1个AIM插槽、32M闪存、256M内存</p><p>Cisco Systems通过Cisco 2600系列将企业级的通用性、集成和功能扩展到了建立 以机构。随着新服务和运用  的面市，Cisco 2600系列的模块化体系结构能够提供适应网络技能 变化所需的通用性。Cisco  2600系列配置了强大的RISC处理器，能够支持当今不断发展的网络中所需的高级服务质量（QoS）、安全和网络集成特征 。通过将多个独立设备的功能集成到一个单元之中，Cisco 2600系列降低了管理远程网络的复杂性。Cisco 2600系列与Cisco  1600、1700和3600系列共享模块化接口，为Internet、内部网访问、多服务语音/数据集成、模拟和数字拨号访问服务、VPN访问、ATM 访问集中、VLAN以及路由带宽管理等运用  提供经济有效的处理 方案。</p><p>四&#160;&#160; .CISCO2800系列路由器</p><p>CISCO2801&#160;&#160;&#160;&#160;&#160;&#160; 2801 Router/AC PWR,2FE,4slots(2HWICs),2AIMS,IP  BASE,64F/128D</p><p>CISCO2811&#160;&#160;&#160;&#160;&#160;&#160; 2811 w/ AC PWR,2FE,4HWICs,2PVDMs,1NME,2AIMS,IP  BASE,64F/256D</p><p>CISCO2821&#160;&#160;&#160;&#160;&#160;&#160; 2821 w/ AC PWR,2GE,4HWICs,3PVDM,1NME-X,2AIM,IP  BASE,64F/256D</p><p>CISCO2851&#160;&#160;&#160;&#160;&#160;&#160;&#160; 2851 w/ AC PWR,2GE,4HWIC,3PVDM,1NME-XD,2AIM,IP  BASE,64F/256D</p><p>Cisco 2800系列包括四个平台：Cisco 2801、Cisco 2811、Cisco 2821和 Cisco  2851。与价格类似的前几代思科路由器相比，Cisco  2800系列可以将性能提升五倍，将安全和话音性能提升十倍，并且可以提供新的嵌入式服务选项，因而可以为客户提供主要 的附加值。它可以在大幅度提升插槽性能和密度的同时，支持Cisco 1700和2600系列中现有的90多种模块。</p><p>五 .CISCO3600系列路由器</p><p>Cisco 3600系列是一个适合大中型企业Internet服务供应商的模块化、多功能访问平台家族。Cisco  3600系列拥有70多个模块化接口]
+]>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/03/26/%E6%80%9D%E7%A7%91Cisco-%E8%B7%AF%E7%94%B1%E5%99%A8%E5%9E%8B%E5%8F%B7%E5%89%96%E6%9E%90/" data-id="clgrjlxm900c27opid3axaah5" data-title="思科Cisco 路由器型号剖析" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-cisco-各系列路由器介绍" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/03/26/cisco-%E5%90%84%E7%B3%BB%E5%88%97%E8%B7%AF%E7%94%B1%E5%99%A8%E4%BB%8B%E7%BB%8D/" class="article-date">
+  <time class="dt-published" datetime="2010-03-26T03:43:00.000Z" itemprop="datePublished">2010-03-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/03/26/cisco-%E5%90%84%E7%B3%BB%E5%88%97%E8%B7%AF%E7%94%B1%E5%99%A8%E4%BB%8B%E7%BB%8D/">cisco 各系列路由器介绍</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <![CDATA[思 科 2600 系列路由器                                                                                                                                                                                                                                                                                        <a name="content"></a> <p><img width="150" height="117" src="/images/pic/other_site/www_cisco_2600_1.gif" alt="思科 2600 系列路由器" />Cisco Systems通过Cisco  2600系列将企业级的通用性、集成和功能扩展到了创建以机构。随着新服务和应用的面市，Cisco  2600系列的模块化体系结构能够提供适应网络技术变化所需的通用性。Cisco  2600系列配置了强大的RISC处理器，能够支持当今不断发展的网络中所需的高级服务质量（QoS）、安全和网络集成特性。通过将多个独立设备的功能集 成到一个单元之中，Cisco 2600系列降低了管理远程网络的复杂性。Cisco 2600系列与Cisco  1600、1700和3600系列共享模块化接口，为Internet、内部网访问、多服务语音/数据集成、模拟和数字拨号访问服务、VPN访问、ATM 访问集中、VLAN以及路由带宽管理等应用提供经济有效的解决方案。</p>                                                            关键特性                                                            <ul> <li>通用性/ 投资保护－可以现场更新的模块化接口能够启动数以千计的定制化解决方案，并能够轻而易举地适应未来网络的要求。</li> <li>集成/可 管理性－降低拥有成本，简化远程管理，提供结合CSU/DSU、复用器、调制解调器、语音/数据网关、ISDN  NT1、防火墙、VPN、加密和压缩设备的集成化网络。</li> <li>多服务语 音/数据网络－降低办公室之间的电话/传真费用；通过利用Cisco  IOS软件服务质量（QoS）特性（例如RSVP、WFQ、承诺访问速率[CAR]和随机早期检测[RED]），语音流量可以实现数字化并封装在IP数据 包中，而且能够与数据流量合并。</li> </ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     思科 2800 系列路由器                                                                                                                                                                                                                <a name="content"></a> <p><img width="200" height="105" src="/images/pic/other_site/www_cisco_2800.jpg" alt="思科 2800                                                系列路由器" />Cisco  2800系列包括四个平台：Cisco 2801、Cisco 2811、Cisco 2821和 Cisco  2851。与价格类似的前几代思科路由器相比，Cisco  2800系列可以将性能提升五倍，将安全和话音性能提升十倍，并且可以提供新的嵌入式服务选项，因而可以为客户提供重要的附加值。它可以在大幅度提升插槽 性能和密度的同时，支持Cisco 1700和2600系列中现有的90多种模块。</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  思科 3200 系列路由器                                                                                                                                        <a name="content"></a> <p><img width="173" height="147" src="/images/pic/other_site/www_cisco_3200_pic1.gif" alt="思科 3200 系列移动接入路由器" />这个紧凑的、高性能的接入解决方案能够以适 用于各种交通工具的外型，为国防、公共安全、国土安全和运输市场提供无缝的移动功能和多个无线网络的互操作能力。</p> <p>Cisco  3200移动接入路由器可以在多个处于运动之中的无线电、蜂窝式电话、微型和无线局域网（WLAN）网络之间提供无缝的通信，从而将IP网络拓展到了运动 中网络领域。</p> <p>Cisco  3200移动接入路由器主要适用于运动中的交通工具，并可以在多个网络之间实现无线连接，从而让用户可以在业界标准的IP技术的基础上部署关键任务型应 用。IP网络为在使用各种传输介质的用户之间共享信息和应用提供了一个平台。Cisco  IOS软件添加了功能丰富的服务、管理功能和移动网络功能。Cisco  3200移动接入路由器让用户可以有效地在一个对等的、层次化的或者网格式的IP网络中传输关键任务型语音、视频和数据。用户可以迅速地制定更加准确的决 策，从而提高他们在现场的工作效率。</p> <p>Cisco 3200移动接入路由器可以为用户提供下列优势：</p> <ul> <li>利用独立于位置或者运动状态的无缝移动功能，实现安全的数 据、语音和视频通信。</li> <li>以一个适用于各种交通工具的、紧凑的、坚固的外型，提供很高 的性能。</li> <li>利用Cisco IOS软件提供先进的IP服务和互操作性。</li> </ul> <p>Cisco  3200移动接入路由器（如图1所示）的设计目的是集成到系统集成商所部署的、全面、定制的通信解决方案中。这使得用户可以在各种空中、陆地或者海洋交通 工具（包括用于军事或者公共安全用途的交通工具）中部署通信网络。系统集成商可以提供一个完整的移动解决方案，其中包括Cisco  3200移动接入路由器硬件、Cisco IOS软件、专门定制的布线设计、电源和外壳，以及其他必要的组件。这些组件可能包括Cisco  Aironet WLAN产品、思科安全硬件和软件、思科路由和交换产品，以及Cisco LAN和WAN管理软件。</p>                                                                                                                                                                                                                                                                                                                                                             思科 3600 系列路由器                                                                <a name="content"></a> <p><img width="216" height="172" src="/images/pic/other_site/www_cisco_3600_1.gif" alt="思科 3600 系列路由器" />Cisco  3600系列是一个适合大中型企业Internet服务供应商的模块化、多功能访问平台家族。Cisco  3600系列拥有70多个模块化接口选项，提供语音/数据集成、虚拟专网（VPN）、拨号访问和多协议数据路由解决方案。通过利用CIsco的语音/传真 网络模块，Cisco  3600系列允许客户在单个网络上合并语音、传真和数据流量。高性能的模块化体系结构保护了客户的网络技术投资，并将多个设备的功能集成到一个可管理的解 决方案之中。3600捆绑还可用于抓住特定的RAS机遇。</p>                        关键特性                        <ul> <li>在一个平台中结合了拨号访问、先进的局域网到局域网]]
+>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/03/26/cisco-%E5%90%84%E7%B3%BB%E5%88%97%E8%B7%AF%E7%94%B1%E5%99%A8%E4%BB%8B%E7%BB%8D/" data-id="clgrjlxb9000k7opi7hsc6g0p" data-title="cisco 各系列路由器介绍" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-失忆！" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/03/25/%E5%A4%B1%E5%BF%86%EF%BC%81/" class="article-date">
+  <time class="dt-published" datetime="2010-03-25T15:03:00.000Z" itemprop="datePublished">2010-03-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/03/25/%E5%A4%B1%E5%BF%86%EF%BC%81/">失忆！</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>夜深里，人静了，自己的心平静了。<br />每当这时候，自己都好低落。<br />现在自己变的好深沉，好忧虑。<br />深沉点好，可以变的成熟些。<br />努力让自己忘记她，但发现自己好失败。<br />常常想想她过的怎么样。<br />现在她在做什么，工作还是休息还是陪男朋友。<br />看看手机有没有信息，多么希望她的出现，那怕是点施舍。<br />多想发个短息问问，最近过的好吗？<br />但是我不没有。<br />QQ习惯了隐身，当她上线的时候多想问一句，在吗？<br />但是我没有。<br />因为<br />这都是多余的，这已不属于我。<br />现在会有个更好的男人陪着她，照顾她，爱着她。<br />而自己空挡的心，有谁来填满。<br />难道注定我一生孤独，一生后悔。<br /><br />—2010年03月23日夜深<br /></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/03/25/%E5%A4%B1%E5%BF%86%EF%BC%81/" data-id="clgrjlxlm00az7opi7ojfc2il" data-title="失忆！" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-下雪了、" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/03/25/%E4%B8%8B%E9%9B%AA%E4%BA%86%E3%80%81/" class="article-date">
+  <time class="dt-published" datetime="2010-03-25T03:17:00.000Z" itemprop="datePublished">2010-03-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/03/25/%E4%B8%8B%E9%9B%AA%E4%BA%86%E3%80%81/">下雪了、</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>这年头，天气真犀利。现在这个季节还下雪，真是可怜啊，感到2012真会来。<br />昨天看今天的气温是1-7，这么冷，想着明天的风应该很大。早上醒来，真冷啊。只好穿羽绒服去上课了。出来宿舍楼，没想到，竟然飘起了雪花。十点多的时候大晴天了。什么鬼天气啊，变化这么快。弄的许多人都感冒了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/03/25/%E4%B8%8B%E9%9B%AA%E4%BA%86%E3%80%81/" data-id="clgrjlxlf00am7opi97wscazf" data-title="下雪了、" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-。。。。。。。" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/03/23/%E3%80%82%E3%80%82%E3%80%82%E3%80%82%E3%80%82%E3%80%82%E3%80%82/" class="article-date">
+  <time class="dt-published" datetime="2010-03-23T10:20:00.000Z" itemprop="datePublished">2010-03-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/03/23/%E3%80%82%E3%80%82%E3%80%82%E3%80%82%E3%80%82%E3%80%82%E3%80%82/">。。。。。。。</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>不知道自己怎么了<br />从来不喜欢写日志<br />现在没事就来这里<br />看看、听听、写写<br />这里什么也没有<br />只有安静、只有key1088<br />一个寂静的世界<br />一个寂寞的世界<br />一个真正属于哥的世界<br /><br />这里本来没有哥，来的人多了，却有了哥的传说<br />你已不属于哥，哥却在传说中遇见了“姐”<br /><br /></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/03/23/%E3%80%82%E3%80%82%E3%80%82%E3%80%82%E3%80%82%E3%80%82%E3%80%82/" data-id="clgrjlx8o00007opie6w6ckxl" data-title="。。。。。。。" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/17/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/19/">weiter &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/">Oracle</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Perl%E7%BC%96%E7%A8%8B/">Perl编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/%E5%AE%B9%E5%99%A8/">容器</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Python%E7%BC%96%E7%A8%8B/">Python编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-dbx/" rel="tag">C;dbx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5-CTX/" rel="tag">MD5_CTX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alarm/" rel="tag">alarm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backup/" rel="tag">backup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fseek/" rel="tag">fseek</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftell/" rel="tag">ftell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gethostbyname/" rel="tag">gethostbyname</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jmp-buf/" rel="tag">jmp_buf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%BD%95%E9%9F%B3/" rel="tag">linux录音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/longjmp/" rel="tag">longjmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mimikatz/" rel="tag">mimikatz</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minikube/" rel="tag">minikube</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-%E8%84%9A%E6%9C%AC/" rel="tag">nginx;脚本</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openshift/" rel="tag">openshift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paas/" rel="tag">paas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qsort/" rel="tag">qsort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setjmp/" rel="tag">setjmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss-easyxss/" rel="tag">xss;easyxss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" rel="tag">云计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E9%9C%89%E6%B4%BE/" rel="tag">树霉派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/" rel="tag">音频降噪</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C-dbx/" style="font-size: 10px;">C;dbx</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/MD5-CTX/" style="font-size: 10px;">MD5_CTX</a> <a href="/tags/alarm/" style="font-size: 10px;">alarm</a> <a href="/tags/backup/" style="font-size: 10px;">backup</a> <a href="/tags/fseek/" style="font-size: 10px;">fseek</a> <a href="/tags/ftell/" style="font-size: 10px;">ftell</a> <a href="/tags/gethostbyname/" style="font-size: 10px;">gethostbyname</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/jmp-buf/" style="font-size: 10px;">jmp_buf</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux%E5%BD%95%E9%9F%B3/" style="font-size: 10px;">linux录音</a> <a href="/tags/longjmp/" style="font-size: 10px;">longjmp</a> <a href="/tags/mimikatz/" style="font-size: 10px;">mimikatz</a> <a href="/tags/minikube/" style="font-size: 10px;">minikube</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx-%E8%84%9A%E6%9C%AC/" style="font-size: 10px;">nginx;脚本</a> <a href="/tags/openshift/" style="font-size: 10px;">openshift</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/paas/" style="font-size: 10px;">paas</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/qsort/" style="font-size: 10px;">qsort</a> <a href="/tags/setjmp/" style="font-size: 10px;">setjmp</a> <a href="/tags/xss-easyxss/" style="font-size: 10px;">xss;easyxss</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 10px;">云计算</a> <a href="/tags/%E6%A0%91%E9%9C%89%E6%B4%BE/" style="font-size: 10px;">树霉派</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/" style="font-size: 10px;">音频降噪</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/04/22/hello-world/">Hello Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/26/%E5%B7%B4%E8%8F%B2%E7%89%B9%E7%9A%84%E5%9F%BA%E7%A1%80%E6%8A%95%E8%B5%84%E7%90%86%E5%BF%B5%E8%AE%B0%E5%BD%95/">巴菲特的基础投资理念记录</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/26/Ubuntu-%E5%AE%89%E8%A3%85minikebe/">Ubuntu 安装minikebe</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/28/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9B%E8%A1%8C%E5%BD%95%E9%9F%B3%E5%92%8C%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/">树莓派进行录音和音频降噪</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 key1088<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

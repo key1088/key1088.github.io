@@ -1,0 +1,6 @@
+title: awk中的时间函数strftime() systime()
+categories: [Shell编程]
+tags: []
+date: 2011-12-15 09:40:00
+---
+<p>systime函数返回从1970年1月1日开始到当前时间(不计闰年)的整秒数</p><p>利用strftime()函数格式化时间</p><ul><li><p>实例：</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $ awk '{ now = systime(); print now }'</li><li><p>strftime函数使用C库中的strftime函数格式化时间。格式如下：</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; systime( [format specification][,timestamp] )<p><strong>Table 3. 日期和时间格式说明符</strong></p><col></col><col>格式描述%a星期几的缩写(Sun)%A星期几的完整写法(Sunday)%b月名的缩写(Oct)%B月名的完整写法(October)%c本地日期和时间%d十进制日期%D日期 08/20/99%e日期，如果只有一位会补上一个空格%H用十进制表示24小时格式的小时%I用十进制表示12小时格式的小时%j从1月1日起一年中的第几天%m十进制表示的月份%M十进制表示的分钟%p12小时表示法(AM/PM)%S十进制表示的秒%U十进制表示的一年中的第几个星期(星期天作为一个星期的开始)%w十进制表示的星期几(星期天是0)%W十进制表示的一年中的第几个星期(星期一作为一个星期的开始)%x重新设置本地日期(08/20/99)%X重新设置本地时间(12：00：00)%y两位数字表示的年(99)%Y当前月份%Z时区(PDT)%%百分号(%)</col><p>实例:</p></li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $ awk '{ now=strftime( &quot;%D&quot;, systime() ); print now }' <br /></li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $ awk '{ now=strftime(&quot;%m/%d/%y&quot;); print now }'</li><li></li><li></li></ul>

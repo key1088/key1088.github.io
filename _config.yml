@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
+title: key1088 blog
+subtitle: '2020到2060会发生什么，这40年内会有哪些变化呢'
+description: '个人博客网站'
 keywords:
-author: John Doe
-language: en
-timezone: ''
+author: key1088
+language: zh
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://key1088.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -97,8 +97,9 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
+#default theme: landscape
 #theme: landscape
-theme: hexo-theme-octo
+theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
