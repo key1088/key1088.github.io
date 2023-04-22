@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   
   
-  <title>解决dedecms在php高版本中不兼容登录的问题 | key1088 blog</title>
+  <title>解决dedecms在php高版本中不兼容登录的问题 | key1088 Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="帮gf把网站给迁移的时候,因为php版本比较高,导致登录的时候不能访问后台,只返回空页面,高版本不兼容,郁闷。wordpress做的挺好,主流兼容性比较好.百度之,搜了一下解决的方法,原来是一个函数的问题,下面是解决的方法。登陆dedemcs后台输入用户名和密码后没有提示显示为空白，主要原为是php5.4的版本废除了session_register函数可以采用如$_SESSION[$this-&amp;g">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决dedecms在php高版本中不兼容登录的问题">
 <meta property="og:url" content="https://key1088.github.io/2013/04/13/%E8%A7%A3%E5%86%B3dedecms%E5%9C%A8php%E9%AB%98%E7%89%88%E6%9C%AC%E4%B8%AD%E4%B8%8D%E5%85%BC%E5%AE%B9%E7%99%BB%E5%BD%95%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
-<meta property="og:site_name" content="key1088 blog">
+<meta property="og:site_name" content="key1088 Blog">
 <meta property="og:description" content="帮gf把网站给迁移的时候,因为php版本比较高,导致登录的时候不能访问后台,只返回空页面,高版本不兼容,郁闷。wordpress做的挺好,主流兼容性比较好.百度之,搜了一下解决的方法,原来是一个函数的问题,下面是解决的方法。登陆dedemcs后台输入用户名和密码后没有提示显示为空白，主要原为是php5.4的版本废除了session_register函数可以采用如$_SESSION[$this-&amp;g">
 <meta property="og:locale">
 <meta property="article:published_time" content="2013-04-13T04:41:45.000Z">
@@ -18,7 +18,7 @@
 <meta property="article:author" content="key1088">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="key1088 blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="key1088 Blog" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -46,7 +46,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">key1088 blog</a>
+        <a href="/" id="logo">key1088 Blog</a>
       </h1>
       
         <h2 id="subtitle-wrap">
@@ -61,6 +61,8 @@
           <a class="main-nav-link" href="/">Home</a>
         
           <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
         
       </nav>
       <nav id="sub-nav">
@@ -273,6 +275,8 @@ PutCookie(‘DedeLoginTime’, time(), 3600 * 24, ‘/’);
     <a href="/" class="mobile-nav-link">Home</a>
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav>
     

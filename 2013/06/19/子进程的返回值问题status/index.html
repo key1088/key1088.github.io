@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   
   
-  <title>子进程的返回值问题status | key1088 blog</title>
+  <title>子进程的返回值问题status | key1088 Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="最近有一个程序，转移到另一台服务器上了，在接受返回值的时候一直出问题。  waitpid(pid, &amp;status, WNOHANG);  WEXITSTATUS(status)老实返回16，郁闷。最后发现是信号的问题。在fork子进程前，添加对子进程的信号接受就可以了。  signal(SIGCHLD,SIG_DFL);">
 <meta property="og:type" content="article">
 <meta property="og:title" content="子进程的返回值问题status">
 <meta property="og:url" content="https://key1088.github.io/2013/06/19/%E5%AD%90%E8%BF%9B%E7%A8%8B%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC%E9%97%AE%E9%A2%98status/index.html">
-<meta property="og:site_name" content="key1088 blog">
+<meta property="og:site_name" content="key1088 Blog">
 <meta property="og:description" content="最近有一个程序，转移到另一台服务器上了，在接受返回值的时候一直出问题。  waitpid(pid, &amp;status, WNOHANG);  WEXITSTATUS(status)老实返回16，郁闷。最后发现是信号的问题。在fork子进程前，添加对子进程的信号接受就可以了。  signal(SIGCHLD,SIG_DFL);">
 <meta property="og:locale">
 <meta property="article:published_time" content="2013-06-19T08:53:59.000Z">
@@ -18,7 +18,7 @@
 <meta property="article:author" content="key1088">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="key1088 blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="key1088 Blog" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -46,7 +46,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">key1088 blog</a>
+        <a href="/" id="logo">key1088 Blog</a>
       </h1>
       
         <h2 id="subtitle-wrap">
@@ -61,6 +61,8 @@
           <a class="main-nav-link" href="/">Home</a>
         
           <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
         
       </nav>
       <nav id="sub-nav">
@@ -239,6 +241,8 @@ signal(SIGCHLD,SIG_DFL);
     <a href="/" class="mobile-nav-link">Home</a>
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav>
     
