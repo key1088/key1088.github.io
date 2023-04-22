@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>key1088 blog</title>
+  <title>key1088 Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="个人博客网站">
 <meta property="og:type" content="website">
-<meta property="og:title" content="key1088 blog">
+<meta property="og:title" content="key1088 Blog">
 <meta property="og:url" content="https://key1088.github.io/page/7/index.html">
-<meta property="og:site_name" content="key1088 blog">
+<meta property="og:site_name" content="key1088 Blog">
 <meta property="og:description" content="个人博客网站">
 <meta property="og:locale">
 <meta property="article:author" content="key1088">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="key1088 blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="key1088 Blog" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -44,7 +44,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">key1088 blog</a>
+        <a href="/" id="logo">key1088 Blog</a>
       </h1>
       
         <h2 id="subtitle-wrap">
@@ -78,48 +78,6 @@
 
       <div class="outer">
         <section id="main">
-  
-    <article id="post-函数说明--waitpid()" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2012/08/24/%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E--waitpid()/" class="article-date">
-  <time class="dt-published" datetime="2012-08-24T07:56:00.000Z" itemprop="datePublished">2012-08-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/C%E7%BC%96%E7%A8%8B/">C编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2012/08/24/%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E--waitpid()/">函数说明  waitpid()</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>waitpid（等待子进程中断或结束）&nbsp;</p><p>&nbsp;<br />相关函数&nbsp;&nbsp;wait，fork<br />&nbsp;&nbsp;<br />表头文件&nbsp;&nbsp;#include&lt;sys/types.h&gt;<br />#include&lt;sys/wait.h&gt;<br />&nbsp;&nbsp;<br />定义函数&nbsp;&nbsp;pid_t&nbsp;waitpid(pid_t&nbsp;pid,int*&nbsp;status,int&nbsp;options);<br />&nbsp;&nbsp;<br />函数说明&nbsp;&nbsp;waitpid()<br />会暂时停止目前进程的执行，直到有信号来到或子进程结束。如果在调用wait()<br />时子进程已经结束，则wait()<br />会立即返回子进程结束状态值。子进程的结束状态值会由参数status<br />返回，而子进程的进程识别码也会一快返回。如果不在意结束状态值，则参数status<br />可以设成NULL。参数pid为欲等待的子进程识别码，其他数值意义如下:<br />pid&lt;-1&nbsp;等待进程组识别码为pid绝对值的任何子进程。<br />pid=-1&nbsp;等待任何子进程，相当于wait()。<br />pid=0&nbsp;等待进程组识别码与目前进程相同的任何子进程。<br />pid&gt;0&nbsp;等待任何子进程识别码为pid的子进程。<br />参数option可以为0&nbsp;或下面的OR&nbsp;组合<br />WNOHANG&nbsp;如果没有任何已经结束的子进程则马上返回，不予以等待。<br />WUNTRACED&nbsp;如果子进程进入暂停执行情况则马上返回，但结束状态不予以理会。<br />子进程的结束状态返回后存于status，底下有几个宏可判别结束情况<br />WIFEXITED(status)如果子进程正常结束则为非0值。<br />WEXITSTATUS(status)取得子进程exit()返回的结束代码，一般会先用WIFEXITED&nbsp;&nbsp;<br />来判断是否正常结束才能使用此宏。<br />WIFSIGNALED(status)如果子进程是因为信号而结束则此宏值为真<br />WTERMSIG(status)取得子进程因信号而中止的信号代码，一般会先用WIFSIGNALED&nbsp;&nbsp;<br />来判断后才使用此宏。<br />WIFSTOPPED(status)如果子进程处于暂停执行情况则此宏值为真。一般只有使用<br />WUNTRACED&nbsp;时才会有此情况。<br />WSTOPSIG(status)取得引发子进程暂停的信号代码，一般会先用WIFSTOPPED&nbsp;&nbsp;<br />来判断后才使用此宏。<br />&nbsp;&nbsp;<br />返回值&nbsp;&nbsp;如果执行成功则返回子进程识别码(PID)，如果有错误发生则返回-1<br />。失败原因存于errno中。</p><p><br /></p>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2012/08/24/%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E--waitpid()/" data-id="clgrjlxku009h7opi7tf9dhtb" data-title="函数说明  waitpid()" class="article-share-link">Teilen</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
   
     <article id="post-MySQL性能监控小知识" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -503,6 +461,49 @@ p><ol> <li>一、        Tar包安装<br /> </li> <li>如果下载的是源包�
 
 
   
+    <article id="post-Oracle-10g-错误“ORA-00988--口令缺失或无效”终极解决办法！" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2012/03/02/Oracle-10g-%E9%94%99%E8%AF%AF%E2%80%9CORA-00988--%E5%8F%A3%E4%BB%A4%E7%BC%BA%E5%A4%B1%E6%88%96%E6%97%A0%E6%95%88%E2%80%9D%E7%BB%88%E6%9E%81%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%EF%BC%81/" class="article-date">
+  <time class="dt-published" datetime="2012-03-02T02:48:00.000Z" itemprop="datePublished">2012-03-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2012/03/02/Oracle-10g-%E9%94%99%E8%AF%AF%E2%80%9CORA-00988--%E5%8F%A3%E4%BB%A4%E7%BC%BA%E5%A4%B1%E6%88%96%E6%97%A0%E6%95%88%E2%80%9D%E7%BB%88%E6%9E%81%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%EF%BC%81/">Oracle 10g 错误“ORA-00988 口令缺失或无效”终极解决办法！</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>如果在安装Oracle的时候出现如下问题：创建数据库完成让你输入密码的时候弹出&quot;ora-00988 缺少或无效口令&quot;的对话框如下图<br><img src="/images/pic/309723085d41f3fc0b7b822c.jpg" small="0" /><br /><br>这是因为Oracle对密码的要求如下：<br>系统用户（SYS、SYSTEM）口令长度不能小于7个字符第一个字符不能为数字且全部字符中应该为字母和数字混合<br>解决方法：<br>运行 cmd 按如下输入命令 sqlplus &#x2F; as sysdba ——— 注意以上的语句中&quot;&#x2F;&quot;两边都要有空格哦！——— 以sys登陆 alter user 用户名 account unlock; ——— 解除锁定 alter user 用户名 identified by&amp;nbsp;密码;————-修改密码然后用你改好的密码登陆就行 举例：sqlplus &#x2F; as sysdbaalter user sys account unlock;alter user sys identified by manager;希望你看过本文章后能顺利解决问题！&amp;nbsp;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2012/03/02/Oracle-10g-%E9%94%99%E8%AF%AF%E2%80%9CORA-00988--%E5%8F%A3%E4%BB%A4%E7%BC%BA%E5%A4%B1%E6%88%96%E6%97%A0%E6%95%88%E2%80%9D%E7%BB%88%E6%9E%81%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%EF%BC%81/" data-id="clgrkcxxx0000zcpi31sb4fd9" data-title="Oracle 10g 错误“ORA-00988 口令缺失或无效”终极解决办法！" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
 
 
   <nav id="page-nav">
@@ -547,7 +548,7 @@ p><ol> <li>一、        Tar包安装<br /> </li> <li>如果下载的是源包�
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
     </div>
   </div>
 
@@ -564,10 +565,6 @@ p><ol> <li>一、        Tar包安装<br /> </li> <li>如果下载的是源包�
           </li>
         
           <li>
-            <a href="/2023/03/09/post-title-with-whitespace/">post title with whitespace</a>
-          </li>
-        
-          <li>
             <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
           </li>
         
@@ -577,6 +574,10 @@ p><ol> <li>一、        Tar包安装<br /> </li> <li>如果下载的是源包�
         
           <li>
             <a href="/2019/11/26/Ubuntu-%E5%AE%89%E8%A3%85minikebe/">Ubuntu 安装minikebe</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/28/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9B%E8%A1%8C%E5%BD%95%E9%9F%B3%E5%92%8C%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/">树莓派进行录音和音频降噪</a>
           </li>
         
       </ul>

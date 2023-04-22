@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>key1088 blog</title>
+  <title>key1088 Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="个人博客网站">
 <meta property="og:type" content="website">
-<meta property="og:title" content="key1088 blog">
+<meta property="og:title" content="key1088 Blog">
 <meta property="og:url" content="https://key1088.github.io/page/17/index.html">
-<meta property="og:site_name" content="key1088 blog">
+<meta property="og:site_name" content="key1088 Blog">
 <meta property="og:description" content="个人博客网站">
 <meta property="og:locale">
 <meta property="article:author" content="key1088">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="key1088 blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="key1088 Blog" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -44,7 +44,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">key1088 blog</a>
+        <a href="/" id="logo">key1088 Blog</a>
       </h1>
       
         <h2 id="subtitle-wrap">
@@ -78,49 +78,6 @@
 
       <div class="outer">
         <section id="main">
-  
-    <article id="post-无聊" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2010/04/14/%E6%97%A0%E8%81%8A/" class="article-date">
-  <time class="dt-published" datetime="2010-04-14T12:03:00.000Z" itemprop="datePublished">2010-04-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2010/04/14/%E6%97%A0%E8%81%8A/">无聊</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>无聊时，扫扫雷，玩玩纸牌。简单也是一种乐趣、、</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/04/14/%E6%97%A0%E8%81%8A/" data-id="clgrjlxls00ba7opi3hdv494e" data-title="无聊" class="article-share-link">Teilen</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
   
     <article id="post-你为什么是穷人" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -508,6 +465,49 @@
 
 
   
+    <article id="post-ERGRP等价负载均衡+度量值计算" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/03/29/ERGRP%E7%AD%89%E4%BB%B7%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1+%E5%BA%A6%E9%87%8F%E5%80%BC%E8%AE%A1%E7%AE%97/" class="article-date">
+  <time class="dt-published" datetime="2010-03-29T11:58:00.000Z" itemprop="datePublished">2010-03-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/03/29/ERGRP%E7%AD%89%E4%BB%B7%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1+%E5%BA%A6%E9%87%8F%E5%80%BC%E8%AE%A1%E7%AE%97/">ERGRP等价负载均衡+度量值计算</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>试验拓扑：<br><img src="/images/pic/c42f172187e85a924723e872.jpg" alt="" /><br>如图用eigrp配置全网络，通。<br>该网络本身就是非等价负载网络。<br>查看个路由器状态<br>R1#sh ip route<br>C    192.168.1.0&#x2F;24 is directly connected, FastEthernet0&#x2F;1<br>C    192.168.2.0&#x2F;24 is directly connected, FastEthernet0&#x2F;0<br>D    192.168.3.0&#x2F;24 [90&#x2F;284160] via 192.168.1.2, 00:16:03, FastEthernet0&#x2F;1<br>R1#R1#sh ip ei topology<br>IP-EIGRP Topology Table for AS(1)&#x2F;ID(1.1.1.1)<br>Codes: P - Passive, A - Active, U - Update, Q - Query, R - Reply,<br>r - Reply status<br>P 192.168.1.0&#x2F;24, 1 successors, FD is 28160<br>via Connected, FastEthernet0&#x2F;1<br>P 192.168.2.0&#x2F;24, 1 successors, FD is 281600<br>via Connected, FastEthernet0&#x2F;0<br>P 192.168.3.0&#x2F;24, 1 successors, FD is 284160<br>via 192.168.1.2 (284160&#x2F;281600), FastEthernet0&#x2F;1<br>via 192.168.2.2 (537600&#x2F;281600), FastEthernet0&#x2F;0<br>R2#sh ip route<br>C    192.168.1.0&#x2F;24 is directly connected, Ethernet1&#x2F;0<br>D    192.168.2.0&#x2F;24 [90&#x2F;307200] via 192.168.3.1, 00:17:19, Ethernet1&#x2F;2<br>C    192.168.3.0&#x2F;24 is directly connected, Ethernet1&#x2F;2<br>R2#<br>R2#sh ip ei to<br>IP-EIGRP Topology Table for AS(1)&#x2F;ID(2.2.2.2)<br>Codes: P - Passive, A - Active, U - Update, Q - Query, R - Reply,<br>r - Reply status<br>P 192.168.1.0&#x2F;24, 1 successors, FD is 281600<br>via Connected, Ethernet1&#x2F;0<br>P 192.168.2.0&#x2F;24, 1 successors, FD is 284160<br>via 192.168.3.1 (307200&#x2F;281600), Ethernet1&#x2F;2<br>via 192.168.1.1 (537600&#x2F;281600), Ethernet1&#x2F;0, serno 31<br>P 192.168.3.0&#x2F;24, 1 successors, FD is 281600<br>via Connected, Ethernet1&#x2F;2<br>R3#sh ip route<br>D    192.168.1.0&#x2F;24 [90&#x2F;284160] via 192.168.2.1, 00:18:01, Ethernet1&#x2F;0<br>C    192.168.2.0&#x2F;24 is directly connected, Ethernet1&#x2F;0<br>C    192.168.3.0&#x2F;24 is directly connected, Ethernet1&#x2F;1<br>R3#sh ip eigrp topology<br>IP-EIGRP Topology Table for AS(1)&#x2F;ID(192.168.3.1)<br>Codes: P - Passive, A - Active, U - Update, Q - Query, R - Reply,<br>r - Reply status<br>P 192.168.1.0&#x2F;24, 1 successors, FD is 284160<br>via 192.168.2.1 (284160&#x2F;28160), Ethernet1&#x2F;0<br>via 192.168.3.2 (307200&#x2F;281600), Ethernet1&#x2F;1<br>P 192.168.2.0&#x2F;24, 1 successors, FD is 281600<br>via Connected, Ethernet1&#x2F;0<br>P 192.168.3.0&#x2F;24, 1 successors, FD is 281600<br>via Connected, Ethernet1&#x2F;1<br>就拿R3的topology来说<br>P 192.168.1.0&#x2F;24, 1 successors, FD is 284160<br>via 192.168.2.1 (284160&#x2F;28160), Ethernet1&#x2F;0<br>via 192.168.3.2 (307200&#x2F;281600), Ethernet1&#x2F;1<br>根据度量值公式来算，本博客有，上一遍就是。<br>求入口带宽最小的，就是R3学到192.168.1.0的更新入端口。第一条线：R1的F0&#x2F;1和R3的E1&#x2F;0。第二条线：R1的E1&#x2F;0和R3的E1&#x2F;1。<br>我们来计算一下<br>首先查去以上端口的BW和延迟，只取重要的啦。<br>第一条线路<br>R1#sh inter f0&#x2F;1<br>FastEthernet0&#x2F;1 is up, line protocol is up<br>Hardware is AmdFE, address is c800.0d2c.0001 (bia c800.0d2c.0001)<br>Internet address is 192.168.1.1&#x2F;24<br>MTU 1500 bytes, BW 100000 Kbit, DLY 100 usec,<br>reliability 255&#x2F;255, txload 1&#x2F;255, rxload 1&#x2F;255<br>Encapsulation ARPA, loopback not set<br>Keepalive set (10 sec)<br>Half-duplex, 100Mb&#x2F;s, 100BaseTX&#x2F;FX<br>R3#sh inter e1&#x2F;0<br>Ethernet1&#x2F;0 is up, line protocol is up<br>Hardware is AmdP2, address is c804.0d2c.0010 (bia c804.0d2c.0010)<br>Internet address is 192.168.2.2&#x2F;24<br>MTU 1500 bytes, BW 10000 Kbit, DLY 1000 usec,<br>reliability 255&#x2F;255, txload 1&#x2F;255, rxload 1&#x2F;255<br>Encapsulation ARPA, loopback not set<br>Keepalive set (10 sec)<br>ARP type: ARPA, ARP Timeout 04:00:00<br>[10^7&#x2F;10000+(1000+100)&#x2F;10]*256&#x3D;284160<br>第二条线路<br>R2#sh inter e1&#x2F;0<br>Ethernet1&#x2F;0 is up, line protocol is up<br>Hardware is AmdP2, address is c801.0d2c.0010 (bia c801.0d2c.0010)<br>Internet address is 192.168.1.2&#x2F;24<br>MTU 1500 bytes, BW 10000 Kbit, DLY 1000 usec,<br>reliability 255&#x2F;255, txload 1&#x2F;255, rxload 1&#x2F;255<br>Encapsulation ARPA, loopback not set<br>Keepalive set (10 sec)<br>ARP type: ARPA, ARP Timeout 04:00:00<br>R3#sh inter e1&#x2F;1<br>Ethernet1&#x2F;1 is up, line protocol is up<br>Hardware is AmdP2, address is c804.0d2c.0011 (bia c804.0d2c.0011)<br>Internet address is 192.168.3.1&#x2F;24<br>MTU 1500 bytes, BW 10000 Kbit, DLY 1000 usec,<br>reliability 255&#x2F;255, txload 1&#x2F;255, rxload 1&#x2F;255<br>Encapsulation ARPA, loopback not set<br>Keepalive set (10 sec)<br>ARP type: ARPA, ARP Timeout 04:00:00<br>[10^7&#x2F;10000+(1000+1000)&#x2F;10]*256&#x3D;307200<br>只要要两个度量值相同，就可以形成等价负载均衡。<br>进入R1 接口F0&#x2F;1中把延迟改为1000就可以了。<br>R1(config-if)#delay 100<br>（注意DLY的单位是usec，在配置时，改成delay 100就可以，查看就变成1000usec了，单位问题）<br>在不同的环境中，也可以改带宽，设置的带宽并不是物理的，bandwidth 命令只会修改 EIGRP 和 OSPF 等路由协议所用的带宽度量。今天才知道，很郁闷。<br>来看下路由表吧。<br>R3#sh ip route<br>D    192.168.1.0&#x2F;24 [90&#x2F;307200] via 192.168.3.2, 00:07:51, Ethernet1&#x2F;1<br>[90&#x2F;307200] via 192.168.2.1, 00:07:51, Ethernet1&#x2F;0<br>C    192.168.2.0&#x2F;24 is directly connected, Ethernet1&#x2F;0<br>C    192.168.3.0&#x2F;24 is directly connected, Ethernet1&#x2F;1<br>&amp;nbsp;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/03/29/ERGRP%E7%AD%89%E4%BB%B7%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1+%E5%BA%A6%E9%87%8F%E5%80%BC%E8%AE%A1%E7%AE%97/" data-id="clgrjlxd5001s7opi231r8klh" data-title="ERGRP等价负载均衡+度量值计算" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
 
 
   <nav id="page-nav">
@@ -552,7 +552,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
     </div>
   </div>
 
@@ -569,10 +569,6 @@
           </li>
         
           <li>
-            <a href="/2023/03/09/post-title-with-whitespace/">post title with whitespace</a>
-          </li>
-        
-          <li>
             <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
           </li>
         
@@ -582,6 +578,10 @@
         
           <li>
             <a href="/2019/11/26/Ubuntu-%E5%AE%89%E8%A3%85minikebe/">Ubuntu 安装minikebe</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/28/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9B%E8%A1%8C%E5%BD%95%E9%9F%B3%E5%92%8C%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/">树莓派进行录音和音频降噪</a>
           </li>
         
       </ul>
