@@ -79,6 +79,68 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-dedecms-嵌套dsql" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/02/13/dedecms-%E5%B5%8C%E5%A5%97dsql/" class="article-date">
+  <time class="dt-published" datetime="2016-02-13T05:15:08.000Z" itemprop="datePublished">2016-02-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Php%E7%BC%96%E7%A8%8B/">Php编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/02/13/dedecms-%E5%B5%8C%E5%A5%97dsql/">dedecms 嵌套dsql</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>织梦CMS中嵌套查询语句,SetQuery和GetObject传入不同的参数就可以了。</p>
+<pre>
+if($keyword != '')
+{
+    $query2 = "SELECT id,title,typeid FROM `#@__archives` where arcrank>-1 AND ($keyword) ORDER BY id desc limit 0,5";
+}
+else
+{
+    $query2 = "SELECT id,title,typeid FROM `#@__archives` where arcrank>-1 ORDER BY id desc limit 0,5";
+}
+$dsql->SetQuery($query2);
+$dsql->Execute(1);
+while($row=$dsql->GetObject(1))
+{
+    $dsql->SetQuery("Select typedir From `#@__arctype` where id='$row->typeid'");
+    $dsql->Execute(2);
+    $ttrow=$dsql->GetObject(2);
+    $tpdir=substr($ttrow->typedir,10);
+    $likearticle .= "<li><a href='/m/article/{$tpdir}/{$row->id}.html'>".cut_str(ConvertStr($row->title),16)."</a></li>";
+}
+</pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2016/02/13/dedecms-%E5%B5%8C%E5%A5%97dsql/" data-id="clgrjlxd0001o7opi83302bte" data-title="dedecms 嵌套dsql" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-使用Denyhosts防止SSHD和VSFTPD暴力破解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2015/11/21/%E4%BD%BF%E7%94%A8Denyhosts%E9%98%B2%E6%AD%A2SSHD%E5%92%8CVSFTPD%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" class="article-date">
@@ -724,49 +786,6 @@ Mar 16 15:47:33 localhost postfix/smtp[2130]: 2B7F53F87B: to=<key1088@163.com>, 
 
 
   
-    <article id="post-sscanf函数的用法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2014/03/16/sscanf%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%A8%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2014-03-16T07:05:21.000Z" itemprop="datePublished">2014-03-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/C%E7%BC%96%E7%A8%8B/">C编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2014/03/16/sscanf%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%A8%E6%B3%95/">sscanf函数的用法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>sscanf() - 从一个字符串中读进与指定格式相符的数据.<br>函数原型:<br>int sscanf( string str, string fmt, mixed var1, mixed var2 … );<br>int scanf( const char *format [,argument]… );<br>说明：<br>　　sscanf与scanf类似，都是用于输入的，只是后者以屏幕(stdin)为输入源，前者以固定字符串为输入源。<br>　　其中的format可以是一个或多个 </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2014/03/16/sscanf%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%A8%E6%B3%95/" data-id="clgrjlxjc006r7opihoqo9tdu" data-title="sscanf函数的用法" class="article-share-link">Teilen</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -824,6 +843,10 @@ Mar 16 15:47:33 localhost postfix/smtp[2130]: 2B7F53F87B: to=<key1088@163.com>, 
       <ul>
         
           <li>
+            <a href="/2023/04/24/%E5%9C%A8%E4%BD%BF%E7%94%A8ChatGPT%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/">在使用ChatGPT中的一些感想</a>
+          </li>
+        
+          <li>
             <a href="/2023/04/22/hello-world/">Hello Hexo</a>
           </li>
         
@@ -837,10 +860,6 @@ Mar 16 15:47:33 localhost postfix/smtp[2130]: 2B7F53F87B: to=<key1088@163.com>, 
         
           <li>
             <a href="/2019/11/26/Ubuntu-%E5%AE%89%E8%A3%85minikebe/">Ubuntu 安装minikebe</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/28/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9B%E8%A1%8C%E5%BD%95%E9%9F%B3%E5%92%8C%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/">树莓派进行录音和音频降噪</a>
           </li>
         
       </ul>
