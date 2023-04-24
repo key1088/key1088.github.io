@@ -79,6 +79,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-纠结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/10/26/%E7%BA%A0%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2011-10-26T06:57:00.000Z" itemprop="datePublished">2011-10-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/10/26/%E7%BA%A0%E7%BB%93/">纠结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>做大事着，不能前怕狼后怕虎。凡事要冷静分析，淡定，淡定，淡定。<img src="/images/pic/other_site/img_baidu_j_0003.gif" /></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/10/26/%E7%BA%A0%E7%BB%93/" data-id="clgrjlxjx007x7opigjje97sm" data-title="纠结" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-采用rsync+inotify，实现多台web数据动态同步" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2011/10/24/%E9%87%87%E7%94%A8rsync+inotify%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%A4%9A%E5%8F%B0web%E6%95%B0%E6%8D%AE%E5%8A%A8%E6%80%81%E5%90%8C%E6%AD%A5/" class="article-date">
@@ -461,49 +503,6 @@
 
 
   
-    <article id="post-iptables之7层过滤(封QQ、MSN、P2P)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2011/09/05/iptables%E4%B9%8B7%E5%B1%82%E8%BF%87%E6%BB%A4(%E5%B0%81QQ%E3%80%81MSN%E3%80%81P2P)/" class="article-date">
-  <time class="dt-published" datetime="2011-09-05T09:33:00.000Z" itemprop="datePublished">2011-09-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2011/09/05/iptables%E4%B9%8B7%E5%B1%82%E8%BF%87%E6%BB%A4(%E5%B0%81QQ%E3%80%81MSN%E3%80%81P2P)/">iptables之7层过滤(封QQ、MSN、P2P)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>iptables之7层过滤封QQ、MSN、P2P<br>环境vmware-NAT连接上网。<br><br />&amp;nbsp;&amp;nbsp; 192.168.2.0&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 192.168.20.0<br />clent —–&gt;eth0-[linux]-eth1——-[nat]—-intener<br>&amp;nbsp;<br>by：key1088<br /><br><strong>准备</strong><br>1.内核源码&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<br>2.iptables 源码&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<br>3.netfilter-L7 filter<br>4.l7-protocols<br><strong>安装</strong><br>1.给内核打补丁.编译内核。我使用的2.6.28的内核。<br>patch -pl &lt; &#x2F;root&#x2F;netfilter-layer7-v2.22&#x2F;kernel-2.6.25-2.6.28-layer7-2.22.patch<br>编译内核<br>make menuconfig<br>选项<br>General setup&amp;nbsp; —&amp;nbsp; <br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Prompt for development and&#x2F;or incomplete code&#x2F;drivers&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<br />&amp;nbsp;&amp;nbsp; Networking&amp;nbsp; —&amp;nbsp; <br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Networking options&amp;nbsp; —&amp;nbsp; <br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Network packet filtering framework (Netfilter)&amp;nbsp; —&amp;nbsp; <br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Core Netfilter Configuration&amp;nbsp; —&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;M&gt; Netfilter connection tracking support&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;M&gt;&amp;nbsp;&amp;nbsp; &quot;layer7&quot; match support&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Layer 7 debugging output&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; IP: Netfilter Configuration&amp;nbsp; —&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<br>&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;M&gt;FULL NAT &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp; #别忘记这个不然没有nat table<br>make<br>make moduls_install&amp;nbsp;<br>make install<br>2.安装Layer 7协议<br>cd l7-protocols-2009-05-28&#x2F; <br />make install<br>3.编译iptables<br>.&#x2F;configure –with-ksoure&#x3D;&#x2F;usr&#x2F;src&#x2F;linux-2.6.28&#x2F;<br>make<br>make install<br>4.检测。重启选择启动那个内核。<br>iptables -V&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #你的iptables 版本<br>iptables -m layer7 –help&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; #看看有layer7选项吗<br>lsmod|grep layer7&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #看看有相应的模块吗<br>iptables -t nat -L&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #其他tables能不能用。<br>iptables -t mangle -L<br>iptables -L<br>5.测试<br>iptables -t nat -A POSTROUTING -s 内网ip -j SNAT –to 外防火墙IP&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #客户端能正常上网，上QQ<br>iptables -t mangle -I PREROUTING -m layer –l7proto qq -j DROP&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #退下QQ，看看能不能使用。<br>6.相应语法<br>iptables -t mangle -I PREROUTING -m layer7 –l7proto edonkey -j DROP <br />iptables -t mangle -I PREROUTING -m layer7 –l7proto bittorrent -j DROP <br />iptables -t mangle -I PREROUTING -m layer7 –l7proto qq -j DROP <br />iptables -t mangle -I PREROUTING -m layer7 –l7proto msnmessenger -j DROP <br />iptables -t mangle -I PREROUTING -m layer7 –l7proto xunlei -j DROP <br />iptables -t mangle -I PREROUTING -m layer7 –l7proto kugoo -j DROP <br />iptables -t mangle -I PREROUTING -m layer7 –l7proto yahoo -j DROP<br>&amp;nbsp;<br>参考地址：<br><a target="_blank" rel="noopener" href="http://lzy821218.blog.51cto.com/209800/307349">http://lzy821218.blog.51cto.com/209800/307349</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/09/05/iptables%E4%B9%8B7%E5%B1%82%E8%BF%87%E6%BB%A4(%E5%B0%81QQ%E3%80%81MSN%E3%80%81P2P)/" data-id="clgrjlxdt002g7opi6st04znj" data-title="iptables之7层过滤(封QQ、MSN、P2P)" class="article-share-link">Teilen</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -561,6 +560,10 @@
       <ul>
         
           <li>
+            <a href="/2023/04/24/%E5%9C%A8%E4%BD%BF%E7%94%A8ChatGPT%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/">在使用ChatGPT中的一些感想</a>
+          </li>
+        
+          <li>
             <a href="/2023/04/22/hello-world/">Hello Hexo</a>
           </li>
         
@@ -574,10 +577,6 @@
         
           <li>
             <a href="/2019/11/26/Ubuntu-%E5%AE%89%E8%A3%85minikebe/">Ubuntu 安装minikebe</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/28/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9B%E8%A1%8C%E5%BD%95%E9%9F%B3%E5%92%8C%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/">树莓派进行录音和音频降噪</a>
           </li>
         
       </ul>

@@ -79,6 +79,49 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Oracle-10g-错误“ORA-00988--口令缺失或无效”终极解决办法！" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2012/03/02/Oracle-10g-%E9%94%99%E8%AF%AF%E2%80%9CORA-00988--%E5%8F%A3%E4%BB%A4%E7%BC%BA%E5%A4%B1%E6%88%96%E6%97%A0%E6%95%88%E2%80%9D%E7%BB%88%E6%9E%81%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%EF%BC%81/" class="article-date">
+  <time class="dt-published" datetime="2012-03-02T02:48:00.000Z" itemprop="datePublished">2012-03-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2012/03/02/Oracle-10g-%E9%94%99%E8%AF%AF%E2%80%9CORA-00988--%E5%8F%A3%E4%BB%A4%E7%BC%BA%E5%A4%B1%E6%88%96%E6%97%A0%E6%95%88%E2%80%9D%E7%BB%88%E6%9E%81%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%EF%BC%81/">Oracle 10g 错误“ORA-00988 口令缺失或无效”终极解决办法！</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>如果在安装Oracle的时候出现如下问题：创建数据库完成让你输入密码的时候弹出&quot;ora-00988 缺少或无效口令&quot;的对话框如下图<br><img src="/images/pic/309723085d41f3fc0b7b822c.jpg" small="0" /><br /><br>这是因为Oracle对密码的要求如下：<br>系统用户（SYS、SYSTEM）口令长度不能小于7个字符第一个字符不能为数字且全部字符中应该为字母和数字混合<br>解决方法：<br>运行 cmd 按如下输入命令 sqlplus &#x2F; as sysdba ——— 注意以上的语句中&quot;&#x2F;&quot;两边都要有空格哦！——— 以sys登陆 alter user 用户名 account unlock; ——— 解除锁定 alter user 用户名 identified by&amp;nbsp;密码;————-修改密码然后用你改好的密码登陆就行 举例：sqlplus &#x2F; as sysdbaalter user sys account unlock;alter user sys identified by manager;希望你看过本文章后能顺利解决问题！&amp;nbsp;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2012/03/02/Oracle-10g-%E9%94%99%E8%AF%AF%E2%80%9CORA-00988--%E5%8F%A3%E4%BB%A4%E7%BC%BA%E5%A4%B1%E6%88%96%E6%97%A0%E6%95%88%E2%80%9D%E7%BB%88%E6%9E%81%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%EF%BC%81/" data-id="clgrkcxxx0000zcpi31sb4fd9" data-title="Oracle 10g 错误“ORA-00988 口令缺失或无效”终极解决办法！" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-windows下查看在线用户命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2012/01/13/windows%E4%B8%8B%E6%9F%A5%E7%9C%8B%E5%9C%A8%E7%BA%BF%E7%94%A8%E6%88%B7%E5%91%BD%E4%BB%A4/" class="article-date">
@@ -458,48 +501,6 @@
 
 
   
-    <article id="post-纠结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2011/10/26/%E7%BA%A0%E7%BB%93/" class="article-date">
-  <time class="dt-published" datetime="2011-10-26T06:57:00.000Z" itemprop="datePublished">2011-10-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2011/10/26/%E7%BA%A0%E7%BB%93/">纠结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>做大事着，不能前怕狼后怕虎。凡事要冷静分析，淡定，淡定，淡定。<img src="/images/pic/other_site/img_baidu_j_0003.gif" /></p>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/10/26/%E7%BA%A0%E7%BB%93/" data-id="clgrjlxjx007x7opigjje97sm" data-title="纠结" class="article-share-link">Teilen</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -557,6 +558,10 @@
       <ul>
         
           <li>
+            <a href="/2023/04/24/%E5%9C%A8%E4%BD%BF%E7%94%A8ChatGPT%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/">在使用ChatGPT中的一些感想</a>
+          </li>
+        
+          <li>
             <a href="/2023/04/22/hello-world/">Hello Hexo</a>
           </li>
         
@@ -570,10 +575,6 @@
         
           <li>
             <a href="/2019/11/26/Ubuntu-%E5%AE%89%E8%A3%85minikebe/">Ubuntu 安装minikebe</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/28/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9B%E8%A1%8C%E5%BD%95%E9%9F%B3%E5%92%8C%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/">树莓派进行录音和音频降噪</a>
           </li>
         
       </ul>

@@ -79,6 +79,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-openshift-备份MYSQL数据库" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2013/04/13/openshift-%E5%A4%87%E4%BB%BDMYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/" class="article-date">
+  <time class="dt-published" datetime="2013-04-13T07:55:39.000Z" itemprop="datePublished">2013-04-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2013/04/13/openshift-%E5%A4%87%E4%BB%BDMYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">openshift 备份MYSQL数据库</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>openshift paas</p>
+<pre>
+mysqldump --password=$OPENSHIFT_DB_PASSWORD -h $OPENSHIFT_DB_HOST -P $OPENSHIFT_DB_PORT -u $OPENSHIFT_DB_USERNAME $OPENSHIFT_GEAR_NAME --add-drop-table >  $OPENSHIFT_DATA_DIR/$OPENSHIFT_GEAR_NAME.sql
+</pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2013/04/13/openshift-%E5%A4%87%E4%BB%BDMYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/" data-id="clgrjlxi9004y7opi093s8taz" data-title="openshift 备份MYSQL数据库" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/backup/" rel="tag">backup</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openshift/" rel="tag">openshift</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/paas/" rel="tag">paas</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-悲剧了" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2013/04/13/%E6%82%B2%E5%89%A7%E4%BA%86/" class="article-date">
@@ -806,69 +853,6 @@ include        fastcgi_params;
 
 
   
-    <article id="post-mysql远程安全设置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2013/04/13/mysql%E8%BF%9C%E7%A8%8B%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/" class="article-date">
-  <time class="dt-published" datetime="2013-04-13T04:43:02.000Z" itemprop="datePublished">2013-04-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2013/04/13/mysql%E8%BF%9C%E7%A8%8B%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/">mysql远程安全设置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>最近又出了mysql远程漏洞,简单说一下mysql远程安全的设置小技巧。<br>1.关闭远程连接<br>mysql默认是开启3306端口,默认也不允许远程连接的。</p>
-<pre>
-mysql> select host,user from user;
-+-----------+--------------+
-| host      | user         |
-+-----------+--------------+
-| 127.0.0.1 | root         |
-| localhost | root         |
-+-----------+--------------+
-2 rows in set (0.00 sec)
-</pre>
-<p>2.如果不使用端口通信通信的话,建议关闭监听端口,使用socket通信<br>在mysql配置文件中my.cnf中[mysqld]中<br>添加skip-networking<br>如果本地使用端口通信的话,或者使用局域网通信的话,建议只监听内网端口<br>在mysql配置文件中my.cnf中[mysqld]中<br>添加bind-address&#x3D;127.0.0.1<br>或者添加bind-address&#x3D;内网地址<br>3.不建议使用远程端口,如果真的使用远程或者远程主从,修改你的端口和授权地址。<br>修改端口<br>在mysql配置文件中my.cnf中[mysqld]中<br>添加port&#x3D;12345<br>添加授权的话，先为数据库创建一个用户test,修改授权ip即可,具体权限可以根据应用设置。</p>
-<pre>
-mysql>update user set host = '1.1.1.1' where user = 'test';
-mysql> select host,user from user where user='test';
-+-----------+--------------+
-| host      | user         |
-+-----------+--------------+
-| 1.1.1.1   | test         |
-+-----------+--------------+
-1 row in set (0.00 sec)
-</pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2013/04/13/mysql%E8%BF%9C%E7%A8%8B%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/" data-id="clgrjlxi6004r7opi3r56cr5n" data-title="mysql远程安全设置" class="article-share-link">Teilen</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -926,6 +910,10 @@ mysql> select host,user from user where user='test';
       <ul>
         
           <li>
+            <a href="/2023/04/24/%E5%9C%A8%E4%BD%BF%E7%94%A8ChatGPT%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/">在使用ChatGPT中的一些感想</a>
+          </li>
+        
+          <li>
             <a href="/2023/04/22/hello-world/">Hello Hexo</a>
           </li>
         
@@ -939,10 +927,6 @@ mysql> select host,user from user where user='test';
         
           <li>
             <a href="/2019/11/26/Ubuntu-%E5%AE%89%E8%A3%85minikebe/">Ubuntu 安装minikebe</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/28/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%BF%9B%E8%A1%8C%E5%BD%95%E9%9F%B3%E5%92%8C%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/">树莓派进行录音和音频降噪</a>
           </li>
         
       </ul>
