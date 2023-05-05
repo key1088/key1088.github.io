@@ -1,12 +1,12 @@
 ---
 title: 使用LLAMA、llama.cpp搭建类ChatGPT环境
 date: 2023-05-05 20:56:26
-tags:['AI'，'ChatGPT','LLaMA']
+tags: ['AI','ChatGPT','LLaMA']
 ---
 
- &ensp;&ensp; &ensp;&ensp;ChatGPT劲爆式的出现，使得AI又重新火了一把，又一次将人工智能带到群众面前，人工智能的发展是断断续续曲折的，随着硬件不断升级，这次应该不是昙花一现，有足够的算力来支撑本次时代变革。在ChatGPT聊天交互式的体验中，让我对计算机处理自然语言的能力又一次加深。近期开源社区也发布了很多开源模型，本次搭建一个类ChatGPT的应用，来加深对大语言模型的理解，为后续深入学习人工智能打下基础。  
+ChatGPT劲爆式的出现，使得AI又重新火了一把，又一次将人工智能带到群众面前，人工智能的发展是断断续续曲折的，随着硬件不断升级，这次应该不是昙花一现，有足够的算力来支撑本次时代变革。在ChatGPT聊天交互式的体验中，让我对计算机处理自然语言的能力又一次加深。近期开源社区也发布了很多开源模型，本次搭建一个类ChatGPT的应用，来加深对大语言模型的理解，为后续深入学习人工智能打下基础。  
 
- &ensp;&ensp; &ensp;&ensp;本次类ChatGPT搭建模型使用Mate原型 LLaMA + Chinese-LLaMA-Alpaca-7B，推理使用llama.cpp。  
+本次类ChatGPT搭建模型使用Mate原型 LLaMA + Chinese-LLaMA-Alpaca-7B，推理使用llama.cpp。  
  + LLaMA https://github.com/facebookresearch/llama  
 LLaMA模型为Mate 发布的模型，现在暂未开源，可以申请获取训练的数据，也可以在网上寻找。模型参数数据包括7B 13B 33B 65B，咱们这次选择最简单的7B参数模型。
  + Chinese-LLaMA-Alpaca https://github.com/ymcui/Chinese-LLaMA-Alpaca  
@@ -14,7 +14,7 @@ Chinese-LLaMA-Alpaca 中文LLaMA模型和指令精调的Alpaca大模型,这些�
  + llama.cpp https://github.com/ggerganov/llama.cpp
 llama.cpp是纯 C/C++开发的LLaMA 模型的推导器，可以使用CPU进行推理，也可以在个人电脑上进行使用，消耗CPU比较明显，交互过程机器中呜呜的作响。
 
- &ensp;&ensp; &ensp;&ensp;我们可以直接使用llama.cpp去加载Mate的原版参数模型数据，但是为了更好的支持中文交互，我们需要将Chinese-LLaMA-Alpaca中的模型和原版LLAMA的模型进行合并，然后做格式转换，由llama.cpp来推导解析，整个过程包括以下6个步骤：  
+我们可以直接使用llama.cpp去加载Mate的原版参数模型数据，但是为了更好的支持中文交互，我们需要将Chinese-LLaMA-Alpaca中的模型和原版LLAMA的模型进行合并，然后做格式转换，由llama.cpp来推导解析，整个过程包括以下6个步骤：  
 + 1-LLaMA 7B模型下载
 + 2-Chinese-LLaMA-Alpaca 7B中文模型下载
 + 3-原版模型和中文模型进行合并模型
@@ -22,8 +22,8 @@ llama.cpp是纯 C/C++开发的LLaMA 模型的推导器，可以使用CPU进行�
 + 5-下载llama.cpp,编译安装
 + 6-对模型数据进行测试
 
- &ensp;&ensp; &ensp;&ensp;步骤1-4可以直接从网上下载，我推荐 https://aistudio.baidu.com/aistudio/projectdetail/5930734 ->数据集->下载zh-models.zip和Chinese-LLaMA-Alpaca-main.zip，作者梦未央02，已经为咱们把模型合并好了，可以直接用，也可以自己合并，合并需要自己得电脑配置超过模型的数据大小。（我在自己电脑上面和google云盘上面都没有合并成功，本地配置太差，google云盘有限制）  
- &ensp;&ensp; &ensp;&ensp;步骤5-下载llama.cpp,编译安装，按照官方步骤去编译即可，我使用虚拟机编译有报错，编译参数需要添加 -mfma，不然会提示以下信息:
+步骤1-4可以直接从网上下载，我推荐 https://aistudio.baidu.com/aistudio/projectdetail/5930734 ->数据集->下载zh-models.zip和Chinese-LLaMA-Alpaca-main.zip，作者梦未央02，已经为咱们把模型合并好了，可以直接用，也可以自己合并，合并需要自己得电脑配置超过模型的数据大小。（我在自己电脑上面和google云盘上面都没有合并成功，本地配置太差，google云盘有限制）  
+步骤5-下载llama.cpp,编译安装，按照官方步骤去编译即可，我使用虚拟机编译有报错，编译参数需要添加 -mfma，不然会提示以下信息:
  ```c
  /include/fmaintrin.h:63:1: error: inlining failed in call to ‘always_inline’ ‘_mm256_fmadd_ps’: target specific option mismatch`
  ```
