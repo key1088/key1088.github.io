@@ -113,6 +113,11 @@
       <a data-url="https://key1088.github.io/2010/03/26/%E5%BE%88NB%E7%9A%84%E4%B8%80%E4%B8%AA%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" data-id="clgrjlxkz009u7opi9ds262dh" data-title="很NB的一个自我介绍" class="article-share-link">Teilen</a>
       
       
+        <a href="/2010/03/26/%E5%BE%88NB%E7%9A%84%E4%B8%80%E4%B8%AA%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2010/03/26/%E5%BE%88NB%E7%9A%84%E4%B8%80%E4%B8%AA%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" itemprop="commentCount"></span>
+          Kommentare
+        </a>
+      
       
     </footer>
   </div>
@@ -141,6 +146,10 @@
 </article>
 
 
+
+  <section id="comments" class="vcomment">
+
+  </section>
 </section>
         
           <aside id="sidebar">
@@ -257,6 +266,29 @@
 
 
 
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "G0tpuvaoHAtNY2tokxE4JdM8-gzGzoHsz",
+        appKey: "Mftb2MUOgwBc0nNzeiDK5OB4",
+        placeholder: "Just go go",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
 
   </div>
 </body>

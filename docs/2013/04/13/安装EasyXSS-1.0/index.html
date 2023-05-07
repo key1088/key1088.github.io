@@ -210,6 +210,11 @@ mysql> select * from xss_key
       <a data-url="https://key1088.github.io/2013/04/13/%E5%AE%89%E8%A3%85EasyXSS-1.0/" data-id="clgrjlxki008v7opi3wkg5qnx" data-title="安装EasyXSS 1.0" class="article-share-link">Teilen</a>
       
       
+        <a href="/2013/04/13/%E5%AE%89%E8%A3%85EasyXSS-1.0/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2013/04/13/%E5%AE%89%E8%A3%85EasyXSS-1.0/" itemprop="commentCount"></span>
+          Kommentare
+        </a>
+      
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xss-easyxss/" rel="tag">xss;easyxss</a></li></ul>
 
@@ -240,6 +245,10 @@ mysql> select * from xss_key
 </article>
 
 
+
+  <section id="comments" class="vcomment">
+
+  </section>
 </section>
         
           <aside id="sidebar">
@@ -356,6 +365,29 @@ mysql> select * from xss_key
 
 
 
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "G0tpuvaoHAtNY2tokxE4JdM8-gzGzoHsz",
+        appKey: "Mftb2MUOgwBc0nNzeiDK5OB4",
+        placeholder: "Just go go",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
 
   </div>
 </body>
