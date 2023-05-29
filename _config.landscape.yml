@@ -16,7 +16,8 @@ fancybox: true
 #   All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></br>
 
 # Footer
-copyright:
+copyright: |-
+    <a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2023016529号</a>
 # Need help choosing? Please see...
 # https://creativecommons.org/choose/
 # https://choosealicense.com/
