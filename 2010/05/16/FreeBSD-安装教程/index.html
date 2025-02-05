@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>FreeBSD 安装教程 | key1088 Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="FreeBSD 安装教程本文以安装 FreeBSD 7.1 (i386) 为示范转载来源：http:&#x2F;&#x2F;wiki.freebsdchina.org&#x2F;howto&#x2F;i&#x2F;installbsd帮助英语不好的朋友和初学FessDSB的朋友们本人其实也是刚开始学用FreeBSD的菜鸟,由于时间空闲,所以想为FreeBSD尽点微薄之力,下文中可能有大量的错误,请老鸟们指正,免得让我误人 子弟.FreeBSD 的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FreeBSD 安装教程">
+<meta property="og:url" content="https://key1088.github.io/2010/05/16/FreeBSD-%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="key1088 Blog">
+<meta property="og:description" content="FreeBSD 安装教程本文以安装 FreeBSD 7.1 (i386) 为示范转载来源：http:&#x2F;&#x2F;wiki.freebsdchina.org&#x2F;howto&#x2F;i&#x2F;installbsd帮助英语不好的朋友和初学FessDSB的朋友们本人其实也是刚开始学用FreeBSD的菜鸟,由于时间空闲,所以想为FreeBSD尽点微薄之力,下文中可能有大量的错误,请老鸟们指正,免得让我误人 子弟.FreeBSD 的">
+<meta property="og:locale">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_0-welcome_to_freebsd.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_icon_sad.gif">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_1-country_selection.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_2-system_conole_keymap.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_3-sysinatall_main_menu.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_4-message.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_icon_cool.gif">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_5-fdisk_partition_editor.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_6-install_boot_manager_for_drive_ad0.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_7-message.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_icon_cool.gif">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_8-freebsd_disklabel_editor.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_9-choose_distributions.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_10-choose_installation_media.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_11-user_confirmation_requested.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_12-message.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_13-user_confirmation_requested-configure_ethernet.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_14-network_interface_information_required.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_15-user_confirmation_requested-ipv6.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_16-user_confirmation_requested-dhcp.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_17-network_configuration.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_18-user_confirmation_requested-bring_interface.png">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_19-user_confirmation_requested-gateway.png">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_20-user_confirmation_requested-configure_inetd.png">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_21-user_confirmation_requested-ssh.png">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_22-user_confirmation_requested-ftp.png">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_23-user_confirmation_requested-nfs_server.png">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_24-user_confirmation_requested-nfs_client.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_25-user_confirmation_requested-console_settions.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_26-user_confirmation_requested-set_time_zone.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_27-select_clock.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_28-time_zone_selector.jpg">
+<meta property="og:image" content="http://wiki.freebsdchina.org/_media/howto/i/29-countries_in_asia.jpg">
+<meta property="og:image" content="http://wiki.freebsdchina.org/_media/howto/i/30-china_time_zones.jpg">
+<meta property="og:image" content="http://wiki.freebsdchina.org/_media/howto/i/31-confirmation.jpg">
+<meta property="og:image" content="http://wiki.freebsdchina.org/_media/howto/i/32-user_confirmation_requested-linux_binary_compatibility.jpg">
+<meta property="og:image" content="http://wiki.freebsdchina.org/_media/howto/i/33-user_confirmation_requested-set_mouse.jpg">
+<meta property="og:image" content="http://wiki.freebsdchina.org/_media/howto/i/34-user_confirmation_requested-package.jpg">
+<meta property="og:image" content="http://wiki.freebsdchina.org/_media/howto/i/35-user_confirmation_requested-add_user.jpg">
+<meta property="og:image" content="http://wiki.freebsdchina.org/_media/howto/i/36-user_confirmation_requested-user_and_group_management.jpg">
+<meta property="og:image" content="http://wiki.freebsdchina.org/_media/howto/i/37-user_confirmation_requested-user_and_group_management-add_user.jpg">
+<meta property="og:image" content="http://wiki.freebsdchina.org/_media/howto/i/38-user_confirmation_requested-exit.jpg">
+<meta property="og:image" content="http://wiki.freebsdchina.org/_media/howto/i/39-message.jpg">
+<meta property="og:image" content="http://wiki.freebsdchina.org/_media/howto/i/40-root_password.jpg">
+<meta property="og:image" content="http://wiki.freebsdchina.org/_media/howto/i/41-user_confirmation_requested-configuration_menu.jpg">
+<meta property="og:image" content="http://wiki.freebsdchina.org/_media/howto/i/42-exit_install.jpg">
+<meta property="og:image" content="http://wiki.freebsdchina.org/_media/howto/i/43-remve_cd.jpg">
+<meta property="article:published_time" content="2010-05-16T07:43:00.000Z">
+<meta property="article:modified_time" content="2025-01-24T06:26:09.572Z">
+<meta property="article:author" content="key1088">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://key1088.github.io/images/pic/other_site/wiki_freebsdchina_0-welcome_to_freebsd.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="key1088 Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">key1088 Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">2020到2060会发生什么，这40年内会有哪些变化呢</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://key1088.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-FreeBSD-安装教程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/05/16/FreeBSD-%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2010-05-16T07:43:00.000Z" itemprop="datePublished">2010-05-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      FreeBSD 安装教程
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><a name="freebsd_安装教程">FreeBSD 安装教程</a><p>本文以安装 FreeBSD 7.1 (i386) 为示范</p><p>转载来源：<a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/howto/i/installbsd">http://wiki.freebsdchina.org/howto/i/installbsd</a></p><p>帮助英语不好的朋友和初学FessDSB的朋友们</p><p>本人其实也是刚开始学用FreeBSD的菜鸟,由于时间空闲,所以想为FreeBSD尽点微薄之力,下文中可能有大量的错误,请老鸟们指正,免得让我误人 子弟.</p><a name="freebsd_的下载">FreeBSD 的下载</a><p>大家可以到 <a target="_blank" href="http://www.freebsdchina.org/" title="http://www.freebsdchina.org" rel="nofollow noopener">http://www.freebsdchina.org</a>  的首页上选择下载,如果只是mini安装的话,只需下载 Disk1 (第一张光盘)就足够了 下载中大家可能看到有  i386和amd64两种版本，i386是32位的操作系统，amd64是64位的操作系统，amd64并不是表示只能使用在amd公司产的64位的系统 上，Intel的相关x86架构上的64位系统也可以使用。 （希望了解相关知识的老鸟们补充一下相关的知识） <a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/howto/a/amd64_list" title="howto:a:amd64_list">支持 FreeBSD amd64 的CPU例表</a></p><a name="基本安装过程">基本安装过程</a><p>OK,让我们开始FreeBSD之旅,直接敲回车,开始安装.</p><a name="第一步_选择启动模式">第一步：选择启动模式</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/0-welcome_to_freebsd.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:0-welcome_to_freebsd.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_0-welcome_to_freebsd.jpg" /></a></p><p>上图的内容为； <br />1.启动FreeBSD [默认选项] <br />2.启动FreeBSD，禁用ACPI <br />3.安全模式启动FreeBSD <br />4.单用户模式启动FreeBSD <br />5……..偶也不知道 verbose loggin是啥 <img src="/images/pic/other_site/wiki_freebsdchina_icon_sad.gif" alt=":-(" /> <br />6.进入启动指令模式（翻译的可能有点问题）<br />7.重启</p><a name="第二步_选择国家">第二步：选择国家</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/1-country_selection.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:1-country_selection.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_1-country_selection.jpg" /></a></p><p>我们当然是选择China了，如果选择呢，只要使用上下移动键就可以上下移动(我总感觉这句像废话)。移动键在我们键盘的最右手边的一排小键盘的左边，那 四个单独在一起的键，如果你分不清左右的话，我建议你还是拿根绳子自已找棵树吧</p><p>有的朋友可能要问，我已经选好了[China]了，怎么选择 [OK] 或 [Cancel]  呢，只需要按[Tab]键就行了，就可以在两者之间切换，如果你以前不知道，多按几下就明白了，光标会移动到你要进行操作的项目上去的。OK,如果你现在 会了,并能举一反三了,那说明你的智商至少70分以上</p><a name="第三步选择键盘类型">第三步:选择键盘类型</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/2-system_conole_keymap.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:2-system_conole_keymap.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_2-system_conole_keymap.jpg" /></a></p><p>我们选择[USA <acronym title="International Organization for Standardization">ISO</acronym>]  美式标准键盘</p><a name="第四步_进入安装菜单">第四步：进入安装菜单</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/3-sysinatall_main_menu.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:3-sysinatall_main_menu.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_3-sysinatall_main_menu.jpg" /></a></p><p>我们选择[Standard]进行安装，如果你想了解更多的关于sysinstall Main Menu的信息请点击<a target="_blank" href="http://wiki.freebsdchina.org/howto/i/install/s/sysinstall_main_menu" title="howto:i:install:s:sysinstall_main_menu" rel="nofollow noopener">sysinstall_main_menu</a></p><a name="第五步提示信息">第五步:提示信息</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/4-message.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:4-message.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_4-message.jpg" /></a></p><p>翻译如下:xxxxx…..English Good的过来帮忙翻译一下 <img src="/images/pic/other_site/wiki_freebsdchina_icon_cool.gif" alt="8-)" /></p><a name="第六步硬盘分区">第六步:硬盘分区</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/5-fdisk_partition_editor.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:5-fdisk_partition_editor.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_5-fdisk_partition_editor.jpg" /></a></p><p>这里,我们选择[A],键盘上按一下a键,表示使用全部硬盘空间,做完所有操作后,要退出此界面,只需按一下q键,就退出,并进入下一步</p><p>如果你想了解更多的此界面包含的信息，请点击这里<a target="_blank" href="http://wiki.freebsdchina.org/howto/i/install/f/fdisk_partition_editor" title="howto:i:install:f:fdisk_partition_editor" rel="nofollow noopener">fdisk_partition_editor</a></p><a name="第七步_启动模式">第七步：启动模式</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/6-install_boot_manager_for_drive_ad0.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:6-install_boot_manager_for_drive_ad0.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_6-install_boot_manager_for_drive_ad0.jpg" /></a></p><p>选择[Standard]，直接使用MBR启动 <br />BootMgr,使用FreeBSD的启动管理，如果你要安装其它操作系统，使用此项 <br />Standard 直接使用MBR模式，不使用启动管理器，如果你一个硬盘只使用FreeBSD一个操作系统的话，使用此项</p><a name="第八步提示信息">第八步:提示信息</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/7-message.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:7-message.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_7-message.jpg" /></a></p><p>翻译如下:xxxxx…..English Good的过来帮忙翻译一下 <img src="/images/pic/other_site/wiki_freebsdchina_icon_cool.gif" alt="8-)" /></p><a name="第九步_分区标签_这里不知道怎么翻译_硬盘标签">第九步：分 区标签？？（这里不知道怎么翻译，硬盘标签？？）</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/8-freebsd_disklabel_editor.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:8-freebsd_disklabel_editor.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_8-freebsd_disklabel_editor.jpg" /></a></p><p>OK，我们现在要对使用的硬盘空间进行….不知道怎么说了，分区吧，就当成分区吧 -<em>-!</p><p>当我们选定(利用上下移动键) [Disk: ad0 Partition name:ad0s1 Free: XXX blocks (xxx <acronym title="Megabyte">MB</acronym>)]之后，可以使用a键进行自动配置，如果全部操作完成，需要退出此界面，进入下一步，按 q键，退出</p><p>如果你想了解更多的此界面包含的信息，请点击这里<a target="_blank" href="http://wiki.freebsdchina.org/howto/i/install/d/disklabel_editor" title="howto:i:install:d:disklabel_editor" rel="nofollow noopener">disklabel_editor</a></p><a name="第十步choose_distributions_谁为帮忙翻译一下吧">第十步:Choose Distributions  (谁为帮忙翻译一下吧)</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/9-choose_distributions.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:9-choose_distributions.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_9-choose_distributions.jpg" /></a></p><p>我们这里选择[Minmal]进行最小化安装.</p><p>如果你想了解更多的此界面包含的信息，请点击这里<a target="_blank" href="http://wiki.freebsdchina.org/howto/i/install/c/choose_distributions" title="howto:i:install:c:choose_distributions" rel="nofollow noopener">choose_distributions</a></p><a name="第十一步_选择从哪里安装">第十一步：选择从哪里安装</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_
+detail/howto/i/10-choose_installation_media.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:10-choose_installation_media.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_10-choose_installation_media.jpg" /></a></p><p>1. CD&#x2F;DVD 从CD&#x2F;DVD上安装<br />2. <acronym title="File Transfer Protocol">FTP</acronym>  从FTP服务器进行安装,如果你的网速够快的话，可以从官方Ftp网站进行网络安装<br />3. <acronym title="File Transfer Protocol">FTP</acronym>  透过防火墙从FTP服务器进行安装<br />4. <acronym title="Hyper Text Transfer Protocol">HTTP</acronym>  通过http代理服务器从FTP服务器进行安装,这里还是从FTP服务器安装，只是使用了HTTP代理<br />5. DOS 从一个DOS分区进行安装<br />6. NFS 通过 NFS进行安装？？<br />7. File System 偶也不是很明白<br />8. Floppy 从软盘进行安装。<br />9. Tape 从磁带机上进行安装</p><p>我们当然是选择 [CD&#x2F;DVD] 了</p><a name="第十二步警告提示信息">第十二步:警告提示信息</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/11-user_confirmation_requested.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:11-user_confirmation_requested.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_11-user_confirmation_requested.jpg" /></a></p><p>选择[YES]<br />以上内容翻译如下:……..</p><a name="第十三步提示信息">第十三步:提示信息</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/12-message.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:12-message.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_12-message.jpg" /></a></p><p>以上内容翻译如下:……..</p><a name="第十四步网络配置">第十四步:网络配置</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/13-user_confirmation_requested-configure_ethernet.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:13-user_confirmation_requested-configure_ethernet.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_13-user_confirmation_requested-configure_ethernet.jpg" /></a></p><p>选择[YES]，我们进行网络配置</p><a name="第十五步选择网络接口">第十五步:选择网络接口</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/14-network_interface_information_required.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:14-network_interface_information_required.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_14-network_interface_information_required.jpg" /></a></p><p>em0 是我的网卡，你的网卡可能是其它，如果被FreeBSD识别出来的话，第一项就是配置网卡<br />plip0 <br />sl0 <br />ppp0 <br />sl0 <br />ppp0</p><p>我们进行网卡设置。选择[em0],注意，你的可能是其它值</p><a name="第十六步是否使用ipv6">第十六步:是否使用IPv6</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/15-user_confirmation_requested-ipv6.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:15-user_confirmation_requested-ipv6.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_15-user_confirmation_requested-ipv6.jpg" /></a></p><p>选择[NO],我也很想用哪,可现在的网络不支持哪</p><a name="第十七步_是否使用_dhcp_来获得网络配置">第十七步：是否 使用 DHCP 来获得网络配置</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/16-user_confirmation_requested-dhcp.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:16-user_confirmation_requested-dhcp.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_16-user_confirmation_requested-dhcp.jpg" /></a></p><p>选择[NO]  (因为我的网络没有DHCP服务器)</p><a name="第十八步_网卡配置">第十八步：网卡配置</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/17-network_configuration.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:17-network_configuration.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_17-network_configuration.jpg" /></a></p><p>Host:你的这台主机的名称，你可以填你想要的名称<br />Domain:这里填写你的域名（如果你没有域名的话，我也不知道填什么，知道的兄弟请告诉一下）<br />IPv4 Gateway:网关IP<br />Name Server:名称服务器（你的DNS服务器）<br />IPv4 Address：此机的IP地址，这个你自已设定了<br />NetMask: 子网掩码，这个要问一下你的网络管理员，如果是254台机器的常见的局域网的话，就是255.255.255.0<br />Extra options to ifconfig: 偶也不知道这里填什么，反正空着就是了</p><a name="第十九步是否现在启用网络接口">第十九步:是否现在启用网络接口</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/18-user_confirmation_requested-bring_interface.png?id=howto%3Ai%3Ainstallbsd" title="howto:i:18-user_confirmation_requested-bring_interface.png"><img src="/images/pic/other_site/wiki_freebsdchina_18-user_confirmation_requested-bring_interface.png" /></a></p><p>选择[YES],上面的图示错了,要选[YES]</p><a name="第二十步是否做为网关">第二十步:是否做为网关</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/19-user_confirmation_requested-gateway.png?id=howto%3Ai%3Ainstallbsd" title="howto:i:19-user_confirmation_requested-gateway.png"><img src="/images/pic/other_site/wiki_freebsdchina_19-user_confirmation_requested-gateway.png" /></a></p><p>选择[NO]</p><a name="第二十一步是否设置inetd的配置">第二十一步:是否设置inetd的配 置</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/20-user_confirmation_requested-configure_inetd.png?id=howto%3Ai%3Ainstallbsd" title="howto:i:20-user_confirmation_requested-configure_inetd.png"><img src="/images/pic/other_site/wiki_freebsdchina_20-user_confirmation_requested-configure_inetd.png" /></a></p><p>选择[NO],这个是用来配置inetd的,相当于WINDOWS里控制面板里的 [服务]</p><a name="第二十三步是否启用ssh">第二十三步:是否启用SSH</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/21-user_confirmation_requested-ssh.png?id=howto%3Ai%3Ainstallbsd" title="howto:i:21-user_confirmation_requested-ssh.png"><img src="/images/pic/other_site/wiki_freebsdchina_21-user_confirmation_requested-ssh.png" /></a></p><p>选择[YES]，因为我们要用SSH来远程控制服务器（大家都是懒人，免得老是往机房里跑了,受辐射不说，还瘦上两斤肉）</p><a name="第二十三步是否启用_ftp_服务">第二十三步:是否启用 FTP 服务</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/22-user_confirmation_requested-ftp.png?id=howto%3Ai%3Ainstallbsd" title="howto:i:22-user_confirmation_requested-ftp.png"><img src="/images/pic/other_site/wiki_freebsdchina_22-user_confirmation_requested-ftp.png" /></a></p><p>选择[NO],如果你要开启FTP服务器的话,选择YES</p><a name="第二十四步是启做为nfs服务器">第二十四步:是启做为NFS服务器</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/23-user_confirmation_requested-nfs_server.png?id=howto%3Ai%3Ainstallbsd" title="howto:i:23-user_confirmation_requested-nfs_server.png"><img src="/images/pic/other_site/wiki_freebsdchina_23-user_confirmation_requested-nfs_server.png" /></a></p><p>选择[NO],偶们不想要它做为NFS 服务器</p><a name="第二十五步是否启用nfs客户端功能">第二十五步:是否启用NFS客户端功 能</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/24-user_confirmation_requested-nfs_client.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:24-user_confirmation_requested-nfs_client.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_24-user_confirmation_requested-nfs_client.jpg" /></a></p><p>偶们还是选择[NO]</p><a name="第二十六步是否定制控制台设定">第二十六步:是否定制控制台设定????</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/25-user_confirmation_requested-console_settions.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:25-user_confirmation_requested-console_settions.
+jpg"><img src="/images/pic/other_site/wiki_freebsdchina_25-user_confirmation_requested-console_settions.jpg" /></a></p><p>[NO]</p><a name="第二十七步是否设置时区">第二十七步:是否设置时区</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/26-user_confirmation_requested-set_time_zone.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:26-user_confirmation_requested-set_time_zone.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_26-user_confirmation_requested-set_time_zone.jpg" /></a></p><p>[YES],这里我们将选择我们的时区，我们是中国北京时间</p><a name="第二十八步_选择_本地_或_utc_时间">第二十八步：选择 本地  或 UTC 时间</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/27-select_clock.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:27-select_clock.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_27-select_clock.jpg" /></a></p><p>这里我们选择[NO] 注： 世界协调时间(Universal Time Coordinated,UTC) <br />GPS  系统中有两种时间区分，一为UTC，另一为LT（地方时）两者的区别为时区不同，UTC就是0时区的时间，地方时为本地时间，如北京为早上八点（东八 区），UTC时间就为零点，时间比北京时晚八小时，以此计算即可</p><a name="第二十九步_选择所在洲">第二十九步：选择所在洲</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/28-time_zone_selector.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:28-time_zone_selector.jpg"><img src="/images/pic/other_site/wiki_freebsdchina_28-time_zone_selector.jpg" /></a></p><p>[5 Asia] 我们选择亚洲,如果你不在亚洲的话，选择你所有的地区</p><a name="第三十步_选择国家或地区">第三十步：选择国家或地区</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/29-countries_in_asia.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:29-countries_in_asia.jpg"><img src="http://wiki.freebsdchina.org/_media/howto/i/29-countries_in_asia.jpg" /></a></p><p>[9 China] 这里选择的有国家,也有地区,比如Hong Kong,是China的一部分,是一个地区</p><a name="第三十一步选择时区">第三十一步:选择时区</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/30-china_time_zones.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:30-china_time_zones.jpg"><img src="http://wiki.freebsdchina.org/_media/howto/i/30-china_time_zones.jpg" /></a></p><p>我们中国大陆人民用的是 [1 east China - Beijin,Guangdong,Shanghai,etc .] 北京时间</p><a name="第三十二步选择是否使用短写模式的时间">第三十二步:选择是否使用短写模 式的时间???</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/31-confirmation.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:31-confirmation.jpg"><img src="http://wiki.freebsdchina.org/_media/howto/i/31-confirmation.jpg" /></a></p><p>这个按自已的需要选择,YES表示使用短写的时间模式???</p><a name="第三十三步是否使用linux_binary_compatibility">第三十三步:是否使用Linux binary  compatibility</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/32-user_confirmation_requested-linux_binary_compatibility.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:32-user_confirmation_requested-linux_binary_compatibility.jpg"><img src="http://wiki.freebsdchina.org/_media/howto/i/32-user_confirmation_requested-linux_binary_compatibility.jpg" /></a></p><p>由于…..(原因太多,我们就不一一例举了),所以我们要选择[YES],不然可能有部分Linux老爹生下的软件不能正常运行的</p><a name="第三十四步是否有ps2_serial_bus_的鼠标">第 三十四步:是否有PS&#x2F;2,serial,bus 的鼠标？？</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/33-user_confirmation_requested-set_mouse.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:33-user_confirmation_requested-set_mouse.jpg"><img src="http://wiki.freebsdchina.org/_media/howto/i/33-user_confirmation_requested-set_mouse.jpg" /></a></p><p>[NO],偶们不用mouse了</p><a name="第三十五步_这个偶也不知道有啥作用_以前没有碰到过">第 三十五步：这个偶也不知道有啥作用，以前没有碰到过</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/34-user_confirmation_requested-package.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:34-user_confirmation_requested-package.jpg"><img src="http://wiki.freebsdchina.org/_media/howto/i/34-user_confirmation_requested-package.jpg" /></a></p><p>偶是选择 [NO]，因为我也不知道是干嘛的，欢迎知道的来补充一下。</p><a name="第三十六步是否增加新用户">第三十六步:是否增加新用户</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/35-user_confirmation_requested-add_user.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:35-user_confirmation_requested-add_user.jpg"><img src="http://wiki.freebsdchina.org/_media/howto/i/35-user_confirmation_requested-add_user.jpg" /></a></p><p>[YES]<br />这里我们要增加一用户，因为我们启用了SSH,而默认情况下Root帐号是不能远程登陆SSH,所以我们这里要增加个wheel组的用户,让它来进行 SSH远程登陆</p><a name="第三十七步用户和组管理界面">第三十七步:用户和组管理界面</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/36-user_confirmation_requested-user_and_group_management.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:36-user_confirmation_requested-user_and_group_management.jpg"><img src="http://wiki.freebsdchina.org/_media/howto/i/36-user_confirmation_requested-user_and_group_management.jpg" /></a></p><p>[User]<br />这里我们增加个wheel组的用户</p><a name="第三十八步增加一用户">第三十八步:增加一用户</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/37-user_confirmation_requested-user_and_group_management-add_user.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:37-user_confirmation_requested-user_and_group_management-add_user.jpg"><img src="http://wiki.freebsdchina.org/_media/howto/i/37-user_confirmation_requested-user_and_group_management-add_user.jpg" /></a></p><p>这里要注意,Group和Member  groups输入wheel,这个用户用来远程SSH登陆,切记切记,一定要设个密码,不然你的服务器就会变成公共场所了</p><a name="第三十九步退出用户管理">第三十九步:退出用户管理</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/38-user_confirmation_requested-exit.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:38-user_confirmation_requested-exit.jpg"><img src="http://wiki.freebsdchina.org/_media/howto/i/38-user_confirmation_requested-exit.jpg" /></a></p><a name="第四十步提示信息">第四十步:提示信息</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/39-message.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:39-message.jpg"><img src="http://wiki.freebsdchina.org/_media/howto/i/39-message.jpg" /></a></p><p>大意是:设置一个ROOT帐号的密码</p><a name="第四十一步设置root帐号的密码">第四十一步:设置root帐号的密码</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/40-root_password.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:40-root_password.jpg"><img src="http://wiki.freebsdchina.org/_media/howto/i/40-root_password.jpg" /></a></p><p>一定要设的长一点哪,不过不要设完后自已也忘了密码 (偶就经常出这样的事故 -</em>-! )</p><a name="第四十二步不知道怎么翻译了">第四十二步: ….. 不知道怎么翻译了</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/41-user_confirmation_requested-configuration_menu.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:41-user_confirmation_requested-configuration_menu.jpg"><img src="http://wiki.freebsdchina.org/_media/howto/i/41-user_confirmation_requested-configuration_menu.jpg" /></a></p><a name="第四十三步退出安装">第四十三步:退出安装</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/42-exit_install.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:42-exit_install.jpg"><img src="http://wiki.freebsdchina.org/_me
+dia/howto/i/42-exit_install.jpg" /></a></p><p>选择[X Exit Instll]我们退出安装</p><a name="最后一步重启">最后一步:重启</a><p><a target="_blank" rel="noopener" href="http://wiki.freebsdchina.org/_detail/howto/i/43-remve_cd.jpg?id=howto%3Ai%3Ainstallbsd" title="howto:i:43-remve_cd.jpg"><img src="http://wiki.freebsdchina.org/_media/howto/i/43-remve_cd.jpg" /></a></p><p>这里要注意,一定要拿出光盘,后再选择[YES],切记切记</p><p>OK全文结束，累死我家毛驴了</p></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/05/16/FreeBSD-%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" data-id="cm6ae6bjn00f17cwi8soeb7cs" data-title="FreeBSD 安装教程" class="article-share-link">Teilen</a>
+      
+      
+        <a href="/2010/05/16/FreeBSD-%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2010/05/16/FreeBSD-%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" itemprop="commentCount"></span>
+          Kommentare
+        </a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2010/05/18/UID,EUID,GID,EGID%E7%9A%84%E5%85%B3%E7%B3%BB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          UID,EUID,GID,EGID的关系
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2010/05/14/LAMP%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%88Red-Hat-5%EF%BC%89BBS-Discuz-7.0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">LAMP环境搭建（Red Hat 5）BBS Discuz 7.0</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/">Oracle</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Perl%E7%BC%96%E7%A8%8B/">Perl编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/%E5%AE%B9%E5%99%A8/">容器</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Python%E7%BC%96%E7%A8%8B/">Python编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-dbx/" rel="tag">C;dbx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLaMA/" rel="tag">LLaMA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5-CTX/" rel="tag">MD5_CTX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alarm/" rel="tag">alarm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backup/" rel="tag">backup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fseek/" rel="tag">fseek</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftell/" rel="tag">ftell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gethostbyname/" rel="tag">gethostbyname</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jmp-buf/" rel="tag">jmp_buf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%BD%95%E9%9F%B3/" rel="tag">linux录音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/longjmp/" rel="tag">longjmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mimikatz/" rel="tag">mimikatz</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minikube/" rel="tag">minikube</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-%E8%84%9A%E6%9C%AC/" rel="tag">nginx;脚本</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openshift/" rel="tag">openshift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paas/" rel="tag">paas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qsort/" rel="tag">qsort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setjmp/" rel="tag">setjmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss-easyxss/" rel="tag">xss;easyxss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" rel="tag">云计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E9%9C%89%E6%B4%BE/" rel="tag">树霉派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/" rel="tag">音频降噪</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/C-dbx/" style="font-size: 10px;">C;dbx</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/LLaMA/" style="font-size: 10px;">LLaMA</a> <a href="/tags/MD5-CTX/" style="font-size: 10px;">MD5_CTX</a> <a href="/tags/alarm/" style="font-size: 10px;">alarm</a> <a href="/tags/backup/" style="font-size: 10px;">backup</a> <a href="/tags/fseek/" style="font-size: 10px;">fseek</a> <a href="/tags/ftell/" style="font-size: 10px;">ftell</a> <a href="/tags/gethostbyname/" style="font-size: 10px;">gethostbyname</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/jmp-buf/" style="font-size: 10px;">jmp_buf</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux%E5%BD%95%E9%9F%B3/" style="font-size: 10px;">linux录音</a> <a href="/tags/longjmp/" style="font-size: 10px;">longjmp</a> <a href="/tags/mimikatz/" style="font-size: 10px;">mimikatz</a> <a href="/tags/minikube/" style="font-size: 10px;">minikube</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx-%E8%84%9A%E6%9C%AC/" style="font-size: 10px;">nginx;脚本</a> <a href="/tags/openshift/" style="font-size: 10px;">openshift</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/paas/" style="font-size: 10px;">paas</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/qsort/" style="font-size: 10px;">qsort</a> <a href="/tags/setjmp/" style="font-size: 10px;">setjmp</a> <a href="/tags/xss-easyxss/" style="font-size: 10px;">xss;easyxss</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 10px;">云计算</a> <a href="/tags/%E6%A0%91%E9%9C%89%E6%B4%BE/" style="font-size: 10px;">树霉派</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/" style="font-size: 10px;">音频降噪</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/05/05/%E4%BD%BF%E7%94%A8LLAMA%E3%80%81llama.cpp%E6%90%AD%E5%BB%BA%E7%B1%BBChatGPT%E7%8E%AF%E5%A2%83/">使用LLAMA、llama.cpp搭建类ChatGPT环境</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/24/%E5%9C%A8%E4%BD%BF%E7%94%A8ChatGPT%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/">在使用ChatGPT中的一些感想</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/26/%E5%B7%B4%E8%8F%B2%E7%89%B9%E7%9A%84%E5%9F%BA%E7%A1%80%E6%8A%95%E8%B5%84%E7%90%86%E5%BF%B5%E8%AE%B0%E5%BD%95/">巴菲特的基础投资理念记录</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/26/Ubuntu-%E5%AE%89%E8%A3%85minikebe/">Ubuntu 安装minikebe</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        <a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2023016529号</a>
+      
+      &copy; 2025 key1088<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "G0tpuvaoHAtNY2tokxE4JdM8-gzGzoHsz",
+        appKey: "Mftb2MUOgwBc0nNzeiDK5OB4",
+        placeholder: "Just go go",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>linux 常见服务 | key1088 Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="&amp;nbsp; Linux&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;服务器在启动时需要启动很多系统服务，它们向本地和网络用户提供了Linux的系统功能接口，直接面向应用程序和用户。提供这些服务的程序是由运行在后台的守护进程（daemons）&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;来执行的。守护进程是生存期长的一种进程。它们独立于控制终端并且周期性的执行某种任务或等待处理某些发生的事件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux 常见服务">
+<meta property="og:url" content="https://key1088.github.io/2011/04/11/linux-%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/index.html">
+<meta property="og:site_name" content="key1088 Blog">
+<meta property="og:description" content="&amp;nbsp; Linux&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;服务器在启动时需要启动很多系统服务，它们向本地和网络用户提供了Linux的系统功能接口，直接面向应用程序和用户。提供这些服务的程序是由运行在后台的守护进程（daemons）&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;来执行的。守护进程是生存期长的一种进程。它们独立于控制终端并且周期性的执行某种任务或等待处理某些发生的事件。">
+<meta property="og:locale">
+<meta property="og:image" content="https://key1088.github.io/images/pic/8de818da5f4ed57b10df9b56.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/75ea2d2fbe422bbb8b139956.jpg">
+<meta property="og:image" content="https://key1088.github.io/images/pic/96e6d3ef3b8ee17063d09f56.jpg">
+<meta property="article:published_time" content="2011-04-11T01:23:00.000Z">
+<meta property="article:modified_time" content="2025-01-24T06:26:09.592Z">
+<meta property="article:author" content="key1088">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://key1088.github.io/images/pic/8de818da5f4ed57b10df9b56.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="key1088 Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">key1088 Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">2020到2060会发生什么，这40年内会有哪些变化呢</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://key1088.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-linux-常见服务" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/04/11/linux-%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" class="article-date">
+  <time class="dt-published" datetime="2011-04-11T01:23:00.000Z" itemprop="datePublished">2011-04-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      linux 常见服务
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>&nbsp; <a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>Linux</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;服务器在启动时需要启动很多系统服务，它们向本地和网络用户提供了Linux的系统功能接口，直接面向应用程序和用户。提供这些服务的程序是由运行在后台的守护进程（daemons）</p><p>&nbsp;&nbsp;&nbsp;&nbsp;来执行的。守护进程是生存期长的一种进程。它们独立于控制终端并且周期性的执行某种任务或等待处理某些发生的事件。他们常常在系统引导装入时启动，在系统</p><p>&nbsp;&nbsp;&nbsp;&nbsp;关闭时终止。linux系统有很多守护进程，大多数服务器都是用守护进程实现的。同时，守护进程完成许多系统任务，比如，作业规划进程crond、打印进</p><p>&nbsp;&nbsp;&nbsp;&nbsp;程lqd等。有些书籍和资料也把守护进程称作：“服务”。选择运行哪些守护进程，要根据具体需求决定。查看系统可以提供的守护进程对应的服务，使用下面方</p><p>&nbsp;&nbsp;&nbsp;&nbsp;法，以root权限运行： </p><p>&nbsp;&nbsp;&nbsp;&nbsp;#ntsysv</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/pic/8de818da5f4ed57b10df9b56.jpg" /></p><p>&nbsp;&nbsp;&nbsp;&nbsp; </p><p>&nbsp;&nbsp;&nbsp;&nbsp;   图1 可以选择的系统服务 </p><p>&nbsp;&nbsp;&nbsp;&nbsp; 界面如图1所示的窗口，下面详细介绍一下各项系统服务的功能。以英文字母为序： </p><p>&nbsp;&nbsp;&nbsp;&nbsp;    一、Linux守护进程简介</p><p>&nbsp;&nbsp;&nbsp;&nbsp;1.alsasound</p><p>&nbsp;&nbsp;&nbsp;&nbsp;：Alsa声卡驱动守护程序。Alsa声卡驱动程序本来是为了 一种声卡Gravis UltraSound(GUS)而写的，该程序被证</p><p>&nbsp;&nbsp;&nbsp;&nbsp;明很优秀，于是作者就开始为一般的声卡写 驱动程序。 Alsa和OSS/Free 及OSS/Linux兼容，但是有自己的接</p><p>&nbsp;&nbsp;&nbsp;&nbsp;口，甚至比OSS优秀。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;2.acpid：acpid（Advanced Configuration and Power Interface）是为替代传统的</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://wiki.ccw.com.cn/APhttp://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>AP</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;M电源管理标准而推出的新型电源管理标准。通常笔记本电脑需要启动电源进行管理。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;3.atalk：AppleTalk网络守护进程。注意不要在后台运行该程序，该程序的数据结构必须在运行其他进程前先花一定时间初始化。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;4.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://topic.ccw.com.cn/corpCenter/592.htmlhttp://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>amd</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;： 自动安装NFS守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;5.anacron：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;一个自动化运行任务守护进程。Red Hat Linux 随带四个自动化任务的工具：cron、 anacron、at、和</p><p>&nbsp;&nbsp;&nbsp;&nbsp;batc。当你的Linux服务器并不是全天运行，这个anacron就可以帮你执行在&quot;crontab&quot;设定的时间内没有执行的工作。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;6.apmd：apmd（Advanced Power Management）是高级电源管理。传统的电源管理标准，对于笔记本电脑比较有用，可以了解系统的电池电量信息。并将相关信息通过syslogd 写入日志。也可以用来在电源不足时关机。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;7.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>arp</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;tables_jf ：为arptables网络的用户控制过滤的守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;8.arpwatch： 记录日志并构建一个在LAN接口上看到的以太网地址和IP地址对<strong></strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"></a></strong><strong>数据库</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong> 。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;atd：at和batch命令守护进程，用户用at命令调度的任务。Batch用于在系统负荷比较低时  运行批处理任务。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;9.autofs：自动安装管理进程automount，与NFS相关，依赖于NIS服务器。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;10.bootparamd：引导参数服务器，为LAN上的无盘工作站提供引导所需的相关信息。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;11.bluetooch：蓝牙服务器守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;12.crond ：cron是</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>Unix</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;下的一个传统程序，该程序周期地运行用户 调度的任务。比起传统的Unix版本，Linux版本添加了不少属性，而且更安全，配置更简单。类似计划任务。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;13.chargen：使用tcp协议的chargen server，chargen（Character Generator  </p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>Pro</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;tocol）是一种网络服务，主要功能是提供类似远程打字的功能。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;14.chargen-udp：使用UDP协议的chargen server。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;15.cpuspeed：监测系统空闲百分比，降低或加快CPU时钟速度和电压从而在系统空闲时将能源消耗降为最小，而在系统繁忙时最大化加快系统执行速度。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;16.dhcpd：动态主机控制协议(Dynamic Host Control Protocol)的服务守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;17.cups： cups(Common UNIX Printing System)是通用UNIX打印守护进程，为Linux提供第三代打印功能。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;18.cups－config－daemons：cups打印系统切换守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;19.cups-lpd：cups行打印守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;20.daytime：使用TCP 协议的Daytime守护进程，该协议为客户机实现从远程服务器获取日期 和时间的功能。预设端口：13。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;21.daytime-udp：使用UDP 协议的Daytime守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;22.dc_server：使用SSL安全套接字的代理服务器守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;23.dc_cl</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>ie</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;nt：使用SSL安全套接字的客户端守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;24.diskdump：服务器磁盘备份守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;25.echo：服务器回显客户数据服务守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;26.echo-udp：使用UDP协议的服务器回显客户数据服务守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;27.eklogin：接受rlogin会话鉴证和用kerberos5加密的一种服务的守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;28.gated ：网关路由守护进程。它支持各种路由协议，包括RIP版本1和2、DCN HELLO协议、 OSPF版本2以及EGP版本2到4。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;29.gpm：gpm（General Purpose Mouse Daemon ）守护进程为文本模式下的Linux程序如mc(Midnight Commander)提供了鼠标的支持。它也支持控制台下鼠标 的拷贝，粘贴操作以及弹出式菜单。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;30.gssftp： 使用kerberos 5认证的ftp守护进程</p><p>&nbsp;&nbsp;&nbsp;&nbsp;31.httpd：Web服务器Apache守护进程，可用来提供HTML文件以 及CGI动态内容服务。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;32.inetd ：因特网操作守护程序。监控网络对各种它管理的服务的需求，并在必要的时候启动相应的服务程序。在Redhat 和Mandrake linux中被
+xinetd代替。Debian, Slackware, </p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>SuSE</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;仍然使用。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;33.innd：Usenet新闻服务器守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;34.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>ii</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;im：中文输入法服务器守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;35.iptables：iptables防火墙守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;36.irda：红外端口守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;37.i</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>sd</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;n：isdn启动和中止服务守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;38.krb5－telnet:使用kerberos 5认证的telnet守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;39.klogin：远程登陆守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;40.keytable： 该进程的功能是转载在/etc/sysconfig/keyboards里定义的键盘映射表，该表可以通过kbdconfig工具进行选择。您应该使该程序处于激活状态。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;41.irqbalance：对多个系统处理器环境下的系统中断请求进行负载平衡的守护程序。如果你只安装了一个CPU，就不需要加载这个守护程序。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;42.kshell ：kshell守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;43.kudzu：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;硬件自动检测程序，会自动检测硬件是否发生变动，并相应进行硬件的添加、删除工作。当系统启动时，kudzu会对当前的硬件进行检测，并且和存储</p><p>&nbsp;&nbsp;&nbsp;&nbsp;在     </p><p>&nbsp;&nbsp;&nbsp;&nbsp;/etc/sysconfig/hwconf中的硬件信息进行对照，如果某个硬件从系统中被添加或者删除时，那么kudzu就会察觉到，并且通知用户是否</p><p>&nbsp;&nbsp;&nbsp;&nbsp;进行相关配置，然后修改etc/sysconfig/hwconf，使硬件资料与系统保持同步。如果/etc/sysconfig/hwconf这个文件</p><p>&nbsp;&nbsp;&nbsp;&nbsp;不存在，那么kudzu将会从/etc/modprobe.conf，/etc/sysconfig/network-scripts/和</p><p>&nbsp;&nbsp;&nbsp;&nbsp;etc/X11/XF86Config中探测已经存在的硬件。如果你不打算增加新硬件，那么就可以关闭这个启动服务，以加快系统启动时间。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;44.ldap：ldap（Lightweight Directory Access Protocol）目录访问协议服务器守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;45.lm_ser</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>oem</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;s：检测主板工作情况守护进程。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;46.lpd ：lpd是老式打印守护程序，负责将lpr等程序提交给打印 作业。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;47.mdmonitor：RAID相关设备的守护程序。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;48.messagebus：D-</p><p>&nbsp;&nbsp;&nbsp;&nbsp;BUS是一个库，为两个或两个以上的应用程序提供一对一的通讯。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;dbus-daemon-1是一个应用程序，它使用这个库来实现messagebus守护程序。多个应用程序通过连接messagebus守护程序可以实</p><p>&nbsp;&nbsp;&nbsp;&nbsp;现与其他程序交换信息。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;49.microcode_ctl：可编码以及发送新的微代码到内核以更新</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>Intel</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp; IA32系列处理器守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;50.mysqld： 一个快速高效可靠的轻型SQL数据库引擎守护进程。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;51.named：DNS（BIND）服务器守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;52.netplugd：netplugd（network </p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>ca</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;ble hotplug management daemon）守护程序，用于监控一个或多个网络接口的状态，当某些事件触发时运行一个外部脚本程序。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;53.netdump：远程网络备份服务器守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;54.netfs：Network Filesystem Mounter，该进程安装和卸载NFS、SAMBA和NCP网络文件系统。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;55.nfs：网络文件系统守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;56.nfslock：NFS是一个流行的通过TCP/IP网络共享文件的协议，此守护进程提供了NFS文件锁定功能。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;57.ntpd：Network time Protocol daemon（网络时间校正协议）。ntpd是用来使系统和一个精确的时间源保持时间同步的协议守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;58.network：激活/关闭启动时的各个网络接口守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;59.psacct：该守护进程包括几个工具用来监控进程活动的工具，包括ac,lastcomm, accton 和sa。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;60.pcmcia：主要用于支持笔记本电脑接口守护进程。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;61.portmap：该守护进程用来支持RPC连接，RPC被用于NFS以及NIS 等服务。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;62.postgresql: PostgreSQL 关系数据库引擎。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;63.proftpd: proftpd 是Unix下的一个配置灵活的ftp服务器的守护程序。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;64.pppoe：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>ADSL</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;连接守护进程。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;65.random ：保存和恢复系统的高质量随机数生成器，这些随机数是系 统一些随机行为提供的。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;66.rawdevices：在使用集群文件系统时用于加载raw设备的守护进程。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;67.readahead、</p><p>&nbsp;&nbsp;&nbsp;&nbsp;readahead_early：readahead和readahead_early是在Fedora core</p><p>&nbsp;&nbsp;&nbsp;&nbsp;2中最新推出的两个后台运行的守护程序。其作用是在启动系统期间，将启动系统所要用到的文件首先读取到内存中，然后在内存中进行执行，以加快系统的启动速</p><p>&nbsp;&nbsp;&nbsp;&nbsp;度。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;68.rhnsd：Red Hat 网络服务守护进程。通知官方的安全信息以及为系统打补丁。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;69.routed ：该守护程序支持RIP协议的自动IP路由表维护。RIP主要 使用在小型网络上，大一点的网络就需要复杂一点的协议。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;70.rsync：remote sync远程数据备份守护进程。  </p><p>&nbsp;&nbsp;&nbsp;&nbsp;71.rsh ：远程主机上启动一个shell，并执行用户命令。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;72.rwhod： 允许远程用户获得运行rwho守护程序的机器上所有已登录用户的列表。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;73.rstatd：一个为LAN上的其它机器收集和提供系统信息的守候进程。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;74.ruserd：远程用户定位服务，这是一个基于RPC的服务，它提供关于当前记录到LAN上一个机器日志中的用户信息 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;75.rwalld：激活rpc.rwall服务进程，这是一项基于RPC的服务，允许用户给每个注册到LAN机器上的其他终端写消息 。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;76.rwhod：激活rwhod服务进程，它支持LAN的rwho和ruptime服务。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;77.saslauthd： 使用SASL的认证守护进程。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;78.sendmail：邮件服务器sendmail守护进程。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;79.smb：Samba文件共享/打印服务守护进程。</p><p>&nbsp;&nbsp
+;&nbsp;&nbsp;80.snmpd：本地简单网络管理守护进程。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;81.squid：代理服务器squid守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;82.sshd：OpenSSH服务器守护进程。Secure Shell Protocol可以实现安全地远程管理主机。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;83.smartd：Self Monitor Analysis and Reporting Technology System，监控你的</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>硬盘</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;是否出现故障。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;84.syslog：一个让系统引导时起动syslog和klogd系统日志守候进程的脚本。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;85.time ：该守护进程从远程主机获取时间和日期，采用TCP协议。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;86.time-udp： 该守护进程从远程主机获取时间和日期，采用UDP协议。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;87.tux：在Linux内核中运行apache服务器的守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;88.vsftpd：vsftpd服务器的守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;89.vncserver： VNC （Virtual Network Computing，虚拟网络计算），它提供了一种在本地系统上显示远程计算机整个&quot;桌面&quot;的轻量型协议。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;90.xfs：X Window字型服务器守护进程，为本地和远程X服务器提供字型集。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;91.xinetd：支持多种网络服务的核心守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;92.ypbind：为NIS（网络信息系统）客户机激活ypbind服务进程 。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;93.yppasswdd：NIS口令服务器守护进程。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;94.ypserv：NIS主服务器守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;95.yum：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>RPM</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;<strong></strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"></a></strong><strong>操作系统</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong>自动升级和软件包管理守护进程。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp; 二、守护进程工作原理和方式</p><p>&nbsp;&nbsp;&nbsp;&nbsp; 在Cl</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>ie</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;nt/Server模式下。服务器监听（Listen）在一个特定的端口上等待客户连接。连接成功后服务器和客户端通过端口进行数据通信。守护进程的工作就是打开一个端口，并且等待（Listen）进入连接。如果客户端产生一个连接请求，守护进程就创建（Fork）一个子服务器响应这个连接，而主服务器继续监听其他的服务请求。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;2.守护进程工作方式：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;（1）运行独立的守护进程</p><p>&nbsp;&nbsp;&nbsp;&nbsp; 独立运行的守护进程由init脚本负责管理，所有独立运行的守护进程的脚本在/etc/rc.d/init.d/目录下。系统服务都是独立运行的守护进程包括：syslogd和cron等。运行独立的守护进程工作方式称作：stand－alone。它</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>Unix</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;传</p><p>&nbsp;&nbsp;&nbsp;&nbsp;统的C/S模式的访问模式。服务器监听（Listen）在一个特点的端口上等待客户端的联机。如果客户端产生一个连接请求，守护进程就创建（Fork）一</p><p>&nbsp;&nbsp;&nbsp;&nbsp;个子服务器响应这个连接，而主服务器继续监听。以保持多个子服务器池等待下一个客户端请求。stand－alone模式工作原理见图1。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/pic/75ea2d2fbe422bbb8b139956.jpg" /></p><p>&nbsp;&nbsp;&nbsp;&nbsp; </p><p>&nbsp;&nbsp;&nbsp;&nbsp;          图1 stand－alone工作模式</p><p>&nbsp;&nbsp;&nbsp;&nbsp;工作在stand－alone模式下的网络服务有route、gated。另外是大家最熟悉是Web服务器：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>Ap</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;ache和邮件服务器Sendmail、域名服务器Bind。因为这些负载很大服务器上，预先创子服务器，可以通过客户的服务速度。在</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>Linux</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;系统中通过stand－alone工作模式启动的服务由/etc/rc.d/下面对应的运行级别当中的符号链接启动。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;（2）xinetd模式</p><p>&nbsp;&nbsp;&nbsp;&nbsp;从守护进程的概念可以看出，对于系统所要通过的每一种服务，都必须运行</p><p>&nbsp;&nbsp;&nbsp;&nbsp;一个监听某个端口连接所发生的守护进程，这通常意味着资源浪费。为了解决这个问题，Linux引进了“网络守护进程服务程序”的概念。Redhat</p><p>&nbsp;&nbsp;&nbsp;&nbsp;Linux 9.0使用的网络守护进程是xinted（eXtended InterNET</p><p>&nbsp;&nbsp;&nbsp;&nbsp;daemon）。和stand－alone模式相比xinted模式也称 Internet</p><p>&nbsp;&nbsp;&nbsp;&nbsp;Super－Server（超级服务器）。xinetd能够同时监听多个指定的端口，在接受用户请求时，他能够根据用户请求的端口不同，启动不同的网络服</p><p>&nbsp;&nbsp;&nbsp;&nbsp;务进程来处理这些用户请求。可以把xinetd看做一个管理启动服务的管理服务器，它决定把一个客户请求交给那个程序处理，然后启动相应的守护进程。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;xinetd模式工作原理见图3。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/pic/96e6d3ef3b8ee17063d09f56.jpg" /></p><p>&nbsp;&nbsp;&nbsp;&nbsp; </p><p>&nbsp;&nbsp;&nbsp;&nbsp;           图3  xinetd工作模式</p><p>&nbsp;&nbsp;&nbsp;&nbsp;和</p><p>&nbsp;&nbsp;&nbsp;&nbsp;stand－alone工作模式相比，系统不想要每一个网络服务进程都监听其服务端口。运行单个xinetd就可以同时监听所有服务端口，这样就降低了系</p><p>&nbsp;&nbsp;&nbsp;&nbsp;统开销，保护系统资源。但是对于访问量大、经常出现并发访问时，xinetd想要频繁启动对应的网络服务进程，反而会导致系统性能下降。察看系统为</p><p>&nbsp;&nbsp;&nbsp;&nbsp;Linux服务提供那种模式方法在Linux命令行可以使用pstree命令可以看到两种不同方式启动的网络服务。一般来说系统一些负载高的服</p><p>&nbsp;&nbsp;&nbsp;&nbsp;务：sendmail、Apache服务是单独启动的。而其他服务类型都可以使用xinetd超级服务器管理。查看目前运行的守护进程可以使用命</p><p>&nbsp;&nbsp;&nbsp;&nbsp;令：“pstree”</p><p>&nbsp;&nbsp;&nbsp;&nbsp;三、守护进程管理工具</p><p>&nbsp;&nbsp;&nbsp;&nbsp;Linux提供了三种不同的守护进程管理工具：redhat－config－services、ntsysv、chkconfig，可以根据具体需要灵活运用。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;（1） redhat－config－services</p><p>&nbsp;&nbsp;&nbsp;&nbsp; redhat－config－services</p><p>&nbsp;&nbsp;&nbsp;&nbsp;是一个一个图形化应用程序，它显示了每项服务的描述，以及每项服务是否在引导时启动（运行级别3、4、5），并允许你启动、停止、或重新启动/etc</p><p>&nbsp;&nbsp;&nbsp;&nbsp;/rc.d/init.d 中的哪些 SysV 服务，哪些 xinetd 服务。要从桌面启动服务配置工具，点击面板上的「主菜单」 =&gt;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;「系统设置」 =&gt; 「服务器设置」 =&gt; 「服务」，或在 shell</p><p>&nbsp;&nbsp;&nbsp;&nbsp;提示下，键入命令：“redhat-config-services” （见图4）。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;<i
+mg src="/images/pic/0d2a1924d14d7554908f9d56.jpg" /></p><p>&nbsp;&nbsp;&nbsp;&nbsp;  </p><p>&nbsp;&nbsp;&nbsp;&nbsp;    图4 redhat-config-services配置工具</p><p>&nbsp;&nbsp;&nbsp;&nbsp; redhat-</p><p>&nbsp;&nbsp;&nbsp;&nbsp;config-services列出了 /etc/rc.d/init.d 中的服务和由 xinetd</p><p>&nbsp;&nbsp;&nbsp;&nbsp;控制的服务。点击左侧列表中的服务名来显示该服务的简短描述以及它的服务状态。如果这个服务不是 xinetd</p><p>&nbsp;&nbsp;&nbsp;&nbsp;服务，状态窗口会显示该服务目前是否在运行。如果该服务被 xinetd 所控制，状态窗口会显示「xinetd</p><p>&nbsp;&nbsp;&nbsp;&nbsp;服务」这个短语。要立即启动、停止、或重新启动某项服务，从列表中选择该项服务，然后点击工具栏上的相应按钮（或从「行动」拉下菜单中选择行动）。如果该</p><p>&nbsp;&nbsp;&nbsp;&nbsp;服务是一个 xinetd 服务，行动按钮会被禁用，因为它们不能被单个地启动或停止。 如果你通过选择或取消选择服务名旁的复选箱来启用或禁用了</p><p>&nbsp;&nbsp;&nbsp;&nbsp;xinetd 服务，你必须从拉下菜单中选择「文件」 =&gt; 「保存改变」来重新启动 xinetd，并立即启用或禁用你所改变的 xinetd</p><p>&nbsp;&nbsp;&nbsp;&nbsp;服务。xinetd 还被配置成自动记忆设置。你可以同时启用或禁用多个 xinetd 服务，在结束后再保存改变。</p><p>&nbsp;&nbsp;&nbsp;&nbsp; （2）ntsysv </p><p>&nbsp;&nbsp;&nbsp;&nbsp; ntsysv</p><p>&nbsp;&nbsp;&nbsp;&nbsp;工具为激活或停运服务提供了简单的界面。你可以使用 ntsysv 来启动或关闭由 xinetd 管理的服务。你还可以使用 ntsysv</p><p>&nbsp;&nbsp;&nbsp;&nbsp;来配置运行级别。按照默认设置，只有当前运行级别会被配置。要配置不同的运行级别，使用 --level 选项来指定一个或多个运行级别。譬如，命令</p><p>&nbsp;&nbsp;&nbsp;&nbsp;ntsysv --level 345 配置运行级别3、4、和5。 ntsysv</p><p>&nbsp;&nbsp;&nbsp;&nbsp;的工作界面见图1。使用上下箭头来上下查看列表。使用空格键来选择或取消选择服务，或用来“按”「确定」和「取消」按钮。要在服务列表和「确定」、「取</p><p>&nbsp;&nbsp;&nbsp;&nbsp;消」按钮中切换，使用 [Tab]键。* 标明某服务被设为启动。[F1] 键会弹出每项服务的简短描述。 </p><p>&nbsp;&nbsp;&nbsp;&nbsp;(3)chkconfig </p><p>&nbsp;&nbsp;&nbsp;&nbsp; chkconfig</p><p>&nbsp;&nbsp;&nbsp;&nbsp;命令也可以用来激活和解除服务。chkconfig --list</p><p>&nbsp;&nbsp;&nbsp;&nbsp;命令显示系统服务列表，以及这些服务在运行级别0到6中已被启动（on）还是停止（off）。chkconfig</p><p>&nbsp;&nbsp;&nbsp;&nbsp;还能用来设置某一服务在某一指定的运行级别内被启动还是被停运。譬如，要在运行级别3、4、5中停运 nfs 服务，使用下面的命令： </p><p>&nbsp;&nbsp;&nbsp;&nbsp;chkconfig --level 345 nfs off</p><p>&nbsp;&nbsp;&nbsp;&nbsp; 再结合一下脚本，需求不一样，自行修改。</p><p>&nbsp;&nbsp;&nbsp;&nbsp; http://hi.baidu.com/key1088/blog/item/1e1cc63231a703b95fdf0e71.html</p><p>&nbsp;&nbsp;&nbsp;&nbsp; 四、合理选择守护进程规避安全隐患</p><p>&nbsp;&nbsp;&nbsp;&nbsp; 运行不必要或有漏洞的守护进程会给<strong></strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"></a></strong><strong>操作系统</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong>带</p><p>&nbsp;&nbsp;&nbsp;&nbsp;来安全和性能上的影响。对于系统安全来说，如果操作系统中的任何一个漏洞，都可能使整个系统受到攻击。所以，增加系统安全的最佳办法就是尽量监视系统的功</p><p>&nbsp;&nbsp;&nbsp;&nbsp;能。文章开始介绍了重要的守护进程，其中“crond、syslog、keytable、xinetd、kudzu、iptables”等是需要运行</p><p>&nbsp;&nbsp;&nbsp;&nbsp;的，echo、echo-udp、daytime、daytime-udp、chargen、chargen-udp主要是做调试用，普通用户基本用不</p><p>&nbsp;&nbsp;&nbsp;&nbsp;到，可以关闭。</p><p>&nbsp;&nbsp;&nbsp;&nbsp; r字开头的守护进程：rsh、rstatd、rsync、ruser</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://hi.baidu.com/key1088/creat/blog/linux%26%2338%3Bunix" target="_blank" rel="noopener noreferrer"><strong>sd</strong></a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;、</p><p>&nbsp;&nbsp;&nbsp;&nbsp;rwalld这些命令都是Berkley远程命令，因为都以字母r开头，故称r*命令。主要使用来使一台计算机上的某个用户以相同的帐户远程执行另一台计</p><p>&nbsp;&nbsp;&nbsp;&nbsp;算机的一个程序。但是，r命令已经被证实存在安全风险。对于确实需要的守护进程，应该尽量选用最新的版本程序，并增加其安全防范。  </p><p>&nbsp;&nbsp;&nbsp;&nbsp; 另外我们还要合理选择守护进程例如innd是运行新闻组服务的进程，如果用户不做Usenet服务器，应该关掉。</p><p>&nbsp;&nbsp;&nbsp;&nbsp; </p><p>&nbsp;&nbsp;&nbsp;&nbsp;总结：</p><p>&nbsp;&nbsp;&nbsp;&nbsp; 基于开放源代码的Linux给用户提供了这样一个平台：可以根据自己的软、硬件环境，定制自己的Linux守护进程。因此，根据每个用户不同的应用范围定制应用环境，可以将Linux系统的安全和性能提升到新的高度。 </p><p>&nbsp;</p><p>&nbsp;</p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/04/11/linux-%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" data-id="cm6ae6bjo00f57cwigg8z5fr9" data-title="linux 常见服务" class="article-share-link">Teilen</a>
+      
+      
+        <a href="/2011/04/11/linux-%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2011/04/11/linux-%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" itemprop="commentCount"></span>
+          Kommentare
+        </a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2011/04/22/shell-%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E6%95%B0%E5%AD%97%E6%AF%94%E8%BE%83/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          shell 字符串、数字比较
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2011/04/10/%E7%94%A8perl-%E4%B8%8Bcgi-bin-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">用perl 下cgi-bin 注意事项</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/">Oracle</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Perl%E7%BC%96%E7%A8%8B/">Perl编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/%E5%AE%B9%E5%99%A8/">容器</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Python%E7%BC%96%E7%A8%8B/">Python编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-dbx/" rel="tag">C;dbx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLaMA/" rel="tag">LLaMA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5-CTX/" rel="tag">MD5_CTX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alarm/" rel="tag">alarm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backup/" rel="tag">backup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fseek/" rel="tag">fseek</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftell/" rel="tag">ftell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gethostbyname/" rel="tag">gethostbyname</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jmp-buf/" rel="tag">jmp_buf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%BD%95%E9%9F%B3/" rel="tag">linux录音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/longjmp/" rel="tag">longjmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mimikatz/" rel="tag">mimikatz</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minikube/" rel="tag">minikube</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-%E8%84%9A%E6%9C%AC/" rel="tag">nginx;脚本</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openshift/" rel="tag">openshift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paas/" rel="tag">paas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qsort/" rel="tag">qsort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setjmp/" rel="tag">setjmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss-easyxss/" rel="tag">xss;easyxss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" rel="tag">云计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E9%9C%89%E6%B4%BE/" rel="tag">树霉派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/" rel="tag">音频降噪</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/C-dbx/" style="font-size: 10px;">C;dbx</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/LLaMA/" style="font-size: 10px;">LLaMA</a> <a href="/tags/MD5-CTX/" style="font-size: 10px;">MD5_CTX</a> <a href="/tags/alarm/" style="font-size: 10px;">alarm</a> <a href="/tags/backup/" style="font-size: 10px;">backup</a> <a href="/tags/fseek/" style="font-size: 10px;">fseek</a> <a href="/tags/ftell/" style="font-size: 10px;">ftell</a> <a href="/tags/gethostbyname/" style="font-size: 10px;">gethostbyname</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/jmp-buf/" style="font-size: 10px;">jmp_buf</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux%E5%BD%95%E9%9F%B3/" style="font-size: 10px;">linux录音</a> <a href="/tags/longjmp/" style="font-size: 10px;">longjmp</a> <a href="/tags/mimikatz/" style="font-size: 10px;">mimikatz</a> <a href="/tags/minikube/" style="font-size: 10px;">minikube</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx-%E8%84%9A%E6%9C%AC/" style="font-size: 10px;">nginx;脚本</a> <a href="/tags/openshift/" style="font-size: 10px;">openshift</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/paas/" style="font-size: 10px;">paas</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/qsort/" style="font-size: 10px;">qsort</a> <a href="/tags/setjmp/" style="font-size: 10px;">setjmp</a> <a href="/tags/xss-easyxss/" style="font-size: 10px;">xss;easyxss</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 10px;">云计算</a> <a href="/tags/%E6%A0%91%E9%9C%89%E6%B4%BE/" style="font-size: 10px;">树霉派</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/" style="font-size: 10px;">音频降噪</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/05/05/%E4%BD%BF%E7%94%A8LLAMA%E3%80%81llama.cpp%E6%90%AD%E5%BB%BA%E7%B1%BBChatGPT%E7%8E%AF%E5%A2%83/">使用LLAMA、llama.cpp搭建类ChatGPT环境</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/24/%E5%9C%A8%E4%BD%BF%E7%94%A8ChatGPT%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/">在使用ChatGPT中的一些感想</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/26/%E5%B7%B4%E8%8F%B2%E7%89%B9%E7%9A%84%E5%9F%BA%E7%A1%80%E6%8A%95%E8%B5%84%E7%90%86%E5%BF%B5%E8%AE%B0%E5%BD%95/">巴菲特的基础投资理念记录</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/26/Ubuntu-%E5%AE%89%E8%A3%85minikebe/">Ubuntu 安装minikebe</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        <a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2023016529号</a>
+      
+      &copy; 2025 key1088<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "G0tpuvaoHAtNY2tokxE4JdM8-gzGzoHsz",
+        appKey: "Mftb2MUOgwBc0nNzeiDK5OB4",
+        placeholder: "Just go go",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>

