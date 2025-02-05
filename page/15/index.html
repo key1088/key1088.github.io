@@ -67,10 +67,10 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://key1088.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://key1088.github.io"></form>
       </div>
     </div>
   </div>
@@ -78,6 +78,54 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-磁盘阵列的做法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/06/10/%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97%E7%9A%84%E5%81%9A%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2010-06-10T14:28:00.000Z" itemprop="datePublished">2010-06-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Windows/">Windows</a>►<a class="article-category-link" href="/categories/Windows/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/06/10/%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97%E7%9A%84%E5%81%9A%E6%B3%95/">磁盘阵列的做法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>RAID，为Redundant Arrays of Independent Disks的简称，中文为廉价冗余磁盘阵列。 <br /><br />磁盘阵列 其实也分为软阵列 (Software Raid)和硬阵列 (Hardware Raid) 两种.  软阵列即通过软件程序并由计算机的CPU提供运行能力所成. 由于软件程式不是一个完整系统故只能提供最基本的 RAID容错功能.  其他如热备用硬盘的设置, <br />远程管理等功能均一一欠奉. 硬阵列是由独立操作的硬件提供整个磁盘阵列的控制和计算功能.  不依靠系统的CPU资源. <br />由于硬阵列是一个完整的系统, 所有需要的功能均可以做进去. 所以硬阵列所提供的功能和性能均比软阵列好. 而且,  <br />如果你想把系统也做到磁盘阵列中, 硬阵列是唯一的选择. 故我们可以看市场上 RAID 5 级的磁盘阵列均为硬阵列. 软 <br />阵列只 适用于 Raid 0 和 Raid 1. 对于我们做镜像用的镜像塔, 肯定不会用 Raid 0或 Raid 1。 <br /><br /><br />作为高 性能的存储系统，巳经得到了越来越广泛的应用。RAID的级别从RAID概念的提出到现在，巳经发展了六个级别，其级别分别是0、1、2、3、4、5等。 但是最常用的是0、1、3、5四个级别。下面就介绍这四个级别。 <br /><br />RAID  0：将多个较小的磁盘合并成一个大的磁盘，不具有冗余，并行I&#x2F;O，速度最快。RAID  0亦称为带区集。它是将多个磁盘并列起来，成为一个大硬盘。在存放数据时，其将数据按磁盘的个数来进行分段，然后同时将这些数据写进这些盘中。 <br />所 以，在所有的级别中，RAID 0的速度是最快的。但是RAID 0没有冗余功能的，如果一个磁盘（物理）损坏，则所有的数据都无法使用。 <br /><br />RAID  1：两组相同的磁盘系统互作镜像，速度没有提高，但是允许单个磁盘错，可靠性最高。RAID  1就是镜像。其原理为在主硬盘上存放数据的同时也在镜像硬盘上写一样的数据。当主硬盘（物理）损坏时，镜像硬盘则代替主硬盘的工作。因为有镜像硬盘做数据 备份，所以RAID 1的数据安全性在所有的RAID级别上来说是最好的。但是其磁盘的利用率却只有50%，是所有RAID上磁盘利用率最低的一个级别。  <br /><br />RAID Level 3 <br /><br /><br />RAID 3存放数据的原理和RAID0、RAID1不同。RAID  3是以一个硬盘来存放数据的奇偶校验位，数据则分段存储于其余硬盘中。它象RAID 0一样以并行的方式来存放数，但速度没有RAID  0快。如果数据盘（物理）损坏，只要将坏硬盘换掉，RAID <br />控制系统则会根据校验盘的数据校验位在新盘中重建坏盘上的数据。不过，如果校验盘 （物理）损坏的话，则全部数据都无法使用。利用单独的校验盘来保护数据虽然没有镜像的安全性高，但是硬盘利用率得到了很大的提高，为n-1。 <br /><br />RAID  5：向阵列中的磁盘写数据，奇偶校验数据存放在阵列中的各个盘上，允许单个磁盘出错。RAID  5也是以数据的校验位来保证数据的安全，但它不是以单独硬盘来存放数据的校验位，而是将数据段的校验位交互存放于各个硬盘上。这样，任何一个硬盘损坏，都 可以根据其它硬盘上的校验位来重建损坏的数据。硬盘的利用率为n-1。 <br /><br />RAID 0－1：同时具有RAID 0和RAID 1的优点。  <br /><br />冗余：采用多个设备同时工作，当其中一个设备失效时，其它设备能够接替失效设备继续工作的体系。在PC服务器上，通常在磁盘子系统、电 源子系统采用冗余技术。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/06/10/%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97%E7%9A%84%E5%81%9A%E6%B3%95/" data-id="clgrjlxky009s7opi1z767ksb" data-title="磁盘阵列的做法" class="article-share-link">Share</a>
+      
+      
+        <a href="/2010/06/10/%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97%E7%9A%84%E5%81%9A%E6%B3%95/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2010/06/10/%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97%E7%9A%84%E5%81%9A%E6%B3%95/" itemprop="commentCount"></span>
+          Comments
+        </a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-liunx下VNCserver-桌面配置。。" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -110,12 +158,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/05/30/liunx%E4%B8%8BVNCserver-%E6%A1%8C%E9%9D%A2%E9%85%8D%E7%BD%AE%E3%80%82%E3%80%82/" data-id="cm6rieb64004siowifjsb9ofe" data-title="liunx下VNCserver 桌面配置。。" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/05/30/liunx%E4%B8%8BVNCserver-%E6%A1%8C%E9%9D%A2%E9%85%8D%E7%BD%AE%E3%80%82%E3%80%82/" data-id="clgrjlxht00467opi0d8p3h5w" data-title="liunx下VNCserver 桌面配置。。" class="article-share-link">Share</a>
       
       
         <a href="/2010/05/30/liunx%E4%B8%8BVNCserver-%E6%A1%8C%E9%9D%A2%E9%85%8D%E7%BD%AE%E3%80%82%E3%80%82/#comments" class="article-comment-link">
           <span class="post-comments-count valine-comment-count" data-xid="/2010/05/30/liunx%E4%B8%8BVNCserver-%E6%A1%8C%E9%9D%A2%E9%85%8D%E7%BD%AE%E3%80%82%E3%80%82/" itemprop="commentCount"></span>
-          Kommentare
+          Comments
         </a>
       
       
@@ -158,12 +206,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/05/30/Samba%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/" data-id="cm6rieb5c001kiowifu1dfr1c" data-title="Samba配置文件常用参数详解" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/05/30/Samba%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/" data-id="clgrjlxj3006d7opi3bo2dqx3" data-title="Samba配置文件常用参数详解" class="article-share-link">Share</a>
       
       
         <a href="/2010/05/30/Samba%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/#comments" class="article-comment-link">
           <span class="post-comments-count valine-comment-count" data-xid="/2010/05/30/Samba%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/" itemprop="commentCount"></span>
-          Kommentare
+          Comments
         </a>
       
       
@@ -206,12 +254,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/05/29/%E6%97%A0%E7%9B%98%E5%B7%A5%E4%BD%9C%E7%AB%99%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E9%AA%8C%E8%A6%81%E7%82%B9/" data-id="cm6rieb7g00b5iowiggj82saf" data-title="无盘工作站启动原理与实验要点" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/05/29/%E6%97%A0%E7%9B%98%E5%B7%A5%E4%BD%9C%E7%AB%99%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E9%AA%8C%E8%A6%81%E7%82%B9/" data-id="clgrjlxlr00b87opi3ak94p80" data-title="无盘工作站启动原理与实验要点" class="article-share-link">Share</a>
       
       
         <a href="/2010/05/29/%E6%97%A0%E7%9B%98%E5%B7%A5%E4%BD%9C%E7%AB%99%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E9%AA%8C%E8%A6%81%E7%82%B9/#comments" class="article-comment-link">
           <span class="post-comments-count valine-comment-count" data-xid="/2010/05/29/%E6%97%A0%E7%9B%98%E5%B7%A5%E4%BD%9C%E7%AB%99%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E9%AA%8C%E8%A6%81%E7%82%B9/" itemprop="commentCount"></span>
-          Kommentare
+          Comments
         </a>
       
       
@@ -254,12 +302,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/05/28/linux%E4%B8%8Bdhcp%E4%B8%AD%E7%BB%A7%E3%80%81/" data-id="cm6rieb61004liowi1fa14vyj" data-title="linux下dhcp中继、" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/05/28/linux%E4%B8%8Bdhcp%E4%B8%AD%E7%BB%A7%E3%80%81/" data-id="clgrjlxh8003t7opice72d2wv" data-title="linux下dhcp中继、" class="article-share-link">Share</a>
       
       
         <a href="/2010/05/28/linux%E4%B8%8Bdhcp%E4%B8%AD%E7%BB%A7%E3%80%81/#comments" class="article-comment-link">
           <span class="post-comments-count valine-comment-count" data-xid="/2010/05/28/linux%E4%B8%8Bdhcp%E4%B8%AD%E7%BB%A7%E3%80%81/" itemprop="commentCount"></span>
-          Kommentare
+          Comments
         </a>
       
       
@@ -301,12 +349,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/05/25/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3linux%E7%9A%84%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE%E5%92%8CSUID,SGID%E4%BB%A5%E5%8F%8A%E7%B2%98%E6%BB%9E%E4%BD%8D/" data-id="cm6rieb7l00bpiowigb2j52eq" data-title="深入理解linux的权限设置和SUID,SGID以及粘滞位" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/05/25/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3linux%E7%9A%84%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE%E5%92%8CSUID,SGID%E4%BB%A5%E5%8F%8A%E7%B2%98%E6%BB%9E%E4%BD%8D/" data-id="clgrjlxm000bl7opih9a36gnd" data-title="深入理解linux的权限设置和SUID,SGID以及粘滞位" class="article-share-link">Share</a>
       
       
         <a href="/2010/05/25/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3linux%E7%9A%84%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE%E5%92%8CSUID,SGID%E4%BB%A5%E5%8F%8A%E7%B2%98%E6%BB%9E%E4%BD%8D/#comments" class="article-comment-link">
           <span class="post-comments-count valine-comment-count" data-xid="/2010/05/25/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3linux%E7%9A%84%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE%E5%92%8CSUID,SGID%E4%BB%A5%E5%8F%8A%E7%B2%98%E6%BB%9E%E4%BD%8D/" itemprop="commentCount"></span>
-          Kommentare
+          Comments
         </a>
       
       
@@ -349,12 +397,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/05/22/chmod%E8%AF%A6%E8%A7%A3/" data-id="cm6rieb5k002liowi98zkgdl1" data-title="chmod详解" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/05/22/chmod%E8%AF%A6%E8%A7%A3/" data-id="clgrjlxb9000j7opig4vjhj6l" data-title="chmod详解" class="article-share-link">Share</a>
       
       
         <a href="/2010/05/22/chmod%E8%AF%A6%E8%A7%A3/#comments" class="article-comment-link">
           <span class="post-comments-count valine-comment-count" data-xid="/2010/05/22/chmod%E8%AF%A6%E8%A7%A3/" itemprop="commentCount"></span>
-          Kommentare
+          Comments
         </a>
       
       
@@ -397,12 +445,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/05/19/grub-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%94%A8%E6%B3%95/" data-id="cm6rieb5w003wiowi3uam8pbo" data-title="grub 命令行用法" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/05/19/grub-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%94%A8%E6%B3%95/" data-id="clgrjlxds002f7opif5kxcy4r" data-title="grub 命令行用法" class="article-share-link">Share</a>
       
       
         <a href="/2010/05/19/grub-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%94%A8%E6%B3%95/#comments" class="article-comment-link">
           <span class="post-comments-count valine-comment-count" data-xid="/2010/05/19/grub-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%94%A8%E6%B3%95/" itemprop="commentCount"></span>
-          Kommentare
+          Comments
         </a>
       
       
@@ -445,12 +493,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/05/18/UID,EUID,GID,EGID%E7%9A%84%E5%85%B3%E7%B3%BB/" data-id="cm6rieb5e001siowi4ok4fjfo" data-title="UID,EUID,GID,EGID的关系" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/05/18/UID,EUID,GID,EGID%E7%9A%84%E5%85%B3%E7%B3%BB/" data-id="clgrjlxjd006t7opi38z4bbjy" data-title="UID,EUID,GID,EGID的关系" class="article-share-link">Share</a>
       
       
         <a href="/2010/05/18/UID,EUID,GID,EGID%E7%9A%84%E5%85%B3%E7%B3%BB/#comments" class="article-comment-link">
           <span class="post-comments-count valine-comment-count" data-xid="/2010/05/18/UID,EUID,GID,EGID%E7%9A%84%E5%85%B3%E7%B3%BB/" itemprop="commentCount"></span>
-          Kommentare
+          Comments
         </a>
       
       
@@ -496,60 +544,12 @@ dia/howto/i/42-exit_install.jpg" /></a></p><p>选择[X Exit Instll]我们退出�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/05/16/FreeBSD-%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" data-id="cm6rieb8500faiowi9twodzze" data-title="FreeBSD 安装教程" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/05/16/FreeBSD-%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" data-id="clgrjlxd7001z7opialq84j2u" data-title="FreeBSD 安装教程" class="article-share-link">Share</a>
       
       
         <a href="/2010/05/16/FreeBSD-%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/#comments" class="article-comment-link">
           <span class="post-comments-count valine-comment-count" data-xid="/2010/05/16/FreeBSD-%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" itemprop="commentCount"></span>
-          Kommentare
-        </a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-LAMP环境搭建（Red-Hat-5）BBS-Discuz-7.0" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2010/05/14/LAMP%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%88Red-Hat-5%EF%BC%89BBS-Discuz-7.0/" class="article-date">
-  <time class="dt-published" datetime="2010-05-14T09:12:00.000Z" itemprop="datePublished">2010-05-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2010/05/14/LAMP%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%88Red-Hat-5%EF%BC%89BBS-Discuz-7.0/">LAMP环境搭建（Red Hat 5）BBS Discuz 7.0</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>LAMP就是linux+apache（httpd）+mysql+php，完美结合。。<br />实验环境Red Hat 5 .<br /><br />开装。。<br />上面的几个包，光盘里面都有。<br /><br />rpm -ivh 装上就是了。。依赖关系烦人的很，可以在装系统的时候多装一些。。。<br />我就复制一遍文章的装吧，人懒没治。。。嘿<br /><br /><br /><br />一、安装Apache：<br /><br /># tar -zxvf httpd-2.2.10.tar.gz<br /><br />(其实在输入文件名时有个简单的技巧，按tab键补全。)<br /><br /># cd httpd-2.2.10<br /><br />#mkdir &#x2F;usr&#x2F;local&#x2F;apache2&amp;#160;&amp;#160; &#x2F;&#x2F;建立一个apache2目录，这个目录是apahce的安装位置<br /><br />#.&#x2F;configure –prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;apache2 –enabel-so&amp;#160; &#x2F;&#x2F;.&#x2F;configure 这个可以加-h来提供帮助，所有的选项都有解释的。<br /><br />#make;make clean;make install&amp;#160; &#x2F;&#x2F;这里加个make clean是防止以前有编译过的.<br /><br />#ln &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;bin&#x2F;apachectl&amp;#160; &#x2F;etc&#x2F;rc.d&#x2F;init.d&#x2F;httpd&amp;#160; &#x2F;&#x2F;添加为httpd“服务”<br /><br />#echo “&#x2F;usr&#x2F;local&#x2F;apache2&#x2F;bin&#x2F;apachect start” &gt;&gt;&#x2F;etc&#x2F;rc.d&#x2F;rc.local&amp;#160;&amp;#160; &#x2F;&#x2F;设置httpd开机自运行<br /><br />二、安装MySQL *<br /><br />#tar -zxvf mysql-5.0.67.tar.gz<br /><br />#cd mysql-5.0.67<br /><br />#groupadd mysql<br /><br />#useradd -g mysql mysql<br /><br />#mkdir &#x2F;usr&#x2F;local&#x2F;mysql<br /><br />#mkdir &#x2F;usr&#x2F;local&#x2F;mysql&#x2F;data<br /><br />#.&#x2F;configure –prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql –sysconfdir&#x3D;&#x2F;etc –enable-assembler –with-charset&#x3D;utf8 –with-extra-charsets&#x3D;all-static–localstaticdir&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;data<br /><br />#make clean,make,make install<br /><br />#&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;bin&#x2F;mysql_install_db<br /><br /><br />别忘记修改root密码默认是空。<br />#mysqladmin -u root password 123456&amp;#160; &#x2F;&#x2F;最好设置复杂些。。。<br /><br /><br />三、安装PHP<br /><br />#tar -zxvf php-5.2.6.tar.gz<br /><br />#cd php-5.2.6<br /><br />#mkdir &#x2F;usr&#x2F;local&#x2F;php5<br /><br />.&#x2F;configure&amp;#160;&amp;#160; –prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;php5&amp;#160;&amp;#160; –with-mysql&#x3D;&#x2F;usr&amp;#160;&amp;#160; –with-gd&#x3D;&#x2F;usr&amp;#160;&amp;#160; –with-libxml-dir&#x3D;&#x2F;usr&amp;#160;&amp;#160; –with-apxs2&#x3D;&#x2F;usr&#x2F;local&#x2F;apache2&#x2F;bin&#x2F;apxs&amp;#160;&amp;#160; –with-zlib&#x3D;&#x2F;usr&amp;#160;&amp;#160; –with-jpeg-dir&#x3D;&#x2F;usr&#x2F;local&#x2F;modules&#x2F;jpeg&amp;#160;&amp;#160; –with-freetype-dir&#x3D;&#x2F;usr&amp;#160;&amp;#160; –with-curl&#x3D;&#x2F;usr&amp;#160;&amp;#160; –with-png-dir&#x3D;&#x2F;usr&amp;#160;&amp;#160; –enable-sockets&amp;#160;&amp;#160; –with-config-file-path&#x3D;&#x2F;usr&#x2F;local&#x2F;apache2&#x2F;conf<br /><br />#make clean<br /><br />#make<br />make install<br /><br />#cp&amp;#160; php.ini-dist &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;conf&#x2F;php.ini&amp;#160; &#x2F;&#x2F;php.ini-dist 文件在原代码所在的目录<br /><br /><br /><br />添加PHP到Apache中<br /><br />#vi&amp;#160; &#x2F;usr&#x2F;local&#x2F;apache2&#x2F;conf &#x2F;httpd.conf<br /><br /><br /><br />在httpd.conf文件相应的地方添加下面几行(如果在安装php5时，有的配置可以已经加上了，就不需要再重新添加了)<br /><br /><br /><br />LoadModule php5_module modules&#x2F;libphp5.so<br /><br />在&lt;IfModule mime_module&gt; 和 &lt;&#x2F;If&gt;之间<br /><br />大约在“TypesConfig conf&#x2F;mime.types”之后加上以下几行<br /><br /><br /><br />AddType application&#x2F;x-httpd-php&amp;#160; .php&amp;#160; &#x2F;&#x2F;只要有这一行PHP就可运行了<br /><br />AddType application&#x2F;x-httpd-php&amp;#160; .phtml&amp;#160; .php3<br /><br />AddType application&#x2F;x-httpd-php-soure&amp;#160; .phps<br /><br />注：前面三行代码中“.php”前面都有一个空格，否则启动apache服务器时会出错<br /><br />在DirectoryIndex index.html index.html.var 后面添加index.php<br /><br />重新启动apache就可以了<br /><br />四、安装Zend<br /><br />#tar -zxvf zendoptimizer-3.3.3-linux-glibc23-i386.tar.gz<br /><br />#cd zendoptimizer-3.3.3-linux-glibc23-1.386<br /><br />#.&#x2F;install.sh<br /><br />安装过程中，需要输入php.ini的位置，和确定Apache的位置。<br /><br />五、ZendOptimizer-3.3.0a-linux-glibc21-i386.tar<br /><br />这个东西实验环境装不装都可以，起到优化作用。可以提到网站的访问速度。提高的还不少、<br />会让你选择php.ini的目录，是目录！默认就好。。<br /><br />六、UCenter_1.5.1_SC_UTF8<br />1. 将 upload 文件夹下所有的文件上传<br /><br />2. 如果您的主机为 *nix 操作系统，请设置如下文件夹权限为 777<br />.&#x2F;data<br />.&#x2F;data&#x2F;avatar<br />.&#x2F;data&#x2F;backup<br />.&#x2F;data&#x2F;cache<br />.&#x2F;data&#x2F;logs<br />.&#x2F;data&#x2F;tmp<br />.&#x2F;data&#x2F;view<br /><br />3. 通过浏览器访问 http:&#x2F;&#x2F;您的域名&#x2F;UC 安装目录&#x2F;install&#x2F;， 根据提示填写 mysql 配置信息、管理员账号信息<br /><br />4.&amp;#160; 删除 install 目录<br /><br />5. 完成安装<br /><br />七、安装 _7.2_SC_UTF8.zip<br /><br />在UCenter向导里面添加这个应用。。<br />解压出来，首先修改配置文件，config.inc.php<br />以下这些目录需要可读写权限 <br />.&#x2F;templates <br />.&#x2F;attachments <br />.&#x2F;forumdata <br />.&#x2F;forumdata&#x2F;cache <br />.&#x2F;forumdata&#x2F;templates <br />.&#x2F;forumdata&#x2F;threadcaches <br />.&#x2F;forumdata&#x2F;logs <br />执行安装脚本<br />请在浏览器中运行 install 程序，即访问 http:&#x2F;&#x2F;您的域名&#x2F;论坛目录&#x2F;install&#x2F; <br />参照页面提示，进行安装，直至安装完毕.<br /><br /><br /><br />下课了，最后一句话，，没有网卡的日志真不爽。。<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/05/14/LAMP%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%88Red-Hat-5%EF%BC%89BBS-Discuz-7.0/" data-id="cm6rieb52000kiowi1a4w43vj" data-title="LAMP环境搭建（Red Hat 5）BBS Discuz 7.0" class="article-share-link">Teilen</a>
-      
-      
-        <a href="/2010/05/14/LAMP%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%88Red-Hat-5%EF%BC%89BBS-Discuz-7.0/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2010/05/14/LAMP%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%88Red-Hat-5%EF%BC%89BBS-Discuz-7.0/" itemprop="commentCount"></span>
-          Kommentare
+          Comments
         </a>
       
       
@@ -565,7 +565,7 @@ dia/howto/i/42-exit_install.jpg" /></a></p><p>选择[X Exit Instll]我们退出�
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/14/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/16/">weiter &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/14/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/16/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -574,7 +574,7 @@ dia/howto/i/42-exit_install.jpg" /></a></p><p>选择[X Exit Instll]我们退出�
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorien</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/">Oracle</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Oracle/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Perl%E7%BC%96%E7%A8%8B/">Perl编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/%E5%AE%B9%E5%99%A8/">容器</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Python%E7%BC%96%E7%A8%8B/">Python编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/Php%E7%BC%96%E7%A8%8B/">Php编程</a></li></ul></li></ul>
     </div>
@@ -603,9 +603,9 @@ dia/howto/i/42-exit_install.jpg" /></a></p><p>选择[X Exit Instll]我们退出�
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
     </div>
   </div>
 
@@ -613,9 +613,13 @@ dia/howto/i/42-exit_install.jpg" /></a></p><p>选择[X Exit Instll]我们退出�
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2025/02/05/hello-world/">Hello Hexo</a>
+          </li>
         
           <li>
             <a href="/2023/05/05/%E4%BD%BF%E7%94%A8LLAMA%E3%80%81llama.cpp%E6%90%AD%E5%BB%BA%E7%B1%BBChatGPT%E7%8E%AF%E5%A2%83/">使用LLAMA、llama.cpp搭建类ChatGPT环境</a>
@@ -631,10 +635,6 @@ dia/howto/i/42-exit_install.jpg" /></a></p><p>选择[X Exit Instll]我们退出�
         
           <li>
             <a href="/2020/02/26/%E5%B7%B4%E8%8F%B2%E7%89%B9%E7%9A%84%E5%9F%BA%E7%A1%80%E6%8A%95%E8%B5%84%E7%90%86%E5%BF%B5%E8%AE%B0%E5%BD%95/">巴菲特的基础投资理念记录</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/26/Ubuntu-%E5%AE%89%E8%A3%85minikebe/">Ubuntu 安装minikebe</a>
           </li>
         
       </ul>
