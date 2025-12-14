@@ -85,6 +85,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-mysqld守护脚本" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time class="dt-published" datetime="2011-04-28T08:23:00.000Z" itemprop="datePublished">2011-04-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/">mysqld守护脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>#!&#x2F;bin&#x2F;sh<br />#This is check msyqld shell<br />#by:<a href="mailto:&#107;&#x65;&#121;&#x31;&#x30;&#x38;&#56;&#64;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#109;">&#107;&#x65;&#121;&#x31;&#x30;&#x38;&#56;&#64;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#109;</a><br />#守护mysqld脚本，防止意外崩溃。<br>#如果连接启动10次，依旧启动不来了。停止（可以写成运行某个程序），解决内存。<br>&amp;nbsp;<br><strong>ERRLOG&#x3D;&#x2F;videodata&#x2F;mysqldata&#x2F;data&#x2F;CHINASOFT.err<br />load_mysqld ()<br />{<br />&#x2F;etc&#x2F;init.d&#x2F;mysqld start<br />}<br /><br />while&amp;nbsp; true<br />do<br />&amp;nbsp; i&#x3D;1<br />&amp;nbsp; PRO&#x3D;<code>ps aux|grep mysqld|grep -v grep</code><br />&amp;nbsp; if [ -z &quot;$PRO&quot; ]<br />&amp;nbsp; then<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; while true<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; do<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; if [ -z &quot;$PRO&quot; ]<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; then<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; load_mysqld<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; echo &quot;<code>date +'%y%m%d %H:%M:%S'</code>&amp;nbsp;&amp;nbsp; $0 LOAD MSYQLD-[$i]&quot; &gt;&gt; $ERRLOG<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; sleep 20<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; PRO&#x3D;<code>ps aux|grep mysqld|grep -v grep</code><br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; if [ -z &quot;$PRO&quot; ]<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; then&amp;nbsp;&amp;nbsp;&amp;nbsp;<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; i&#x3D;$((i+1))<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; fi<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; else<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; break<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; fi<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; if [ $i -eq 10 ]<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; then<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; echo &quot;<code>date +'%y%m%d %H:%M:%S'</code> HR_MYSQL_SAFE.SH LOAD MSQQLD –STOP&quot; &gt;&gt; $ERRLOG<br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp; &amp;nbsp; exit 1<br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; fi<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; done<br />&amp;nbsp; fi<br />&amp;nbsp; sleep 20<br />done</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/" data-id="cmiwria4d005muolkebb9gw5p" data-title="mysqld守护脚本" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+        <a href="/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/" itemprop="commentCount"></span>
+          Kommentare
+        </a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-MySQL中my.cnf文件选项" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2011/04/27/MySQL%E4%B8%ADmy.cnf%E6%96%87%E4%BB%B6%E9%80%89%E9%A1%B9/" class="article-date">
@@ -514,53 +562,6 @@ mg src="/images/pic/0d2a1924d14d7554908f9d56.jpg" /></p><p>&nbsp;&nbsp;&nbsp;&nb
 
 
   
-    <article id="post-linux-console的利用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2011/01/19/linux-console%E7%9A%84%E5%88%A9%E7%94%A8/" class="article-date">
-  <time class="dt-published" datetime="2011-01-19T09:12:00.000Z" itemprop="datePublished">2011-01-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2011/01/19/linux-console%E7%9A%84%E5%88%A9%E7%94%A8/">linux console的利用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>公司linux设备出现问题的时候，网络不同，没有办法操作。有的代理商，配置的ip都记不住，设备没有恢复出厂设备按钮。</p><p>以前只能接显示器，有的还要打开机箱盖，NND的麻烦啊。</p><p>&nbsp;</p><p>所以啊，想了一个办法，像配置交换机一样。使用console口，连接。配置。</p><p>开始网络寻找，找到了方法，给童鞋们分享一下。</p><p>&nbsp;</p><p>1.grup的配置/boot/grub/grub.conf</p><p># grub.conf generated by anaconda<br />#<br /># Note that you do not have to rerun grub after making changes to this file<br /># NOTICE:&nbsp; You do not have a /boot partition.&nbsp; This means that<br />#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all kernel and initrd paths are relative to /, eg.<br />#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; root (hd1,0)<br />#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; kernel /boot/vmlinuz-version ro root=/dev/sdb1<br />#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; initrd /boot/initrd-version.img<br />#boot=/dev/sda<br />serial --unit=0 --speed=9600 --word=8 --parity=no --stop=1&nbsp;<br />terminal --timeout=10 serial console<br />default=0<br />timeout=5<br />#splashimage=(hd0,0)/boot/grub/splash.xpm.gz&nbsp;&nbsp;&nbsp;&nbsp; ####图像建议去掉<br />hiddenmenu<br />title Fedora Core (2.6.11-1.1369_FC4)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; root (hd0,0)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; kernel /boot/vmlinuz-2.6.11-1.1369_FC4 ro root=LABEL=/1 console=tty0 console=ttyS0,9600n8<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; initrd /boot/initrd-2.6.11-1.1369_FC4.img</p><p>&nbsp;</p><p>console在linux下是字符设备。ttys0.ttys1,ttys2......&nbsp; </p><p>tty0 是linux没有启动起来的时候，内核对应的接口（我自己理解是这样）</p><p>ttys0，则是linux console 的表示。</p><p>&nbsp;</p><p>2.修改/etc/inittab</p><p>[root@localhost etc]# cat /etc/inittab<br />#<br /># inittab&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This file describes how the INIT process should set up<br />#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the system in a certain run-level.<br />#<br /># Author:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Miquel van Smoorenburg, &lt;&gt;<br />#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modified for RHS Linux by Marc Ewing and Donnie Barnes<br />#</p><p># Default runlevel. The runlevels used by RHS are:<br />#&nbsp;&nbsp; 0 - halt (Do NOT set initdefault to this)<br />#&nbsp;&nbsp; 1 - Single user mode<br />#&nbsp;&nbsp; 2 - Multiuser, without NFS (The same as 3, if you do not have networking)<br />#&nbsp;&nbsp; 3 - Full multiuser mode<br />#&nbsp;&nbsp; 4 - unused<br />#&nbsp;&nbsp; 5 - X11<br />#&nbsp;&nbsp; 6 - reboot (Do NOT set initdefault to this)<br />#<br />id:3:initdefault:</p><p># System initialization.<br />si::sysinit:/etc/rc.d/rc.sysinit</p><p>l0:0:wait:/etc/rc.d/rc 0<br />l1:1:wait:/etc/rc.d/rc 1<br />l2:2:wait:/etc/rc.d/rc 2<br />l3:3:wait:/etc/rc.d/rc 3<br />l4:4:wait:/etc/rc.d/rc 4<br />l5:5:wait:/etc/rc.d/rc 5<br />l6:6:wait:/etc/rc.d/rc 6</p><p># Trap CTRL-ALT-DELETE<br />ca::ctrlaltdel:/sbin/shutdown -t3 -r now</p><p># When our UPS tells us power has failed, assume we have a few minutes<br /># of power left.&nbsp; Schedule a shutdown for 2 minutes from now.<br /># This does, of course, assume you have powerd installed and your<br /># UPS connected and working correctly.<br />pf::powerfail:/sbin/shutdown -f -h +2 &quot;Power Failure; System Shutting Down&quot;</p><p># If power was restored before the shutdown kicked in, cancel it.<br />pr:12345:powerokwait:/sbin/shutdown -c &quot;Power Restored; Shutdown Cancelled&quot;</p><p><br /># Run gettys in standard runlevels<br />co:2345:respawn:/sbin/agetty ttyS0 9600 vt100-nav<br />1:2345:respawn:/sbin/mingetty tty1<br />2:2345:respawn:/sbin/mingetty tty2<br />3:2345:respawn:/sbin/mingetty tty3<br />4:2345:respawn:/sbin/mingetty tty4<br />5:2345:respawn:/sbin/mingetty tty5<br />6:2345:respawn:/sbin/mingetty tty6<br />s0:2345:respawn:/sbin/agetty -L -f /etc/issue.serial 9600 ttyS1 vt100</p><p><br /># Run xdm in runlevel 5<br />x:5:once:/etc/X11/prefdm -nodaemon<br />3. 修改/etc/securetty</p><p>tty安全设置，系统允许ttys0登录。添加ttyS0</p><p>[root@localhost etc]# cat /etc/securetty<br />console<br />vc/1<br />vc/2<br />vc/3<br />vc/4<br />vc/5<br />vc/6<br />vc/7<br />vc/8<br />vc/9<br />vc/10<br />vc/11<br />tty1<br />tty2<br />tty3<br />tty4<br />tty5<br />tty6<br />tty7<br />tty8<br />tty9<br />tty10<br />tty11<br />ttyS0<br /></p><p>然后用重启用putty或者SecureCRT。不建议用系统的超级终端，因为编辑文件的时候，无法编辑。</p><p>至少我没有找到方法。</p><p>我用的是putty</p><p><img src="/images/pic/3e38309389d3fcdda877a43a.jpg" small="0" /></p><p>ok 不懂的 童鞋可以留言。 加QQ交流。欢迎拍砖。。。<br /></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/01/19/linux-console%E7%9A%84%E5%88%A9%E7%94%A8/" data-id="cmiwria440042uolkh6sa04rw" data-title="linux console的利用" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
-      
-      
-        <a href="/2011/01/19/linux-console%E7%9A%84%E5%88%A9%E7%94%A8/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/01/19/linux-console%E7%9A%84%E5%88%A9%E7%94%A8/" itemprop="commentCount"></span>
-          Kommentare
-        </a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -605,7 +606,7 @@ mg src="/images/pic/0d2a1924d14d7554908f9d56.jpg" /></p><p>&nbsp;&nbsp;&nbsp;&nb
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
     </div>
   </div>
 
@@ -616,6 +617,10 @@ mg src="/images/pic/0d2a1924d14d7554908f9d56.jpg" /></p><p>&nbsp;&nbsp;&nbsp;&nb
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2025/12/14/%E4%B8%AD%E5%9B%BD%E6%95%99%E8%82%B2%E8%83%8C%E6%99%AF%E4%B8%8B%E7%9A%84%E8%82%B2%E5%84%BF%E6%9C%9F%E4%B8%8E%E8%8A%92%E6%A0%BC%E5%BC%8F%E6%8A%95%E8%B5%84%E9%98%B6%E6%AE%B5%E5%88%92%E5%88%86/">中国教育背景下的育儿期与芒格式投资阶段划分</a>
+          </li>
         
           <li>
             <a href="/2025/10/27/%E6%99%BA%E8%83%BD%E5%85%BB%E8%80%81%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83/">智能养老项目的一些思考</a>
@@ -631,10 +636,6 @@ mg src="/images/pic/0d2a1924d14d7554908f9d56.jpg" /></p><p>&nbsp;&nbsp;&nbsp;&nb
         
           <li>
             <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/26/%E5%B7%B4%E8%8F%B2%E7%89%B9%E7%9A%84%E5%9F%BA%E7%A1%80%E6%8A%95%E8%B5%84%E7%90%86%E5%BF%B5%E8%AE%B0%E5%BD%95/">巴菲特的基础投资理念记录</a>
           </li>
         
       </ul>
