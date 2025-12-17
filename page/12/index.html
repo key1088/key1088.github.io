@@ -111,12 +111,12 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>#!&#x2F;bin&#x2F;sh<br />#This is check msyqld shell<br />#by:<a href="mailto:&#107;&#x65;&#121;&#x31;&#x30;&#x38;&#56;&#64;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#109;">&#107;&#x65;&#121;&#x31;&#x30;&#x38;&#56;&#64;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#109;</a><br />#守护mysqld脚本，防止意外崩溃。<br>#如果连接启动10次，依旧启动不来了。停止（可以写成运行某个程序），解决内存。<br>&amp;nbsp;<br><strong>ERRLOG&#x3D;&#x2F;videodata&#x2F;mysqldata&#x2F;data&#x2F;CHINASOFT.err<br />load_mysqld ()<br />{<br />&#x2F;etc&#x2F;init.d&#x2F;mysqld start<br />}<br /><br />while&amp;nbsp; true<br />do<br />&amp;nbsp; i&#x3D;1<br />&amp;nbsp; PRO&#x3D;<code>ps aux|grep mysqld|grep -v grep</code><br />&amp;nbsp; if [ -z &quot;$PRO&quot; ]<br />&amp;nbsp; then<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; while true<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; do<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; if [ -z &quot;$PRO&quot; ]<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; then<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; load_mysqld<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; echo &quot;<code>date +'%y%m%d %H:%M:%S'</code>&amp;nbsp;&amp;nbsp; $0 LOAD MSYQLD-[$i]&quot; &gt;&gt; $ERRLOG<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; sleep 20<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; PRO&#x3D;<code>ps aux|grep mysqld|grep -v grep</code><br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; if [ -z &quot;$PRO&quot; ]<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; then&amp;nbsp;&amp;nbsp;&amp;nbsp;<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; i&#x3D;$((i+1))<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; fi<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; else<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; break<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; fi<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; if [ $i -eq 10 ]<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; then<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; echo &quot;<code>date +'%y%m%d %H:%M:%S'</code> HR_MYSQL_SAFE.SH LOAD MSQQLD –STOP&quot; &gt;&gt; $ERRLOG<br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp; &amp;nbsp; exit 1<br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; fi<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; done<br />&amp;nbsp; fi<br />&amp;nbsp; sleep 20<br />done</strong></p>
+        <p>#!&#x2F;bin&#x2F;sh<br />#This is check msyqld shell<br />#by:<a href="mailto:&#x6b;&#x65;&#x79;&#49;&#48;&#x38;&#x38;&#x40;&#49;&#x36;&#51;&#x2e;&#99;&#111;&#109;">&#x6b;&#x65;&#x79;&#49;&#48;&#x38;&#x38;&#x40;&#49;&#x36;&#51;&#x2e;&#99;&#111;&#109;</a><br />#守护mysqld脚本，防止意外崩溃。<br>#如果连接启动10次，依旧启动不来了。停止（可以写成运行某个程序），解决内存。<br>&amp;nbsp;<br><strong>ERRLOG&#x3D;&#x2F;videodata&#x2F;mysqldata&#x2F;data&#x2F;CHINASOFT.err<br />load_mysqld ()<br />{<br />&#x2F;etc&#x2F;init.d&#x2F;mysqld start<br />}<br /><br />while&amp;nbsp; true<br />do<br />&amp;nbsp; i&#x3D;1<br />&amp;nbsp; PRO&#x3D;<code>ps aux|grep mysqld|grep -v grep</code><br />&amp;nbsp; if [ -z &quot;$PRO&quot; ]<br />&amp;nbsp; then<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; while true<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; do<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; if [ -z &quot;$PRO&quot; ]<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; then<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; load_mysqld<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; echo &quot;<code>date +'%y%m%d %H:%M:%S'</code>&amp;nbsp;&amp;nbsp; $0 LOAD MSYQLD-[$i]&quot; &gt;&gt; $ERRLOG<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; sleep 20<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; PRO&#x3D;<code>ps aux|grep mysqld|grep -v grep</code><br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; if [ -z &quot;$PRO&quot; ]<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; then&amp;nbsp;&amp;nbsp;&amp;nbsp;<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; i&#x3D;$((i+1))<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; fi<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; else<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; break<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; fi<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; if [ $i -eq 10 ]<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; then<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; echo &quot;<code>date +'%y%m%d %H:%M:%S'</code> HR_MYSQL_SAFE.SH LOAD MSQQLD –STOP&quot; &gt;&gt; $ERRLOG<br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp; &amp;nbsp; exit 1<br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; fi<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; done<br />&amp;nbsp; fi<br />&amp;nbsp; sleep 20<br />done</strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/" data-id="cmiwria4d005muolkebb9gw5p" data-title="mysqld守护脚本" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="https://key1088.github.io/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/" data-id="cmj9xllu8005r0slk116h39d1" data-title="mysqld守护脚本" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/#comments" class="article-comment-link">
@@ -164,7 +164,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/04/27/MySQL%E4%B8%ADmy.cnf%E6%96%87%E4%BB%B6%E9%80%89%E9%A1%B9/" data-id="cmiwria3o001guolk6awnb1cs" data-title="MySQL中my.cnf文件选项" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="https://key1088.github.io/2011/04/27/MySQL%E4%B8%ADmy.cnf%E6%96%87%E4%BB%B6%E9%80%89%E9%A1%B9/" data-id="cmj9xlltp001f0slkg993aewh" data-title="MySQL中my.cnf文件选项" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/04/27/MySQL%E4%B8%ADmy.cnf%E6%96%87%E4%BB%B6%E9%80%89%E9%A1%B9/#comments" class="article-comment-link">
@@ -212,7 +212,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/04/22/shell-%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E6%95%B0%E5%AD%97%E6%AF%94%E8%BE%83/" data-id="cmiwria4l007fuolkgg1neqy9" data-title="shell 字符串、数字比较" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="https://key1088.github.io/2011/04/22/shell-%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E6%95%B0%E5%AD%97%E6%AF%94%E8%BE%83/" data-id="cmj9xlluh007j0slk7235a7j2" data-title="shell 字符串、数字比较" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/04/22/shell-%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E6%95%B0%E5%AD%97%E6%AF%94%E8%BE%83/#comments" class="article-comment-link">
@@ -262,7 +262,7 @@ mg src="/images/pic/0d2a1924d14d7554908f9d56.jpg" /></p><p>&nbsp;&nbsp;&nbsp;&nb
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/04/11/linux-%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" data-id="cmiwria45004duolk7p261nv8" data-title="linux 常见服务" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="https://key1088.github.io/2011/04/11/linux-%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" data-id="cmj9xllu4004n0slk7oyeh156" data-title="linux 常见服务" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/04/11/linux-%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/#comments" class="article-comment-link">
@@ -310,7 +310,7 @@ mg src="/images/pic/0d2a1924d14d7554908f9d56.jpg" /></p><p>&nbsp;&nbsp;&nbsp;&nb
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/04/10/%E7%94%A8perl-%E4%B8%8Bcgi-bin-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="cmiwria5800byuolkhzpwevvy" data-title="用perl 下cgi-bin 注意事项" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="https://key1088.github.io/2011/04/10/%E7%94%A8perl-%E4%B8%8Bcgi-bin-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="cmj9xllv500c70slk9nks00nb" data-title="用perl 下cgi-bin 注意事项" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/04/10/%E7%94%A8perl-%E4%B8%8Bcgi-bin-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/#comments" class="article-comment-link">
@@ -357,7 +357,7 @@ mg src="/images/pic/0d2a1924d14d7554908f9d56.jpg" /></p><p>&nbsp;&nbsp;&nbsp;&nb
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/03/30/%E6%B7%BB%E5%8A%A0-swap%E6%96%87%E4%BB%B6%E9%97%AE%E9%A2%98/" data-id="cmiwria5600bfuolkgawkgmdy" data-title="添加 swap文件问题" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="https://key1088.github.io/2011/03/30/%E6%B7%BB%E5%8A%A0-swap%E6%96%87%E4%BB%B6%E9%97%AE%E9%A2%98/" data-id="cmj9xllv200bs0slkg2re35dw" data-title="添加 swap文件问题" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/03/30/%E6%B7%BB%E5%8A%A0-swap%E6%96%87%E4%BB%B6%E9%97%AE%E9%A2%98/#comments" class="article-comment-link">
@@ -404,7 +404,7 @@ mg src="/images/pic/0d2a1924d14d7554908f9d56.jpg" /></p><p>&nbsp;&nbsp;&nbsp;&nb
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/03/29/1115%20-%20Unknown%20character%20set/" data-id="cmiwria3b0001uolk95tr3z7h" data-title="1115 - Unknown character set" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="https://key1088.github.io/2011/03/29/1115%20-%20Unknown%20character%20set/" data-id="cmj9xlltb00010slkbxw56pt2" data-title="1115 - Unknown character set" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/03/29/1115%20-%20Unknown%20character%20set/#comments" class="article-comment-link">
@@ -451,7 +451,7 @@ mg src="/images/pic/0d2a1924d14d7554908f9d56.jpg" /></p><p>&nbsp;&nbsp;&nbsp;&nb
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/03/24/bin-rm--cannot-remove-%60libtoolT&amp;#039;--No-such-file-or-directory/" data-id="cmiwria3v002luolke24443uw" data-title="/bin/rm cannot remove libtoolT No such file or directory" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="https://key1088.github.io/2011/03/24/bin-rm--cannot-remove-%60libtoolT&amp;#039;--No-such-file-or-directory/" data-id="cmj9xlltv002s0slk5wo50tx5" data-title="/bin/rm cannot remove libtoolT No such file or directory" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/03/24/bin-rm--cannot-remove-%60libtoolT&amp;#039;--No-such-file-or-directory/#comments" class="article-comment-link">
@@ -498,7 +498,7 @@ mg src="/images/pic/0d2a1924d14d7554908f9d56.jpg" /></p><p>&nbsp;&nbsp;&nbsp;&nb
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/02/27/%E5%86%99linux%E6%9C%8D%E5%8A%A1/" data-id="cmiwria4v009huolkcb5nc5q2" data-title="写linux服务" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="https://key1088.github.io/2011/02/27/%E5%86%99linux%E6%9C%8D%E5%8A%A1/" data-id="cmj9xllur009o0slk54ql0it7" data-title="写linux服务" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/02/27/%E5%86%99linux%E6%9C%8D%E5%8A%A1/#comments" class="article-comment-link">
@@ -545,7 +545,7 @@ mg src="/images/pic/0d2a1924d14d7554908f9d56.jpg" /></p><p>&nbsp;&nbsp;&nbsp;&nb
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/02/21/umount-device-is-busy-%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" data-id="cmiwria4m007suolk1mj78y7z" data-title="umount device is busy 问题总结" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="https://key1088.github.io/2011/02/21/umount-device-is-busy-%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" data-id="cmj9xlluk00820slk78bx8c4j" data-title="umount device is busy 问题总结" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/02/21/umount-device-is-busy-%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/#comments" class="article-comment-link">
