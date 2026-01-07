@@ -34,6 +34,11 @@
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
   
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2824514878105238"
+     crossorigin="anonymous"></script>
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body>
@@ -54,7 +59,7 @@
     </div>
     <div id="header-inner" class="inner">
       <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
         
           <a class="main-nav-link" href="/">Home</a>
         
@@ -65,9 +70,10 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://key1088.github.io"></form>
@@ -78,6 +84,102 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-OSPF路由验证" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/03/30/OSPF%E8%B7%AF%E7%94%B1%E9%AA%8C%E8%AF%81/" class="article-date">
+  <time class="dt-published" datetime="2010-03-30T06:37:00.000Z" itemprop="datePublished">2010-03-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/03/30/OSPF%E8%B7%AF%E7%94%B1%E9%AA%8C%E8%AF%81/">OSPF路由验证</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>OSPF路由验证：<br />主要分为两大方面<br />1.基于链路的验证<br />2..基于区域的验证<br />这里就只发命令了，很简单。<br />1.基于链路的验证：<br />R1(config)#router ospf 1<br />R1(config-router)#router-id 1.1.1.1<br />R1(config-router)#network 1.1.1.0 0.0.0.255 area 0<br />R1(config-router)#network 192.168.12.0 0.0.0.255 area 0<br />R1(config)#interface s0&#x2F;0<br />R1(config-if)#ip ospf authentication &#x2F;&#x2F;接口S0&#x2F;0启用简单口令认证<br />R1(config-if)#ip ospf authentication-key cisco &#x2F;&#x2F;配置认证密码<br />或者<br /><br />R1(config)#router ospf 1<br />R1(config-router)#router-id 1.1.1.1<br />R1(config-router)#network 1.1.1.0 0.0.0.255 area 0<br />R1(config-router)#network 192.168.12.0 0.0.0.255 area 0<br />R1(config)#interface s0&#x2F;0<br />R1(config-if)#ip ospf authentication message-digest&#x2F;&#x2F;接口s0&#x2F;0 启用MD5 认证<br />R1(config-if)#ip ospf message-digest-key 1 md5 cisco &#x2F;&#x2F;配置key ID 及密匙<br />注意：加密方式，应该一样。不然无法建立关系。<br /><br />2.基于区域的验证<br />R1(config)#router ospf 1<br />R1(config-router)#router-id 1.1.1.1<br />R1(config-router)#network 192.168.12.0 255.255.255.0 area 0<br />R1(config-router)#network 1.1.1.0 255.255.255.0 area 0<br />R1(config-router)#area 0 authentication message-digest&amp;#160; &#x2F; &#x2F;区域号0 启用MD5 认证<br />R1(config)#interface s0&#x2F;0<br />R1(config-if)#ip ospf message-digest-key 1 md5 cisco&amp;#160;&amp;#160; &#x2F;&#x2F;接口配置认证key ID 及密匙 ID 1 钥匙cisco<br />或者<br />R1(config-if)#ip ospf authentication-key cisco&amp;#160; &#x2F;&#x2F;接口配置认证key为cisco 明文 <br /><br />注意：加密方式，应该一样。不然无法建立关系。<br /><br />验证优先级：OSPF 链路认证优于区域认证</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/03/30/OSPF%E8%B7%AF%E7%94%B1%E9%AA%8C%E8%AF%81/" data-id="cmj9xlltr001p0slk2rsk4wdp" data-title="OSPF路由验证" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+        <a href="/2010/03/30/OSPF%E8%B7%AF%E7%94%B1%E9%AA%8C%E8%AF%81/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2010/03/30/OSPF%E8%B7%AF%E7%94%B1%E9%AA%8C%E8%AF%81/" itemprop="commentCount"></span>
+          Kommentare
+        </a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-共享精神" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/03/30/%E5%85%B1%E4%BA%AB%E7%B2%BE%E7%A5%9E/" class="article-date">
+  <time class="dt-published" datetime="2010-03-30T03:25:00.000Z" itemprop="datePublished">2010-03-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/03/30/%E5%85%B1%E4%BA%AB%E7%B2%BE%E7%A5%9E/">共享精神</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>我只是想把我自己知道的，告诉别人。因为在自己学习的时候，一个人很艰苦，遇到难题都是自己解决。<br />把好的东西，分享出来，在提高别人的同时，也提高了自己。并没有所谓的装B，也没有所谓的自大，请不要鄙视我好吗？？</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/03/30/%E5%85%B1%E4%BA%AB%E7%B2%BE%E7%A5%9E/" data-id="cmj9xlluq009g0slkgviu0nud" data-title="共享精神" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+        <a href="/2010/03/30/%E5%85%B1%E4%BA%AB%E7%B2%BE%E7%A5%9E/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2010/03/30/%E5%85%B1%E4%BA%AB%E7%B2%BE%E7%A5%9E/" itemprop="commentCount"></span>
+          Kommentare
+        </a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-Variance的计算" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -109,11 +211,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/03/29/Variance%E7%9A%84%E8%AE%A1%E7%AE%97/" data-id="clgrjlxk8008f7opi2ncv93d5" data-title="Variance的计算" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/03/29/Variance%E7%9A%84%E8%AE%A1%E7%AE%97/" data-id="cmj9xlltu002d0slk853063my" data-title="Variance的计算" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2010/03/29/Variance%E7%9A%84%E8%AE%A1%E7%AE%97/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2010/03/29/Variance%E7%9A%84%E8%AE%A1%E7%AE%97/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2010/03/29/Variance%E7%9A%84%E8%AE%A1%E7%AE%97/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -157,11 +259,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/03/29/ERGRP%E7%AD%89%E4%BB%B7%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1+%E5%BA%A6%E9%87%8F%E5%80%BC%E8%AE%A1%E7%AE%97/" data-id="clgrjlxd5001s7opi231r8klh" data-title="ERGRP等价负载均衡+度量值计算" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/03/29/ERGRP%E7%AD%89%E4%BB%B7%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1+%E5%BA%A6%E9%87%8F%E5%80%BC%E8%AE%A1%E7%AE%97/" data-id="cmj9xlltk000m0slk3a8h7bwa" data-title="ERGRP等价负载均衡+度量值计算" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2010/03/29/ERGRP%E7%AD%89%E4%BB%B7%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1+%E5%BA%A6%E9%87%8F%E5%80%BC%E8%AE%A1%E7%AE%97/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2010/03/29/ERGRP%E7%AD%89%E4%BB%B7%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1+%E5%BA%A6%E9%87%8F%E5%80%BC%E8%AE%A1%E7%AE%97/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2010/03/29/ERGRP%E7%AD%89%E4%BB%B7%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1+%E5%BA%A6%E9%87%8F%E5%80%BC%E8%AE%A1%E7%AE%97/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -205,11 +307,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/03/29/%E8%AE%A1%E7%AE%97EIGRP%E7%9A%84%E5%BA%A6%E9%87%8F%E5%80%BC%E6%96%B9%E6%B3%95/" data-id="clgrjlxl1009y7opibtqna2rr" data-title="计算EIGRP的度量值方法" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/03/29/%E8%AE%A1%E7%AE%97EIGRP%E7%9A%84%E5%BA%A6%E9%87%8F%E5%80%BC%E6%96%B9%E6%B3%95/" data-id="cmj9xllv800d20slkd0c8gi53" data-title="计算EIGRP的度量值方法" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2010/03/29/%E8%AE%A1%E7%AE%97EIGRP%E7%9A%84%E5%BA%A6%E9%87%8F%E5%80%BC%E6%96%B9%E6%B3%95/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2010/03/29/%E8%AE%A1%E7%AE%97EIGRP%E7%9A%84%E5%BA%A6%E9%87%8F%E5%80%BC%E6%96%B9%E6%B3%95/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2010/03/29/%E8%AE%A1%E7%AE%97EIGRP%E7%9A%84%E5%BA%A6%E9%87%8F%E5%80%BC%E6%96%B9%E6%B3%95/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -253,11 +355,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/03/29/%E9%83%81%E9%97%B7%EF%BC%8C%E6%89%8B%E6%9C%BA%E5%81%9C%E6%9C%BA%E4%BA%86%E3%80%82/" data-id="clgrjlxms00cr7opi4nq8f8jy" data-title="郁闷，手机停机了。" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/03/29/%E9%83%81%E9%97%B7%EF%BC%8C%E6%89%8B%E6%9C%BA%E5%81%9C%E6%9C%BA%E4%BA%86%E3%80%82/" data-id="cmj9xllvb00f90slk0nycgabp" data-title="郁闷，手机停机了。" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2010/03/29/%E9%83%81%E9%97%B7%EF%BC%8C%E6%89%8B%E6%9C%BA%E5%81%9C%E6%9C%BA%E4%BA%86%E3%80%82/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2010/03/29/%E9%83%81%E9%97%B7%EF%BC%8C%E6%89%8B%E6%9C%BA%E5%81%9C%E6%9C%BA%E4%BA%86%E3%80%82/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2010/03/29/%E9%83%81%E9%97%B7%EF%BC%8C%E6%89%8B%E6%9C%BA%E5%81%9C%E6%9C%BA%E4%BA%86%E3%80%82/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -300,11 +402,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/03/28/%E7%BD%91%E7%BB%9C%E8%B4%9F%E8%BD%BD%E5%B9%B3%E8%A1%A1%EF%BC%88NLB)%E8%AF%95%E9%AA%8C%E6%80%BB%E7%BB%93/" data-id="clgrjlxm400bz7opi7pnube7z" data-title="网络负载平衡（NLB)试验总结" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/03/28/%E7%BD%91%E7%BB%9C%E8%B4%9F%E8%BD%BD%E5%B9%B3%E8%A1%A1%EF%BC%88NLB)%E8%AF%95%E9%AA%8C%E6%80%BB%E7%BB%93/" data-id="cmj9xllv700cp0slk8abz1biq" data-title="网络负载平衡（NLB)试验总结" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2010/03/28/%E7%BD%91%E7%BB%9C%E8%B4%9F%E8%BD%BD%E5%B9%B3%E8%A1%A1%EF%BC%88NLB)%E8%AF%95%E9%AA%8C%E6%80%BB%E7%BB%93/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2010/03/28/%E7%BD%91%E7%BB%9C%E8%B4%9F%E8%BD%BD%E5%B9%B3%E8%A1%A1%EF%BC%88NLB)%E8%AF%95%E9%AA%8C%E6%80%BB%E7%BB%93/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2010/03/28/%E7%BD%91%E7%BB%9C%E8%B4%9F%E8%BD%BD%E5%B9%B3%E8%A1%A1%EF%BC%88NLB)%E8%AF%95%E9%AA%8C%E6%80%BB%E7%BB%93/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -348,11 +450,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/03/26/P4P%E6%8A%80%E6%9C%AF/" data-id="clgrjlxip005p7opihum1bgwc" data-title="P4P技术" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/03/26/P4P%E6%8A%80%E6%9C%AF/" data-id="cmj9xlltr001w0slkchvcc5as" data-title="P4P技术" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2010/03/26/P4P%E6%8A%80%E6%9C%AF/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2010/03/26/P4P%E6%8A%80%E6%9C%AF/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2010/03/26/P4P%E6%8A%80%E6%9C%AF/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -396,11 +498,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/03/26/%E5%BE%88NB%E7%9A%84%E4%B8%80%E4%B8%AA%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" data-id="clgrjlxkz009u7opi9ds262dh" data-title="很NB的一个自我介绍" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/03/26/%E5%BE%88NB%E7%9A%84%E4%B8%80%E4%B8%AA%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" data-id="cmj9xlluv00ap0slkh9xr377c" data-title="很NB的一个自我介绍" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2010/03/26/%E5%BE%88NB%E7%9A%84%E4%B8%80%E4%B8%AA%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2010/03/26/%E5%BE%88NB%E7%9A%84%E4%B8%80%E4%B8%AA%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2010/03/26/%E5%BE%88NB%E7%9A%84%E4%B8%80%E4%B8%AA%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -445,107 +547,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/03/26/%E6%80%9D%E7%A7%91Cisco-%E8%B7%AF%E7%94%B1%E5%99%A8%E5%9E%8B%E5%8F%B7%E5%89%96%E6%9E%90/" data-id="clgrjlxm900c27opid3axaah5" data-title="思科Cisco 路由器型号剖析" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2010/03/26/%E6%80%9D%E7%A7%91Cisco-%E8%B7%AF%E7%94%B1%E5%99%A8%E5%9E%8B%E5%8F%B7%E5%89%96%E6%9E%90/" data-id="cmj9xlluw00av0slkbmpie6x2" data-title="思科Cisco 路由器型号剖析" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2010/03/26/%E6%80%9D%E7%A7%91Cisco-%E8%B7%AF%E7%94%B1%E5%99%A8%E5%9E%8B%E5%8F%B7%E5%89%96%E6%9E%90/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2010/03/26/%E6%80%9D%E7%A7%91Cisco-%E8%B7%AF%E7%94%B1%E5%99%A8%E5%9E%8B%E5%8F%B7%E5%89%96%E6%9E%90/" itemprop="commentCount"></span>
-          Kommentare
-        </a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-cisco-各系列路由器介绍" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2010/03/26/cisco-%E5%90%84%E7%B3%BB%E5%88%97%E8%B7%AF%E7%94%B1%E5%99%A8%E4%BB%8B%E7%BB%8D/" class="article-date">
-  <time class="dt-published" datetime="2010-03-26T03:43:00.000Z" itemprop="datePublished">2010-03-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2010/03/26/cisco-%E5%90%84%E7%B3%BB%E5%88%97%E8%B7%AF%E7%94%B1%E5%99%A8%E4%BB%8B%E7%BB%8D/">cisco 各系列路由器介绍</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <![CDATA[思 科 2600 系列路由器                                                                                                                                                                                                                                                                                        <a name="content"></a> <p><img width="150" height="117" src="/images/pic/other_site/www_cisco_2600_1.gif" alt="思科 2600 系列路由器" />Cisco Systems通过Cisco  2600系列将企业级的通用性、集成和功能扩展到了创建以机构。随着新服务和应用的面市，Cisco  2600系列的模块化体系结构能够提供适应网络技术变化所需的通用性。Cisco  2600系列配置了强大的RISC处理器，能够支持当今不断发展的网络中所需的高级服务质量（QoS）、安全和网络集成特性。通过将多个独立设备的功能集 成到一个单元之中，Cisco 2600系列降低了管理远程网络的复杂性。Cisco 2600系列与Cisco  1600、1700和3600系列共享模块化接口，为Internet、内部网访问、多服务语音/数据集成、模拟和数字拨号访问服务、VPN访问、ATM 访问集中、VLAN以及路由带宽管理等应用提供经济有效的解决方案。</p>                                                            关键特性                                                            <ul> <li>通用性/ 投资保护－可以现场更新的模块化接口能够启动数以千计的定制化解决方案，并能够轻而易举地适应未来网络的要求。</li> <li>集成/可 管理性－降低拥有成本，简化远程管理，提供结合CSU/DSU、复用器、调制解调器、语音/数据网关、ISDN  NT1、防火墙、VPN、加密和压缩设备的集成化网络。</li> <li>多服务语 音/数据网络－降低办公室之间的电话/传真费用；通过利用Cisco  IOS软件服务质量（QoS）特性（例如RSVP、WFQ、承诺访问速率[CAR]和随机早期检测[RED]），语音流量可以实现数字化并封装在IP数据 包中，而且能够与数据流量合并。</li> </ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     思科 2800 系列路由器                                                                                                                                                                                                                <a name="content"></a> <p><img width="200" height="105" src="/images/pic/other_site/www_cisco_2800.jpg" alt="思科 2800                                                系列路由器" />Cisco  2800系列包括四个平台：Cisco 2801、Cisco 2811、Cisco 2821和 Cisco  2851。与价格类似的前几代思科路由器相比，Cisco  2800系列可以将性能提升五倍，将安全和话音性能提升十倍，并且可以提供新的嵌入式服务选项，因而可以为客户提供重要的附加值。它可以在大幅度提升插槽 性能和密度的同时，支持Cisco 1700和2600系列中现有的90多种模块。</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  思科 3200 系列路由器                                                                                                                                        <a name="content"></a> <p><img width="173" height="147" src="/images/pic/other_site/www_cisco_3200_pic1.gif" alt="思科 3200 系列移动接入路由器" />这个紧凑的、高性能的接入解决方案能够以适 用于各种交通工具的外型，为国防、公共安全、国土安全和运输市场提供无缝的移动功能和多个无线网络的互操作能力。</p> <p>Cisco  3200移动接入路由器可以在多个处于运动之中的无线电、蜂窝式电话、微型和无线局域网（WLAN）网络之间提供无缝的通信，从而将IP网络拓展到了运动 中网络领域。</p> <p>Cisco  3200移动接入路由器主要适用于运动中的交通工具，并可以在多个网络之间实现无线连接，从而让用户可以在业界标准的IP技术的基础上部署关键任务型应 用。IP网络为在使用各种传输介质的用户之间共享信息和应用提供了一个平台。Cisco  IOS软件添加了功能丰富的服务、管理功能和移动网络功能。Cisco  3200移动接入路由器让用户可以有效地在一个对等的、层次化的或者网格式的IP网络中传输关键任务型语音、视频和数据。用户可以迅速地制定更加准确的决 策，从而提高他们在现场的工作效率。</p> <p>Cisco 3200移动接入路由器可以为用户提供下列优势：</p> <ul> <li>利用独立于位置或者运动状态的无缝移动功能，实现安全的数 据、语音和视频通信。</li> <li>以一个适用于各种交通工具的、紧凑的、坚固的外型，提供很高 的性能。</li> <li>利用Cisco IOS软件提供先进的IP服务和互操作性。</li> </ul> <p>Cisco  3200移动接入路由器（如图1所示）的设计目的是集成到系统集成商所部署的、全面、定制的通信解决方案中。这使得用户可以在各种空中、陆地或者海洋交通 工具（包括用于军事或者公共安全用途的交通工具）中部署通信网络。系统集成商可以提供一个完整的移动解决方案，其中包括Cisco  3200移动接入路由器硬件、Cisco IOS软件、专门定制的布线设计、电源和外壳，以及其他必要的组件。这些组件可能包括Cisco  Aironet WLAN产品、思科安全硬件和软件、思科路由和交换产品，以及Cisco LAN和WAN管理软件。</p>                                                                                                                                                                                                                                                                                                                                                             思科 3600 系列路由器                                                                <a name="content"></a> <p><img width="216" height="172" src="/images/pic/other_site/www_cisco_3600_1.gif" alt="思科 3600 系列路由器" />Cisco  3600系列是一个适合大中型企业Internet服务供应商的模块化、多功能访问平台家族。Cisco  3600系列拥有70多个模块化接口选项，提供语音/数据集成、虚拟专网（VPN）、拨号访问和多协议数据路由解决方案。通过利用CIsco的语音/传真 网络模块，Cisco  3600系列允许客户在单个网络上合并语音、传真和数据流量。高性能的模块化体系结构保护了客户的网络技术投资，并将多个设备的功能集成到一个可管理的解 决方案之中。3600捆绑还可用于抓住特定的RAS机遇。</p>                        关键特性                        <ul> <li>在一个平台中结合了拨号访问、先进的局域网到局域网]]
->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/03/26/cisco-%E5%90%84%E7%B3%BB%E5%88%97%E8%B7%AF%E7%94%B1%E5%99%A8%E4%BB%8B%E7%BB%8D/" data-id="clgrjlxb9000k7opi7hsc6g0p" data-title="cisco 各系列路由器介绍" class="article-share-link">Teilen</a>
-      
-      
-        <a href="/2010/03/26/cisco-%E5%90%84%E7%B3%BB%E5%88%97%E8%B7%AF%E7%94%B1%E5%99%A8%E4%BB%8B%E7%BB%8D/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2010/03/26/cisco-%E5%90%84%E7%B3%BB%E5%88%97%E8%B7%AF%E7%94%B1%E5%99%A8%E4%BB%8B%E7%BB%8D/" itemprop="commentCount"></span>
-          Kommentare
-        </a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-失忆！" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2010/03/25/%E5%A4%B1%E5%BF%86%EF%BC%81/" class="article-date">
-  <time class="dt-published" datetime="2010-03-25T15:03:00.000Z" itemprop="datePublished">2010-03-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2010/03/25/%E5%A4%B1%E5%BF%86%EF%BC%81/">失忆！</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>夜深里，人静了，自己的心平静了。<br />每当这时候，自己都好低落。<br />现在自己变的好深沉，好忧虑。<br />深沉点好，可以变的成熟些。<br />努力让自己忘记她，但发现自己好失败。<br />常常想想她过的怎么样。<br />现在她在做什么，工作还是休息还是陪男朋友。<br />看看手机有没有信息，多么希望她的出现，那怕是点施舍。<br />多想发个短息问问，最近过的好吗？<br />但是我不没有。<br />QQ习惯了隐身，当她上线的时候多想问一句，在吗？<br />但是我没有。<br />因为<br />这都是多余的，这已不属于我。<br />现在会有个更好的男人陪着她，照顾她，爱着她。<br />而自己空挡的心，有谁来填满。<br />难道注定我一生孤独，一生后悔。<br /><br />—2010年03月23日夜深<br /></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/03/25/%E5%A4%B1%E5%BF%86%EF%BC%81/" data-id="clgrjlxlm00az7opi7ojfc2il" data-title="失忆！" class="article-share-link">Teilen</a>
-      
-      
-        <a href="/2010/03/25/%E5%A4%B1%E5%BF%86%EF%BC%81/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2010/03/25/%E5%A4%B1%E5%BF%86%EF%BC%81/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2010/03/26/%E6%80%9D%E7%A7%91Cisco-%E8%B7%AF%E7%94%B1%E5%99%A8%E5%9E%8B%E5%8F%B7%E5%89%96%E6%9E%90/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -602,7 +608,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">January 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
     </div>
   </div>
 
@@ -615,23 +621,23 @@
       <ul>
         
           <li>
+            <a href="/2026/01/07/2026%E5%B9%B4%E4%B8%80%E4%BA%9B%E8%AE%A1%E5%88%92-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/">2026年一些计划-持续更新中</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/14/%E4%B8%AD%E5%9B%BD%E6%95%99%E8%82%B2%E8%83%8C%E6%99%AF%E4%B8%8B%E7%9A%84%E8%82%B2%E5%84%BF%E6%9C%9F%E4%B8%8E%E8%8A%92%E6%A0%BC%E5%BC%8F%E6%8A%95%E8%B5%84%E9%98%B6%E6%AE%B5%E5%88%92%E5%88%86/">中国教育背景下的育儿期与芒格式投资阶段划分</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/27/%E6%99%BA%E8%83%BD%E5%85%BB%E8%80%81%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83/">智能养老项目的一些思考</a>
+          </li>
+        
+          <li>
             <a href="/2023/05/05/%E4%BD%BF%E7%94%A8LLAMA%E3%80%81llama.cpp%E6%90%AD%E5%BB%BA%E7%B1%BBChatGPT%E7%8E%AF%E5%A2%83/">使用LLAMA、llama.cpp搭建类ChatGPT环境</a>
           </li>
         
           <li>
             <a href="/2023/04/24/%E5%9C%A8%E4%BD%BF%E7%94%A8ChatGPT%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/">在使用ChatGPT中的一些感想</a>
-          </li>
-        
-          <li>
-            <a href="/2023/04/22/hello-world/">Hello Hexo</a>
-          </li>
-        
-          <li>
-            <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/26/%E5%B7%B4%E8%8F%B2%E7%89%B9%E7%9A%84%E5%9F%BA%E7%A1%80%E6%8A%95%E8%B5%84%E7%90%86%E5%BF%B5%E8%AE%B0%E5%BD%95/">巴菲特的基础投资理念记录</a>
           </li>
         
       </ul>
@@ -647,9 +653,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-        <a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2023016529号</a>
-      
-      &copy; 2023 key1088<br>
+      &copy; 2026 key1088<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -668,7 +672,7 @@
     
 
 
-<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/jquery-3.6.4.min.js"></script>
 
 
 

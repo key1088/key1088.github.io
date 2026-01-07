@@ -104,4 +104,9 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: git@github.com:key1088/key1088.github.io.git  # 你的 Git 仓库地址
+  branch: gh-pages  # 目标分支
+  message: "update blog"  # 自定义提交信息
+
+#show_ad_post: true  ##设置为 true

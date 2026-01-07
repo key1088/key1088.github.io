@@ -34,6 +34,11 @@
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
   
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2824514878105238"
+     crossorigin="anonymous"></script>
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body>
@@ -54,7 +59,7 @@
     </div>
     <div id="header-inner" class="inner">
       <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
         
           <a class="main-nav-link" href="/">Home</a>
         
@@ -65,9 +70,10 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://key1088.github.io"></form>
@@ -78,6 +84,101 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-linux下RRDTool安装方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/09/08/linux%E4%B8%8BRRDTool%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2011-09-08T05:35:00.000Z" itemprop="datePublished">2011-09-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>►<a class="article-category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/09/08/linux%E4%B8%8BRRDTool%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/">linux下RRDTool安装方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一、使用yum安装：<br />在 /etc/yum.repos.d/下面新建dag.repo文件在文件中输入源地址：<br />[root@hmg2 yum.repos.d]# cat dag.repo<br />[dag]<br />name=Dag RPM Repository for Red Hat Enterprise Linux<br />baseurl=http://apt.sw.be/redhat/el$releasever/en/$basearch/dag<br />gpgcheck=1<br />gpgkey=http://dag.wieers.com/rpm/packages/RPM-GPG-KEY.dag.txt<br />enabled=1<br />[root@hmg2 yum.repos.d]#yum -y install rrdtool<br />这样就可以完成RRDTool安装……<br />二、软件包安装：<br />先yum安装所要的库文件：<br />[root@hmg2 yum.repos.d]#yum install cairo-devel libxml2-devel pango-devel pango libpng-devel freetype freetype-devel libart_lgpl-devel<br />然后下载rrdtool包，安装：<br />[root@hmg2 src]#wget http://oss.oetiker.ch/rrdtool/pub/rrdtool-1.3.1.tar.gz<br />[root@hmg2 src]#tar -zxvf rrdtool-1.3.1.tar.gz<br />[root@hmg2 src]#./configure –prefix=/usr/local/rrdtool &amp;&amp; make &amp;&amp; make install<br />运行rrdtool –v测试安装成功没有：<br />[root@hmg2 src]#rrdtool -v //可以看到RRDTool的用法以及版本信息</p><p>三、另一种yum安装<br />[root@hmg2 src]#wget http://packages.sw.be/rpmforge-release/rpmforge-release-0.3.6-1.el5.rf.i386.rpm<br />[root@hmg2 src]#rpm -ivh rpmforge-release-0.3.6-1.el5.rf.i386.rpm<br />[root@hmg2 src]#yum -y install rrdtool*</p><p> </p><p><a target="_blank" href="http://www.smartsecur.com.cn" rel="noopener noreferrer"></a></p><p><a target="_blank" href="http://www.smartsecur.com.cn" rel="noopener noreferrer"></a></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/09/08/linux%E4%B8%8BRRDTool%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/" data-id="cmj9xllu5004z0slk6uhg663p" data-title="linux下RRDTool安装方法" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+        <a href="/2011/09/08/linux%E4%B8%8BRRDTool%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/09/08/linux%E4%B8%8BRRDTool%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/" itemprop="commentCount"></span>
+          Kommentare
+        </a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-mysql数据库删除后，网站连接数据库正常。" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/09/06/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%A0%E9%99%A4%E5%90%8E%EF%BC%8C%E7%BD%91%E7%AB%99%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E6%AD%A3%E5%B8%B8%E3%80%82/" class="article-date">
+  <time class="dt-published" datetime="2011-09-06T09:34:00.000Z" itemprop="datePublished">2011-09-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/09/06/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%A0%E9%99%A4%E5%90%8E%EF%BC%8C%E7%BD%91%E7%AB%99%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E6%AD%A3%E5%B8%B8%E3%80%82/">mysql数据库删除后，网站连接数据库正常。</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>今天，（vmware里的）网站程序怎么也连接不上了，提示连接不上数据库，之前好好的，没有做什么操作啊。<br>密码是正确的，终端能连接上，就是php连接不上，php也没有什么问题啊。郁闷死了。怒之，删mysql数据库，重建。<br>rm -rf &#x2F;usr&#x2F;local&#x2F;mysql&#x2F;var&#x2F;mysql&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #直接删除的数据<br>mysql_install_db –user&#x3D;mysql –basedir&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql –datadir&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;var<br>mysql -u root -p&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #进入mysql模式<br>show databases；&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #有其他数据库<br>可笑的是，现在网站能访问了，网站连接数据库的用户密码没有修改。<br>快速进入mysql表<br>use mysql<br>select user，host，password from user；&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #确定是创建的，没有其他的用户。<br>mysql -u 任意用户 -p&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #任意用户，空密码能进入<br>mysqladmin -uroot password&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #初始化密码，提示连接localhost 失败，0.0.0.0:3306正常监听。<br>看mysql日志正常，有点小郁闷。没有初始化密码前，不需要验证码。只要有对应的数据库就可以吗。晕。<br>&amp;nbsp;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/09/06/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%A0%E9%99%A4%E5%90%8E%EF%BC%8C%E7%BD%91%E7%AB%99%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E6%AD%A3%E5%B8%B8%E3%80%82/" data-id="cmj9xllu9005x0slkhk3z8jo4" data-title="mysql数据库删除后，网站连接数据库正常。" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+        <a href="/2011/09/06/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%A0%E9%99%A4%E5%90%8E%EF%BC%8C%E7%BD%91%E7%AB%99%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E6%AD%A3%E5%B8%B8%E3%80%82/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/09/06/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%A0%E9%99%A4%E5%90%8E%EF%BC%8C%E7%BD%91%E7%AB%99%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E6%AD%A3%E5%B8%B8%E3%80%82/" itemprop="commentCount"></span>
+          Kommentare
+        </a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-统计每日访问ip数脚本" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -109,11 +210,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/09/06/%E7%BB%9F%E8%AE%A1%E6%AF%8F%E6%97%A5%E8%AE%BF%E9%97%AEip%E6%95%B0%E8%84%9A%E6%9C%AC/" data-id="clgrjlxm300by7opiex310upx" data-title="统计每日访问ip数脚本" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/09/06/%E7%BB%9F%E8%AE%A1%E6%AF%8F%E6%97%A5%E8%AE%BF%E9%97%AEip%E6%95%B0%E8%84%9A%E6%9C%AC/" data-id="cmj9xllv600cl0slk1nui5djn" data-title="统计每日访问ip数脚本" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/09/06/%E7%BB%9F%E8%AE%A1%E6%AF%8F%E6%97%A5%E8%AE%BF%E9%97%AEip%E6%95%B0%E8%84%9A%E6%9C%AC/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/09/06/%E7%BB%9F%E8%AE%A1%E6%AF%8F%E6%97%A5%E8%AE%BF%E9%97%AEip%E6%95%B0%E8%84%9A%E6%9C%AC/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/09/06/%E7%BB%9F%E8%AE%A1%E6%AF%8F%E6%97%A5%E8%AE%BF%E9%97%AEip%E6%95%B0%E8%84%9A%E6%9C%AC/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -157,11 +258,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/09/05/iptables%E4%B9%8B7%E5%B1%82%E8%BF%87%E6%BB%A4(%E5%B0%81QQ%E3%80%81MSN%E3%80%81P2P)/" data-id="clgrjlxdt002g7opi6st04znj" data-title="iptables之7层过滤(封QQ、MSN、P2P)" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/09/05/iptables%E4%B9%8B7%E5%B1%82%E8%BF%87%E6%BB%A4(%E5%B0%81QQ%E3%80%81MSN%E3%80%81P2P)/" data-id="cmj9xllu0003q0slkd47ofxxx" data-title="iptables之7层过滤(封QQ、MSN、P2P)" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/09/05/iptables%E4%B9%8B7%E5%B1%82%E8%BF%87%E6%BB%A4(%E5%B0%81QQ%E3%80%81MSN%E3%80%81P2P)/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/09/05/iptables%E4%B9%8B7%E5%B1%82%E8%BF%87%E6%BB%A4(%E5%B0%81QQ%E3%80%81MSN%E3%80%81P2P)/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/09/05/iptables%E4%B9%8B7%E5%B1%82%E8%BF%87%E6%BB%A4(%E5%B0%81QQ%E3%80%81MSN%E3%80%81P2P)/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -204,11 +305,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/09/01/squid-%E4%B8%89%E7%A7%8D%E4%BB%A3%E7%90%86%E6%96%B9%E5%BC%8F/" data-id="clgrjlxja006n7opifp88c3ef" data-title="squid 三种代理方式" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/09/01/squid-%E4%B8%89%E7%A7%8D%E4%BB%A3%E7%90%86%E6%96%B9%E5%BC%8F/" data-id="cmj9xllui007p0slker5e0a80" data-title="squid 三种代理方式" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/09/01/squid-%E4%B8%89%E7%A7%8D%E4%BB%A3%E7%90%86%E6%96%B9%E5%BC%8F/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/09/01/squid-%E4%B8%89%E7%A7%8D%E4%BB%A3%E7%90%86%E6%96%B9%E5%BC%8F/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/09/01/squid-%E4%B8%89%E7%A7%8D%E4%BB%A3%E7%90%86%E6%96%B9%E5%BC%8F/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -251,11 +352,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/08/05/red5-%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85/" data-id="clgrjlxj4006f7opi0eh7dr2k" data-title="red5 简单安装" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/08/05/red5-%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85/" data-id="cmj9xllug007b0slk2p7r3n61" data-title="red5 简单安装" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/08/05/red5-%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/08/05/red5-%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/08/05/red5-%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -299,11 +400,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/08/02/CentOS%E5%AE%89%E8%A3%85GNOME-Desktop-Enviroment/" data-id="clgrk6tpj00008opi8j13fwee" data-title="CentOS安装GNOME Desktop Enviroment" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/08/02/CentOS%E5%AE%89%E8%A3%85GNOME-Desktop-Enviroment/" data-id="cmj9xllth00090slk4lc3di24" data-title="CentOS安装GNOME Desktop Enviroment" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/08/02/CentOS%E5%AE%89%E8%A3%85GNOME-Desktop-Enviroment/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/08/02/CentOS%E5%AE%89%E8%A3%85GNOME-Desktop-Enviroment/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/08/02/CentOS%E5%AE%89%E8%A3%85GNOME-Desktop-Enviroment/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -347,11 +448,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/07/14/%E7%BC%96%E8%AF%91Mysql%E6%97%B6configure--error--No-curses-termcap-library-found-%E7%9A%84%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="clgrkehmi00030spi899acnhi" data-title="编译Mysql时configure- error No curses/termcap library found 的错误解决方法" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/07/14/%E7%BC%96%E8%AF%91Mysql%E6%97%B6configure--error--No-curses-termcap-library-found-%E7%9A%84%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="cmj9xllv700cn0slk5v232mhy" data-title="编译Mysql时configure- error No curses/termcap library found 的错误解决方法" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/07/14/%E7%BC%96%E8%AF%91Mysql%E6%97%B6configure--error--No-curses-termcap-library-found-%E7%9A%84%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/07/14/%E7%BC%96%E8%AF%91Mysql%E6%97%B6configure--error--No-curses-termcap-library-found-%E7%9A%84%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/07/14/%E7%BC%96%E8%AF%91Mysql%E6%97%B6configure--error--No-curses-termcap-library-found-%E7%9A%84%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -394,11 +495,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/07/14/debian-termcap-compat/" data-id="clgrjlxc300177opifg9qg4kf" data-title="debian termcap-compat" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/07/14/debian-termcap-compat/" data-id="cmj9xlltx00360slk8b8k8ito" data-title="debian termcap-compat" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/07/14/debian-termcap-compat/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/07/14/debian-termcap-compat/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/07/14/debian-termcap-compat/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -441,106 +542,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/07/12/%E5%AF%B9linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/" data-id="clgrjlxkv009j7opiard4giay" data-title="对linux服务器的一些安全设置" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/07/12/%E5%AF%B9linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/" data-id="cmj9xlluu00ah0slkhr3lhxk9" data-title="对linux服务器的一些安全设置" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/07/12/%E5%AF%B9linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/07/12/%E5%AF%B9linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/" itemprop="commentCount"></span>
-          Kommentare
-        </a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-linux-下-GPG加解密" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2011/07/11/linux-%E4%B8%8B-GPG%E5%8A%A0%E8%A7%A3%E5%AF%86/" class="article-date">
-  <time class="dt-published" datetime="2011-07-11T03:51:00.000Z" itemprop="datePublished">2011-07-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>►<a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/">Linux</a>►<a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2011/07/11/linux-%E4%B8%8B-GPG%E5%8A%A0%E8%A7%A3%E5%AF%86/">linux 下 GPG加解密</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><strong></strong><br>互联网是不安全，当今是，将来也是。加密和解密都是相对的，都是有难度系数也确定的。<br>GPG 有两个key，一个是公钥，一个是私钥。公钥加密，私钥解密。<br>要想加密，必须拥有自己或者别人的公钥key。<br>要想解密，必须拥有该加密文件的私钥key和密码。<br>简单的记录一下。<br>&amp;nbsp;<br>&amp;nbsp;<br>1.生成密钥对。（本机）<strong></strong><br>shell &gt;gpg –gen-key&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #生成密钥对<br>shell&gt;gpg -K&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #查看私钥<br>shell&gt;gpg –list-keys&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp; #查看公钥<br>主要是加密种类、名称、日期、密码等<br>2.导出公钥。（本机）<br>shell&gt;gpg –export -a -r <em>[key1088]</em>&gt; pub.key&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #导出名字为key1088的公钥。<br>把生成的公钥，发送到目标电脑。<br>3.导入目标（目标）<br>shell&gt;gpg –import <em>[pub.key]&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</em>#导入名字为pub.key的文件<br>shell&gt;gpg –list-keys&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #查看公钥，有没有key1088公钥。<br>4.加密（目标）<br>shell&gt;gpg -e -r <em>[key1088]&amp;nbsp;&amp;nbsp; test.txt &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</em>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #使用key1088的公钥，加密test.txt文件 ,生成一个名字为test.txt.asc<br>shell&gt;gpg <em>[test.txt.asc]&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</em> #失败！！会提示没有密钥。只有蜜月才可以解密。<br>把加密文件，发送到本机，进行解密。<br>5.解密（本机）<br>shell&gt;gpg <em>[test.txt.asc]&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</em>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #输入密码方可解密。<br /><br>&amp;nbsp;</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/07/11/linux-%E4%B8%8B-GPG%E5%8A%A0%E8%A7%A3%E5%AF%86/" data-id="clgrjlxh6003r7opif3fcbsql" data-title="linux 下 GPG加解密" class="article-share-link">Teilen</a>
-      
-      
-        <a href="/2011/07/11/linux-%E4%B8%8B-GPG%E5%8A%A0%E8%A7%A3%E5%AF%86/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/07/11/linux-%E4%B8%8B-GPG%E5%8A%A0%E8%A7%A3%E5%AF%86/" itemprop="commentCount"></span>
-          Kommentare
-        </a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-find-查到隐藏文件" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2011/07/01/find-%E6%9F%A5%E5%88%B0%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/" class="article-date">
-  <time class="dt-published" datetime="2011-07-01T09:05:00.000Z" itemprop="datePublished">2011-07-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2011/07/01/find-%E6%9F%A5%E5%88%B0%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/">find 查到隐藏文件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>查找一个目录下的一个目录下的隐藏文件</p><p>find PATH -name &quot;.*&quot; -type f </p><p>name 匹配要用双引号&quot; &quot;.</p><p>&nbsp;</p><p>可以查看 被rootkit 或web页面所应藏的webshell和back door。</p>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/07/01/find-%E6%9F%A5%E5%88%B0%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/" data-id="clgrjlxd4001q7opi2v8u7urr" data-title="find 查到隐藏文件" class="article-share-link">Teilen</a>
-      
-      
-        <a href="/2011/07/01/find-%E6%9F%A5%E5%88%B0%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/07/01/find-%E6%9F%A5%E5%88%B0%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/07/12/%E5%AF%B9linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -597,7 +603,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">January 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
     </div>
   </div>
 
@@ -610,23 +616,23 @@
       <ul>
         
           <li>
+            <a href="/2026/01/07/2026%E5%B9%B4%E4%B8%80%E4%BA%9B%E8%AE%A1%E5%88%92-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/">2026年一些计划-持续更新中</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/14/%E4%B8%AD%E5%9B%BD%E6%95%99%E8%82%B2%E8%83%8C%E6%99%AF%E4%B8%8B%E7%9A%84%E8%82%B2%E5%84%BF%E6%9C%9F%E4%B8%8E%E8%8A%92%E6%A0%BC%E5%BC%8F%E6%8A%95%E8%B5%84%E9%98%B6%E6%AE%B5%E5%88%92%E5%88%86/">中国教育背景下的育儿期与芒格式投资阶段划分</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/27/%E6%99%BA%E8%83%BD%E5%85%BB%E8%80%81%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83/">智能养老项目的一些思考</a>
+          </li>
+        
+          <li>
             <a href="/2023/05/05/%E4%BD%BF%E7%94%A8LLAMA%E3%80%81llama.cpp%E6%90%AD%E5%BB%BA%E7%B1%BBChatGPT%E7%8E%AF%E5%A2%83/">使用LLAMA、llama.cpp搭建类ChatGPT环境</a>
           </li>
         
           <li>
             <a href="/2023/04/24/%E5%9C%A8%E4%BD%BF%E7%94%A8ChatGPT%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/">在使用ChatGPT中的一些感想</a>
-          </li>
-        
-          <li>
-            <a href="/2023/04/22/hello-world/">Hello Hexo</a>
-          </li>
-        
-          <li>
-            <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/26/%E5%B7%B4%E8%8F%B2%E7%89%B9%E7%9A%84%E5%9F%BA%E7%A1%80%E6%8A%95%E8%B5%84%E7%90%86%E5%BF%B5%E8%AE%B0%E5%BD%95/">巴菲特的基础投资理念记录</a>
           </li>
         
       </ul>
@@ -642,9 +648,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-        <a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2023016529号</a>
-      
-      &copy; 2023 key1088<br>
+      &copy; 2026 key1088<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -663,7 +667,7 @@
     
 
 
-<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/jquery-3.6.4.min.js"></script>
 
 
 

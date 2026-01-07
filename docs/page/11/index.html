@@ -34,6 +34,11 @@
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
   
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2824514878105238"
+     crossorigin="anonymous"></script>
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body>
@@ -54,7 +59,7 @@
     </div>
     <div id="header-inner" class="inner">
       <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
         
           <a class="main-nav-link" href="/">Home</a>
         
@@ -65,9 +70,10 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://key1088.github.io"></form>
@@ -78,6 +84,101 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-linux-下-GPG加解密" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/07/11/linux-%E4%B8%8B-GPG%E5%8A%A0%E8%A7%A3%E5%AF%86/" class="article-date">
+  <time class="dt-published" datetime="2011-07-11T03:51:00.000Z" itemprop="datePublished">2011-07-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>►<a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/">Linux</a>►<a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/07/11/linux-%E4%B8%8B-GPG%E5%8A%A0%E8%A7%A3%E5%AF%86/">linux 下 GPG加解密</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong></strong><br>互联网是不安全，当今是，将来也是。加密和解密都是相对的，都是有难度系数也确定的。<br>GPG 有两个key，一个是公钥，一个是私钥。公钥加密，私钥解密。<br>要想加密，必须拥有自己或者别人的公钥key。<br>要想解密，必须拥有该加密文件的私钥key和密码。<br>简单的记录一下。<br>&amp;nbsp;<br>&amp;nbsp;<br>1.生成密钥对。（本机）<strong></strong><br>shell &gt;gpg –gen-key&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #生成密钥对<br>shell&gt;gpg -K&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #查看私钥<br>shell&gt;gpg –list-keys&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp; #查看公钥<br>主要是加密种类、名称、日期、密码等<br>2.导出公钥。（本机）<br>shell&gt;gpg –export -a -r <em>[key1088]</em>&gt; pub.key&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #导出名字为key1088的公钥。<br>把生成的公钥，发送到目标电脑。<br>3.导入目标（目标）<br>shell&gt;gpg –import <em>[pub.key]&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</em>#导入名字为pub.key的文件<br>shell&gt;gpg –list-keys&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #查看公钥，有没有key1088公钥。<br>4.加密（目标）<br>shell&gt;gpg -e -r <em>[key1088]&amp;nbsp;&amp;nbsp; test.txt &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</em>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #使用key1088的公钥，加密test.txt文件 ,生成一个名字为test.txt.asc<br>shell&gt;gpg <em>[test.txt.asc]&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</em> #失败！！会提示没有密钥。只有蜜月才可以解密。<br>把加密文件，发送到本机，进行解密。<br>5.解密（本机）<br>shell&gt;gpg <em>[test.txt.asc]&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</em>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #输入密码方可解密。<br /><br>&amp;nbsp;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/07/11/linux-%E4%B8%8B-GPG%E5%8A%A0%E8%A7%A3%E5%AF%86/" data-id="cmj9xllu200480slk698g3oc0" data-title="linux 下 GPG加解密" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+        <a href="/2011/07/11/linux-%E4%B8%8B-GPG%E5%8A%A0%E8%A7%A3%E5%AF%86/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/07/11/linux-%E4%B8%8B-GPG%E5%8A%A0%E8%A7%A3%E5%AF%86/" itemprop="commentCount"></span>
+          Kommentare
+        </a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-find-查到隐藏文件" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2011/07/01/find-%E6%9F%A5%E5%88%B0%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/" class="article-date">
+  <time class="dt-published" datetime="2011-07-01T09:05:00.000Z" itemprop="datePublished">2011-07-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2011/07/01/find-%E6%9F%A5%E5%88%B0%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/">find 查到隐藏文件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>查找一个目录下的一个目录下的隐藏文件</p><p>find PATH -name &quot;.*&quot; -type f </p><p>name 匹配要用双引号&quot; &quot;.</p><p>&nbsp;</p><p>可以查看 被rootkit 或web页面所应藏的webshell和back door。</p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2011/07/01/find-%E6%9F%A5%E5%88%B0%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/" data-id="cmj9xllty003e0slkh9490x10" data-title="find 查到隐藏文件" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+        <a href="/2011/07/01/find-%E6%9F%A5%E5%88%B0%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/07/01/find-%E6%9F%A5%E5%88%B0%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/" itemprop="commentCount"></span>
+          Kommentare
+        </a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-MAFIX---Linux-2.6-rootkit分析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -112,11 +213,11 @@ r/sbin/xntps&quot;| grep -v &quot;/usr/sbin/nscd&quot; &gt; /tmp/.grep</p><p>&nb
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/06/28/MAFIX---Linux-2.6-rootkit%E5%88%86%E6%9E%90/" data-id="clgrjlxhx00497opib8ei1ydj" data-title="MAFIX - Linux 2.6 rootkit分析" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/06/28/MAFIX---Linux-2.6-rootkit%E5%88%86%E6%9E%90/" data-id="cmj9xlltq001m0slk1pm88ur1" data-title="MAFIX - Linux 2.6 rootkit分析" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/06/28/MAFIX---Linux-2.6-rootkit%E5%88%86%E6%9E%90/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/06/28/MAFIX---Linux-2.6-rootkit%E5%88%86%E6%9E%90/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/06/28/MAFIX---Linux-2.6-rootkit%E5%88%86%E6%9E%90/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -160,11 +261,11 @@ r/sbin/xntps&quot;| grep -v &quot;/usr/sbin/nscd&quot; &gt; /tmp/.grep</p><p>&nb
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/06/27/Linux%E4%B8%8Brootkit-ddrk%E6%94%BB%E5%87%BB%E8%8E%B7%E5%BE%97root%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E6%B8%85%E9%99%A4%E6%96%B9%E6%B3%95[%E8%BD%AC]/" data-id="clgrjlxhu00477opi1fdt6zhc" data-title="Linux下rootkit-ddrk攻击获得root权限以及清除方法[转]" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/06/27/Linux%E4%B8%8Brootkit-ddrk%E6%94%BB%E5%87%BB%E8%8E%B7%E5%BE%97root%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E6%B8%85%E9%99%A4%E6%96%B9%E6%B3%95[%E8%BD%AC]/" data-id="cmj9xllto001a0slk2trc1sz6" data-title="Linux下rootkit-ddrk攻击获得root权限以及清除方法[转]" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/06/27/Linux%E4%B8%8Brootkit-ddrk%E6%94%BB%E5%87%BB%E8%8E%B7%E5%BE%97root%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E6%B8%85%E9%99%A4%E6%96%B9%E6%B3%95%5B%E8%BD%AC%5D/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/06/27/Linux%E4%B8%8Brootkit-ddrk%E6%94%BB%E5%87%BB%E8%8E%B7%E5%BE%97root%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E6%B8%85%E9%99%A4%E6%96%B9%E6%B3%95%5B%E8%BD%AC%5D/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/06/27/Linux%E4%B8%8Brootkit-ddrk%E6%94%BB%E5%87%BB%E8%8E%B7%E5%BE%97root%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E6%B8%85%E9%99%A4%E6%96%B9%E6%B3%95%5B%E8%BD%AC%5D/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -207,11 +308,11 @@ r/sbin/xntps&quot;| grep -v &quot;/usr/sbin/nscd&quot; &gt; /tmp/.grep</p><p>&nb
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/06/23/php2008%E6%BC%8F%E6%B4%9E%E5%90%8E%E5%8F%B0%E4%B8%8A%E4%BC%A00day%E6%BC%8F%E6%B4%9E/" data-id="clgrjlxir005t7opiah8971pd" data-title="php2008漏洞后台上传0day漏洞" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/06/23/php2008%E6%BC%8F%E6%B4%9E%E5%90%8E%E5%8F%B0%E4%B8%8A%E4%BC%A00day%E6%BC%8F%E6%B4%9E/" data-id="cmj9xllue006v0slkf0i70q61" data-title="php2008漏洞后台上传0day漏洞" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/06/23/php2008%E6%BC%8F%E6%B4%9E%E5%90%8E%E5%8F%B0%E4%B8%8A%E4%BC%A00day%E6%BC%8F%E6%B4%9E/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/06/23/php2008%E6%BC%8F%E6%B4%9E%E5%90%8E%E5%8F%B0%E4%B8%8A%E4%BC%A00day%E6%BC%8F%E6%B4%9E/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/06/23/php2008%E6%BC%8F%E6%B4%9E%E5%90%8E%E5%8F%B0%E4%B8%8A%E4%BC%A00day%E6%BC%8F%E6%B4%9E/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -254,11 +355,11 @@ r/sbin/xntps&quot;| grep -v &quot;/usr/sbin/nscd&quot; &gt; /tmp/.grep</p><p>&nb
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/06/21/scan-webshell-shell/" data-id="clgrjlxj4006g7opic5lsgev8" data-title="scan webshell shell" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/06/21/scan-webshell-shell/" data-id="cmj9xlluh007g0slk2mda49hd" data-title="scan webshell shell" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/06/21/scan-webshell-shell/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/06/21/scan-webshell-shell/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/06/21/scan-webshell-shell/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -301,11 +402,11 @@ r/sbin/xntps&quot;| grep -v &quot;/usr/sbin/nscd&quot; &gt; /tmp/.grep</p><p>&nb
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/06/20/vsftpd-%E6%9C%8D%E5%8A%A1%E8%84%9A%E6%9C%AC/" data-id="clgrjlxkb008n7opi91nahzik" data-title="vsftpd 服务脚本" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/06/20/vsftpd-%E6%9C%8D%E5%8A%A1%E8%84%9A%E6%9C%AC/" data-id="cmj9xlluk00840slkdxmx6f4l" data-title="vsftpd 服务脚本" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/06/20/vsftpd-%E6%9C%8D%E5%8A%A1%E8%84%9A%E6%9C%AC/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/06/20/vsftpd-%E6%9C%8D%E5%8A%A1%E8%84%9A%E6%9C%AC/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/06/20/vsftpd-%E6%9C%8D%E5%8A%A1%E8%84%9A%E6%9C%AC/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -348,11 +449,11 @@ r/sbin/xntps&quot;| grep -v &quot;/usr/sbin/nscd&quot; &gt; /tmp/.grep</p><p>&nb
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/06/15/linux-%E6%96%87%E4%BB%B6%E3%80%81%E7%9B%AE%E5%BD%95%E5%86%99%E4%BF%9D%E6%8A%A4/" data-id="clgrjlxha003w7opi8crl5lap" data-title="linux 文件、目录写保护" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/06/15/linux-%E6%96%87%E4%BB%B6%E3%80%81%E7%9B%AE%E5%BD%95%E5%86%99%E4%BF%9D%E6%8A%A4/" data-id="cmj9xllu3004j0slkgbm5fz7h" data-title="linux 文件、目录写保护" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/06/15/linux-%E6%96%87%E4%BB%B6%E3%80%81%E7%9B%AE%E5%BD%95%E5%86%99%E4%BF%9D%E6%8A%A4/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/06/15/linux-%E6%96%87%E4%BB%B6%E3%80%81%E7%9B%AE%E5%BD%95%E5%86%99%E4%BF%9D%E6%8A%A4/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/06/15/linux-%E6%96%87%E4%BB%B6%E3%80%81%E7%9B%AE%E5%BD%95%E5%86%99%E4%BF%9D%E6%8A%A4/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -395,11 +496,11 @@ r/sbin/xntps&quot;| grep -v &quot;/usr/sbin/nscd&quot; &gt; /tmp/.grep</p><p>&nb
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/05/21/%E6%B5%AE%E8%BA%81%E7%9A%84%E5%A4%A9%EF%BC%8C%E6%B5%AE%E8%BA%81%E7%9A%84%E6%88%91%E3%80%82/" data-id="clgrjlxky009q7opi0r0l8x1c" data-title="浮躁的天，浮躁的我。" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/05/21/%E6%B5%AE%E8%BA%81%E7%9A%84%E5%A4%A9%EF%BC%8C%E6%B5%AE%E8%BA%81%E7%9A%84%E6%88%91%E3%80%82/" data-id="cmj9xllv200bo0slkdvz0ap9d" data-title="浮躁的天，浮躁的我。" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/05/21/%E6%B5%AE%E8%BA%81%E7%9A%84%E5%A4%A9%EF%BC%8C%E6%B5%AE%E8%BA%81%E7%9A%84%E6%88%91%E3%80%82/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/05/21/%E6%B5%AE%E8%BA%81%E7%9A%84%E5%A4%A9%EF%BC%8C%E6%B5%AE%E8%BA%81%E7%9A%84%E6%88%91%E3%80%82/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/05/21/%E6%B5%AE%E8%BA%81%E7%9A%84%E5%A4%A9%EF%BC%8C%E6%B5%AE%E8%BA%81%E7%9A%84%E6%88%91%E3%80%82/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -442,106 +543,11 @@ r/sbin/xntps&quot;| grep -v &quot;/usr/sbin/nscd&quot; &gt; /tmp/.grep</p><p>&nb
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/05/17/ntsd-%E5%BA%94%E7%94%A8%E6%8A%80%E5%B7%A7/" data-id="clgrjlxia00517opi5yvhdk9f" data-title="ntsd 应用技巧" class="article-share-link">Teilen</a>
+      <a data-url="https://key1088.github.io/2011/05/17/ntsd-%E5%BA%94%E7%94%A8%E6%8A%80%E5%B7%A7/" data-id="cmj9xllua00640slk8g90f9f1" data-title="ntsd 应用技巧" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
         <a href="/2011/05/17/ntsd-%E5%BA%94%E7%94%A8%E6%8A%80%E5%B7%A7/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/05/17/ntsd-%E5%BA%94%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="commentCount"></span>
-          Kommentare
-        </a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-shell-中$()-、-${}-and-$(())-用法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2011/04/29/shell-%E4%B8%AD$()-%E3%80%81-$%7B%7D-and-$(())-%E7%94%A8%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2011-04-29T04:48:00.000Z" itemprop="datePublished">2011-04-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2011/04/29/shell-%E4%B8%AD$()-%E3%80%81-$%7B%7D-and-$(())-%E7%94%A8%E6%B3%95/">shell 中$() 、 ${} and $(()) 用法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>脚本如下：</p><p><strong>#!/bin/bash<br />#test $() and ${} and $(())&nbsp; useges<br />#by:key1088@163.com<br />#mail:key1088@163.com<br /><br /><br />file=$(pwd)<br />echo $file<br />echo<br />echo '${file#*/}'<br />echo ${file#*/}<br />echo<br /><br />echo '${file##*/}'<br />echo ${file##*/}<br />echo<br /><br />echo '$(file%/*)'<br />echo ${file%%/*}<br />echo<br /><br />echo '${file/cis7/cis8/}'<br />echo ${file/cis7/cis8/}<br />echo<br /><br />echo '${file//cis7/cis8/}'<br />echo ${file//cis7/cis8/}<br />echo<br /><br />echo '${file:0:5}'<br />echo ${file:0:5}<br />echo<br /><br />echo '${file:5:5}'<br />echo ${file:5:5}<br />echo<br /><br />echo '$(#file)'<br />echo $
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/04/29/shell-%E4%B8%AD$()-%E3%80%81-$%7B%7D-and-$(())-%E7%94%A8%E6%B3%95/" data-id="clgrjlxj7006i7opigriu4ii8" data-title="shell 中$() 、 ${} and $(()) 用法" class="article-share-link">Teilen</a>
-      
-      
-        <a href="/2011/04/29/shell-%E4%B8%AD$()-%E3%80%81-$%7B%7D-and-$(())-%E7%94%A8%E6%B3%95/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/04/29/shell-%E4%B8%AD$()-%E3%80%81-$%7B%7D-and-$(())-%E7%94%A8%E6%B3%95/" itemprop="commentCount"></span>
-          Kommentare
-        </a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-mysqld守护脚本" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/" class="article-date">
-  <time class="dt-published" datetime="2011-04-28T08:23:00.000Z" itemprop="datePublished">2011-04-28</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/">mysqld守护脚本</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>#!&#x2F;bin&#x2F;sh<br />#This is check msyqld shell<br />#by:<a href="mailto:&#107;&#x65;&#121;&#49;&#48;&#x38;&#x38;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;">&#107;&#x65;&#121;&#49;&#48;&#x38;&#x38;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;</a><br />#守护mysqld脚本，防止意外崩溃。<br>#如果连接启动10次，依旧启动不来了。停止（可以写成运行某个程序），解决内存。<br>&amp;nbsp;<br><strong>ERRLOG&#x3D;&#x2F;videodata&#x2F;mysqldata&#x2F;data&#x2F;CHINASOFT.err<br />load_mysqld ()<br />{<br />&#x2F;etc&#x2F;init.d&#x2F;mysqld start<br />}<br /><br />while&amp;nbsp; true<br />do<br />&amp;nbsp; i&#x3D;1<br />&amp;nbsp; PRO&#x3D;<code>ps aux|grep mysqld|grep -v grep</code><br />&amp;nbsp; if [ -z &quot;$PRO&quot; ]<br />&amp;nbsp; then<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; while true<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; do<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; if [ -z &quot;$PRO&quot; ]<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; then<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; load_mysqld<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; echo &quot;<code>date +'%y%m%d %H:%M:%S'</code>&amp;nbsp;&amp;nbsp; $0 LOAD MSYQLD-[$i]&quot; &gt;&gt; $ERRLOG<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; sleep 20<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; PRO&#x3D;<code>ps aux|grep mysqld|grep -v grep</code><br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; if [ -z &quot;$PRO&quot; ]<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; then&amp;nbsp;&amp;nbsp;&amp;nbsp;<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; i&#x3D;$((i+1))<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; fi<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; else<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; break<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; fi<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; if [ $i -eq 10 ]<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; then<br />&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; echo &quot;<code>date +'%y%m%d %H:%M:%S'</code> HR_MYSQL_SAFE.SH LOAD MSQQLD –STOP&quot; &gt;&gt; $ERRLOG<br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp; &amp;nbsp; exit 1<br />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; fi<br />&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; done<br />&amp;nbsp; fi<br />&amp;nbsp; sleep 20<br />done</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/" data-id="clgrjlxi2004l7opi3hs321d6" data-title="mysqld守护脚本" class="article-share-link">Teilen</a>
-      
-      
-        <a href="/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2011/04/28/mysqld%E5%AE%88%E6%8A%A4%E8%84%9A%E6%9C%AC/" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2011/05/17/ntsd-%E5%BA%94%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="commentCount"></span>
           Kommentare
         </a>
       
@@ -598,7 +604,7 @@ r/sbin/xntps&quot;| grep -v &quot;/usr/sbin/nscd&quot; &gt; /tmp/.grep</p><p>&nb
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">January 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
     </div>
   </div>
 
@@ -611,23 +617,23 @@ r/sbin/xntps&quot;| grep -v &quot;/usr/sbin/nscd&quot; &gt; /tmp/.grep</p><p>&nb
       <ul>
         
           <li>
+            <a href="/2026/01/07/2026%E5%B9%B4%E4%B8%80%E4%BA%9B%E8%AE%A1%E5%88%92-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/">2026年一些计划-持续更新中</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/14/%E4%B8%AD%E5%9B%BD%E6%95%99%E8%82%B2%E8%83%8C%E6%99%AF%E4%B8%8B%E7%9A%84%E8%82%B2%E5%84%BF%E6%9C%9F%E4%B8%8E%E8%8A%92%E6%A0%BC%E5%BC%8F%E6%8A%95%E8%B5%84%E9%98%B6%E6%AE%B5%E5%88%92%E5%88%86/">中国教育背景下的育儿期与芒格式投资阶段划分</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/27/%E6%99%BA%E8%83%BD%E5%85%BB%E8%80%81%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83/">智能养老项目的一些思考</a>
+          </li>
+        
+          <li>
             <a href="/2023/05/05/%E4%BD%BF%E7%94%A8LLAMA%E3%80%81llama.cpp%E6%90%AD%E5%BB%BA%E7%B1%BBChatGPT%E7%8E%AF%E5%A2%83/">使用LLAMA、llama.cpp搭建类ChatGPT环境</a>
           </li>
         
           <li>
             <a href="/2023/04/24/%E5%9C%A8%E4%BD%BF%E7%94%A8ChatGPT%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/">在使用ChatGPT中的一些感想</a>
-          </li>
-        
-          <li>
-            <a href="/2023/04/22/hello-world/">Hello Hexo</a>
-          </li>
-        
-          <li>
-            <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/26/%E5%B7%B4%E8%8F%B2%E7%89%B9%E7%9A%84%E5%9F%BA%E7%A1%80%E6%8A%95%E8%B5%84%E7%90%86%E5%BF%B5%E8%AE%B0%E5%BD%95/">巴菲特的基础投资理念记录</a>
           </li>
         
       </ul>
@@ -643,9 +649,7 @@ r/sbin/xntps&quot;| grep -v &quot;/usr/sbin/nscd&quot; &gt; /tmp/.grep</p><p>&nb
   <div class="outer">
     <div id="footer-info" class="inner">
       
-        <a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2023016529号</a>
-      
-      &copy; 2023 key1088<br>
+      &copy; 2026 key1088<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -664,7 +668,7 @@ r/sbin/xntps&quot;| grep -v &quot;/usr/sbin/nscd&quot; &gt; /tmp/.grep</p><p>&nb
     
 
 
-<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/jquery-3.6.4.min.js"></script>
 
 
 
