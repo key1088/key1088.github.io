@@ -85,6 +85,114 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LINUX-设置库优先级变量LD_PRELOAD" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2014/04/13/LINUX-%E8%AE%BE%E7%BD%AE%E5%BA%93%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%98%E9%87%8FLD_PRELOAD/" class="article-date">
+  <time class="dt-published" datetime="2014-04-13T08:20:45.000Z" itemprop="datePublished">2014-04-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>►<a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/">Linux</a>►<a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2014/04/13/LINUX-%E8%AE%BE%E7%BD%AE%E5%BA%93%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%98%E9%87%8FLD_PRELOAD/">LINUX 设置库优先级变量LD_PRELOAD</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在Unix操作系统的动态链接库的世界中，LD_PRELOAD就是这样一个环境变量，它可以影响程序的运行时的链接（Runtime linker），它允许你定义在程序运行前优先加载的动态链接库。<br>  大家想到着就邪恶了吧，今天看proxychanis代码发现的，和win平台sockscap32类似。<br> 看代码test.c</p>
+<pre>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+int main(void)
+{
+    char *passwd="abcd";
+    char in_buff[10];
+    printf("-->input your passwd:");
+    scanf("%s", in_buff);
+    if( strcmp(passwd,in_buff) != 0) {
+        printf("passwd errn");
+        exit(-1);
+    }
+    printf("ok!. open doorn");
+}
+</pre>
+<p>库代码hack.c</p>
+<pre>
+#include <stdio.h>
+int strcmp(const char *s1, const char *s2)
+{
+    printf("hack function invoked. s1=[%s],s2=[%s]n", s1, s2);
+    return 0;
+}
+</pre>
+<pre>
+[root@localhost preload]# gcc -o test test.c
+[root@localhost preload]# ./test
+-->input your passwd:123
+passwd err
+[root@localhost preload]# gcc -shared -o hack.o hack.c
+[root@localhost preload]# ls -l hack.so
+-rwxr-xr-x 1 root root 4116 Apr 13 15:52 hack.so
+[root@localhost preload]# LD_PRELOAD="./hack.so"
+[root@localhost preload]# ./test
+-->input your passwd:123
+passwd err
+[root@localhost preload]# export LD_PRELOAD="./hack.so"
+[root@localhost preload]# ./test
+-->input your passwd:123
+hack function invoked. s1=[abcd],s2=[123]
+ok!. open door
+[root@localhost preload]#
+</pre>
+<p>这是一种思路，还有一种最直接的办法用ltrace<br>ltrace是跟踪调用库函数的工具</p>
+<pre>
+[root@localhost preload]# export LD_PRELOAD=
+[root@localhost preload]# ltrace ./test
+(0x69951c, 0x699ab0, 0, 0, 0x699e58)                                              = 0x6998e4
+__libc_start_main(0x80484a4, 1, 0xbf948364, 0x8048530, 0x8048520 <unfinished ...>
+printf("-->input your passwd:")                                                   = 21
+__isoc99_scanf(0x80485ff, 0xbf9482a2, 0x9acce0, 0x9abff4, 0x8048530-->input your passwd:123
+)              = 1
+strcmp("abcd", "123")                                                             = 1
+puts("passwd err"passwd err
+)                                                                = 11
+exit(1 <unfinished ...>
++++ exited (status 1) +++
+[root@localhost preload]#
+</pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2014/04/13/LINUX-%E8%AE%BE%E7%BD%AE%E5%BA%93%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%98%E9%87%8FLD_PRELOAD/" data-id="cmj9xllto00150slk87poc3n8" data-title="LINUX 设置库优先级变量LD_PRELOAD" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+        <a href="/2014/04/13/LINUX-%E8%AE%BE%E7%BD%AE%E5%BA%93%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%98%E9%87%8FLD_PRELOAD/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2014/04/13/LINUX-%E8%AE%BE%E7%BD%AE%E5%BA%93%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%98%E9%87%8FLD_PRELOAD/" itemprop="commentCount"></span>
+          Kommentare
+        </a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-perl-命令行常用语法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2014/03/22/perl-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/" class="article-date">
@@ -1164,135 +1272,6 @@ end;
 
 
   
-    <article id="post-使用inotify-监控文件创建、修改" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2013/07/17/%E4%BD%BF%E7%94%A8inotify-%E7%9B%91%E6%8E%A7%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA%E3%80%81%E4%BF%AE%E6%94%B9/" class="article-date">
-  <time class="dt-published" datetime="2013-07-17T14:36:27.000Z" itemprop="datePublished">2013-07-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/">Linux</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2013/07/17/%E4%BD%BF%E7%94%A8inotify-%E7%9B%91%E6%8E%A7%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA%E3%80%81%E4%BF%AE%E6%94%B9/">使用inotify 监控文件创建、修改</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>例子为：使用inotify 监控文件创建，可用于安全防护，在创建文件时，检测文件内容，以及后续的操作。<br>监控类型在&#x2F;usr&#x2F;include&#x2F;sys&#x2F;inotify.h头文件查看</p>
-<pre>
-#define IN_ACCESS        0x00000001     /* File was accessed.  */
-#define IN_MODIFY        0x00000002     /* File was modified.  */
-#define IN_ATTRIB        0x00000004     /* Metadata changed.  */
-#define IN_CLOSE_WRITE   0x00000008     /* Writtable file was closed.  */
-#define IN_CLOSE_NOWRITE 0x00000010     /* Unwrittable file closed.  */
-#define IN_CLOSE         (IN_CLOSE_WRITE | IN_CLOSE_NOWRITE) /* Close.  */
-#define IN_OPEN          0x00000020     /* File was opened.  */
-#define IN_MOVED_FROM    0x00000040     /* File was moved from X.  */
-#define IN_MOVED_TO      0x00000080     /* File was moved to Y.  */
-#define IN_MOVE          (IN_MOVED_FROM | IN_MOVED_TO) /* Moves.  */
-#define IN_CREATE        0x00000100     /* Subfile was created.  */
-#define IN_DELETE        0x00000200     /* Subfile was deleted.  */
-#define IN_DELETE_SELF   0x00000400     /* Self was deleted.  */
-#define IN_MOVE_SELF     0x00000800     /* Self was moved.  */
-/* Events sent by the kernel.  */
-#define IN_UNMOUNT       0x00002000     /* Backing fs was unmounted.  */
-#define IN_Q_OVERFLOW    0x00004000     /* Event queued overflowed.  */
-#define IN_IGNORED       0x00008000     /* File was ignored.  */
-/* Helper events.  */
-#define IN_CLOSE         (IN_CLOSE_WRITE | IN_CLOSE_NOWRITE)    /* Close.  */
-#define IN_MOVE          (IN_MOVED_FROM | IN_MOVED_TO)          /* Moves.  */
-/* Special flags.  */
-#define IN_ONLYDIR       0x01000000     /* Only watch the path if it is a
-                                           directory.  */
-#define IN_DONT_FOLLOW   0x02000000     /* Do not follow a sym link.  */
-#define IN_EXCL_UNLINK   0x04000000     /* Exclude events on unlinked
-                                           objects.  */
-#define IN_MASK_ADD      0x20000000     /* Add to the mask of an already
-#define IN_ONESHOT       0x80000000     /* Only send event once.  */
-/* All events which a program can wait on.  */
-#define IN_ALL_EVENTS    (IN_ACCESS | IN_MODIFY | IN_ATTRIB | IN_CLOSE_WRITE
-                          | IN_CLOSE_NOWRITE | IN_OPEN | IN_MOVED_FROM
-                          | IN_MOVED_TO | IN_CREATE | IN_DELETE
-                          | IN_DELETE_SELF | IN_MOVE_SELF)
-</pre>
-<p>监控制定目录下面创建文件和目录</p>
-<pre>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/inotify.h>
-#define	EVENT_SIZE ( sizeof(struct inotify_event) )
-#define	BUFF_LEN ( 1024 * ( EVENT_SIZE + 16 ))
-int main(void)
-{
-    int	length, i = 0;
-    int	fd;
-    int	wd;
-    char	buff[BUFF_LEN];
-    fd = inotify_init();
-    if ( fd < 0) {
-        perror("inotify_init error:");
-        exit(-1);
-    }
-    wd = inotify_add_watch(fd, "/home/key1088/code/c/test", IN_CREATE);
-    struct inotify_event *event;
-    while ( 1 ) {
-        memset(buff, 0x00, sizeof(buff));
-        length = read(fd, buff, BUFF_LEN);
-        if ( length < 0) {
-            perror("read:");
-        }
-        event = ( struct inotify_event * ) &buff[ i ];
-        if ( event->len ) {
-            if (event->mask & IN_CREATE) {
-                if(event->mask & IN_ISDIR) {
-                    printf("create dir,dirname=[%s]n", event->name);
-                }else{
-                    printf("create file,filename=[%s]n", event->name);
-                }
-            }
-        }
-    }
-    inotify_rm_watch(fd, wd);
-    close(fd);
-    return 0;
-}
-</pre>
-<p>参考：<a target="_blank" rel="noopener" href="http://www.ibm.com/developerworks/cn/linux/l-ubuntu-inotify/">http://www.ibm.com/developerworks/cn/linux/l-ubuntu-inotify/</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2013/07/17/%E4%BD%BF%E7%94%A8inotify-%E7%9B%91%E6%8E%A7%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA%E3%80%81%E4%BF%AE%E6%94%B9/" data-id="cmj9xllup00950slkd0kcf463" data-title="使用inotify 监控文件创建、修改" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
-      
-      
-        <a href="/2013/07/17/%E4%BD%BF%E7%94%A8inotify-%E7%9B%91%E6%8E%A7%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA%E3%80%81%E4%BF%AE%E6%94%B9/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2013/07/17/%E4%BD%BF%E7%94%A8inotify-%E7%9B%91%E6%8E%A7%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA%E3%80%81%E4%BF%AE%E6%94%B9/" itemprop="commentCount"></span>
-          Kommentare
-        </a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1337,7 +1316,7 @@ int main(void)
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">January 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
     </div>
   </div>
 
@@ -1348,6 +1327,10 @@ int main(void)
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/01/07/2026%E5%B9%B4%E4%B8%80%E4%BA%9B%E8%AE%A1%E5%88%92-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/">2026年一些计划-持续更新中</a>
+          </li>
         
           <li>
             <a href="/2025/12/14/%E4%B8%AD%E5%9B%BD%E6%95%99%E8%82%B2%E8%83%8C%E6%99%AF%E4%B8%8B%E7%9A%84%E8%82%B2%E5%84%BF%E6%9C%9F%E4%B8%8E%E8%8A%92%E6%A0%BC%E5%BC%8F%E6%8A%95%E8%B5%84%E9%98%B6%E6%AE%B5%E5%88%92%E5%88%86/">中国教育背景下的育儿期与芒格式投资阶段划分</a>
@@ -1365,10 +1348,6 @@ int main(void)
             <a href="/2023/04/24/%E5%9C%A8%E4%BD%BF%E7%94%A8ChatGPT%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/">在使用ChatGPT中的一些感想</a>
           </li>
         
-          <li>
-            <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1382,7 +1361,7 @@ int main(void)
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2025 key1088<br>
+      &copy; 2026 key1088<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

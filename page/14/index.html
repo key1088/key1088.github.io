@@ -85,6 +85,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-硬盘下安装linux" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2010/11/25/%E7%A1%AC%E7%9B%98%E4%B8%8B%E5%AE%89%E8%A3%85linux/" class="article-date">
+  <time class="dt-published" datetime="2010-11-25T09:53:00.000Z" itemprop="datePublished">2010-11-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2010/11/25/%E7%A1%AC%E7%9B%98%E4%B8%8B%E5%AE%89%E8%A3%85linux/">硬盘下安装linux</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>公司新来一批设备，主板没有IDE口，IDE光驱就不能用了。</p><p>用USB光驱装，竟然不能初始化过来，郁闷死了、我要安装的linux系统，太老了，驱动应该支持的少。</p><p>没有办法，公司没有sata光驱，只能硬盘安装了。</p><p> </p><p> </p><p>在另一个linux系统上，上传linux镜像iso。再把iso里面的isolinux文件提取出来。</p><p>这个文件，大家都知道吧，安装引导文件。</p><p>从一个linux启动，进入grub，就是刚刚进去系统时的东西，进入grub命令行（按”c“）。</p><p>kernel （hd0,0)/路径/isolinux/vmlinuz</p><p>&#8205; </p><p>initrd（hd0,0)/路径/isolinux/initd.img</p><p> </p><p>boot</p><p> </p><p>进入安装界面，选择硬盘安装。选择iso的目录就行，不</p><p></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2010/11/25/%E7%A1%AC%E7%9B%98%E4%B8%8B%E5%AE%89%E8%A3%85linux/" data-id="cmj9xllv400c20slkawhl7jp9" data-title="硬盘下安装linux" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+        <a href="/2010/11/25/%E7%A1%AC%E7%9B%98%E4%B8%8B%E5%AE%89%E8%A3%85linux/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2010/11/25/%E7%A1%AC%E7%9B%98%E4%B8%8B%E5%AE%89%E8%A3%85linux/" itemprop="commentCount"></span>
+          Kommentare
+        </a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2010新编中国顶级黑客圈内人物资料和QQ,微博以及博客详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2010/10/10/2010%E6%96%B0%E7%BC%96%E4%B8%AD%E5%9B%BD%E9%A1%B6%E7%BA%A7%E9%BB%91%E5%AE%A2%E5%9C%88%E5%86%85%E4%BA%BA%E7%89%A9%E8%B5%84%E6%96%99%E5%92%8CQQ,%E5%BE%AE%E5%8D%9A%E4%BB%A5%E5%8F%8A%E5%8D%9A%E5%AE%A2%E8%AF%A6%E8%A7%A3/" class="article-date">
@@ -519,53 +566,6 @@
 
 
   
-    <article id="post-经典N个" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2010/06/26/%E7%BB%8F%E5%85%B8N%E4%B8%AA/" class="article-date">
-  <time class="dt-published" datetime="2010-06-26T05:12:00.000Z" itemprop="datePublished">2010-06-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%83%B3/">生活感想</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2010/06/26/%E7%BB%8F%E5%85%B8N%E4%B8%AA/">经典N个</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>某业内人士 10:06:01<br />有些zf技术人员水平差的无法理解，说说我以前遇到过的一次：</p><p>某单位网站服务器被黑了，他打电话求助别人帮他改了密码，然后登录，我看他老把密码输入在用户名处登不进，我很纳闷这是干什么？我也没提醒他，过了 好久他不得不向我求助说进不了，然后我教他用户名处输入用户名，密码处输入密码，他感谢我说又学了一个技巧。我很纳闷，问他你在这做网管做多久了，他说做 了有五年了。我看他桌子上还摆了一大堆的技术书籍。</p><p>其实这样的事情数不胜数，跟朋友闲聊得知有很多类似荒诞的事让人抓狂：</p><p>朋友给一家zf单位做安全检查和加固，发现所有主机管理员密码全部是123456，叫技术人员们改密码，他们很怀疑的眼光说，密码没告诉别人，黑客 怎么能知道？朋友解释这个密码太简单，靠手工猜测就能猜出来，他说黑客哪有可能偏会猜这个呢？然后又解释一堆，说黑客字典里都有这个密码，他还是不理解， 怎么会有？我没告诉他们啊，怎么黑客字典里都有呢！%￥(&amp;^&amp;</p><p>然后给的安全解决方案其中一项就是改密码。数日后，zf技术人员打来电话，问&ldquo;怎么这么久你还没给我改密码，我要投诉你！&rdquo;然后又解释了一大堆，密 码是他们自己内部改，让他改他就知道了！他还是不理解，你们不是做安全的么，密码不由你们改谁改？^%&amp;%^$&amp;^%</p><p>还有的技术人员也不是不懂技术：<br />某地做安全检查，朋友检查发现木马要把木马清掉，负责人说不要清掉!你清掉了，黑客进不来他们万一采取更大的报复怎么办？无语。。。</p><p>某业内人士&nbsp;&nbsp;  11:43:44<br />有的黑客也经典</p><p>某业内人士 11:44:31<br />某地发生DoS攻击，我去应急，黑客打来电话，逼要系统密码，否则就一直DoS<br />某业内人士 11:44:46<br />我和客户都哭笑不得</p>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2010/06/26/%E7%BB%8F%E5%85%B8N%E4%B8%AA/" data-id="cmj9xllv600ch0slk4psl0tpb" data-title="经典N个" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
-      
-      
-        <a href="/2010/06/26/%E7%BB%8F%E5%85%B8N%E4%B8%AA/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2010/06/26/%E7%BB%8F%E5%85%B8N%E4%B8%AA/" itemprop="commentCount"></span>
-          Kommentare
-        </a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -610,7 +610,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">January 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
     </div>
   </div>
 
@@ -621,6 +621,10 @@
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/01/07/2026%E5%B9%B4%E4%B8%80%E4%BA%9B%E8%AE%A1%E5%88%92-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/">2026年一些计划-持续更新中</a>
+          </li>
         
           <li>
             <a href="/2025/12/14/%E4%B8%AD%E5%9B%BD%E6%95%99%E8%82%B2%E8%83%8C%E6%99%AF%E4%B8%8B%E7%9A%84%E8%82%B2%E5%84%BF%E6%9C%9F%E4%B8%8E%E8%8A%92%E6%A0%BC%E5%BC%8F%E6%8A%95%E8%B5%84%E9%98%B6%E6%AE%B5%E5%88%92%E5%88%86/">中国教育背景下的育儿期与芒格式投资阶段划分</a>
@@ -638,10 +642,6 @@
             <a href="/2023/04/24/%E5%9C%A8%E4%BD%BF%E7%94%A8ChatGPT%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/">在使用ChatGPT中的一些感想</a>
           </li>
         
-          <li>
-            <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -655,7 +655,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2025 key1088<br>
+      &copy; 2026 key1088<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

@@ -85,6 +85,220 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-源码搭建CA服务器,证书可申请、吊销" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/09/04/%E6%BA%90%E7%A0%81%E6%90%AD%E5%BB%BACA%E6%9C%8D%E5%8A%A1%E5%99%A8,%E8%AF%81%E4%B9%A6%E5%8F%AF%E7%94%B3%E8%AF%B7%E3%80%81%E5%90%8A%E9%94%80/" class="article-date">
+  <time class="dt-published" datetime="2016-09-04T08:41:57.000Z" itemprop="datePublished">2016-09-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>►<a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/09/04/%E6%BA%90%E7%A0%81%E6%90%AD%E5%BB%BACA%E6%9C%8D%E5%8A%A1%E5%99%A8,%E8%AF%81%E4%B9%A6%E5%8F%AF%E7%94%B3%E8%AF%B7%E3%80%81%E5%90%8A%E9%94%80/">源码搭建CA服务器,证书可申请、吊销</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="现在越来越多的项目在设计的过程中会很注重网络安全，银行金融业和监管机构之间一般采用金融城域网专线连接，在链路上面也使用CA数字证书，一般金融业的CA证书都是CFCA颁发，或者使用制定型号的-加密机。本章主要介绍一下CA服务器的搭建、证书的申请和吊销（也可以自己做加密机），后续有时间会写一下关于程序中怎么使用CA证书进行安全校验的。openssl安装：先来介绍一下openssl的安装，一般LINUX发行版都会自带openssl工具，裁剪系统中一般自己来编译安装。我们的编译和测试环境如下：key1088-key1088-host-uname-aLinux-key1088-host-4-4-0-36-generic-55-Ubuntu-SMP-Thu-Aug-11-18-01-55-UTC-2016-x86-64-x86-64-x86-64-GNU-Linuxkey1088-key1088-host-gcc-versiongcc-Ubuntu-5-4-0-6ubuntu116-04-2-5-4-0-20160609Copyright-C-2015-Free-Software-Foundation-Inc-This-is-free-software-see-the-source-for-copying-conditions-There-is-NOwarranty-not-even-for-MERCHANTABILITY-or-FITNESS-FOR-A-PARTICULAR-PURPOSE-1-下载openssl源代码https-www-openssl-org-wget-https-www-openssl-org-source-openssl-1-1-0-tar-gz2-编译安装tar-xvf-openssl-1-1-0-tar-gzcd-openssl-1-1-0-configmake咱们这次就不make-install了，就在这个目录下面操作了，需要临时设置一下环境变量这个版本默认编译出来静态bin文件在apps下面-rw-rw-r-1-key1088-key1088-911-9月-4-13-49-x509-d-rwxrwxr-x-1-key1088-key1088-680616-9月-4-13-49-openssl-rwxrwxr-x-1-key1088-key1088-6755-9月-4-13-50-CA-pl-rwxrwxr-x-1-key1088-key1088-6613-9月-4-13-50-tsget3-环境变量设置key1088-key1088-host-openssl-1-1-0-apps-openssl-version-openssl-error-while-loading-shared-libraries-libssl-so-1-1-cannot-open-shared-object-file-No-such-file-or-directorykey1088-key1088-host-openssl-1-1-0-apps-LD-LIBRARY-PATH-LD-LIBRARY-PATH-HOME-openssl-1-1-0key1088-key1088-host-openssl-1-1-0-apps-export-LD-LIBRARY-PATHkey1088-key1088-host-openssl-1-1-0-apps-openssl-versionOpenSSL-1-1-0-25-Aug-2016出现版本号就证明环境变量设置正确，openssl可以用了。CA服务器证书生成：CA（Certificate-Authority）证书颁发机构主要负责证书的颁发、管理以及归档和吊销。证书内包含了拥有证书者的姓名、地址、电子邮件帐号、公钥、证书有效期、发放证书的CA、CA的数字签名等信息。证书主要有三大功能：加密、签名、身份验证。所有的操作默认在openssl-1-1-0目录下进行2-生成CA密钥mkdir-p-CA-privatekey1088-key1088-host-openssl-1-1-0-umask-077-apps-openssl-genrsa-out-CA-private-cakey-pem-2048-Generating-RSA-private-key-2048-bit-long-modulus-unable-to-write-random-state-e-is-65537-0x010001-如果出现这个“unable-to-write-‘random-state’”设置一下环境变量即可key1088-key1088-host-openssl-1-1-0-export-RANDFILE-HOME-rndkey1088-key1088-host-openssl-1-1-0-umask-077-apps-openssl-genrsa-out-CA-private-cakey-pem-2048-Generating-RSA-private-key-2048-bit-long-modulus-e-is-65537-0x010001-2-生成自签名证书创建配置文件目录mkdir-etccp-apps-openssl-cnf-etc为了简化证书制作过程中的输入-修改了etc-x2F-openssl-cnf，修改对比内容如下key1088-key1088-host-openssl-1-1-0-diff-etc-openssl-cnf-apps-openssl-cnf42c42-dir-CA-Where-everything-is-kept"><a href="#现在越来越多的项目在设计的过程中会很注重网络安全，银行金融业和监管机构之间一般采用金融城域网专线连接，在链路上面也使用CA数字证书，一般金融业的CA证书都是CFCA颁发，或者使用制定型号的-加密机。本章主要介绍一下CA服务器的搭建、证书的申请和吊销（也可以自己做加密机），后续有时间会写一下关于程序中怎么使用CA证书进行安全校验的。openssl安装：先来介绍一下openssl的安装，一般LINUX发行版都会自带openssl工具，裁剪系统中一般自己来编译安装。我们的编译和测试环境如下：key1088-key1088-host-uname-aLinux-key1088-host-4-4-0-36-generic-55-Ubuntu-SMP-Thu-Aug-11-18-01-55-UTC-2016-x86-64-x86-64-x86-64-GNU-Linuxkey1088-key1088-host-gcc-versiongcc-Ubuntu-5-4-0-6ubuntu116-04-2-5-4-0-20160609Copyright-C-2015-Free-Software-Foundation-Inc-This-is-free-software-see-the-source-for-copying-conditions-There-is-NOwarranty-not-even-for-MERCHANTABILITY-or-FITNESS-FOR-A-PARTICULAR-PURPOSE-1-下载openssl源代码https-www-openssl-org-wget-https-www-openssl-org-source-openssl-1-1-0-tar-gz2-编译安装tar-xvf-openssl-1-1-0-tar-gzcd-openssl-1-1-0-configmake咱们这次就不make-install了，就在这个目录下面操作了，需要临时设置一下环境变量这个版本默认编译出来静态bin文件在apps下面-rw-rw-r-1-key1088-key1088-911-9月-4-13-49-x509-d-rwxrwxr-x-1-key1088-key1088-680616-9月-4-13-49-openssl-rwxrwxr-x-1-key1088-key1088-6755-9月-4-13-50-CA-pl-rwxrwxr-x-1-key1088-key1088-6613-9月-4-13-50-tsget3-环境变量设置key1088-key1088-host-openssl-1-1-0-apps-openssl-version-openssl-error-while-loading-shared-libraries-libssl-so-1-1-cannot-open-shared-object-file-No-such-file-or-directorykey1088-key1088-host-openssl-1-1-0-apps-LD-LIBRARY-PATH-LD-LIBRARY-PATH-HOME-openssl-1-1-0key1088-key1088-host-openssl-1-1-0-apps-export-LD-LIBRARY-PATHkey1088-key1088-host-openssl-1-1-0-apps-openssl-versionOpenSSL-1-1-0-25-Aug-2016出现版本号就证明环境变量设置正确，openssl可以用了。CA服务器证书生成：CA（Certificate-Authority）证书颁发机构主要负责证书的颁发、管理以及归档和吊销。证书内包含了拥有证书者的姓名、地址、电子邮件帐号、公钥、证书有效期、发放证书的CA、CA的数字签名等信息。证书主要有三大功能：加密、签名、身份验证。所有的操作默认在openssl-1-1-0目录下进行2-生成CA密钥mkdir-p-CA-privatekey1088-key1088-host-openssl-1-1-0-umask-077-apps-openssl-genrsa-out-CA-private-cakey-pem-2048-Generating-RSA-private-key-2048-bit-long-modulus-unable-to-write-random-state-e-is-65537-0x010001-如果出现这个“unable-to-write-‘random-state’”设置一下环境变量即可key1088-key1088-host-openssl-1-1-0-export-RANDFILE-HOME-rndkey1088-key1088-host-openssl-1-1-0-umask-077-apps-openssl-genrsa-out-CA-private-cakey-pem-2048-Generating-RSA-private-key-2048-bit-long-modulus-e-is-65537-0x010001-2-生成自签名证书创建配置文件目录mkdir-etccp-apps-openssl-cnf-etc为了简化证书制作过程中的输入-修改了etc-x2F-openssl-cnf，修改对比内容如下key1088-key1088-host-openssl-1-1-0-diff-etc-openssl-cnf-apps-openssl-cnf42c42-dir-CA-Where-everything-is-kept" class="headerlink" title="现在越来越多的项目在设计的过程中会很注重网络安全，银行金融业和监管机构之间一般采用金融城域网专线连接，在链路上面也使用CA数字证书，一般金融业的CA证书都是CFCA颁发，或者使用制定型号的 加密机。本章主要介绍一下CA服务器的搭建、证书的申请和吊销（也可以自己做加密机），后续有时间会写一下关于程序中怎么使用CA证书进行安全校验的。openssl安装：先来介绍一下openssl的安装，一般LINUX发行版都会自带openssl工具，裁剪系统中一般自己来编译安装。我们的编译和测试环境如下：key1088@key1088-host:$ uname -aLinux key1088-host 4.4.0-36-generic #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016 x86_64 x86_64 x86_64 GNU/Linuxkey1088@key1088-host:$ gcc --versiongcc (Ubuntu 5.4.0-6ubuntu116.04.2) 5.4.0 20160609Copyright (C) 2015 Free Software Foundation, Inc.This is free software; see the source for copying conditions.  There is NOwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.1.下载openssl源代码https://www.openssl.org/wget https://www.openssl.org/source/openssl-1.1.0.tar.gz2.编译安装tar xvf openssl-1.1.0.tar.gzcd openssl-1.1.0./configmake咱们这次就不make install了，就在这个目录下面操作了，需要临时设置一下环境变量这个版本默认编译出来静态bin文件在apps下面-rw-rw-r-- 1 key1088 key1088    911 9月   4 13:49 x509.d-rwxrwxr-x 1 key1088 key1088 680616 9月   4 13:49 openssl-rwxrwxr-x 1 key1088 key1088   6755 9月   4 13:50 CA.pl-rwxrwxr-x 1 key1088 key1088   6613 9月   4 13:50 tsget3.环境变量设置key1088@key1088-host:/openssl-1.1.0/apps$ ./openssl version./openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directorykey1088@key1088-host:/openssl-1.1.0/apps$ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/openssl-1.1.0key1088@key1088-host:/openssl-1.1.0/apps$ export LD_LIBRARY_PATHkey1088@key1088-host:/openssl-1.1.0/apps$ ./openssl versionOpenSSL 1.1.0  25 Aug 2016出现版本号就证明环境变量设置正确，openssl可以用了。CA服务器证书生成：CA（Certificate Authority）证书颁发机构主要负责证书的颁发、管理以及归档和吊销。证书内包含了拥有证书者的姓名、地址、电子邮件帐号、公钥、证书有效期、发放证书的CA、CA的数字签名等信息。证书主要有三大功能：加密、签名、身份验证。所有的操作默认在openssl-1.1.0目录下进行2.生成CA密钥mkdir -p CA/privatekey1088@key1088-host:/openssl-1.1.0$ (umask 077;./apps/openssl genrsa -out CA/private/cakey.pem 2048)Generating RSA private key, 2048 bit long modulus.................................+++..........+++unable to write 'random state'e is 65537 (0x010001)如果出现这个“unable to write ‘random state’”设置一下环境变量即可key1088@key1088-host:/openssl-1.1.0$ export RANDFILE=$HOME/.rndkey1088@key1088-host:/openssl-1.1.0$ (umask 077;./apps/openssl genrsa -out CA/private/cakey.pem 2048)Generating RSA private key, 2048 bit long modulus.................................+++.....................................................................................+++e is 65537 (0x010001)2.生成自签名证书创建配置文件目录mkdir etccp apps/openssl.cnf etc为了简化证书制作过程中的输入 修改了etc&#x2F;openssl.cnf，修改对比内容如下key1088@key1088-host:~/openssl-1.1.0$ diff etc/openssl.cnf apps/openssl.cnf42c42< dir		= ./CA		# Where everything is kept"></a>现在越来越多的项目在设计的过程中会很注重网络安全，银行金融业和监管机构之间一般采用金融城域网专线连接，在链路上面也使用CA数字证书，一般金融业的CA证书都是CFCA颁发，或者使用制定型号的 加密机。本章主要介绍一下CA服务器的搭建、证书的申请和吊销（也可以自己做加密机），后续有时间会写一下关于程序中怎么使用CA证书进行安全校验的。<br><strong>openssl安装：<br></strong><br>先来介绍一下openssl的安装，一般LINUX发行版都会自带openssl工具，裁剪系统中一般自己来编译安装。<br>我们的编译和测试环境如下：<br><pre><br>key1088@key1088-host:<del>$ uname -a<br>Linux key1088-host 4.4.0-36-generic #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux<br>key1088@key1088-host:</del>$ gcc --version<br>gcc (Ubuntu 5.4.0-6ubuntu1<del>16.04.2) 5.4.0 20160609<br>Copyright (C) 2015 Free Software Foundation, Inc.<br>This is free software; see the source for copying conditions.  There is NO<br>warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.<br></pre><br>1.下载openssl源代码<br><a target="_blank" rel="noopener" href="https://www.openssl.org/">https://www.openssl.org/</a><br><pre><br>wget <a target="_blank" rel="noopener" href="https://www.openssl.org/source/openssl-1.1.0.tar.gz">https://www.openssl.org/source/openssl-1.1.0.tar.gz</a><br></pre><br>2.编译安装<br><pre><br>tar xvf openssl-1.1.0.tar.gz<br>cd openssl-1.1.0<br>./config<br>make<br></pre><br>咱们这次就不make install了，就在这个目录下面操作了，需要临时设置一下环境变量<br>这个版本默认编译出来静态bin文件在apps下面<br><pre><br>-rw-rw-r-- 1 key1088 key1088    911 9月   4 13:49 x509.d<br>-rwxrwxr-x 1 key1088 key1088 680616 9月   4 13:49 openssl<br>-rwxrwxr-x 1 key1088 key1088   6755 9月   4 13:50 CA.pl<br>-rwxrwxr-x 1 key1088 key1088   6613 9月   4 13:50 tsget<br></pre><br>3.环境变量设置<br><pre><br>key1088@key1088-host:</del>/openssl-1.1.0/apps$ ./openssl version<br>./openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory<br>key1088@key1088-host:<del>/openssl-1.1.0/apps$ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/openssl-1.1.0<br>key1088@key1088-host:</del>/openssl-1.1.0/apps$ export LD_LIBRARY_PATH<br>key1088@key1088-host:<del>/openssl-1.1.0/apps$ ./openssl versionOpenSSL 1.1.0  25 Aug 2016<br></pre><br>出现版本号就证明环境变量设置正确，openssl可以用了。<br><strong><br>CA服务器证书生成：<br></strong><br>CA（Certificate Authority）证书颁发机构主要负责证书的颁发、管理以及归档和吊销。证书内包含了拥有证书者的姓名、地址、电子邮件帐号、公钥、证书有效期、发放证书的CA、CA的数字签名等信息。证书主要有三大功能：加密、签名、身份验证。<br>所有的操作默认在openssl-1.1.0目录下进行<br>2.生成CA密钥<br><pre><br>mkdir -p CA/private<br>key1088@key1088-host:</del>/openssl-1.1.0$ (umask 077;./apps/openssl genrsa -out CA/private/cakey.pem 2048)<br>Generating RSA private key, 2048 bit long modulus<br>.................................+++<br>..........+++<br>unable to write 'random state'<br>e is 65537 (0x010001)<br></pre><br>如果出现这个“unable to write ‘random state’”设置一下环境变量即可<br><pre><br>key1088@key1088-host:<del>/openssl-1.1.0$ export RANDFILE=$HOME/.rnd<br>key1088@key1088-host:</del>/openssl-1.1.0$ (umask 077;./apps/openssl genrsa -out CA/private/cakey.pem 2048)<br>Generating RSA private key, 2048 bit long modulus<br>.................................+++<br>.....................................................................................+++<br>e is 65537 (0x010001)<br></pre><br>2.生成自签名证书<br>创建配置文件目录<br><pre><br>mkdir etc<br>cp apps/openssl.cnf etc<br></pre><br>为了简化证书制作过程中的输入 修改了etc&#x2F;openssl.cnf，修改对比内容如下<br><pre><br>key1088@key1088-host:~/openssl-1.1.0$ diff etc/openssl.cnf apps/openssl.cnf<br>42c42<br>< dir		= ./CA		# Where everything is kept</h2><blockquote>
+<p>dir		= ./demoCA		# Where everything is kept<br>129c129<br>< countryName_default		= CN</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>countryName_default		= AU<br>134c134<br>< stateOrProvinceName_default	= BJ</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>stateOrProvinceName_default	= Some-State<br>139c139<br>< 0.organizationName_default	= key1088.info</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>0.organizationName_default	= Internet Widgits Pty Ltd<br>151c151<br>< emailAddress			= <a href="mailto:&#x6b;&#101;&#x79;&#49;&#48;&#x38;&#56;&#64;&#49;&#54;&#51;&#x2e;&#99;&#x6f;&#109;">&#x6b;&#101;&#x79;&#49;&#48;&#x38;&#56;&#64;&#49;&#54;&#51;&#x2e;&#99;&#x6f;&#109;</a></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>emailAddress			= Email Address<br></pre><br>根据密钥生存证书</p>
+</blockquote>
+<pre>
+key1088@key1088-host:~/openssl-1.1.0$ ./apps/openssl req -new -x509 -key CA/private/cakey.pem -out CA/cacert.pem -days 1000 -config etc/openssl.cnf
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [CN]:
+State or Province Name (full name) [BJ]:
+Locality Name (eg, city) []:
+Organization Name (eg, company) [key1088.info]:
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:key1088
+key1088@163.com []:
+</pre>
+<h2 id="创建CA服务器所需文件key1088-key1088-host-openssl-1-1-0-touch-CA-index-txt-serial-key1088-key1088-host-openssl-1-1-0-ls-l-CA-总用量-8-rw-rw-r-1-key1088-key1088-1176-9月-4-14-07-cacert-pem-rw-rw-r-1-key1088-key1088-0-9月-4-14-09-index-txtdrwxrwxr-x-2-key1088-key1088-4096-9月-4-13-57-private-rw-rw-r-1-key1088-key1088-0-9月-4-14-09-serial证书序号开始值设置key1088-key1088-host-openssl-1-1-0-echo-01-CA-serial3-生成客户端证书，也称为节点证书。key1088-key1088-host-openssl-1-1-0-umask-077-apps-openssl-genrsa-out-CA-client-c01-key-2048-Generating-RSA-private-key-2048-bit-long-modulus-e-is-65537-0x10001-key1088-key1088-host-openssl-1-1-0-apps-openssl-req-new-key-CA-client-c01-key-out-CA-client-c01-csr-config-etc-openssl-cnfYou-are-about-to-be-asked-to-enter-information-that-will-be-incorporatedinto-your-certificate-request-What-you-are-about-to-enter-is-what-is-called-a-Distinguished-Name-or-a-DN-There-are-quite-a-few-fields-but-you-can-leave-some-blankFor-some-fields-there-will-be-a-default-value-If-you-enter-the-field-will-be-left-blank"><a href="#创建CA服务器所需文件key1088-key1088-host-openssl-1-1-0-touch-CA-index-txt-serial-key1088-key1088-host-openssl-1-1-0-ls-l-CA-总用量-8-rw-rw-r-1-key1088-key1088-1176-9月-4-14-07-cacert-pem-rw-rw-r-1-key1088-key1088-0-9月-4-14-09-index-txtdrwxrwxr-x-2-key1088-key1088-4096-9月-4-13-57-private-rw-rw-r-1-key1088-key1088-0-9月-4-14-09-serial证书序号开始值设置key1088-key1088-host-openssl-1-1-0-echo-01-CA-serial3-生成客户端证书，也称为节点证书。key1088-key1088-host-openssl-1-1-0-umask-077-apps-openssl-genrsa-out-CA-client-c01-key-2048-Generating-RSA-private-key-2048-bit-long-modulus-e-is-65537-0x10001-key1088-key1088-host-openssl-1-1-0-apps-openssl-req-new-key-CA-client-c01-key-out-CA-client-c01-csr-config-etc-openssl-cnfYou-are-about-to-be-asked-to-enter-information-that-will-be-incorporatedinto-your-certificate-request-What-you-are-about-to-enter-is-what-is-called-a-Distinguished-Name-or-a-DN-There-are-quite-a-few-fields-but-you-can-leave-some-blankFor-some-fields-there-will-be-a-default-value-If-you-enter-the-field-will-be-left-blank" class="headerlink" title="创建CA服务器所需文件key1088@key1088-host:/openssl-1.1.0$ touch CA/{index.txt,serial}key1088@key1088-host:/openssl-1.1.0$ ls -l CA/总用量 8-rw-rw-r-- 1 key1088 key1088 1176 9月   4 14:07 cacert.pem-rw-rw-r-- 1 key1088 key1088    0 9月   4 14:09 index.txtdrwxrwxr-x 2 key1088 key1088 4096 9月   4 13:57 private-rw-rw-r-- 1 key1088 key1088    0 9月   4 14:09 serial证书序号开始值设置key1088@key1088-host:/openssl-1.1.0$ echo "01" > CA/serial3.生成客户端证书，也称为节点证书。key1088@key1088-host:/openssl-1.1.0$ (umask 077;./apps/openssl genrsa -out CA/client/c01.key 2048)Generating RSA private key, 2048 bit long modulus............+++................................................................................................+++e is 65537 (0x10001)key1088@key1088-host:~/openssl-1.1.0$ ./apps/openssl req -new -key CA/client/c01.key -out CA/client/c01.csr -config etc/openssl.cnfYou are about to be asked to enter information that will be incorporatedinto your certificate request.What you are about to enter is what is called a Distinguished Name or a DN.There are quite a few fields but you can leave some blankFor some fields there will be a default value,If you enter '.', the field will be left blank."></a>创建CA服务器所需文件<br><pre><br>key1088@key1088-host:<del>/openssl-1.1.0$ touch CA/{index.txt,serial}<br>key1088@key1088-host:</del>/openssl-1.1.0$ ls -l CA/<br>总用量 8<br>-rw-rw-r-- 1 key1088 key1088 1176 9月   4 14:07 cacert.pem<br>-rw-rw-r-- 1 key1088 key1088    0 9月   4 14:09 index.txt<br>drwxrwxr-x 2 key1088 key1088 4096 9月   4 13:57 private<br>-rw-rw-r-- 1 key1088 key1088    0 9月   4 14:09 serial<br></pre><br>证书序号开始值设置<br><pre><br>key1088@key1088-host:<del>/openssl-1.1.0$ echo "01" > CA/serial<br></pre><br>3.生成客户端证书，也称为节点证书。<br><pre><br>key1088@key1088-host:</del>/openssl-1.1.0$ (umask 077;./apps/openssl genrsa -out CA/client/c01.key 2048)<br>Generating RSA private key, 2048 bit long modulus<br>............+++<br>................................................................................................+++<br>e is 65537 (0x10001)<br>key1088@key1088-host:~/openssl-1.1.0$ ./apps/openssl req -new -key CA/client/c01.key -out CA/client/c01.csr -config etc/openssl.cnf<br>You are about to be asked to enter information that will be incorporated<br>into your certificate request.<br>What you are about to enter is what is called a Distinguished Name or a DN.<br>There are quite a few fields but you can leave some blank<br>For some fields there will be a default value,<br>If you enter '.', the field will be left blank.</h2><p>Country Name (2 letter code) [CN]:<br>State or Province Name (full name) [BJ]:<br>Locality Name (eg, city) []:<br>Organization Name (eg, company) [key1088.info]:<br>Organizational Unit Name (eg, section) []:<br>Common Name (e.g. server FQDN or YOUR name) []:c01		#此处不能和CA中的名称相同<br><a href="mailto:&#x6b;&#101;&#121;&#49;&#48;&#56;&#56;&#64;&#49;&#54;&#x33;&#46;&#x63;&#x6f;&#109;">&#x6b;&#101;&#121;&#49;&#48;&#56;&#56;&#64;&#49;&#54;&#x33;&#46;&#x63;&#x6f;&#109;</a> []:<br>Please enter the following 'extra' attributes<br>to be sent with your certificate request<br>A challenge password []:1234<br>An optional company name []:1234<br></pre><br>4.部署到CA中</p>
+<pre>
+mkdir -p CA/newcerts
+key1088@key1088-host:~/openssl-1.1.0$ ./apps/openssl ca -in CA/client/c01.csr -out CA/client/c01.crt -days 1000 -config etc/openssl.cnf
+Using configuration from etc/openssl.cnf
+Can't open ./CA/index.txt.attr for reading, No such file or directory
+140399448418048:error:02001002:system library:fopen:No such file or directory:crypto/bio/bss_file.c:74:fopen('./CA/index.txt.attr','r')
+140399448418048:error:2006D080:BIO routines:BIO_new_file:no such file:crypto/bio/bss_file.c:77:
+Check that the request matches the signature
+Signature ok
+Certificate Details:
+        Serial Number: 1 (0x1)
+        Validity
+            Not Before: Sep  4 06:58:17 2016 GMT
+            Not After : Jun  1 06:58:17 2019 GMT
+        Subject:
+            countryName               = CN
+            stateOrProvinceName       = BJ
+            organizationName          = key1088.info
+            commonName                = c01
+        X509v3 extensions:
+            X509v3 Basic Constraints:
+                CA:FALSE
+            Netscape Comment:
+                OpenSSL Generated Certificate
+            X509v3 Subject Key Identifier:
+                AB:F4:CB:4F:13:28:F8:5D:A7:DB:A0:E3:F3:52:86:C1:25:D1:EB:A0
+            X509v3 Authority Key Identifier:
+                keyid:68:82:F2:71:02:9C:92:00:F4:05:72:30:24:97:6B:80:2E:69:AF:EA
+Certificate is to be certified until Jun  1 06:58:17 2019 GMT (1000 days)
+Sign the certificate? [y/n]:y
+1 out of 1 certificate requests certified, commit? [y/n]y
+Write out database with 1 new entries
+Data Base Updated
+key1088@key1088-host:~/openssl-1.1.0$ du -a CA/
+8	CA/newcerts/01.pem		        #自动生成的PEM文件，按照序号命名
+12	CA/newcerts
+4	CA/private/cakey.pem
+8	CA/private
+4	CA/serial
+4	CA/serial.old
+0	CA/index.txt.old
+4	CA/cacert.pem
+4	CA/index.txt
+8	CA/client/c01.crt			#生成的证书
+4	CA/client/c01.key
+4	CA/client/c01.csr
+20	CA/client
+4	CA/index.txt.attr
+64	CA/
+</pre>
+<p>openssl自带的样例：<br>openssl-1.1.0&#x2F;apps&#x2F;demoCA&#x2F;下面的内容<br>5.转换给pfx格式（可选）</p>
+<pre>
+key1088@key1088-host:~/openssl-1.1.0$ ./apps/openssl pkcs12 -export -clcerts -in CA/client/c01.crt -inkey CA/client/c01.key -out CA/client/c01.pfx
+Enter Export Password:					#12345678
+Verifying - Enter Export Password:		#同上
+</pre>
+<p>pfx文件包含数字签名证书和私钥，可以进行密钥转移，也可以导入到浏览器中查看。<br>6.验证证书是否正确</p>
+<pre>
+key1088@key1088-host:~/openssl-1.1.0$ ./apps/openssl verify -CAfile CA/cacert.pem  CA/client/c01.crt
+CA/client/c01.crt: OK
+</pre>
+<p><strong>吊销证书<br></strong><br>1.查看客户端证书序号</p>
+<pre>
+key1088@key1088-host:~/openssl-1.1.0$ ./apps/openssl x509 -in CA/client/c01.crt -noout -serial -subject
+serial=01
+subject=C = CN, ST = BJ, O = key1088.info, CN = c01
+</pre>
+<p>2.吊销证书</p>
+<pre>
+key1088@key1088-host:~/openssl-1.1.0$ ./apps/openssl ca -revoke CA/newcerts/01.pem -config etc/openssl.cnf
+Using configuration from etc/openssl.cnf
+Revoking Certificate 01.
+Data Base Updated
+</pre>
+<p>3.生成吊销列表</p>
+<pre>
+key1088@key1088-host:~/openssl-1.1.0$ echo "01" > CA/crlnumber
+key1088@key1088-host:~/openssl-1.1.0$ ./apps/openssl ca -gencrl -out CA/all.crl -config etc/openssl.cnf
+Using configuration from etc/openssl.cnf
+</pre>
+<p>4.查看吊销</p>
+<pre>
+key1088@key1088-host:~/openssl-1.1.0$ ./apps/openssl crl -in CA/all.crl -noout -text
+Certificate Revocation List (CRL):
+        Version 2 (0x1)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: /C=CN/ST=BJ/O=key1088.info/CN=key1088
+        Last Update: Sep  4 07:37:17 2016 GMT
+        Next Update: Oct  4 07:37:17 2016 GMT
+        CRL extensions:
+            X509v3 CRL Number:
+                1
+Revoked Certificates:
+    Serial Number: 01
+        Revocation Date: Sep  4 07:34:48 2016 GMT
+    Signature Algorithm: sha256WithRSAEncryption
+         a7:98:6c:8f:77:d2:52:6a:57:eb:27:75:6f:17:eb:3c:30:19:
+         78:bb:4f:77:aa:94:74:28:e5:7a:05:38:8d:03:6c:7c:8f:63:
+         de:a9:fd:d3:ed:77:70:7d:24:9a:b9:da:42:05:9b:d1:73:92:
+         6c:0c:13:88:16:16:d7:e1:4f:6f:62:90:8a:11:b1:c5:b7:80:
+         c8:6c:76:e5:d2:eb:a9:f4:ee:da:85:56:9e:f2:97:02:43:ef:
+         3d:ea:77:af:5b:f1:ed:4b:39:c7:7e:9c:22:62:91:ee:17:30:
+         10:d2:49:82:9a:0d:9c:0c:ad:63:1e:cb:30:33:f0:5f:55:dc:
+         b6:6c:70:61:82:ba:e0:d3:98:96:f3:3d:8b:0c:02:0d:fd:ac:
+         61:e5:24:46:a0:52:94:05:f4:a9:a8:8b:25:40:db:a4:e5:58:
+         4f:bd:37:1d:44:87:f1:3f:f9:06:d5:47:aa:0c:8f:1e:ba:d6:
+         99:ef:f7:77:e0:af:05:a3:08:78:06:0f:e2:6a:a4:cd:ac:1a:
+         45:d3:18:9a:18:25:ee:c3:7b:66:51:77:52:64:5e:4a:81:9e:
+         84:be:16:bc:da:7d:83:7b:49:d1:5a:0f:4f:02:e4:fa:fb:80:
+         53:7f:7f:72:02:17:31:25:c6:6e:cc:1e:4f:7e:9c:f4:ae:d1:
+         85:a2:6a:d6
+key1088@key1088-host:~/openssl-1.1.0$ cat CA/serial
+03
+key1088@key1088-host:~/openssl-1.1.0$ cat CA/crlnumber
+02
+key1088@key1088-host:~/openssl-1.1.0$ cat CA/index.txt
+R	190601065817Z	160904073448Z	01	unknown	/C=CN/ST=BJ/O=key1088.info/CN=c01
+V	190601073145Z		02	unknown	/C=CN/ST=BJ/O=key1088.info/CN=c02
+key1088@key1088-host:~/openssl-1.1.0$ cat CA/index.txt.old
+V	190601065817Z		01	unknown	/C=CN/ST=BJ/O=key1088.info/CN=c01
+V	190601073145Z		02	unknown	/C=CN/ST=BJ/O=key1088.info/CN=c02
+</pre>
+<p>5.验证吊销的证书和正常使用的证书</p>
+<pre>
+key1088@key1088-host:~/openssl-1.1.0$ ./apps/openssl  verify -crl_check -CRLfile CA/all.crl -CAfile CA/cacert.pem CA/client/c01.crt
+C = CN, ST = BJ, O = key1088.info, CN = c01
+error 23 at 0 depth lookup: certificate revoked
+error CA/client/c01.crt: verification failed
+</pre>
+<p>再新生成一个02的证书验证一下，验证结果。<br>key1088@key1088-host:~&#x2F;openssl-1.1.0$ .&#x2F;apps&#x2F;openssl  verify -crl_check -CRLfile CA&#x2F;all.crl -CAfile CA&#x2F;cacert.pem CA&#x2F;client&#x2F;c02.crt<br>CA&#x2F;client&#x2F;c02.crt: OK<br>参考文章：<br><a target="_blank" rel="noopener" href="http://www.yunweipai.com/archives/4513.html%20r">http://www.yunweipai.com/archives/4513.html%20r</a><br><a target="_blank" rel="noopener" href="http://raymii.org/s/articles/OpenSSL_manually_verify_a_certificate_against_a_CRL.html">http://raymii.org/s/articles/OpenSSL_manually_verify_a_certificate_against_a_CRL.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://key1088.github.io/2016/09/04/%E6%BA%90%E7%A0%81%E6%90%AD%E5%BB%BACA%E6%9C%8D%E5%8A%A1%E5%99%A8,%E8%AF%81%E4%B9%A6%E5%8F%AF%E7%94%B3%E8%AF%B7%E3%80%81%E5%90%8A%E9%94%80/" data-id="cmj9xllv300bx0slkgu4yee74" data-title="源码搭建CA服务器,证书可申请、吊销" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+        <a href="/2016/09/04/%E6%BA%90%E7%A0%81%E6%90%AD%E5%BB%BACA%E6%9C%8D%E5%8A%A1%E5%99%A8,%E8%AF%81%E4%B9%A6%E5%8F%AF%E7%94%B3%E8%AF%B7%E3%80%81%E5%90%8A%E9%94%80/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2016/09/04/%E6%BA%90%E7%A0%81%E6%90%AD%E5%BB%BACA%E6%9C%8D%E5%8A%A1%E5%99%A8,%E8%AF%81%E4%B9%A6%E5%8F%AF%E7%94%B3%E8%AF%B7%E3%80%81%E5%90%8A%E9%94%80/" itemprop="commentCount"></span>
+          Kommentare
+        </a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-linux-shell下命令反弹shell，tcp连接" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2016/08/24/linux-shell%E4%B8%8B%E5%91%BD%E4%BB%A4%E5%8F%8D%E5%BC%B9shell%EF%BC%8Ctcp%E8%BF%9E%E6%8E%A5/" class="article-date">
@@ -676,114 +890,6 @@ return 0;
 
 
   
-    <article id="post-LINUX-设置库优先级变量LD_PRELOAD" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2014/04/13/LINUX-%E8%AE%BE%E7%BD%AE%E5%BA%93%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%98%E9%87%8FLD_PRELOAD/" class="article-date">
-  <time class="dt-published" datetime="2014-04-13T08:20:45.000Z" itemprop="datePublished">2014-04-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>►<a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/">Linux</a>►<a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Linux/C%E7%BC%96%E7%A8%8B/">C编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2014/04/13/LINUX-%E8%AE%BE%E7%BD%AE%E5%BA%93%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%98%E9%87%8FLD_PRELOAD/">LINUX 设置库优先级变量LD_PRELOAD</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>在Unix操作系统的动态链接库的世界中，LD_PRELOAD就是这样一个环境变量，它可以影响程序的运行时的链接（Runtime linker），它允许你定义在程序运行前优先加载的动态链接库。<br>  大家想到着就邪恶了吧，今天看proxychanis代码发现的，和win平台sockscap32类似。<br> 看代码test.c</p>
-<pre>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-int main(void)
-{
-    char *passwd="abcd";
-    char in_buff[10];
-    printf("-->input your passwd:");
-    scanf("%s", in_buff);
-    if( strcmp(passwd,in_buff) != 0) {
-        printf("passwd errn");
-        exit(-1);
-    }
-    printf("ok!. open doorn");
-}
-</pre>
-<p>库代码hack.c</p>
-<pre>
-#include <stdio.h>
-int strcmp(const char *s1, const char *s2)
-{
-    printf("hack function invoked. s1=[%s],s2=[%s]n", s1, s2);
-    return 0;
-}
-</pre>
-<pre>
-[root@localhost preload]# gcc -o test test.c
-[root@localhost preload]# ./test
--->input your passwd:123
-passwd err
-[root@localhost preload]# gcc -shared -o hack.o hack.c
-[root@localhost preload]# ls -l hack.so
--rwxr-xr-x 1 root root 4116 Apr 13 15:52 hack.so
-[root@localhost preload]# LD_PRELOAD="./hack.so"
-[root@localhost preload]# ./test
--->input your passwd:123
-passwd err
-[root@localhost preload]# export LD_PRELOAD="./hack.so"
-[root@localhost preload]# ./test
--->input your passwd:123
-hack function invoked. s1=[abcd],s2=[123]
-ok!. open door
-[root@localhost preload]#
-</pre>
-<p>这是一种思路，还有一种最直接的办法用ltrace<br>ltrace是跟踪调用库函数的工具</p>
-<pre>
-[root@localhost preload]# export LD_PRELOAD=
-[root@localhost preload]# ltrace ./test
-(0x69951c, 0x699ab0, 0, 0, 0x699e58)                                              = 0x6998e4
-__libc_start_main(0x80484a4, 1, 0xbf948364, 0x8048530, 0x8048520 <unfinished ...>
-printf("-->input your passwd:")                                                   = 21
-__isoc99_scanf(0x80485ff, 0xbf9482a2, 0x9acce0, 0x9abff4, 0x8048530-->input your passwd:123
-)              = 1
-strcmp("abcd", "123")                                                             = 1
-puts("passwd err"passwd err
-)                                                                = 11
-exit(1 <unfinished ...>
-+++ exited (status 1) +++
-[root@localhost preload]#
-</pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://key1088.github.io/2014/04/13/LINUX-%E8%AE%BE%E7%BD%AE%E5%BA%93%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%98%E9%87%8FLD_PRELOAD/" data-id="cmj9xllto00150slk87poc3n8" data-title="LINUX 设置库优先级变量LD_PRELOAD" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
-      
-      
-        <a href="/2014/04/13/LINUX-%E8%AE%BE%E7%BD%AE%E5%BA%93%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%98%E9%87%8FLD_PRELOAD/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/2014/04/13/LINUX-%E8%AE%BE%E7%BD%AE%E5%BA%93%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%98%E9%87%8FLD_PRELOAD/" itemprop="commentCount"></span>
-          Kommentare
-        </a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -828,7 +934,7 @@ exit(1 <unfinished ...>
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">January 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">April 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/03/">March 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li></ul>
     </div>
   </div>
 
@@ -839,6 +945,10 @@ exit(1 <unfinished ...>
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/01/07/2026%E5%B9%B4%E4%B8%80%E4%BA%9B%E8%AE%A1%E5%88%92-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/">2026年一些计划-持续更新中</a>
+          </li>
         
           <li>
             <a href="/2025/12/14/%E4%B8%AD%E5%9B%BD%E6%95%99%E8%82%B2%E8%83%8C%E6%99%AF%E4%B8%8B%E7%9A%84%E8%82%B2%E5%84%BF%E6%9C%9F%E4%B8%8E%E8%8A%92%E6%A0%BC%E5%BC%8F%E6%8A%95%E8%B5%84%E9%98%B6%E6%AE%B5%E5%88%92%E5%88%86/">中国教育背景下的育儿期与芒格式投资阶段划分</a>
@@ -856,10 +966,6 @@ exit(1 <unfinished ...>
             <a href="/2023/04/24/%E5%9C%A8%E4%BD%BF%E7%94%A8ChatGPT%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/">在使用ChatGPT中的一些感想</a>
           </li>
         
-          <li>
-            <a href="/2020/11/21/%E8%A7%A3%E5%86%B3%E6%A0%91%E8%8E%93%E6%B4%BESSH%E7%99%BB%E5%BD%95%E5%92%8C%E8%BE%93%E5%85%A5%E5%8D%A1%E9%A1%BF%EF%BC%8C%E8%AF%95%E4%BA%86%E5%BE%88%E5%A4%9A%E6%96%B9%E6%B3%95/">解决树莓派SSH登录和输入卡顿，试了很多方法</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -873,7 +979,7 @@ exit(1 <unfinished ...>
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2025 key1088<br>
+      &copy; 2026 key1088<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
